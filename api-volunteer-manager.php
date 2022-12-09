@@ -36,7 +36,7 @@ add_action('acf/init', function () {
     $acfExportManager->setTextdomain('api-volunteer-manager');
     $acfExportManager->setExportFolder(VOLUNTEER_MANAGER_PATH . 'source/php/AcfFields/');
     $acfExportManager->autoExport(array(
-        'api-volunteer-manager-settings' => 'group_61ea7a87e8aaa' //Update with acf id here, settings view
+        'assignment' => 'group_639308fb101ce' //Update with acf id here, settings view
     ));
     $acfExportManager->import();
 });
