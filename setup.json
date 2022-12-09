@@ -1,11 +1,11 @@
 {
-  "name": "WordPress Plugin Boilerplate",
-  "description": "A boilerplate repo for WordPress plugins.",
-  "slug": "boilerplate",
-  "slugcamelcase": "Boilerplate",
-  "namespace": "WordPressPluginBoilerplate",
-  "capsConstant": "WP_PLUGIN_BOILERPLATE",
-  "author": "Firstname Lastname @ Company",
-  "authoremail": "firstname.lastname@company.com",
-  "github": "githubname"
+  "name": "Volunteer Manager",
+  "description": "Creates a api that may be used to manage volunteer assignments",
+  "slug": "api-volunteer-manager",
+  "slugcamelcase": "VolunteerManager",
+  "namespace": "VolunteerManager",
+  "capsConstant": "VOLUNTEER_MANAGER",
+  "author": "Sebastian Thulin @ Helsingborg Stad",
+  "authoremail": "sebastian.thulin@helsingborg.se",
+  "github": "helsingborg-stad"
 }
