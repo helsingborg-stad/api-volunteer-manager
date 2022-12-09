@@ -12,9 +12,13 @@ class App
         $this->cacheBust = new \VolunteerManager\Helper\CacheBust();
 
         add_action('plugins_loaded', array($this, 'init')); 
+
+
+        
     }
 
     public function init() {
+        new Api();
         new Assignment();
     }
 
