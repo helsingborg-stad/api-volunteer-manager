@@ -10,6 +10,12 @@ class App
         add_action('admin_enqueue_scripts', array($this, 'enqueueScripts'));
 
         $this->cacheBust = new \VolunteerManager\Helper\CacheBust();
+
+        add_action('plugins_loaded', array($this, 'init')); 
+    }
+
+    public function init() {
+        new Assignment();
     }
 
     /**
