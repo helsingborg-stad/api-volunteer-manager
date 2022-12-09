@@ -1,6 +1,6 @@
 <?php
 
-namespace {{BPREPLACENAMESPACE}};
+namespace VolunteerManager;
 
 class App
 {
@@ -9,7 +9,7 @@ class App
         add_action('admin_enqueue_scripts', array($this, 'enqueueStyles'));
         add_action('admin_enqueue_scripts', array($this, 'enqueueScripts'));
 
-        $this->cacheBust = new \{{BPREPLACENAMESPACE}}\Helper\CacheBust();
+        $this->cacheBust = new \VolunteerManager\Helper\CacheBust();
     }
 
     /**
@@ -19,12 +19,12 @@ class App
     public function enqueueStyles()
     {
         wp_register_style(
-            '{{BPREPLACESLUG}}-css',
-            {{BPREPLACECAPSCONSTANT}}_URL . '/dist/' .
-            $this->cacheBust->name('css/{{BPREPLACESLUG}}.css')
+            'api-volunteer-manager-css',
+            VOLUNTEER_MANAGER_URL . '/dist/' .
+            $this->cacheBust->name('css/api-volunteer-manager.css')
         );
 
-        wp_enqueue_style('{{BPREPLACESLUG}}-css');
+        wp_enqueue_style('api-volunteer-manager-css');
     }
 
     /**
@@ -34,11 +34,11 @@ class App
     public function enqueueScripts()
     {
         wp_register_script(
-            '{{BPREPLACESLUG}}-js',
-            {{BPREPLACECAPSCONSTANT}}_URL . '/dist/' .
-            $this->cacheBust->name('js/{{BPREPLACESLUG}}.js')
+            'api-volunteer-manager-js',
+            VOLUNTEER_MANAGER_URL . '/dist/' .
+            $this->cacheBust->name('js/api-volunteer-manager.js')
         );
 
-        wp_enqueue_script('{{BPREPLACESLUG}}-js');
+        wp_enqueue_script('api-volunteer-manager-js');
     }
 }

@@ -1,7 +1,7 @@
 <?php
-namespace {{BPREPLACENAMESPACE}}\Helper;
+namespace VolunteerManager\Helper;
 
-use {{BPREPLACENAMESPACE}}\Helper\CacheBust;
+use VolunteerManager\Helper\CacheBust;
 
 use Brain\Monkey\Functions;
 use Mockery;
@@ -12,7 +12,7 @@ class CacheBustTest extends \PluginTestCase\PluginTestCase
     {
         Functions\when('file_exists')->justReturn(false);
 
-        $cacheBust = Mockery::mock('{{BPREPLACENAMESPACE}}\Helper\CacheBust')->makePartial();
+        $cacheBust = Mockery::mock('VolunteerManager\Helper\CacheBust')->makePartial();
         $cacheBust->shouldReceive('isDebug')->andReturn(true);
 
         $realfile = $cacheBust->name('nofile');

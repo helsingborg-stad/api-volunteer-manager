@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: {{BPREPLACENAME}}\n"
+"Project-Id-Version: Volunteer Manager\n"
 "POT-Creation-Date: 2022-03-28 16:14+0200\n"
 "PO-Revision-Date: 2022-03-28 16:14+0200\n"
 "Last-Translator: \n"
@@ -21,21 +21,21 @@ msgstr ""
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 
 #. Plugin Name of the plugin/theme
-msgid "{{BPREPLACENAME}}"
+msgid "Volunteer Manager"
 msgstr ""
 
 #. Plugin URI of the plugin/theme
-msgid "https://github.com/{{BPREPLACEGITHUB}}/{{BPREPLACESLUG}}"
+msgid "https://github.com/helsingborg-stad/api-volunteer-manager"
 msgstr ""
 
 #. Description of the plugin/theme
-msgid "{{BPREPLACEDESCRIPTION}}"
+msgid "Creates a api that may be used to manage volunteer assignments"
 msgstr ""
 
 #. Author of the plugin/theme
-msgid "{{BPREPLACEAUTHOR}}"
+msgid "Sebastian Thulin @ Helsingborg Stad"
 msgstr ""
 
 #. Author URI of the plugin/theme
-msgid "https://github.com/{{BPREPLACEGITHUB}}"
+msgid "https://github.com/helsingborg-stad"
 msgstr ""

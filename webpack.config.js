@@ -16,8 +16,8 @@ module.exports = {
      * Add your entry files here
      */
     entry: {
-        'js/{{BPREPLACESLUG}}': './source/js/{{BPREPLACESLUG}}.js',
-        'css/{{BPREPLACESLUG}}': './source/sass/{{BPREPLACESLUG}}.scss',
+        'js/api-volunteer-manager': './source/js/api-volunteer-manager.js',
+        'css/api-volunteer-manager': './source/sass/api-volunteer-manager.scss',
     },
     
     /**

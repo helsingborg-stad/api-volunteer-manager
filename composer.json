@@ -1,6 +1,6 @@
 {
-    "name": "{{BPREPLACEGITHUB}}/{{BPREPLACESLUG}}",
-    "description": "{{BPREPLACEDESCRIPTION}}",
+    "name": "helsingborg-stad/api-volunteer-manager",
+    "description": "Creates a api that may be used to manage volunteer assignments",
     "type": "wordpress-plugin",
     "license": "MIT",
     "scripts": {
@@ -10,12 +10,12 @@
     },
     "authors": [
         {
-            "name": "{{BPREPLACEAUTHOR}}",
-            "email": "{{BPREPLACEAUTHOREMAIL}}"
+            "name": "Sebastian Thulin @ Helsingborg Stad",
+            "email": "sebastian.thulin@helsingborg.se"
         }
     ],
     "autoload": {
-        "psr-4": {"{{BPREPLACENAMESPACE}}\\": "source/php/"}
+        "psr-4": {"VolunteerManager\\": "source/php/"}
     },
     "minimum-stability": "stable",
     "require": {},
