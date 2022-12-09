@@ -10,6 +10,12 @@ class Icon
   ]; 
   private static $base64Prefix = 'data:image/svg+xml;base64,';
 
+  /**
+   * Get a base 64 string representing a icon
+   *
+   * @param string $iconName
+   * @return string|bool The icon or false if not found
+   */
   public static function get($iconName)
   {
     if($fileContents = self::readFile($iconName)) {

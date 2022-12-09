@@ -4,10 +4,24 @@ namespace VolunteerManager\Helper;
 
 class MetaBox
 {
-    public function remove($slug, $postType, $position = 'side')
+    private static $slug;
+    private static $postType;
+    private static $position; 
+
+    public static function remove($slug, $postType, $position = 'side')
     {
-        add_action('admin_menu', function () {
-            remove_meta_box($slug, $postType, $position);
-        });
+        self::$slug = $slug;
+        self::$postType = $postType;
+        self::$position = $position;
+
+        add_action('admin_menu', array('\VolunteerManager\Helper\MetaBox', 'removeMetaBox'));
+    }
+
+    public static function removeMetaBox() {
+        remove_meta_box(
+            self::$slug,
+            self::$postType,
+            self::$position
+        );
     }
 }
