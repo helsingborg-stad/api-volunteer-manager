@@ -67,7 +67,8 @@ class Assignment extends PostType
                 'hierarchical'          =>  true,
                 'exclude_from_search'   =>  true,
                 'taxonomies'            =>  array(),
-                'supports'              =>  array('title', 'revisions', 'editor')
+                'supports'              =>  array('title', 'revisions', 'editor'),
+                'meta_box_cb'           => false,
             )
         );
 
@@ -200,7 +201,7 @@ class Assignment extends PostType
         );
 
         //Remove deafult UI
-        MetaBox::remove(
+        (new MetaBox)->remove(
             "tagsdiv-todo-priority", 
             self::$postTypeSlug
         ); 
@@ -233,7 +234,7 @@ class Assignment extends PostType
         );
 
         //Remove deafult UI
-        MetaBox::remove(
+        (new MetaBox)->remove(
             "tagsdiv-todo-status", 
             self::$postTypeSlug
         ); 
@@ -293,7 +294,7 @@ class Assignment extends PostType
         );
 
         //Remove deafult UI
-        MetaBox::remove(
+        (new MetaBox)->remove(
             "tagsdiv-todo-type", 
             self::$postTypeSlug
         ); 
