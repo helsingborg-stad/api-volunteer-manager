@@ -31,15 +31,6 @@ class Assignment extends PostType
         self::$priorityTaxonomySlug = $this->taxonomyPriority();
         self::$statusTaxonomySlug   = $this->taxonomyStatus();
         self::$sprintTaxonomySlug   = $this->taxonomySprint();
-
-        add_filter('Municipio/CustomPostType/ExcludedPostTypes', array($this, 'excludePostType'));
-    }
-
-    // Exclude this post type from page template filter.
-    public function excludePostType($postTypes)
-    {
-        $postTypes[] = $this->postType();
-        return $postTypes;
     }
 
     /**
@@ -194,7 +185,7 @@ class Assignment extends PostType
             __('Priorities', 'api-volunteer-manager'),
             __('Priority', 'api-volunteer-manager'),
             'todo-priority',
-            array('assignment'),
+            array(self::$postTypeSlug),
             array(
                 'hierarchical' => false
             )
@@ -227,7 +218,7 @@ class Assignment extends PostType
             __('Statuses', 'api-volunteer-manager'),
             __('Status', 'api-volunteer-manager'),
             'todo-status',
-            array('assignment'),
+            array(self::$postTypeSlug),
             array(
                 'hierarchical' => false
             )
@@ -260,7 +251,7 @@ class Assignment extends PostType
             __('Categories', 'api-volunteer-manager'),
             __('Category', 'api-volunteer-manager'),
             'todo-category',
-            array('assignment'),
+            array(self::$postTypeSlug),
             array(
                 'hierarchical' => true
             )
@@ -287,7 +278,7 @@ class Assignment extends PostType
             __('Types', 'api-volunteer-manager'),
             __('Type', 'api-volunteer-manager'),
             'todo-type',
-            array('assignment'),
+            array(self::$postTypeSlug),
             array(
                 'hierarchical' => false
             )
@@ -320,11 +311,18 @@ class Assignment extends PostType
             __('Sprints', 'api-volunteer-manager'),
             __('Sprint', 'api-volunteer-manager'),
             'todo-sprint',
-            array('assignment'),
+            array(self::$postTypeSlug),
             array(
                 'hierarchical' => true
             )
         );
+
+        //Remove deafult UI
+        (new MetaBox)->remove(
+            "todo-sprintdiv", 
+            self::$postTypeSlug
+        ); 
+
 
         //Add filter
         new Filter(
@@ -346,6 +344,6 @@ class Assignment extends PostType
         return Field::get(
             'taxonomy_color', 
             $taxonomySlug . '_' . $termId
-        ); 
+        ) ?? '#eee'; 
     }
 }
