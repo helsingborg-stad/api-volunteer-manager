@@ -68,7 +68,7 @@ class Assignment extends PostType
                 'exclude_from_search'   =>  true,
                 'taxonomies'            =>  array(),
                 'supports'              =>  array('title', 'revisions', 'editor'),
-                'meta_box_cb'           => false,
+                'show_in_rest'          => true
             )
         );
 
