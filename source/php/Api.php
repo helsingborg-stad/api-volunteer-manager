@@ -6,6 +6,10 @@ use \VolunteerManager\Helper\Url as Url;
 
 class Api
 {
+    private $postTypes = [
+        'assignment'
+    ]; 
+
     private $removeableResponseKeys = [
         'author',
         'guid',
@@ -48,19 +52,25 @@ class Api
         //Actions
         add_action('template_redirect', array($this, 'redirectToApi'));
 
-        //Filters
+        //Change REST prefix
         add_filter('rest_url_prefix', array($this, 'apiBasePrefix'), 5000, 1);
-        add_filter('rest_prepare_assignment', array($this, 'removeLinks'), 4000, 3);
-        add_filter('rest_prepare_assignment', array($this, 'removeResponseKeys'), 5000, 3);
-        add_filter('rest_prepare_assignment', array($this, 'renameResponseKeys'), 6000, 3);
-        add_filter('rest_prepare_assignment', array($this, 'addSignature'), 7000, 3);
-        add_filter('rest_prepare_assignment', array($this, 'reorderResponseKeys'), 8000, 3);
-
+        
+        //Filter data output
+        if(is_iterable($this->postTypes)) {
+            foreach($this->postTypes as $postType) {
+                add_filter('rest_prepare_' . $postType, array($this, 'removeLinks'), 4000, 3);
+                add_filter('rest_prepare_' . $postType, array($this, 'removeResponseKeys'), 5000, 3);
+                add_filter('rest_prepare_' . $postType, array($this, 'renameResponseKeys'), 6000, 3);
+                add_filter('rest_prepare_' . $postType, array($this, 'addSignature'), 7000, 3);
+                add_filter('rest_prepare_' . $postType, array($this, 'reorderResponseKeys'), 8000, 3);
+            }
+        }
+        
         //Remove all endpints not created by this addon
-        add_filter( 'rest_endpoints', array($this, 'removeDefaultEndpints'));
+        add_filter( 'rest_endpoints', array($this, 'removeDefaultEndpoints'));
     }
 
-    function removeDefaultEndpints($endpoints ) {
+    function removeDefaultEndpoints($endpoints ) {
         foreach ($endpoints as $endpoint => $details ) {
             if(in_array($endpoint, ["/", "/wp/v2"])) {
                 continue;
@@ -99,21 +109,38 @@ class Api
         }
     }
 
+    /**
+     * Rename keys to a more appropriate name
+     *
+     * @param object    $response  The unfiletered response
+     * @param object    $post      The post currently being filtered
+     * @param object    $request   The request data
+     * @return object   $response  The filtered respose     
+     */
     public function renameResponseKeys($response, $post, $request)
     {
         $keys = (array) $this->renameResponseKeys;
 
-        foreach($keys as $from => $to) {
-            if(array_key_exists($from, $response->data)) {
-                $response->data[$to] = $response->data[$from]; 
-                unset($response->data[$from]);
+        if(is_iterable($keys)) {
+            foreach($keys as $from => $to) {
+                if(array_key_exists($from, $response->data)) {
+                    $response->data[$to] = $response->data[$from]; 
+                    unset($response->data[$from]);
+                }
             }
         }
 
         return $response;
     }
 
-
+    /**
+     * Reorder response keys to a logical order
+     *
+     * @param object    $response  The unfiletered response
+     * @param object    $post      The post currently being filtered
+     * @param object    $request   The request data
+     * @return object   $response  The filtered respose     
+     */
     public function reorderResponseKeys($response, $post, $request)
     {
         $response->data = array_replace(
@@ -123,6 +150,14 @@ class Api
         return $response;
     }
 
+    /**
+     * Remove response keys not needed
+     *
+     * @param object    $response  The unfiletered response
+     * @param object    $post      The post currently being filtered
+     * @param object    $request   The request data
+     * @return object   $response  The filtered respose     
+     */
     public function removeResponseKeys($response, $post, $request)
     {
         $keys = (array) $this->removeableResponseKeys;
@@ -134,6 +169,14 @@ class Api
         return $response;
     }
 
+    /**
+     * Remove links from the reponse
+     *
+     * @param object    $response  The unfiletered response
+     * @param object    $post      The post currently being filtered
+     * @param object    $request   The request data
+     * @return object   $response  The filtered respose     
+     */
     public function removeLinks($response, $post, $request) {
         foreach($response->get_links() as $_linkKey => $_linkVal) {
             if(!in_array($_linkKey, $this->allowedLinkKeys)) {
@@ -143,17 +186,28 @@ class Api
         return $response;
     }
 
+    /**
+     * Create a unique signature for the given data 
+     *
+     * @param object    $response  The unfiletered response
+     * @param object    $post      The post currently being filtered
+     * @param object    $request   The request data
+     * @return object   $response  The filtered respose     
+     */
     public function addSignature($response, $post, $request) {
 
         $doNotIncludeInSignature = (array) $this->doNotIncludeInSignature; 
 
         $stack = []; 
-        foreach($response->data as $key => $item) {
-            if(!in_array($key, $doNotIncludeInSignature)) {
-                $stack[] = $item; 
+        if(is_iterable($response->data)) {
+            foreach($response->data as $key => $item) {
+                if(!in_array($key, $doNotIncludeInSignature)) {
+                    $stack[] = $item; 
+                }
             }
         }
 
+        //Add new signature
         $response->data['signature'] = md5(serialize($stack)); 
 
         return $response; 
