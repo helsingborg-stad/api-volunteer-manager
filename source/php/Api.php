@@ -29,8 +29,13 @@ class Api
         'modified_gmt' => 'modified'
     ];
 
-    private $allowedLinkKeys = [
-
+    private $disallowedLinkKeys = [
+        'self',
+        'collection',
+        'version-history',
+        'predecessor-version',
+        'wp:attachment',
+        'curies'
     ];
 
     private $responseKeysOrder = [
@@ -70,7 +75,13 @@ class Api
         add_filter( 'rest_endpoints', array($this, 'removeDefaultEndpoints'));
     }
 
-    function removeDefaultEndpoints($endpoints ) {
+    /**
+     * Remove default endpoints
+     *
+     * @param array $endpoints
+     * @return array
+     */
+    function removeDefaultEndpoints($endpoints) {
         foreach ($endpoints as $endpoint => $details ) {
             if(in_array($endpoint, ["/", "/wp/v2"])) {
                 continue;
@@ -139,7 +150,7 @@ class Api
      * @param object    $response  The unfiletered response
      * @param object    $post      The post currently being filtered
      * @param object    $request   The request data
-     * @return object   $response  The filtered respose     
+     * @return object   $response  The filtered respose
      */
     public function reorderResponseKeys($response, $post, $request)
     {
@@ -156,7 +167,7 @@ class Api
      * @param object    $response  The unfiletered response
      * @param object    $post      The post currently being filtered
      * @param object    $request   The request data
-     * @return object   $response  The filtered respose     
+     * @return object   $response  The filtered respose
      */
     public function removeResponseKeys($response, $post, $request)
     {
@@ -179,7 +190,7 @@ class Api
      */
     public function removeLinks($response, $post, $request) {
         foreach($response->get_links() as $_linkKey => $_linkVal) {
-            if(!in_array($_linkKey, $this->allowedLinkKeys)) {
+            if(in_array($_linkKey, $this->disallowedLinkKeys)) {
                 $response->remove_link($_linkKey);
             }
         }
