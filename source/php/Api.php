@@ -34,7 +34,7 @@ class Api
         'collection',
         'version-history',
         'predecessor-version',
-        'wp:attachment',
+        'https://api.w.org/attachment',
         'curies'
     ];
 
@@ -63,11 +63,12 @@ class Api
         //Filter data output
         if(is_iterable($this->postTypes)) {
             foreach($this->postTypes as $postType) {
-                add_filter('rest_prepare_' . $postType, array($this, 'removeLinks'), 4000, 3);
+                add_filter('rest_prepare_' . $postType, array($this, 'removeLinks'), 10000, 3);
                 add_filter('rest_prepare_' . $postType, array($this, 'removeResponseKeys'), 5000, 3);
                 add_filter('rest_prepare_' . $postType, array($this, 'renameResponseKeys'), 6000, 3);
                 add_filter('rest_prepare_' . $postType, array($this, 'addSignature'), 7000, 3);
                 add_filter('rest_prepare_' . $postType, array($this, 'reorderResponseKeys'), 8000, 3);
+                add_filter('rest_prepare_' . $postType, array($this, 'useRenderedAsMainValue'), 8000, 3);
             }
         }
         
@@ -145,6 +146,26 @@ class Api
     }
 
     /**
+     * If there are rendered key, use that on item level.
+     *
+     * @param object    $response  The unfiletered response
+     * @param object    $post      The post currently being filtered
+     * @param object    $request   The request data
+     * @return object   $response  The filtered respose
+     */
+    public function useRenderedAsMainValue($response, $post, $request)
+    {
+        if(is_iterable($response->data)) {
+            foreach($response->data as $key => $item) {
+                if(isset($item['rendered'])) {
+                    $response->data[$key] = $item['rendered'];
+                }
+            }
+        }
+        return $response;
+    }
+
+    /**
      * Reorder response keys to a logical order
      *
      * @param object    $response  The unfiletered response
@@ -189,16 +210,20 @@ class Api
      * @return object   $response  The filtered respose     
      */
     public function removeLinks($response, $post, $request) {
-        foreach($response->get_links() as $_linkKey => $_linkVal) {
-            if(in_array($_linkKey, $this->disallowedLinkKeys)) {
-                $response->remove_link($_linkKey);
+        if(is_iterable($response->get_links())) {
+            foreach($response->get_links() as $_linkKey => $_linkVal) {
+                if(in_array($_linkKey, $this->disallowedLinkKeys)) {
+                    $response->remove_link($_linkKey);
+                }
             }
         }
         return $response;
     }
 
     /**
-     * Create a unique signature for the given data 
+     * Create a unique signature for the given data. 
+     * Simplifies for other services to know, when
+     * data needs to be re-synced.
      *
      * @param object    $response  The unfiletered response
      * @param object    $post      The post currently being filtered
