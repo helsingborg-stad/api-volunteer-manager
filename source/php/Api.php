@@ -2,13 +2,46 @@
 
 namespace VolunteerManager;
 
-/**
- * Filtering WordPress API
- */
+use \VolunteerManager\Helper\Url as Url;
 
 class Api
 {
-    private $removeFields;
+    private $removeableResponseKeys = [
+        'author',
+        'guid',
+        'link',
+        'template',
+        'meta',
+        'taxonomy',
+        'menu_order',
+        'parent',
+        'modified',
+        'date'
+    ];
+
+    private $renameResponseKeys = [
+        'acf' => 'meta',
+        'date_gmt' => 'created',
+        'modified_gmt' => 'modified'
+    ];
+
+    private $allowedLinkKeys = [
+
+    ];
+
+    private $responseKeysOrder = [
+        'id',
+        'created',
+        'modified',
+        'status',
+        'type',
+        'slug'
+    ];
+
+    private $doNotIncludeInSignature = [
+        'modified',
+        'created'
+    ];
 
     public function __construct()
     {
@@ -17,8 +50,24 @@ class Api
 
         //Filters
         add_filter('rest_url_prefix', array($this, 'apiBasePrefix'), 5000, 1);
-        add_filter('rest_prepare_alarm', array($this, 'removeResponseKeys'), 5000, 3);
-        add_filter('rest_prepare_station', array($this, 'removeResponseKeys'), 5000, 3);
+        add_filter('rest_prepare_assignment', array($this, 'removeLinks'), 4000, 3);
+        add_filter('rest_prepare_assignment', array($this, 'removeResponseKeys'), 5000, 3);
+        add_filter('rest_prepare_assignment', array($this, 'renameResponseKeys'), 6000, 3);
+        add_filter('rest_prepare_assignment', array($this, 'addSignature'), 7000, 3);
+        add_filter('rest_prepare_assignment', array($this, 'reorderResponseKeys'), 8000, 3);
+
+        //Remove all endpints not created by this addon
+        add_filter( 'rest_endpoints', array($this, 'removeDefaultEndpints'));
+    }
+
+    function removeDefaultEndpints($endpoints ) {
+        foreach ($endpoints as $endpoint => $details ) {
+            if(in_array($endpoint, ["/", "/wp/v2"])) {
+                continue;
+            }
+            //unset($endpoints[$endpoint]);
+        }
+        return $endpoints;
     }
 
     /**
@@ -40,37 +89,73 @@ class Api
             return;
         }
 
-        if (!is_admin() && strpos(self::currentUrl(), rtrim(rest_url(), "/")) === false && self::currentUrl() == rtrim(home_url(), "/")) {
+        if(is_admin()) {
+            return;
+        }
+
+        if (strpos(Url::current(), rtrim(rest_url(), "/")) === false && Url::current() == rtrim(home_url(), "/")) {
             wp_redirect(rest_url());
             exit;
         }
     }
 
+    public function renameResponseKeys($response, $post, $request)
+    {
+        $keys = (array) $this->renameResponseKeys;
+
+        foreach($keys as $from => $to) {
+            if(array_key_exists($from, $response->data)) {
+                $response->data[$to] = $response->data[$from]; 
+                unset($response->data[$from]);
+            }
+        }
+
+        return $response;
+    }
+
+
+    public function reorderResponseKeys($response, $post, $request)
+    {
+        $response->data = array_replace(
+            array_flip($this->responseKeysOrder),
+            $response->data
+        );
+        return $response;
+    }
+
     public function removeResponseKeys($response, $post, $request)
     {
-        //Common keys
-        $keys = array('author', 'acf', 'guid', 'link', 'template', 'meta', 'taxonomy', 'menu_order');
+        $keys = (array) $this->removeableResponseKeys;
 
-        //Do filtering
         $response->data = array_filter($response->data, function ($k) use ($keys) {
             return !in_array($k, $keys, true);
         }, ARRAY_FILTER_USE_KEY);
 
-        //Return santizied response
         return $response;
     }
 
-    public static function currentUrl()
-    {
-        $currentURL = (@$_SERVER["HTTPS"] == "on") ? "https://" : "http://";
-        $currentURL .= $_SERVER["SERVER_NAME"];
+    public function removeLinks($response, $post, $request) {
+        foreach($response->get_links() as $_linkKey => $_linkVal) {
+            if(!in_array($_linkKey, $this->allowedLinkKeys)) {
+                $response->remove_link($_linkKey);
+            }
+        }
+        return $response;
+    }
 
-        if ($_SERVER["SERVER_PORT"] != "80" && $_SERVER["SERVER_PORT"] != "443") {
-            $currentURL .= ":".$_SERVER["SERVER_PORT"];
+    public function addSignature($response, $post, $request) {
+
+        $doNotIncludeInSignature = (array) $this->doNotIncludeInSignature; 
+
+        $stack = []; 
+        foreach($response->data as $key => $item) {
+            if(!in_array($key, $doNotIncludeInSignature)) {
+                $stack[] = $item; 
+            }
         }
 
-        $currentURL .= $_SERVER["REQUEST_URI"];
+        $response->data['signature'] = md5(serialize($stack)); 
 
-        return rtrim($currentURL, "/");
+        return $response; 
     }
 }
