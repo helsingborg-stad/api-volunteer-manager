@@ -1,0 +1,1 @@
+{"version":3,"file":"js/api-volunteer-manager.5ef7704702e1c526028d.js","mappings":"AAAAA,QAAQC,IAAI","sources":["webpack://api-volunteer-manager/./source/js/api-volunteer-manager.js"],"sourcesContent":["console.log('Volunteer Manager'); \n"],"names":["console","log"],"sourceRoot":""}
