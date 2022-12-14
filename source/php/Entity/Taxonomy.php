@@ -10,13 +10,20 @@ class Taxonomy
     public $args;
     public $postTypes;
 
+    private $defaultArgs = [
+        'show_in_rest' => true
+    ];
+
     public function __construct($namePlural, $nameSingular, $slug, $postTypes, $args)
     {
         $this->namePlural = $namePlural;
         $this->nameSingular = $nameSingular;
         $this->slug = $slug;
-        $this->args = $args;
         $this->postTypes = $postTypes;
+        $this->args = array_merge(
+            $this->defaultArgs,
+            $args
+        );
 
         add_action('init', array($this, 'registerTaxonomy'));
     }
@@ -40,6 +47,7 @@ class Taxonomy
         $this->args['labels'] = $labels;
 
         register_taxonomy($this->slug, $this->postTypes, $this->args);
+        
         return $this->slug;
     }
 }
