@@ -7,10 +7,11 @@ if (php_sapi_name() !== 'cli') {
 
 // Any command needed to run and build plugin assets when newly cheched out of repo.
 $buildCommands = [
-    'npm ci --no-progress --no-audit',
-    'npx --yes browserslist@latest --update-db',
+    'npm ci --no-progress',
+    'npx browserslist@latest --update-db',
     'npm run build',
-    'composer install --prefer-dist --no-progress'
+    'composer install --prefer-dist --no-progress --no-dev',
+    'composer dump-autoload --no-dev --classmap-authoritative'
 ];
 
 // Files and directories not suitable for prod to be removed.
@@ -24,7 +25,10 @@ $removables = [
     'webpack.config.js',
     'node_modules',
     'package-lock.json',
-    'package.json'
+    'package.json',
+    'patchwork.json',
+    'phpunit.xml',
+    'source/tests'
 ];
 
 $dirName = basename(dirname(__FILE__));
@@ -34,10 +38,8 @@ $output = '';
 $exitCode = 0;
 foreach ($buildCommands as $buildCommand) {
     print "---- Running build command '$buildCommand' for $dirName. ----\n";
-    $timeStart = microtime(true);
     $exitCode = executeCommand($buildCommand);
-    $buildTime = round(microtime(true) - $timeStart);
-    print "---- Done build command '$buildCommand' for $dirName.  Build time: $buildTime seconds. ----\n";
+    print "---- Done build command '$buildCommand' for $dirName. ----\n";
     if ($exitCode > 0) {
         exit($exitCode);
     }
@@ -60,14 +62,7 @@ if (isset($argv[1]) && $argv[1] === '--cleanup') {
  */
 function executeCommand($command)
 {
-    $fullCommand = '';
-    if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
-        $fullCommand = "cmd /v:on /c \"$command 2>&1 & echo Exit status : !ErrorLevel!\"";
-    } else {
-        $fullCommand = "$command 2>&1 ; echo Exit status : $?";
-    }
-
-    $proc = popen($fullCommand, 'r');
+    $proc = popen("$command 2>&1 ; echo Exit status : $?", 'r');
 
     $liveOutput     = '';
     $completeOutput = '';
