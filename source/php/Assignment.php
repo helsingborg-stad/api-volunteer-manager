@@ -7,8 +7,8 @@ use \VolunteerManager\Entity\PostType as PostType;
 use \VolunteerManager\Entity\Filter as Filter; 
 
 use \VolunteerManager\Helper\MetaBox as MetaBox;
-use \VolunteerManager\Helper\Field as Field;
 use \VolunteerManager\Helper\Icon as Icon;
+use \VolunteerManager\Helper\Admin\UI as AdminUI;
 
 class Assignment extends PostType
 {
@@ -69,19 +69,20 @@ class Assignment extends PostType
             __('Priority', 'api-volunteer-manager'),
             true,
             function ($column, $postId) {
-                $i = 0;
-                $priorities = get_the_terms($postId, self::$priorityTaxonomySlug);
-
-                if (empty($priorities)) {
-                    echo '<span class="todo-term-pill">' . __("Unprioritized", 'api-volunteer-manager') . '</span>';
-                } else {
-                    foreach ((array)$priorities as $priority) {
-                        echo isset($priority->name) ? '<span style="background: ' . $this->taxonomyColor($priority->term_id, self::$priorityTaxonomySlug). ';" class="todo-term-pill '. $priority->slug  .'">' . $priority->name . '</span>': '';
-                    }
-                }
+                echo AdminUI::createTaxonomyPills(
+                    get_the_terms(
+                        $postId, 
+                        self::$priorityTaxonomySlug
+                    )
+                );
             }
         );
 
+
+
+
+
+/*
 
         //Category in list
         $postType->addTableColumn(
@@ -171,6 +172,11 @@ class Assignment extends PostType
             }
         );
 
+        
+
+
+        */
+        
         return $postType->slug;
     }
 
@@ -192,10 +198,10 @@ class Assignment extends PostType
         );
 
         //Remove deafult UI
-        (new MetaBox)->remove(
+        /*(new MetaBox)->remove(
             "tagsdiv-todo-priority", 
             self::$postTypeSlug
-        ); 
+        );*/ 
 
         //Add filter
         new Filter(
@@ -332,18 +338,5 @@ class Assignment extends PostType
 
         //Return taxonomy slug
         return $categories->slug;
-    }
-
-    /**
-     * Returns colorcode by taxonomy id
-     * @return string
-     */
-
-    public function taxonomyColor($termId, $taxonomySlug) : string
-    {
-        return Field::get(
-            'taxonomy_color', 
-            $taxonomySlug . '_' . $termId
-        ) ?? '#eee'; 
     }
 }
