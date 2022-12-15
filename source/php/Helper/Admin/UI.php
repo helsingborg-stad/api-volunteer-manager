@@ -18,7 +18,7 @@ class UI
         } else {
             foreach ((array)$taxonomy as $item) {
                 echo sprintf(
-                    '<span style="background: %s; padding: 3px 7px; border-radius: 3px; color: %s;" class="term-pill term-pill-%s">%s</span>',
+                    '<span style="background: %s; color: %s;" class="term-pill term-pill-%s">%s</span>',
                     self::taxonomyColor($item->term_id, $item->taxonomy),
                     self::taxonomyColorContrast($item->term_id, $item->taxonomy),
                     $item->slug,
