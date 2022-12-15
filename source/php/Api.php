@@ -37,7 +37,8 @@ class Api
         'version-history',
         'predecessor-version',
         'https://api.w.org/attachment',
-        'curies'
+        'curies',
+        'about'
     ];
 
     private $responseKeysOrder = [
