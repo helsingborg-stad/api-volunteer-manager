@@ -6,7 +6,7 @@
             "key": "field_639b0426d0ba5",
             "label": "Email",
             "name": "email",
-            "type": "text",
+            "type": "email",
             "instructions": "",
             "required": 1,
             "conditional_logic": 0,
@@ -16,7 +16,6 @@
                 "id": ""
             },
             "default_value": "",
-            "maxlength": "",
             "placeholder": "",
             "prepend": "",
             "append": ""
@@ -25,7 +24,7 @@
             "key": "field_639b04e97810f",
             "label": "Phone",
             "name": "phone",
-            "type": "text",
+            "type": "number",
             "instructions": "",
             "required": 1,
             "conditional_logic": 0,
@@ -35,8 +34,10 @@
                 "id": ""
             },
             "default_value": "",
-            "maxlength": "",
+            "min": "",
+            "max": "",
             "placeholder": "",
+            "step": "",
             "prepend": "",
             "append": ""
         }
@@ -58,6 +59,6 @@
     "hide_on_screen": "",
     "active": true,
     "description": "",
-    "show_in_rest": 0
+    "show_in_rest": 1
 }]
 
