@@ -2,19 +2,14 @@
 
 namespace VolunteerManager;
 
+use \VolunteerManager\Helper\CacheBust as CacheBust; 
 class App
 {
     public function __construct()
     {
         add_action('admin_enqueue_scripts', array($this, 'enqueueStyles'));
         add_action('admin_enqueue_scripts', array($this, 'enqueueScripts'));
-
-        $this->cacheBust = new \VolunteerManager\Helper\CacheBust();
-
         add_action('plugins_loaded', array($this, 'init')); 
-
-
-        
     }
 
     public function init() {
@@ -32,7 +27,7 @@ class App
         wp_register_style(
             'api-volunteer-manager-css',
             VOLUNTEER_MANAGER_URL . '/dist/' .
-            $this->cacheBust->name('css/api-volunteer-manager.css')
+            (new CacheBust())->name('css/api-volunteer-manager.css')
         );
 
         wp_enqueue_style('api-volunteer-manager-css');
@@ -47,7 +42,7 @@ class App
         wp_register_script(
             'api-volunteer-manager-js',
             VOLUNTEER_MANAGER_URL . '/dist/' .
-            $this->cacheBust->name('js/api-volunteer-manager.js')
+            (new CacheBust())->name('js/api-volunteer-manager.js')
         );
 
         wp_enqueue_script('api-volunteer-manager-js');
