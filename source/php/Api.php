@@ -7,7 +7,9 @@ use \VolunteerManager\Helper\Url as Url;
 class Api
 {
     private $postTypes = [
-        'assignment'
+        'assignment',
+        'employer',
+        'employee'
     ]; 
 
     private $removeableResponseKeys = [
