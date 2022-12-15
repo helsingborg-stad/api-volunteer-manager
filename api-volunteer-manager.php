@@ -36,9 +36,10 @@ add_action('acf/init', function () {
     $acfExportManager->setTextdomain('api-volunteer-manager');
     $acfExportManager->setExportFolder(VOLUNTEER_MANAGER_PATH . 'source/php/AcfFields/');
     $acfExportManager->autoExport(array(
-        'employer' => 'group_639308fb101ce',
-        'employee' => 'group_639b042622dd1',
-        'taxonomy' => 'group_63986eae18b97'
+        'employer'  => 'group_639308fb101ce',
+        'employee'  => 'group_639b042622dd1',
+        'signup'    => 'group_639b06c19d21f',
+        'taxonomy'  => 'group_63986eae18b97'
     ));
     $acfExportManager->import();
 });
