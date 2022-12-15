@@ -20,6 +20,7 @@ class App
     public function init() {
         new Api();
         new Assignment();
+        new Employee();
     }
 
     /**

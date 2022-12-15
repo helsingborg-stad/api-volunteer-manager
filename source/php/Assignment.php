@@ -55,7 +55,7 @@ class Assignment extends PostType
                     'slug'       =>   __('assignment', 'api-volunteer-manager'),
                     'with_front' =>   false
                 ),
-                'hierarchical'          =>  true,
+                'hierarchical'          =>  false,
                 'exclude_from_search'   =>  true,
                 'taxonomies'            =>  array(),
                 'supports'              =>  array('title', 'revisions', 'editor'),
