@@ -245,9 +245,8 @@ class Api
                 }
             }
         }
-
-        //Add new signature
-        $response->data['signature'] = md5(serialize($stack)); 
+        
+        $response->data['md5'] = md5(serialize($stack)); 
 
         return $response; 
     }
