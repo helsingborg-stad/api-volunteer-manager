@@ -13,9 +13,15 @@ class App
     }
 
     public function init() {
+        //General
         new Api();
+
+        //Post types
         new Assignment();
         new Employee();
+
+        //Admin
+        new Admin();
     }
 
     /**
