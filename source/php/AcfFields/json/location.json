@@ -1,0 +1,43 @@
+[{
+    "key": "group_63a0408b8601f",
+    "title": "Location",
+    "fields": [
+        {
+            "key": "field_63a0408bd8a3a",
+            "label": "Assignment Location",
+            "name": "assignment_location",
+            "type": "google_map",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "center_lat": "56.0346721",
+            "center_lng": "12.6502445",
+            "zoom": 12,
+            "height": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "assignment"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 1
+}]
+
