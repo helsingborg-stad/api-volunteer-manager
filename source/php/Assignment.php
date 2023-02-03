@@ -58,7 +58,7 @@ class Assignment extends PostType
                 'hierarchical'          =>  false,
                 'exclude_from_search'   =>  true,
                 'taxonomies'            =>  array(),
-                'supports'              =>  array('title', 'revisions', 'editor'),
+                'supports'              =>  array('title', 'revisions'),
                 'show_in_rest'          => true
             )
         );
