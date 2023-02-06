@@ -4,8 +4,9 @@
     "fields": [
         {
             "key": "field_63a0408bd8a3a",
-            "label": "Assignment Location",
+            "label": "Location",
             "name": "assignment_location",
+            "aria-label": "",
             "type": "google_map",
             "instructions": "",
             "required": 0,

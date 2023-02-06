@@ -27,7 +27,7 @@
         ),
         1 => array(
             'key' => 'field_63dcdb011a906',
-            'label' => __('Qualifications', 'api-volunteer-manager'),
+            'label' => __('Qualification', 'api-volunteer-manager'),
             'name' => 'qualifications',
             'aria-label' => '',
             'type' => 'textarea',
@@ -87,8 +87,8 @@
         ),
         4 => array(
             'key' => 'field_63dcff972b04c',
-            'label' => __('Number of vacancies', 'api-volunteer-manager'),
-            'name' => 'vacancies',
+            'label' => __('Number of spots', 'api-volunteer-manager'),
+            'name' => 'number_of_available_spots',
             'aria-label' => '',
             'type' => 'number',
             'instructions' => '',
@@ -118,7 +118,7 @@
         ),
     ),
     'menu_order' => 0,
-    'position' => 'normal',
+    'position' => 'acf_after_title',
     'style' => 'default',
     'label_placement' => 'top',
     'instruction_placement' => 'label',

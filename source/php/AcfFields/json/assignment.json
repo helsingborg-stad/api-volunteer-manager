@@ -24,7 +24,7 @@
         },
         {
             "key": "field_63dcdb011a906",
-            "label": "Qualifications",
+            "label": "Qualification",
             "name": "qualifications",
             "aria-label": "",
             "type": "textarea",
@@ -84,8 +84,8 @@
         },
         {
             "key": "field_63dcff972b04c",
-            "label": "Number of vacancies",
-            "name": "vacancies",
+            "label": "Number of spots",
+            "name": "number_of_available_spots",
             "aria-label": "",
             "type": "number",
             "instructions": "",
@@ -115,7 +115,7 @@
         ]
     ],
     "menu_order": 0,
-    "position": "normal",
+    "position": "acf_after_title",
     "style": "default",
     "label_placement": "top",
     "instruction_placement": "label",
