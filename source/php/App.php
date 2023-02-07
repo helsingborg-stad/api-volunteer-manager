@@ -2,17 +2,21 @@
 
 namespace VolunteerManager;
 
-use \VolunteerManager\Helper\CacheBust as CacheBust; 
+use \VolunteerManager\Helper\CacheBust as CacheBust;
+
 class App
 {
     public function __construct()
     {
         add_action('admin_enqueue_scripts', array($this, 'enqueueStyles'));
         add_action('admin_enqueue_scripts', array($this, 'enqueueScripts'));
-        add_action('plugins_loaded', array($this, 'init')); 
+        add_action('plugins_loaded', array($this, 'init'));
+
+        add_action('acf/init', array($this, 'updateAcfSettings'));
     }
 
-    public function init() {
+    public function init()
+    {
         //General
         new Api();
 
@@ -52,5 +56,14 @@ class App
         );
 
         wp_enqueue_script('api-volunteer-manager-js');
+    }
+
+    /**
+     * Update ACF settings
+     * @return void
+     */
+    public function updateAcfSettings()
+    {
+        acf_update_setting('google_api_key', defined('GOOGLE_API_KEY') ? GOOGLE_API_KEY : '');
     }
 }

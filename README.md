@@ -81,6 +81,16 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 
 Instructions for deploys.
 
+
+## Constants
+
+### Google Maps API
+Google Maps API key with **Maps JavaScript API** enabled.
+
+```
+define('GOOGLE_API_KEY', 'xyz');
+```
+
 ## Roadmap
 
 See the [open issues][issues-url] for a list of proposed features (and known issues).
