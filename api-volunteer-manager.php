@@ -36,12 +36,13 @@ add_action('acf/init', function () {
     $acfExportManager->setTextdomain('api-volunteer-manager');
     $acfExportManager->setExportFolder(VOLUNTEER_MANAGER_PATH . 'source/php/AcfFields/');
     $acfExportManager->autoExport(array(
-        'employer'      => 'group_639308fb101ce',
-        'employee'      => 'group_639b042622dd1',
-        'signup'        => 'group_639b06c19d21f',
-        'location'      => 'group_63a0408b8601f',
-        'taxonomy'      => 'group_63986eae18b97',
-        'assignment'    => 'group_63dce32c807e2'
+        'employer'          => 'group_639308fb101ce',
+        'employee'          => 'group_639b042622dd1',
+        'signup'            => 'group_639b06c19d21f',
+        'location'          => 'group_63a0408b8601f',
+        'taxonomy'          => 'group_63986eae18b97',
+        'assignment'        => 'group_63dce32c807e2',
+        'assignment-status' => 'group_63e2023f5baca'
     ));
     $acfExportManager->import();
 });
