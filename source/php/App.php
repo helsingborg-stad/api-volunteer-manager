@@ -12,7 +12,7 @@ class App
         add_action('admin_enqueue_scripts', array($this, 'enqueueScripts'));
         add_action('plugins_loaded', array($this, 'init'));
 
-        add_action('acf/init', array($this, 'updateAcfSettings'));
+        add_filter('acf/fields/google_map/api', array($this, 'setGoogleApiKey'));
     }
 
     public function init()
@@ -59,11 +59,13 @@ class App
     }
 
     /**
-     * Update ACF settings
-     * @return void
+     * Filter that sets Google Maps API key
+     * @param array $api
+     * @return array $api
      */
-    public function updateAcfSettings()
+    public function setGoogleApiKey($api)
     {
-        acf_update_setting('google_api_key', defined('GOOGLE_API_KEY') ? GOOGLE_API_KEY : '');
+        $api['key'] = defined('GOOGLE_API_KEY') ? GOOGLE_API_KEY : '';
+        return $api;
     }
 }
