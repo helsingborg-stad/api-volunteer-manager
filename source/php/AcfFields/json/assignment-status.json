@@ -1,13 +1,13 @@
 [{
-    "key": "group_63a0408b8601f",
-    "title": "Location",
+    "key": "group_63e2023f5baca",
+    "title": "Status",
     "fields": [
         {
-            "key": "field_63a0408bd8a3a",
-            "label": "Location",
-            "name": "assignment_location",
+            "key": "field_63e2023fc3a36",
+            "label": "Status",
+            "name": "assignment_status",
             "aria-label": "",
-            "type": "google_map",
+            "type": "taxonomy",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -16,10 +16,14 @@
                 "class": "",
                 "id": ""
             },
-            "center_lat": "56.0346721",
-            "center_lng": "12.6502445",
-            "zoom": 12,
-            "height": ""
+            "taxonomy": "assignment-status",
+            "add_term": 0,
+            "save_terms": 1,
+            "load_terms": 1,
+            "return_format": "object",
+            "field_type": "select",
+            "allow_null": 1,
+            "multiple": 0
         }
     ],
     "location": [
@@ -32,7 +36,7 @@
         ]
     ],
     "menu_order": 0,
-    "position": "normal",
+    "position": "side",
     "style": "default",
     "label_placement": "top",
     "instruction_placement": "label",

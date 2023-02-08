@@ -6,6 +6,7 @@
             "key": "field_63986eb7525b6",
             "label": "Taxonomy Color",
             "name": "taxonomy_color",
+            "aria-label": "",
             "type": "color_picker",
             "instructions": "",
             "required": 0,

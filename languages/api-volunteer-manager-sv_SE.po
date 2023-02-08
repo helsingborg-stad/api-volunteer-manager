@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Volunteer Manager\n"
-"POT-Creation-Date: 2022-03-28 16:14+0200\n"
-"PO-Revision-Date: 2022-03-28 16:14+0200\n"
+"POT-Creation-Date: 2023-02-06 11:36+0100\n"
+"PO-Revision-Date: 2023-02-06 11:36+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: sv_SE\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.8.12\n"
 "X-Poedit-Basepath: ..\n"
-"X-Poedit-WPHeader: boilerplate.php\n"
+"X-Poedit-WPHeader: api-volunteer-manager.php\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
@@ -19,6 +19,289 @@ msgstr ""
 "_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.js\n"
+
+#: source/php/AcfFields/php/assignment.php:6
+msgid "Assignment"
+msgstr "Uppdrag"
+
+#: source/php/AcfFields/php/assignment.php:10
+msgid "Description"
+msgstr "Beskrivning"
+
+#: source/php/AcfFields/php/assignment.php:14
+msgid "Describe the assignment."
+msgstr "Beskriv uppdraget."
+
+#: source/php/AcfFields/php/assignment.php:30
+msgid "Qualification"
+msgstr "Kvalifikation"
+
+#: source/php/AcfFields/php/assignment.php:34
+msgid ""
+"What is required of the volunteer (e.g., education, access to a car, "
+"language)."
+msgstr "Vad krävs av volontären (t.ex. utbildning, tillgång till bil, språk)."
+
+#: source/php/AcfFields/php/assignment.php:50
+msgid "Schedule"
+msgstr "Schema"
+
+#: source/php/AcfFields/php/assignment.php:54
+msgid "Schedule for when and how often the assignment occurs."
+msgstr "Schemalägg när och hur ofta uppdraget inträffar."
+
+#: source/php/AcfFields/php/assignment.php:70
+msgid "Benefits"
+msgstr "Förmåner"
+
+#: source/php/AcfFields/php/assignment.php:74
+msgid "E.g., bus card, lunch."
+msgstr "T.ex. busskort, lunch."
+
+#: source/php/AcfFields/php/assignment.php:90
+msgid "Number of spots"
+msgstr "Antal platser"
+
+#: source/php/AcfFields/php/employee.php:6
+msgid "Employee"
+msgstr "Anställd"
+
+#: source/php/AcfFields/php/employee.php:10
+#: source/php/AcfFields/php/employer.php:109
+#: source/php/AcfFields/php/signup.php:24
+#: source/php/AcfFields/php/signup.php:37
+msgid "Email"
+msgstr "E-postadress"
+
+#: source/php/AcfFields/php/employee.php:29
+#: source/php/AcfFields/php/employer.php:129
+#: source/php/AcfFields/php/signup.php:25
+#: source/php/AcfFields/php/signup.php:64
+msgid "Phone"
+msgstr "Telefonnummer"
+
+#: source/php/AcfFields/php/employer.php:6
+#: source/php/AcfFields/php/employer.php:10
+msgid "Employer"
+msgstr "Arbetsgivare"
+
+#: source/php/AcfFields/php/employer.php:14
+msgid "Enable if the employer is external ie. not arranged by the city."
+msgstr "Aktivera om arbetsgivaren är extern dvs. inte arrangerad av staden."
+
+#: source/php/AcfFields/php/employer.php:22
+msgid "If the employer is external."
+msgstr "Om arbetsgivaren är extern."
+
+#: source/php/AcfFields/php/employer.php:24
+msgid "External"
+msgstr "Extern"
+
+#: source/php/AcfFields/php/employer.php:25
+msgid "Internal"
+msgstr "Intern"
+
+#: source/php/AcfFields/php/employer.php:30
+#: source/php/AcfFields/php/employer.php:88
+msgid "Name"
+msgstr "Namn"
+
+#: source/php/AcfFields/php/employer.php:34
+msgid "Name of the company/organisation."
+msgstr "Företagets/organisationens namn."
+
+#: source/php/AcfFields/php/employer.php:58
+msgid "Contacts"
+msgstr "Kontaktpersoner"
+
+#: source/php/AcfFields/php/employer.php:83
+msgid "Add Contact"
+msgstr "Lägg till kontakt"
+
+#: source/php/AcfFields/php/employer.php:154
+msgid "Website"
+msgstr "Webbplats"
+
+#: source/php/AcfFields/php/location.php:6
+#: source/php/AcfFields/php/location.php:10
+msgid "Location"
+msgstr "Plats"
+
+#: source/php/AcfFields/php/signup.php:6
+msgid "Signup"
+msgstr "Registrering"
+
+#: source/php/AcfFields/php/signup.php:10
+msgid "Signup methods"
+msgstr "Registreringsmetoder"
+
+#: source/php/AcfFields/php/signup.php:23
+#: source/php/AcfFields/php/signup.php:92
+msgid "Link"
+msgstr "Länk"
+
+#: source/php/AcfFields/php/taxonomy.php:6
+#: source/php/AcfFields/php/taxonomy.php:10
+msgid "Taxonomy Color"
+msgstr ""
+
+#: source/php/AcfFields/php/taxonomy.php:22
+msgid "#eee"
+msgstr ""
+
+#: source/php/Admin.php:22
+msgid "API-url"
+msgstr ""
+
+#: source/php/Assignment.php:44
+msgctxt "Post type plural"
+msgid "Assignments"
+msgstr ""
+
+#: source/php/Assignment.php:45
+msgctxt "Post type singular"
+msgid "Assignment"
+msgstr ""
+
+#: source/php/Assignment.php:48
+msgid "Assignments"
+msgstr ""
+
+#: source/php/Assignment.php:55
+msgid "assignment"
+msgstr ""
+
+#: source/php/Assignment.php:69 source/php/Assignment.php:192
+msgid "Priority"
+msgstr ""
+
+#: source/php/Assignment.php:191
+msgid "Priorities"
+msgstr ""
+
+#: source/php/Assignment.php:224
+msgid "Statuses"
+msgstr ""
+
+#: source/php/Assignment.php:225
+msgid "Status"
+msgstr ""
+
+#: source/php/Assignment.php:257
+msgid "Categories"
+msgstr ""
+
+#: source/php/Assignment.php:258
+msgid "Category"
+msgstr ""
+
+#: source/php/Assignment.php:284
+msgid "Types"
+msgstr ""
+
+#: source/php/Assignment.php:285
+msgid "Type"
+msgstr ""
+
+#: source/php/Assignment.php:317
+msgid "Sprints"
+msgstr ""
+
+#: source/php/Assignment.php:318
+msgid "Sprint"
+msgstr ""
+
+#: source/php/Employee.php:25
+msgctxt "Post type plural"
+msgid "Employees"
+msgstr ""
+
+#: source/php/Employee.php:26
+msgctxt "Post type singular"
+msgid "Employee"
+msgstr ""
+
+#: source/php/Employee.php:29
+msgid "Employees"
+msgstr ""
+
+#: source/php/Employee.php:36
+msgid "employee"
+msgstr ""
+
+#: source/php/Entity/Filter.php:26
+msgid "Show All"
+msgstr ""
+
+#: source/php/Entity/PostType.php:48 source/php/Entity/PostType.php:49
+#, php-format
+msgid "Add new %s"
+msgstr ""
+
+#: source/php/Entity/PostType.php:50 source/php/Entity/Taxonomy.php:40
+#, php-format
+msgid "Edit %s"
+msgstr ""
+
+#: source/php/Entity/PostType.php:51
+#, php-format
+msgid "New %s"
+msgstr ""
+
+#: source/php/Entity/PostType.php:52
+#, php-format
+msgid "View %s"
+msgstr ""
+
+#: source/php/Entity/PostType.php:53 source/php/Entity/Taxonomy.php:36
+#, php-format
+msgid "Search %s"
+msgstr ""
+
+#: source/php/Entity/PostType.php:54
+#, php-format
+msgid "No %s found"
+msgstr ""
+
+#: source/php/Entity/PostType.php:55
+#, php-format
+msgid "No %s found in trash"
+msgstr ""
+
+#: source/php/Entity/PostType.php:56 source/php/Entity/Taxonomy.php:38
+#: source/php/Entity/Taxonomy.php:39
+#, php-format
+msgid "Parent %s:"
+msgstr ""
+
+#: source/php/Entity/Taxonomy.php:37
+#, php-format
+msgid "All %s"
+msgstr ""
+
+#: source/php/Entity/Taxonomy.php:41
+#, php-format
+msgid "Update %s"
+msgstr ""
+
+#: source/php/Entity/Taxonomy.php:42
+#, php-format
+msgid "Add New %s"
+msgstr ""
+
+#: source/php/Entity/Taxonomy.php:43
+#, php-format
+msgid "New %s Name"
+msgstr ""
+
+#: vendor/helsingborg-stad/acf-export-manager/src/AcfExportManager.php:364
+msgid "Export with AcfExportManager"
+msgstr ""
+
+#: vendor/helsingborg-stad/acf-export-manager/src/AcfExportManager.php:408
+#, php-format
+msgid "Exported %d fieldgroup(s)."
+msgstr ""
 
 #. Plugin Name of the plugin/theme
 msgid "Volunteer Manager"
@@ -39,3 +322,12 @@ msgstr ""
 #. Author URI of the plugin/theme
 msgid "https://github.com/helsingborg-stad"
 msgstr ""
+
+#~ msgid "Qualifications"
+#~ msgstr "Kvalifikationer"
+
+#~ msgid "Employer name"
+#~ msgstr "Arbetsgivarens namn"
+
+#~ msgid "Employer Website"
+#~ msgstr "Arbetsgivarens webbplats"

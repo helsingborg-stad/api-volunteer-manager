@@ -7,8 +7,9 @@
     'fields' => array(
         0 => array(
             'key' => 'field_63a0408bd8a3a',
-            'label' => __('Assignment Location', 'api-volunteer-manager'),
+            'label' => __('Location', 'api-volunteer-manager'),
             'name' => 'assignment_location',
+            'aria-label' => '',
             'type' => 'google_map',
             'instructions' => '',
             'required' => 0,
