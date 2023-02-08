@@ -2,17 +2,21 @@
 
 namespace VolunteerManager;
 
-use \VolunteerManager\Helper\CacheBust as CacheBust; 
+use \VolunteerManager\Helper\CacheBust as CacheBust;
+
 class App
 {
     public function __construct()
     {
         add_action('admin_enqueue_scripts', array($this, 'enqueueStyles'));
         add_action('admin_enqueue_scripts', array($this, 'enqueueScripts'));
-        add_action('plugins_loaded', array($this, 'init')); 
+        add_action('plugins_loaded', array($this, 'init'));
+
+        add_filter('acf/fields/google_map/api', array($this, 'setGoogleApiKey'));
     }
 
-    public function init() {
+    public function init()
+    {
         //General
         new Api();
 
@@ -52,5 +56,16 @@ class App
         );
 
         wp_enqueue_script('api-volunteer-manager-js');
+    }
+
+    /**
+     * Filter that sets Google Maps API key
+     * @param array $api
+     * @return array $api
+     */
+    public function setGoogleApiKey($api)
+    {
+        $api['key'] = defined('GOOGLE_API_KEY') ? GOOGLE_API_KEY : '';
+        return $api;
     }
 }
