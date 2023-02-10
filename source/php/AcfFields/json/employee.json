@@ -42,6 +42,66 @@
             "step": "",
             "prepend": "",
             "append": ""
+        },
+        {
+            "key": "field_63e61ca6acd0d",
+            "label": "Surname",
+            "name": "surname",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_63e61cfeacd0e",
+            "label": "First name",
+            "name": "first_name",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_63e61d69acd0f",
+            "label": "Newsletter",
+            "name": "newsletter",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "Indicates if employee subscribes to newsletter.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 0,
+            "ui_on_text": "",
+            "ui_off_text": ""
         }
     ],
     "location": [
@@ -61,6 +121,11 @@
     "hide_on_screen": "",
     "active": true,
     "description": "",
-    "show_in_rest": 1
+    "show_in_rest": 1,
+    "acfe_display_title": "",
+    "acfe_autosync": "",
+    "acfe_form": 0,
+    "acfe_meta": "",
+    "acfe_note": ""
 }]
 
