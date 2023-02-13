@@ -2,12 +2,12 @@
 
 namespace VolunteerManager;
 
-use \VolunteerManager\Entity\PostType as PostType; 
+use \VolunteerManager\Entity\PostType as PostType;
 use \VolunteerManager\Helper\Icon as Icon;
 
 class Employee extends PostType
 {
-    private static $postTypeSlug; 
+    private static $postTypeSlug;
 
     public function __construct()
     {
