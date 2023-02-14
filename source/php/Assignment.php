@@ -9,6 +9,7 @@ use \VolunteerManager\Entity\Filter as Filter;
 use \VolunteerManager\Helper\MetaBox as MetaBox;
 use \VolunteerManager\Helper\Icon as Icon;
 use \VolunteerManager\Helper\Admin\UI as AdminUI;
+use \VolunteerManager\Components\EditPostStatusButtons\EditPostStatusButtonFactory as EditPostStatusButtonFactory;
 
 class Assignment extends PostType
 {
@@ -22,6 +23,8 @@ class Assignment extends PostType
 
         //Taxonomy
         self::$statusTaxonomySlug   = $this->taxonomyStatus();
+
+        add_action('admin_post_edit_post_status', array($this, 'updatePostStatus'));
     }
 
     /**
@@ -68,7 +71,39 @@ class Assignment extends PostType
             }
         );
 
+        $postType->addTableColumn(
+            'public',
+            __('Public', 'api-volunteer-manager'),
+            false,
+            function ($column, $postId) {
+                $postStatus = get_post_status($postId);
+                $editButton = EditPostStatusButtonFactory::create($postId, $postStatus);
+                echo $editButton->getHtml();
+            }
+        );
+
         return $postType->slug;
+    }
+
+    public function updatePostStatus()
+    {
+        $queryString = http_build_query(array(
+            'post_type' => self::$postTypeSlug,
+            'paged' => $_GET['paged'],
+        ));
+
+        $redirectUrl = admin_url('edit.php') . '?' . $queryString;
+
+        if (! wp_verify_nonce($_GET['nonce'], 'edit_post_status')) {
+            wp_redirect($redirectUrl);
+        }
+
+        $post = get_post($_GET['post_id'], 'ARRAY_A');
+        $post['post_status'] = $_GET['post_status'];
+        wp_update_post($post, true);
+
+        wp_redirect($redirectUrl);
+        exit();
     }
 
     /**
