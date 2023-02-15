@@ -67,18 +67,19 @@ class UI
      * Create URL to trigger edit post status action
      *
      * @param integer $postId
-     * @param string $postStatus
+     * @param string  $postStatus
      * @return String
      */
-    public static function createEditStatusUrl(int $postId, string $postStatus): String
+    public static function createEditStatusUrl(int $postId, string $postStatus): string
     {
         $nonce = wp_create_nonce('edit_status_nonce');
+        $paged = filter_input(INPUT_GET, 'paged', FILTER_SANITIZE_STRING);
         $getData = http_build_query(array(
             'nonce' => $nonce,
             'action' => 'edit_post_status',
             'post_status' => $postStatus,
             'post_id' => $postId,
-            'paged' => $_GET['paged']
+            'paged' => $paged
         ));
         $url = admin_url('admin-post.php') . '?' . $getData;
         return $url;

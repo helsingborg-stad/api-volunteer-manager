@@ -91,19 +91,24 @@ class Assignment extends PostType
      */
     public function updatePostStatus()
     {
+        $paged = filter_input(INPUT_GET, 'paged', FILTER_SANITIZE_STRING);
+        $nonce = filter_input(INPUT_GET, 'nonce', FILTER_SANITIZE_STRING);
+        $postId = filter_input(INPUT_GET, 'post_id', FILTER_SANITIZE_STRING);
+        $postStatus = filter_input(INPUT_GET, 'post_status', FILTER_SANITIZE_STRING);
+
         $queryString = http_build_query(array(
             'post_type' => self::$postTypeSlug,
-            'paged' => $_GET['paged'],
+            'paged' => $paged,
         ));
 
         $redirectUrl = admin_url('edit.php') . '?' . $queryString;
 
-        if (! wp_verify_nonce($_GET['nonce'], 'edit_post_status')) {
+        if (!wp_verify_nonce($nonce, 'edit_post_status')) {
             wp_redirect($redirectUrl);
         }
 
-        $post = get_post($_GET['post_id'], 'ARRAY_A');
-        $post['post_status'] = $_GET['post_status'];
+        $post = get_post($postId, 'ARRAY_A');
+        $post['post_status'] = $postStatus;
         wp_update_post($post, true);
 
         wp_redirect($redirectUrl);
