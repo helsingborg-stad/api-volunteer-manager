@@ -2,8 +2,6 @@
 
 namespace VolunteerManager\Components\EditPostStatusButtons;
 
-use \VolunteerManager\Helper\Admin\UI as UI;
-
 class PendingEditPostStatusButton implements EditPostStatusButton
 {
     private $postId;
