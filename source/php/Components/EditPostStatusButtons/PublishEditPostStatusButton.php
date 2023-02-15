@@ -19,7 +19,7 @@ class PublishEditPostStatusButton implements EditPostStatusButton
         return sprintf(
             $format,
             UI::createEditStatusUrl($this->postId, 'draft'),
-            'button-primary button-danger',
+            'button-primary button-primary__red',
             __('Unpublish this post', 'api-volunteer-manager'),
             __('Unpublish', 'api-volunteer-manager')
         );
