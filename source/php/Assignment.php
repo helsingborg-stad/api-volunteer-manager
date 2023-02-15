@@ -85,6 +85,10 @@ class Assignment extends PostType
         return $postType->slug;
     }
 
+    /**
+     * Update post status
+     * @return void
+     */
     public function updatePostStatus()
     {
         $queryString = http_build_query(array(

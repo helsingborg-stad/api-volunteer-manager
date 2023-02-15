@@ -63,6 +63,13 @@ class UI
         return ($yiq >= 128) ? '#000' : '#fff';
     }
 
+    /**
+     * Create URL to trigger edit post status action
+     *
+     * @param integer $postId
+     * @param string $postStatus
+     * @return String
+     */
     public static function createEditStatusUrl(int $postId, string $postStatus): String
     {
         $nonce = wp_create_nonce('edit_status_nonce');
