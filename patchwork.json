@@ -1,7 +1,8 @@
 {
-    "redefinable-internals": [
-        "file_exists",
-        "file_get_contents",
-        "function_exists"
-    ]
+  "redefinable-internals": [
+    "file_exists",
+    "file_get_contents",
+    "function_exists",
+    "filter_input"
+  ]
 }
