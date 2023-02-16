@@ -2,11 +2,11 @@
 
 namespace VolunteerManager\Components\EditPostStatusButtons;
 
-use \VolunteerManager\Helper\Admin\UI as UI;
+use \VolunteerManager\Helper\Admin\URL as URL;
 
 class DraftEditPostStatusButton implements EditPostStatusButton
 {
-    private $postId;
+    private int $postId;
 
     public function __construct(int $postId)
     {
@@ -18,7 +18,11 @@ class DraftEditPostStatusButton implements EditPostStatusButton
         $format = '<a href="%s" class="%s" title="%s">%s</a>';
         return sprintf(
             $format,
-            UI::createEditStatusUrl($this->postId, 'publish'),
+            URL::createPostActionUrl(
+                'update_post_status',
+                ['post_id' => $this->postId, 'post_status' => 'publish'],
+                ['\VolunteerManager\Helper\Admin\URL', 'wpCreateNonce']
+            ),
             'button-primary',
             __('Publish this post', 'api-volunteer-manager'),
             __('Publish', 'api-volunteer-manager')

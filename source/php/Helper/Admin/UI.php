@@ -32,11 +32,11 @@ class UI
     /**
      * Returns colorcode by taxonomy id
      *
-     * @param int $termId
+     * @param int    $termId
      * @param string $taxonomySlug
      * @return string
      */
-    public static function taxonomyColor($termId, $taxonomySlug) : string
+    public static function taxonomyColor($termId, $taxonomySlug): string
     {
         return Field::get(
             'taxonomy_color',
@@ -47,7 +47,7 @@ class UI
     /**
      * Get contrast
      *
-     * @param int $termId
+     * @param int    $termId
      * @param string $taxonomySlug
      * @return string
      */
@@ -61,27 +61,5 @@ class UI
         $yiq = (($r * 299) + ($g * 587) + ($b * 114)) / 1000;
 
         return ($yiq >= 128) ? '#000' : '#fff';
-    }
-
-    /**
-     * Create URL to trigger edit post status action
-     *
-     * @param integer $postId
-     * @param string  $postStatus
-     * @return String
-     */
-    public static function createEditStatusUrl(int $postId, string $postStatus): string
-    {
-        $nonce = wp_create_nonce('edit_status_nonce');
-        $paged = filter_input(INPUT_GET, 'paged', FILTER_SANITIZE_STRING);
-        $getData = http_build_query(array(
-            'nonce' => $nonce,
-            'action' => 'edit_post_status',
-            'post_status' => $postStatus,
-            'post_id' => $postId,
-            'paged' => $paged
-        ));
-        $url = admin_url('admin-post.php') . '?' . $getData;
-        return $url;
     }
 }
