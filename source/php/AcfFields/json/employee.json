@@ -23,8 +23,8 @@
         },
         {
             "key": "field_639b04e97810f",
-            "label": "Phone",
-            "name": "phone",
+            "label": "Phone number",
+            "name": "phone_number",
             "aria-label": "",
             "type": "number",
             "instructions": "",
@@ -42,6 +42,131 @@
             "step": "",
             "prepend": "",
             "append": ""
+        },
+        {
+            "key": "field_63e61ca6acd0d",
+            "label": "Surname",
+            "name": "surname",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_63e61cfeacd0e",
+            "label": "First name",
+            "name": "first_name",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_63e61d69acd0f",
+            "label": "Newsletter",
+            "name": "newsletter",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "Indicates if employee subscribes to newsletter.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 0,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_63e65b89379a0",
+            "label": "Crime record extracts",
+            "name": "crime_record_extracted",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "Indicates wheter requests for criminal record extracts have been made.",
+            "default_value": 0,
+            "ui": 0,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_63e65d2b379a1",
+            "label": "Crime record extracted at date",
+            "name": "crime_record_extracted_date",
+            "aria-label": "",
+            "type": "date_picker",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "display_format": "d\/m\/Y",
+            "return_format": "d\/m\/Y",
+            "first_day": 1
+        },
+        {
+            "key": "field_63e65e0d379a2",
+            "label": "Swedish Language Proficiency",
+            "name": "swedish_language_proficiency",
+            "aria-label": "",
+            "type": "select",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "Fluent": "Fluent",
+                "Basic": "Basic",
+                "Lacks language proficiency": "Lacks language proficiency"
+            },
+            "default_value": false,
+            "return_format": "value",
+            "multiple": 0,
+            "allow_null": 0,
+            "ui": 0,
+            "ajax": 0,
+            "placeholder": ""
         }
     ],
     "location": [
@@ -61,6 +186,11 @@
     "hide_on_screen": "",
     "active": true,
     "description": "",
-    "show_in_rest": 1
+    "show_in_rest": 1,
+    "acfe_display_title": "",
+    "acfe_autosync": "",
+    "acfe_form": 0,
+    "acfe_meta": "",
+    "acfe_note": ""
 }]
 
