@@ -19,7 +19,7 @@ class PendingEditPostStatusButton implements EditPostStatusButton
             get_edit_post_link($this->postId),
             'button',
             __('This post must be reviewed before it can be published.', 'api-volunteer-manager'),
-            __('Review', 'api-volunteer-manager')
+            __('Review required', 'api-volunteer-manager')
         );
     }
 }

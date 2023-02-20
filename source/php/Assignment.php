@@ -76,8 +76,8 @@ class Assignment
         );
 
         $postType->addTableColumn(
-            'edit_status',
-            __('Edit status', 'api-volunteer-manager'),
+            'visibility',
+            __('Visibility', 'api-volunteer-manager'),
             false,
             function ($column, $postId) {
                 $postStatus = get_post_status($postId);
