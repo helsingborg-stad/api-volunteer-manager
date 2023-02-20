@@ -9,10 +9,10 @@ use \VolunteerManager\Entity\Filter as Filter;
 use \VolunteerManager\Helper\MetaBox as MetaBox;
 use \VolunteerManager\Helper\Icon as Icon;
 use \VolunteerManager\Helper\Admin\UI as AdminUI;
-use \VolunteerManager\Helper\Admin\URL as URL;
 use \VolunteerManager\Components\EditPostStatusButtons\EditPostStatusButtonFactory as EditPostStatusButtonFactory;
+use \VolunteerManager\Helper\Admin\UrlBuilder as UrlBuilder;
 
-class Assignment extends PostType
+class Assignment
 {
     public static $postTypeSlug;
     public static $statusTaxonomySlug;
@@ -78,7 +78,7 @@ class Assignment extends PostType
             false,
             function ($column, $postId) {
                 $postStatus = get_post_status($postId);
-                $editButton = EditPostStatusButtonFactory::create($postId, $postStatus);
+                $editButton = EditPostStatusButtonFactory::create($postId, $postStatus, new UrlBuilder());
                 echo $editButton->getHtml();
             }
         );
@@ -92,10 +92,10 @@ class Assignment extends PostType
      */
     public function updatePostStatus()
     {
-        $paged = URL::getRequestParameter('paged');
-        $nonce = URL::getRequestParameter('nonce');
-        $postId = URL::getRequestParameter('post_id');
-        $postStatus = URL::getRequestParameter('post_status');
+        $paged = filter_input(INPUT_GET, 'paged', FILTER_SANITIZE_STRING);
+        $nonce = filter_input(INPUT_GET, 'nonce', FILTER_SANITIZE_STRING);
+        $postId = filter_input(INPUT_GET, 'post_id', FILTER_SANITIZE_STRING);
+        $postStatus = filter_input(INPUT_GET, 'post_status', FILTER_SANITIZE_STRING);
 
         $queryString = http_build_query(array(
             'post_type' => self::$postTypeSlug,
