@@ -21,7 +21,8 @@ class App
         new Api();
 
         //Post types
-        new Assignment();
+        $assignment = new Assignment();
+        $assignment->addHooks();
         new Employee();
 
         //Admin

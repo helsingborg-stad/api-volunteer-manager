@@ -14,8 +14,8 @@ use \VolunteerManager\Helper\Admin\UrlBuilder as UrlBuilder;
 
 class Assignment
 {
-    public static $postTypeSlug;
-    public static $statusTaxonomySlug;
+    public static string $postTypeSlug;
+    public static string $statusTaxonomySlug;
 
     public function __construct()
     {
@@ -24,7 +24,10 @@ class Assignment
 
         //Taxonomy
         self::$statusTaxonomySlug = $this->taxonomyStatus();
+    }
 
+    public function addHooks()
+    {
         add_action('admin_post_update_post_status', array($this, 'updatePostStatus'));
     }
 
@@ -73,8 +76,8 @@ class Assignment
         );
 
         $postType->addTableColumn(
-            'public',
-            __('Public', 'api-volunteer-manager'),
+            'edit_status',
+            __('Edit status', 'api-volunteer-manager'),
             false,
             function ($column, $postId) {
                 $postStatus = get_post_status($postId);
@@ -133,7 +136,7 @@ class Assignment
             )
         );
 
-        //Remove deafult UI
+        //Remove default UI
         (new MetaBox)->remove(
             "tagsdiv-assignment-status",
             self::$postTypeSlug
