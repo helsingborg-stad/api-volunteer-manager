@@ -3,25 +3,36 @@
 namespace VolunteerManager;
 
 use \VolunteerManager\Entity\PostType as PostType;
+use VolunteerManager\Entity\Taxonomy;
 use \VolunteerManager\Helper\Icon as Icon;
 
-class Employee extends PostType
+class Employee
 {
-    private static $postTypeSlug;
+    private static $postType;
+    private static $statusTaxonomySlug;
 
     public function __construct()
     {
-        self::$postTypeSlug = $this->postType();
+        self::$postType = $this->postType();
+        $this->addPostTypeTableColumn(self::$postType);
+
+        self::$statusTaxonomySlug = $this->registerEmployeeStatusTaxonomy(self::$postType);
     }
+
+    public function addHooks()
+    {
+        add_action('init', array($this, 'createEmployeeStatusTerms'));
+    }
+
 
     /**
      * Create post type
-     * @return void
+     * @return PostType
      */
-    public function postType() : string
+    public function postType(): PostType
     {
-        // Create posttype
-        $postType = new PostType(
+        // Create post type
+        return new PostType(
             _x('Employees', 'Post type plural', 'api-volunteer-manager'),
             _x('Employee', 'Post type singular', 'api-volunteer-manager'),
             'employee',
