@@ -8,15 +8,14 @@ use \VolunteerManager\Helper\Icon as Icon;
 
 class Employee
 {
-    private static $postType;
-    private static $statusTaxonomySlug;
+    private static PostType $postType;
 
     public function __construct()
     {
         self::$postType = $this->postType();
         $this->addPostTypeTableColumn(self::$postType);
 
-        self::$statusTaxonomySlug = $this->registerEmployeeStatusTaxonomy(self::$postType);
+        $this->registerEmployeeStatusTaxonomy(self::$postType);
     }
 
     public function addHooks()
@@ -74,7 +73,7 @@ class Employee
         );
     }
 
-    private function registerEmployeeStatusTaxonomy($postType) : string
+    private function registerEmployeeStatusTaxonomy($postType) : void
     {
         $categories = new Taxonomy(
             'Registration statuses',
@@ -87,7 +86,6 @@ class Employee
             )
         );
 
-        return $categories->slug;
     }
 
     public function createEmployeeStatusTerms()
