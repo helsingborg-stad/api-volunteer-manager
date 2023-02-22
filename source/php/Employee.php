@@ -88,14 +88,54 @@ class Employee
                 // 'show_ui' => false
             )
         );
-
     }
 
-    public function createEmployeeStatusTerms()
+    /**
+     * Create terms for the employee status taxonomy
+     *
+     * @return void
+     */
+    public function createEmployeeStatusTerms(): void
     {
-        $insert_result = wp_insert_term(
-            'p_insert_test',
-            'employee-registration-status'
-        );
+        $term_items = [
+            [
+                'name' => 'New',
+                'slug' => 'new',
+                'description' => 'New employee. Employee needs to be processed.'
+            ],
+            [
+                'name' => 'Ongoing',
+                'slug' => 'ongoing',
+                'description' => 'Employee under investigation.'
+            ],
+            [
+                'name' => 'Approved',
+                'slug' => 'approved',
+                'description' => 'Employee approved for assignments.'
+            ],
+            [
+                'name' => 'Denied',
+                'slug' => 'denied',
+                'description' => 'Employee denied. Employee can\'t apply.'
+            ]
+        ];
+
+        foreach ($term_items as $term) {
+            if (!term_exists($term['name'], 'employee-registration-status'))
+            {
+                $result = wp_insert_term(
+                    $term['name'],
+                    'employee-registration-status',
+                    [
+                        'slug' => $term['slug'],
+                        'description' => $term['description'],
+                    ]
+                );
+
+                if (is_wp_error($result)) {
+                    // handle error
+                }
+            }
+        }
     }
 }
