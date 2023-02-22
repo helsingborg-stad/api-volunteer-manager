@@ -3,7 +3,7 @@
 namespace VolunteerManager;
 
 use \VolunteerManager\Entity\PostType as PostType;
-use VolunteerManager\Entity\Taxonomy;
+use \VolunteerManager\Entity\Taxonomy as Taxonomy;
 use \VolunteerManager\Helper\Icon as Icon;
 
 class Employee
@@ -22,7 +22,6 @@ class Employee
     {
         add_action('init', array($this, 'createEmployeeStatusTerms'));
     }
-
 
     /**
      * Create post type
@@ -56,12 +55,10 @@ class Employee
     }
 
     /**
-     * Add table column to post type
-     *
      * @param PostType $postType
      * @return void
      */
-    public function addPostTypeTableColumn(PostType $postType)
+    private function addPostTypeTableColumn(PostType $postType): void
     {
         $postType->addTableColumn(
             'registration_status',
@@ -73,9 +70,15 @@ class Employee
         );
     }
 
+    /**
+     * Create terms for the employee status taxonomy
+     *
+     * @param $postType
+     * @return void
+     */
     private function registerEmployeeStatusTaxonomy($postType) : void
     {
-        $categories = new Taxonomy(
+        new Taxonomy(
             'Registration statuses',
             'Registration status',
             'employee-registration-status',
