@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Volunteer Manager\n"
-"POT-Creation-Date: 2023-02-06 11:36+0100\n"
-"PO-Revision-Date: 2023-02-06 11:36+0100\n"
+"POT-Creation-Date: 2023-02-20 12:50+0100\n"
+"PO-Revision-Date: 2023-02-20 12:51+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: sv_SE\n"
@@ -19,6 +19,12 @@ msgstr ""
 "_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.js\n"
+
+#: source/php/AcfFields/php/assignment-status.php:6
+#: source/php/AcfFields/php/assignment-status.php:10
+#: source/php/Assignment.php:66 source/php/Assignment.php:131
+msgid "Status"
+msgstr "Status"
 
 #: source/php/AcfFields/php/assignment.php:6
 msgid "Assignment"
@@ -74,11 +80,52 @@ msgid "Email"
 msgstr "E-postadress"
 
 #: source/php/AcfFields/php/employee.php:29
-#: source/php/AcfFields/php/employer.php:129
-#: source/php/AcfFields/php/signup.php:25
-#: source/php/AcfFields/php/signup.php:64
-msgid "Phone"
-msgstr "Telefonnummer"
+msgid "Phone number"
+msgstr ""
+
+#: source/php/AcfFields/php/employee.php:51
+msgid "Surname"
+msgstr ""
+
+#: source/php/AcfFields/php/employee.php:71
+msgid "First name"
+msgstr ""
+
+#: source/php/AcfFields/php/employee.php:91
+msgid "Newsletter"
+msgstr ""
+
+#: source/php/AcfFields/php/employee.php:95
+msgid "Indicates if employee subscribes to newsletter."
+msgstr ""
+
+#: source/php/AcfFields/php/employee.php:111
+msgid "Crime record extracts"
+msgstr ""
+
+#: source/php/AcfFields/php/employee.php:123
+msgid "Indicates wheter requests for criminal record extracts have been made."
+msgstr ""
+
+#: source/php/AcfFields/php/employee.php:131
+msgid "Crime record extracted at date"
+msgstr ""
+
+#: source/php/AcfFields/php/employee.php:149
+msgid "Swedish Language Proficiency"
+msgstr ""
+
+#: source/php/AcfFields/php/employee.php:162
+msgid "Fluent"
+msgstr ""
+
+#: source/php/AcfFields/php/employee.php:163
+msgid "Basic"
+msgstr ""
+
+#: source/php/AcfFields/php/employee.php:164
+msgid "Lacks language proficiency"
+msgstr ""
 
 #: source/php/AcfFields/php/employer.php:6
 #: source/php/AcfFields/php/employer.php:10
@@ -118,6 +165,12 @@ msgstr "Kontaktpersoner"
 msgid "Add Contact"
 msgstr "Lägg till kontakt"
 
+#: source/php/AcfFields/php/employer.php:129
+#: source/php/AcfFields/php/signup.php:25
+#: source/php/AcfFields/php/signup.php:64
+msgid "Phone"
+msgstr "Telefonnummer"
+
 #: source/php/AcfFields/php/employer.php:154
 msgid "Website"
 msgstr "Webbplats"
@@ -153,63 +206,55 @@ msgstr ""
 msgid "API-url"
 msgstr ""
 
-#: source/php/Assignment.php:44
+#: source/php/Assignment.php:42
 msgctxt "Post type plural"
 msgid "Assignments"
-msgstr ""
+msgstr "Uppdrag"
 
-#: source/php/Assignment.php:45
+#: source/php/Assignment.php:43
 msgctxt "Post type singular"
 msgid "Assignment"
-msgstr ""
+msgstr "Uppdrag"
 
-#: source/php/Assignment.php:48
+#: source/php/Assignment.php:46
 msgid "Assignments"
-msgstr ""
+msgstr "Uppdrag"
 
-#: source/php/Assignment.php:55
+#: source/php/Assignment.php:53
 msgid "assignment"
 msgstr ""
 
-#: source/php/Assignment.php:69 source/php/Assignment.php:192
-msgid "Priority"
-msgstr ""
+#: source/php/Assignment.php:80
+msgid "Visibility"
+msgstr "Synlighet"
 
-#: source/php/Assignment.php:191
-msgid "Priorities"
-msgstr ""
-
-#: source/php/Assignment.php:224
+#: source/php/Assignment.php:130
 msgid "Statuses"
+msgstr "Statusar"
+
+#: source/php/Components/EditPostStatusButtons/DraftEditPostStatusButton.php:25
+msgid "Publish this post"
+msgstr "Publicera det här inlägget"
+
+#: source/php/Components/EditPostStatusButtons/DraftEditPostStatusButton.php:26
+msgid "Publish"
+msgstr "Publicera"
+
+#: source/php/Components/EditPostStatusButtons/PendingEditPostStatusButton.php:21
+msgid "This post must be reviewed before it can be published."
 msgstr ""
 
-#: source/php/Assignment.php:225
-msgid "Status"
-msgstr ""
+#: source/php/Components/EditPostStatusButtons/PendingEditPostStatusButton.php:22
+msgid "Review required"
+msgstr "Granskning krävs"
 
-#: source/php/Assignment.php:257
-msgid "Categories"
-msgstr ""
+#: source/php/Components/EditPostStatusButtons/PublishEditPostStatusButton.php:25
+msgid "Unpublish this post"
+msgstr "Avpublicera det här inlägget"
 
-#: source/php/Assignment.php:258
-msgid "Category"
-msgstr ""
-
-#: source/php/Assignment.php:284
-msgid "Types"
-msgstr ""
-
-#: source/php/Assignment.php:285
-msgid "Type"
-msgstr ""
-
-#: source/php/Assignment.php:317
-msgid "Sprints"
-msgstr ""
-
-#: source/php/Assignment.php:318
-msgid "Sprint"
-msgstr ""
+#: source/php/Components/EditPostStatusButtons/PublishEditPostStatusButton.php:26
+msgid "Unpublish"
+msgstr "Avpublicera"
 
 #: source/php/Employee.php:25
 msgctxt "Post type plural"
@@ -322,6 +367,9 @@ msgstr ""
 #. Author URI of the plugin/theme
 msgid "https://github.com/helsingborg-stad"
 msgstr ""
+
+#~ msgid "Review"
+#~ msgstr "Granska"
 
 #~ msgid "Qualifications"
 #~ msgstr "Kvalifikationer"

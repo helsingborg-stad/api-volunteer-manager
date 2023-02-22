@@ -1,1 +1,0 @@
-{"version":3,"file":"css/api-volunteer-manager.101bc835cec88eac7038.css","mappings":"AAEA,WAEE,kBADA,eACA","sources":["webpack://api-volunteer-manager/./source/sass/api-volunteer-manager.scss"],"sourcesContent":[".api-volunteer-manager {}\n\n.term-pill {\n  padding: 3px 7px; \n  border-radius: 3px; \n}"],"names":[],"sourceRoot":""}
