@@ -1,9 +1,9 @@
 <?php
 
-namespace VolunteerManager\Helper\Admin;
+namespace VolunteerManager\Helper;
 
 use PluginTestCase\PluginTestCase;
-use VolunteerManager\Helper\Admin\EmailNotifier as EmailNotifier;
+use VolunteerManager\Helper\EmailNotifier as EmailNotifier;
 
 class EmailNotifierTest extends PluginTestCase
 {

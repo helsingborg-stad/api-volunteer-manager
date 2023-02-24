@@ -1,6 +1,6 @@
 <?php
 
-namespace VolunteerManager\Helper\Admin;
+namespace VolunteerManager\Helper;
 
 interface NotifierInterface
 {
