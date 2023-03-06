@@ -131,10 +131,6 @@ class Employee
                         'description' => $term['description'],
                     ]
                 );
-
-                if (is_wp_error($result)) {
-                    // handle error
-                }
             }
         }
     }
