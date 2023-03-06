@@ -2,9 +2,9 @@
 
 namespace VolunteerManager;
 
-use VolunteerManager\Helper\CacheBust as CacheBust;
-use VolunteerManager\Helper\EmailNotifier;
-use VolunteerManager\Notification\NotificationsHandler as NotificationsHandler;
+use VolunteerManager\Helper\CacheBust;
+use VolunteerManager\Notification\EmailNotificationSender;
+use VolunteerManager\Notification\NotificationsHandler;
 
 class App
 {
@@ -19,10 +19,10 @@ class App
 
     public function init()
     {
-        $emailNotifier = new EmailNotifier('wp_mail');
+        $emailSender = new EmailNotificationSender('wp_mail');
 
         $notificationsConfig = require 'Notification/Notifications.php';
-        $notificationsHandler = new NotificationsHandler($notificationsConfig, $emailNotifier);
+        $notificationsHandler = new NotificationsHandler($notificationsConfig, $emailSender);
         $notificationsHandler->addHooks();
 
         //General

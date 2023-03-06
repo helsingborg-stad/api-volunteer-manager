@@ -2,26 +2,24 @@
 
 namespace VolunteerManager\Notification;
 
-use VolunteerManager\Helper\NotifierInterface;
-
 class NotificationsHandler
 {
     private array $config;
-    private NotifierInterface $mailer;
+    private NotificationSender $sender;
 
-    public function __construct(array $config, NotifierInterface $mailer)
+    public function __construct(array $config, NotificationSender $sender)
     {
         $this->config = $config;
-        $this->mailer = $mailer;
+        $this->sender = $sender;
     }
 
     public function addHooks(): void
     {
-        add_action('avm_send_notification', array($this, 'sendEmailNotification'), 10, 4);
+        add_action('avm_send_notification', array($this, 'sendNotification'), 10, 4);
     }
 
     /**
-     * Handles a notification event by sending an email to the specified recipient.
+     * Handles a notification event by sending a message to the specified recipient.
      *
      * @param string $to      The email address of the recipient.
      * @param string $from    The email address of the sender.
@@ -29,9 +27,9 @@ class NotificationsHandler
      * @param string $content The body of the email.
      * @return void
      */
-    public function sendEmailNotification(string $to, string $from, string $subject, string $content): void
+    public function sendNotification(string $to, string $from, string $subject, string $content): void
     {
-        $this->mailer->send($to, $from, $content, $subject);
+        $this->sender->send($to, $from, $content, $subject);
     }
 
     /**

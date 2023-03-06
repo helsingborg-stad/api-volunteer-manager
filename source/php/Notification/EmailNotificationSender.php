@@ -1,13 +1,13 @@
 <?php
 
-namespace VolunteerManager\Helper;
+namespace VolunteerManager\Notification;
 
-interface NotifierInterface
+interface NotificationSender
 {
     public function send(string $to, string $from, string $message): bool;
 }
 
-class EmailNotifier implements NotifierInterface
+class EmailNotificationSender implements NotificationSender
 {
     private $emailService;
 
