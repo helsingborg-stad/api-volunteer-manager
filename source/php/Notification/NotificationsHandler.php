@@ -147,11 +147,26 @@ class NotificationsHandler
         return $termIds;
     }
 
-    public function taxonomyHasNotifications($postType, $taxonomy): bool
+    /**
+     * Checks whether a taxonomy has any notifications for a given post type.
+     *
+     * @param string $postType The post type to check for notifications.
+     * @param string $taxonomy The taxonomy to check for notifications.
+     * @return bool True if the taxonomy has notifications, false otherwise.
+     */
+    public function taxonomyHasNotifications(string $postType, string $taxonomy): bool
     {
-        return !empty($this->getNotifications($postType, $taxonomy));
+        $notifications = $this->getNotifications($postType, $taxonomy);
+        return !empty($notifications);
     }
 
+    /**
+     * Gets the notifications for a given post type and key.
+     *
+     * @param string $postType The post type to get notifications for.
+     * @param string $key      The taxonomy or meta field of the notifications to get.
+     * @return array An array of notifications for the given post type and key.
+     */
     public function getNotifications(string $postType, string $key): array
     {
         return $this->config[$postType][$key] ?? [];
