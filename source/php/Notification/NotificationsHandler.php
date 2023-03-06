@@ -21,10 +21,10 @@ class NotificationsHandler
     /**
      * Handles a notification event by sending a message to the specified recipient.
      *
-     * @param string $to      The email address of the recipient.
-     * @param string $from    The email address of the sender.
-     * @param string $subject The subject of the email.
-     * @param string $content The body of the email.
+     * @param string $to      Recipient of the notification.
+     * @param string $from    Sender of the notification.
+     * @param string $subject The subject of the notification.
+     * @param string $content The body of the notification.
      * @return void
      */
     public function sendNotification(string $to, string $from, string $subject, string $content): void
