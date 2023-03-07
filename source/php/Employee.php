@@ -85,7 +85,7 @@ class Employee
             array($postType->slug),
             array (
                 'hierarchical' => false,
-                // 'show_ui' => false
+                'show_ui' => false
             )
         );
     }
