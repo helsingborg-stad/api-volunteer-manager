@@ -6,7 +6,7 @@ use VolunteerManager\Helper\CacheBust;
 use VolunteerManager\Notification\NotificationsConfig;
 use VolunteerManager\Notification\EmailNotificationSender;
 use VolunteerManager\Notification\LoggingNotificationSender;
-use VolunteerManager\Notification\NotificationsHandler;
+use VolunteerManager\Notification\NotificationHandler;
 
 class App
 {
@@ -23,7 +23,7 @@ class App
     {
         $emailSender = new EmailNotificationSender('wp_mail');
         $loggingEmailSender = new LoggingNotificationSender($emailSender);
-        $notificationsHandler = new NotificationsHandler(NotificationsConfig::$notifications, $loggingEmailSender);
+        $notificationsHandler = new NotificationHandler(NotificationsConfig::$notifications, $loggingEmailSender);
         $notificationsHandler->addHooks();
 
         //General

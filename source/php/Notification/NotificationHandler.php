@@ -2,7 +2,7 @@
 
 namespace VolunteerManager\Notification;
 
-class NotificationsHandler
+class NotificationHandler
 {
     private array $config;
     private NotificationSenderInterface $sender;
