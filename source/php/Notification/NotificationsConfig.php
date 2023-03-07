@@ -2,9 +2,9 @@
 
 namespace VolunteerManager\Notification;
 
-class Notifications
+class NotificationsConfig
 {
-    public static array $notificationsConfig = [
+    public static array $notifications = [
         'assignment' => [
             'assignment-status' => [
                 [
