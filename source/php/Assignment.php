@@ -10,16 +10,17 @@ use VolunteerManager\Helper\Admin\UI as AdminUI;
 use VolunteerManager\Helper\Admin\UrlBuilder as UrlBuilder;
 use VolunteerManager\Helper\Icon as Icon;
 use VolunteerManager\Helper\MetaBox as MetaBox;
+use VolunteerManager\Notification\NotificationHandlerInterface;
 
 class Assignment
 {
-    private $notificationsHandler;
+    private NotificationHandlerInterface $notificationHandler;
     public static string $postTypeSlug;
     public static string $statusTaxonomySlug;
 
-    public function __construct($notificationsHandler)
+    public function __construct($notificationHandler)
     {
-        $this->notificationsHandler = $notificationsHandler;
+        $this->notificationHandler = $notificationHandler;
         //Main post type
         self::$postTypeSlug = $this->postType();
         //Taxonomy
@@ -52,10 +53,10 @@ class Assignment
 
     public function handleStatusUpdate(int $objectId, array $terms, array $newIds, string $taxonomy, bool $append, array $oldIds): void
     {
-        if (empty($this->notificationsHandler->getNotifications(self::$postTypeSlug, $taxonomy))) {
+        if (empty($this->notificationHandler->getNotifications(self::$postTypeSlug, $taxonomy))) {
             return;
         }
-        $this->notificationsHandler->scheduleNotificationsForTermUpdates($newIds, $oldIds, self::$postTypeSlug, $taxonomy, $objectId);
+        $this->notificationHandler->scheduleNotificationsForTermUpdates($newIds, $oldIds, self::$postTypeSlug, $taxonomy, $objectId);
     }
 
     /**

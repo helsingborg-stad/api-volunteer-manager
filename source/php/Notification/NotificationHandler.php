@@ -2,7 +2,7 @@
 
 namespace VolunteerManager\Notification;
 
-class NotificationHandler
+class NotificationHandler implements NotificationHandlerInterface
 {
     private array $config;
     private NotificationSenderInterface $sender;
@@ -54,7 +54,7 @@ class NotificationHandler
         wp_schedule_single_event($eventTime, $eventHook, $args);
     }
 
-    public function scheduleNotificationsForTermUpdates(array $newTermIds, array $oldTermIds, string $postType, string $taxonomy, int $postId)
+    public function scheduleNotificationsForTermUpdates(array $newTermIds, array $oldTermIds, string $postType, string $taxonomy, int $postId): void
     {
         $oldTermSlugs = $this->convertTermIdsToSlugs($oldTermIds, $taxonomy);
         $newTermSlugs = $this->convertTermIdsToSlugs($newTermIds, $taxonomy);
