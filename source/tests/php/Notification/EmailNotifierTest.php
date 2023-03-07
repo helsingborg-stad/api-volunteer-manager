@@ -1,18 +1,17 @@
 <?php
 
-namespace VolunteerManager\Helper;
+namespace php\Notification;
 
 use PluginTestCase\PluginTestCase;
-use VolunteerManager\Helper\EmailNotifier as EmailNotifier;
+use VolunteerManager\Notification\EmailNotificationSender;
 
 class EmailNotifierTest extends PluginTestCase
 {
     public function testSendSuccess()
     {
         $emailService = fn($to, $subject, $message, $headers, $attachments) => true;
-        $notifier = new EmailNotifier($emailService);
+        $notifier = new EmailNotificationSender($emailService);
         $result = $notifier->send('test@example.com', 'sender@example.com', 'message',);
         $this->assertTrue($result);
     }
 }
-
