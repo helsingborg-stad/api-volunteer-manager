@@ -73,23 +73,23 @@ class NotificationHandler
      * Determines whether an event should be run based on the event rule and post metadata.
      *
      * @param int      $postId     The ID of the post associated with the event.
-     * @param array    $eventRule  An array containing the rule data.
+     * @param array    $rule       An array containing the rule data.
      * @param callable $getFieldFn A function to retrieve post meta data for a given key.
      * @return bool Whether the event should be run.
      */
-    public function shouldScheduleNotification(int $postId, array $eventRule, callable $getFieldFn): bool
+    public function shouldScheduleNotification(int $postId, array $rule, callable $getFieldFn): bool
     {
         if (empty($rule)) {
             return true;
         }
 
-        $metaValue = call_user_func($getFieldFn($rule['key'], $postId));
+        $metaValue = call_user_func($getFieldFn, $rule['key'], $postId);
 
-        switch ($eventRule['operator']) {
+        switch ($rule['operator']) {
             case 'EQUAL':
-                return $metaValue === $eventRule['value'];
+                return $metaValue === $rule['value'];
             case 'NOT_EQUAL':
-                return $metaValue !== $eventRule['value'];
+                return $metaValue !== $rule['value'];
             default:
                 return false;
         }
