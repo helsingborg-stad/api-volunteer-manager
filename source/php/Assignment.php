@@ -31,16 +31,22 @@ class Assignment
         add_action('admin_post_update_post_status', array($this, 'updatePostStatus'));
         add_action('set_object_terms', array($this, 'handleStatusUpdate'), 10, 6);
 
-        add_filter('avm_assignment_approved_notification', array($this, 'populateNotificationContacts'), 10, 2);
-        add_filter('avm_assignment_denied_notification', array($this, 'populateNotificationContacts'), 10, 2);
+        add_filter('avm_notification', array($this, 'populateNotificationSender'), 10, 1);
+        add_filter('avm_assignment_approved_notification', array($this, 'populateNotificationReceiver'), 10, 2);
+        add_filter('avm_assignment_denied_notification', array($this, 'populateNotificationReceiver'), 10, 2);
     }
 
-    public function populateNotificationContacts($args, $postId)
+    public function populateNotificationSender($args)
     {
-        // TODO: Get correct email key
+        $args['from'] = 'no-reply@helsingborg.se';
+        return $args;
+    }
+
+    public function populateNotificationReceiver($args, $postId)
+    {
+        // TODO: Set correct email key
         $receiver = get_field('contact_email', $postId);
         $args['to'] = $receiver ?? '';
-        $args['from'] = 'no-reply@helsingborg.se';
         return $args;
     }
 
