@@ -52,7 +52,7 @@ class Assignment
 
     public function handleStatusUpdate(int $objectId, array $terms, array $newIds, string $taxonomy, bool $append, array $oldIds): void
     {
-        if (!$this->notificationsHandler->taxonomyHasNotifications(self::$postTypeSlug, $taxonomy)) {
+        if (empty($this->notificationsHandler->getNotifications(self::$postTypeSlug, $taxonomy))) {
             return;
         }
         $this->notificationsHandler->scheduleNotificationsForTermUpdates($newIds, $oldIds, self::$postTypeSlug, $taxonomy, $objectId);
