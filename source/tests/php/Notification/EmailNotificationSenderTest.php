@@ -5,7 +5,7 @@ namespace php\Notification;
 use PluginTestCase\PluginTestCase;
 use VolunteerManager\Notification\EmailNotificationSender;
 
-class EmailNotifierTest extends PluginTestCase
+class EmailNotificationSenderTest extends PluginTestCase
 {
     public function testSendSuccess()
     {
