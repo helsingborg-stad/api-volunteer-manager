@@ -5,9 +5,9 @@ namespace VolunteerManager\Notification;
 class NotificationsHandler
 {
     private array $config;
-    private NotificationSender $sender;
+    private NotificationSenderInterface $sender;
 
-    public function __construct(array $config, NotificationSender $sender)
+    public function __construct(array $config, NotificationSenderInterface $sender)
     {
         $this->config = $config;
         $this->sender = $sender;
@@ -49,7 +49,9 @@ class NotificationsHandler
             'subject' => $notification['message']['subject'] ?? '',
             'content' => $notification['message']['content'] ?? '',
         ];
-        wp_schedule_single_event($eventTime, $eventHook, apply_filters("avm_{$notification['key']}_notification", $args, $postId));
+        $args = apply_filters('avm_notification', $args, $postId);
+        $args = apply_filters("avm_{$notification['key']}_notification", $args, $postId);
+        wp_schedule_single_event($eventTime, $eventHook, $args);
     }
 
     public function scheduleNotificationsForTermUpdates(array $newTermIds, array $oldTermIds, string $postType, string $taxonomy, int $postId)
@@ -68,7 +70,7 @@ class NotificationsHandler
     }
 
     /**
-     * Determines whether an event should be run based on the event rule and post meta data.
+     * Determines whether an event should be run based on the event rule and post metadata.
      *
      * @param int      $postId     The ID of the post associated with the event.
      * @param array    $eventRule  An array containing the rule data.
