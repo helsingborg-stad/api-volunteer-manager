@@ -4,54 +4,104 @@ namespace php\Notification;
 
 use PluginTestCase\PluginTestCase;
 use VolunteerManager\Notification\NotificationHandler;
-use VolunteerManager\Notification\NotificationSenderInterface;
+use VolunteerManager\Notification\NotificationHandlerInterface;
 
 class NotificationHandlerTest extends PluginTestCase
 {
-    public function testShouldScheduleNotification()
-    {
-        $sender = new Sender();
-        $notificationsHandler = new NotificationHandler([], $sender);
+    private NotificationHandlerInterface $notificationHandler;
 
-        $postId = 1;
-        $rule = [
+    public function setUp(): void
+    {
+        $emailServiceMock = $this->getMockBuilder('VolunteerManager\Notification\EmailNotificationSender')
+            ->disableOriginalConstructor()
+            ->getMock();
+        $this->notificationHandler = new NotificationHandler(self::$config, $emailServiceMock);
+    }
+
+    private static array $config = [
+        'post_type' => [
+            'taxonomy' => [
+                [
+                    'key' => 'post_approved',
+                    'oldValue' => 'foo',
+                    'newValue' => 'bar',
+                    'message' => [
+                        'subject' => 'Subject',
+                        'content' => 'Content',
+                    ],
+                    'rule' => [
+                        'key' => 'foo_key',
+                        'value' => 'foo',
+                        'operator' => 'EQUAL'
+                    ]
+                ],
+            ]
+        ]
+    ];
+
+    public function testShouldScheduleNotificationWithEmptyRule()
+    {
+        $eventRule = [];
+        $getFieldFn = fn($key, $postId) => 'test_value';
+        $result = $this->notificationHandler->shouldScheduleNotification(1, $eventRule, $getFieldFn);
+        $this->assertTrue($result);
+    }
+
+    public function testShouldScheduleNotificationWithEqualOperator()
+    {
+        $eventRule = [
             'key' => 'test_key',
             'operator' => 'EQUAL',
             'value' => 'test_value'
         ];
         $getFieldFn = fn($key, $postId) => 'test_value';
-
-        // Test case when rule is empty
-        $eventRule = [];
-        $result = $notificationsHandler->shouldScheduleNotification($postId, $eventRule, $getFieldFn);
+        $result = $this->notificationHandler->shouldScheduleNotification(1, $eventRule, $getFieldFn);
         $this->assertTrue($result);
+    }
 
-        // Test case when operator is EQUAL and metaValue matches value
-        $eventRule = $rule;
-        $result = $notificationsHandler->shouldScheduleNotification($postId, $eventRule, $getFieldFn);
-        $this->assertTrue($result);
-
-        // Test case when operator is NOT_EQUAL and metaValue match value
-        $eventRule['operator'] = 'NOT_EQUAL';
-        $result = $notificationsHandler->shouldScheduleNotification($postId, $eventRule, $getFieldFn);
-        $this->assertFalse($result);
-
-        // Test case when operator is NOT_EQUAL and metaValue does not match value
-        $eventRule['value'] = 'test_value_not_equal';
-        $result = $notificationsHandler->shouldScheduleNotification($postId, $eventRule, $getFieldFn);
-        $this->assertTrue($result);
-
-        // Test case when operator is unrecognized
-        $eventRule['operator'] = 'INVALID_OPERATOR';
-        $result = $notificationsHandler->shouldScheduleNotification($postId, $eventRule, $getFieldFn);
+    public function testShouldScheduleNotificationWithNotEqualOperator()
+    {
+        $eventRule = [
+            'key' => 'test_key',
+            'operator' => 'NOT_EQUAL',
+            'value' => 'test_value'
+        ];
+        $getFieldFn = fn($key, $postId) => 'test_value';
+        $result = $this->notificationHandler->shouldScheduleNotification(1, $eventRule, $getFieldFn);
         $this->assertFalse($result);
     }
-}
 
-class Sender implements NotificationSenderInterface
-{
-    public function send(string $to, string $from, string $message): bool
+    public function testShouldScheduleNotificationWithNotEqualOperatorAndNonMatchingValue()
     {
-        return true;
+        $postId = 1;
+        $eventRule = [
+            'key' => 'test_key',
+            'operator' => 'NOT_EQUAL',
+            'value' => 'test_value_not_equal'
+        ];
+        $getFieldFn = fn($key, $postId) => 'test_value';
+        $result = $this->notificationHandler->shouldScheduleNotification($postId, $eventRule, $getFieldFn);
+        $this->assertTrue($result);
+    }
+
+    public function testShouldScheduleNotificationWithInvalidOperator()
+    {
+        $eventRule = [
+            'key' => 'test_key',
+            'operator' => 'INVALID_OPERATOR',
+            'value' => 'test_value'
+        ];
+        $getFieldFn = fn($key, $postId) => 'test_value';
+        $result = $this->notificationHandler->shouldScheduleNotification(1, $eventRule, $getFieldFn);
+        $this->assertFalse($result);
+    }
+
+    public function testGetNotifications()
+    {
+        $result = $this->notificationHandler->getNotifications('post_type', 'taxonomy');
+        $this->assertEquals($result, self::$config['post_type']['taxonomy']);
+
+        $result = $this->notificationHandler->getNotifications('post_type', 'unknown_taxonomy');
+        $this->assertEquals([], $result);
     }
 }
