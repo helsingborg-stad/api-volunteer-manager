@@ -42,144 +42,11 @@
             "append": ""
         },
         {
-            "key": "field_63e61ca6acd0d",
-            "label": "Surname",
-            "name": "surname",
-            "aria-label": "",
-            "type": "text",
-            "instructions": "",
-            "required": 1,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "maxlength": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": ""
-        },
-        {
-            "key": "field_63e61cfeacd0e",
-            "label": "First name",
-            "name": "first_name",
-            "aria-label": "",
-            "type": "text",
-            "instructions": "",
-            "required": 1,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "maxlength": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": ""
-        },
-        {
-            "key": "field_63e61d69acd0f",
-            "label": "Newsletter",
-            "name": "newsletter",
-            "aria-label": "",
-            "type": "true_false",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "message": "Check this box if the employee would like to receive newsletters",
-            "default_value": 0,
-            "ui": 0,
-            "ui_on_text": "",
-            "ui_off_text": ""
-        },
-        {
-            "key": "field_63e65b89379a0",
-            "label": "Crime record extracted",
-            "name": "crime_record_extracted",
-            "aria-label": "",
-            "type": "true_false",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "message": "Check the box if a criminal background check has been conducted for the employee",
-            "default_value": 0,
-            "ui": 0,
-            "ui_on_text": "",
-            "ui_off_text": ""
-        },
-        {
-            "key": "field_63e65d2b379a1",
-            "label": "Date for when criminal background check was conducted",
-            "name": "crime_record_extracted_date",
-            "aria-label": "",
-            "type": "date_picker",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_63e65b89379a0",
-                        "operator": "==",
-                        "value": "1"
-                    }
-                ]
-            ],
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "display_format": "Y-m-d",
-            "return_format": "Y-m-d",
-            "first_day": 1
-        },
-        {
-            "key": "field_63e65e0d379a2",
-            "label": "Swedish language proficiency",
-            "name": "swedish_language_proficiency",
-            "aria-label": "",
-            "type": "select",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "choices": {
-                "Fluent": "Fluent",
-                "Basic": "Basic",
-                "Lacks language proficiency": "Lacks language proficiency"
-            },
-            "default_value": false,
-            "return_format": "value",
-            "multiple": 0,
-            "allow_null": 0,
-            "ui": 0,
-            "ajax": 0,
-            "placeholder": ""
-        },
-        {
             "key": "field_63ea300a56bf7",
-            "label": "Registration",
-            "name": "registration",
+            "label": "Employment status",
+            "name": "employment_status",
             "aria-label": "",
-            "type": "select",
+            "type": "acfe_taxonomy_terms",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -188,77 +55,31 @@
                 "class": "",
                 "id": ""
             },
-            "choices": {
-                "new": "new",
-                "ongoing": "ongoing",
-                "approved": "approved",
-                "denied": "denied"
-            },
-            "default_value": "new",
-            "return_format": "value",
-            "multiple": 0,
-            "allow_null": 0,
+            "taxonomy": [
+                "employee-registration-status"
+            ],
+            "allow_terms": [
+                "all_employee-registration-status"
+            ],
+            "allow_level": "",
+            "field_type": "select",
+            "default_value": [
+                "New"
+            ],
+            "return_format": "id",
             "ui": 0,
+            "allow_null": 0,
+            "multiple": 0,
+            "save_terms": 1,
+            "load_terms": 1,
+            "choices": [],
             "ajax": 0,
-            "placeholder": ""
-        },
-        {
-            "key": "field_63ea311bdc227",
-            "label": "Registration date",
-            "name": "registration_date",
-            "aria-label": "",
-            "type": "date_picker",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "display_format": "Y-m-d",
-            "return_format": "Y-m-d",
-            "first_day": 1
-        },
-        {
-            "key": "field_63ea315cdc228",
-            "label": "Swedish national identity number",
-            "name": "national_identity_number",
-            "aria-label": "",
-            "type": "text",
-            "instructions": "",
-            "required": 1,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "maxlength": "",
             "placeholder": "",
-            "prepend": "",
-            "append": ""
-        },
-        {
-            "key": "field_63e61ca6acd0d",
-            "label": "Surname",
-            "name": "surname",
-            "aria-label": "",
-            "type": "text",
-            "instructions": "",
-            "required": 1,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "maxlength": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": ""
+            "search_placeholder": "",
+            "layout": "",
+            "toggle": 0,
+            "allow_custom": 0,
+            "other_choice": 0
         },
         {
             "key": "field_63e61cfeacd0e",
@@ -339,6 +160,24 @@
             "first_day": 1
         },
         {
+            "key": "field_63ea311bdc227",
+            "label": "Registration date",
+            "name": "registration_date",
+            "aria-label": "",
+            "type": "date_picker",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "display_format": "Y-m-d",
+            "return_format": "Y-m-d",
+            "first_day": 1
+        },
+        {
             "key": "field_63e65e0d379a2",
             "label": "Swedish Language Proficiency",
             "name": "swedish_language_proficiency",
@@ -364,6 +203,46 @@
             "ui": 0,
             "ajax": 0,
             "placeholder": ""
+        },
+        {
+            "key": "field_63ea315cdc228",
+            "label": "Swedish national identity number",
+            "name": "national_identity_number",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_63e61ca6acd0d",
+            "label": "Surname",
+            "name": "surname",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
         }
     ],
     "location": [
