@@ -20,7 +20,7 @@ class Employee
 
     public function addHooks()
     {
-        add_action('init', array($this, 'createEmployeeStatusTerms'));
+        add_action('init', array($this, 'insertEmploymentStatusTerms'));
     }
 
     /**
@@ -91,11 +91,11 @@ class Employee
     }
 
     /**
-     * Create terms for the employee status taxonomy
+     * Insert terms for the employee status taxonomy
      *
      * @return void
      */
-    public function createEmployeeStatusTerms(): void
+    public function insertEmploymentStatusTerms(): void
     {
         $term_items = [
             [
