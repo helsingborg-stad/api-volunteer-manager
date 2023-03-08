@@ -3,6 +3,66 @@
     "title": "Employee",
     "fields": [
         {
+            "key": "field_63e61cfeacd0e",
+            "label": "First name",
+            "name": "first_name",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_63e61ca6acd0d",
+            "label": "Surname",
+            "name": "surname",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_63ea315cdc228",
+            "label": "Swedish national identity number",
+            "name": "national_identity_number",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
             "key": "field_639b0426d0ba5",
             "label": "Email",
             "name": "email",
@@ -80,46 +140,6 @@
             "toggle": 0,
             "allow_custom": 0,
             "other_choice": 0
-        },
-        {
-            "key": "field_63e61cfeacd0e",
-            "label": "First name",
-            "name": "first_name",
-            "aria-label": "",
-            "type": "text",
-            "instructions": "",
-            "required": 1,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "maxlength": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": ""
-        },
-        {
-            "key": "field_63e61d69acd0f",
-            "label": "Newsletter",
-            "name": "newsletter",
-            "aria-label": "",
-            "type": "true_false",
-            "instructions": "Indicates if employee subscribes to newsletter.",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "message": "",
-            "default_value": 0,
-            "ui": 0,
-            "ui_on_text": "",
-            "ui_off_text": ""
         },
         {
             "key": "field_63e65b89379a0",
@@ -205,44 +225,24 @@
             "placeholder": ""
         },
         {
-            "key": "field_63ea315cdc228",
-            "label": "Swedish national identity number",
-            "name": "national_identity_number",
+            "key": "field_63e61d69acd0f",
+            "label": "Newsletter",
+            "name": "newsletter",
             "aria-label": "",
-            "type": "text",
-            "instructions": "",
-            "required": 1,
+            "type": "true_false",
+            "instructions": "Indicates if employee subscribes to newsletter.",
+            "required": 0,
             "conditional_logic": 0,
             "wrapper": {
                 "width": "",
                 "class": "",
                 "id": ""
             },
-            "default_value": "",
-            "maxlength": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": ""
-        },
-        {
-            "key": "field_63e61ca6acd0d",
-            "label": "Surname",
-            "name": "surname",
-            "aria-label": "",
-            "type": "text",
-            "instructions": "",
-            "required": 1,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "maxlength": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": ""
+            "message": "",
+            "default_value": 0,
+            "ui": 0,
+            "ui_on_text": "",
+            "ui_off_text": ""
         }
     ],
     "location": [
