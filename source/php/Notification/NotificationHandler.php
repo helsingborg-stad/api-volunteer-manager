@@ -54,6 +54,16 @@ class NotificationHandler implements NotificationHandlerInterface
         wp_schedule_single_event($eventTime, $eventHook, $args);
     }
 
+    /**
+     * Schedule notifications for terms.
+     *
+     * @param array  $newTermIds An array of term IDs that were newly assigned to the post.
+     * @param array  $oldTermIds An array of term IDs that were previously assigned to the post.
+     * @param string $postType   The type of post being updated.
+     * @param string $taxonomy   The taxonomy for which the terms are being updated.
+     * @param int    $postId     The ID of the post being updated.
+     * @return void
+     */
     public function scheduleNotificationsForTermUpdates(array $newTermIds, array $oldTermIds, string $postType, string $taxonomy, int $postId): void
     {
         $oldTermSlugs = $this->convertTermIdsToSlugs($oldTermIds, $taxonomy);

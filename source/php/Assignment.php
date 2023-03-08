@@ -30,20 +30,31 @@ class Assignment
     public function addHooks()
     {
         add_action('admin_post_update_post_status', array($this, 'updatePostStatus'));
-        add_action('set_object_terms', array($this, 'handleStatusUpdate'), 10, 6);
+        add_action('set_object_terms', array($this, 'scheduleTermNotifications'), 10, 6);
 
         add_filter('avm_notification', array($this, 'populateNotificationSender'), 10, 1);
         add_filter('avm_assignment_approved_notification', array($this, 'populateNotificationReceiver'), 10, 2);
         add_filter('avm_assignment_denied_notification', array($this, 'populateNotificationReceiver'), 10, 2);
     }
 
-    public function populateNotificationSender($args)
+    /**
+     * Populates notifications with sender email address
+     * @param array $args
+     * @return array
+     */
+    public function populateNotificationSender(array $args): array
     {
         $args['from'] = 'no-reply@helsingborg.se';
         return $args;
     }
 
-    public function populateNotificationReceiver($args, $postId)
+    /**
+     * Populate notification with receiver email address
+     * @param array $args
+     * @param int   $postId
+     * @return array
+     */
+    public function populateNotificationReceiver(array $args, int $postId): array
     {
         // TODO: Set correct email key
         $receiver = get_field('contact_email', $postId);
@@ -51,7 +62,17 @@ class Assignment
         return $args;
     }
 
-    public function handleStatusUpdate(int $objectId, array $terms, array $newIds, string $taxonomy, bool $append, array $oldIds): void
+    /**
+     * Registers notification events when status taxonomy changes
+     * @param int    $objectId
+     * @param array  $terms
+     * @param array  $newIds
+     * @param string $taxonomy
+     * @param bool   $append
+     * @param array  $oldIds
+     * @return void
+     */
+    public function scheduleTermNotifications(int $objectId, array $terms, array $newIds, string $taxonomy, bool $append, array $oldIds): void
     {
         if (empty($this->notificationHandler->getNotifications(self::$postTypeSlug, $taxonomy))) {
             return;
