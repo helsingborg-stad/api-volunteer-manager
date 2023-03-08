@@ -104,4 +104,69 @@ class NotificationHandlerTest extends PluginTestCase
         $result = $this->notificationHandler->getNotifications('post_type', 'unknown_taxonomy');
         $this->assertEquals([], $result);
     }
+
+    /**
+     * @dataProvider notificationProvider
+     */
+    public function testFindMatchingEvents(array $notifications, array $searchCriteria, array $expectedMatches): void
+    {
+        $this->assertEquals(
+            $expectedMatches,
+            $this->notificationHandler->findMatchingEvents($notifications, $searchCriteria)
+        );
+    }
+
+    public function notificationProvider(): array
+    {
+        return [
+            [
+                [
+                    ["oldValue" => 1, "newValue" => 2],
+                    ["oldValue" => 3, "newValue" => 4],
+                    ["oldValue" => 5, "newValue" => 6],
+                ],
+                [
+                    ["oldValue" => 1, "newValue" => 2],
+                    ["oldValue" => 5, "newValue" => 6],
+                ],
+                [
+                    ["oldValue" => 1, "newValue" => 2],
+                    ["oldValue" => 5, "newValue" => 6],
+                ],
+            ],
+            [
+                [
+                    ["oldValue" => "A", "newValue" => "B"],
+                    ["oldValue" => "C", "newValue" => "D"],
+                    ["oldValue" => "E", "newValue" => "F"],
+                ],
+                [
+                    ["oldValue" => "C", "newValue" => "D"],
+                    ["oldValue" => "E", "newValue" => "F"],
+                ],
+                [
+                    ["oldValue" => "C", "newValue" => "D"],
+                    ["oldValue" => "E", "newValue" => "F"],
+                ],
+            ],
+        ];
+    }
+
+    public function testCombineOldAndNewValues(): void
+    {
+        $oldValues = [1, 2, 3];
+        $newValues = [4, 5, 6];
+
+        $expectedCombinedValues = [
+            ["oldValue" => 1, "newValue" => 4],
+            ["oldValue" => 2, "newValue" => 5],
+            ["oldValue" => 3, "newValue" => 6],
+        ];
+
+        $this->assertEquals(
+            $expectedCombinedValues,
+            $this->notificationHandler->combineOldAndNewValues($oldValues, $newValues)
+        );
+    }
+
 }
