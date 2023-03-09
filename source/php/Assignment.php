@@ -2,26 +2,27 @@
 
 namespace VolunteerManager;
 
-use \VolunteerManager\Entity\Taxonomy as Taxonomy;
-use \VolunteerManager\Entity\PostType as PostType;
-use \VolunteerManager\Entity\Filter as Filter;
-
-use \VolunteerManager\Helper\MetaBox as MetaBox;
-use \VolunteerManager\Helper\Icon as Icon;
-use \VolunteerManager\Helper\Admin\UI as AdminUI;
-use \VolunteerManager\Components\EditPostStatusButtons\EditPostStatusButtonFactory as EditPostStatusButtonFactory;
-use \VolunteerManager\Helper\Admin\UrlBuilder as UrlBuilder;
+use VolunteerManager\Components\EditPostStatusButtons\EditPostStatusButtonFactory as EditPostStatusButtonFactory;
+use VolunteerManager\Entity\Filter as Filter;
+use VolunteerManager\Entity\PostType as PostType;
+use VolunteerManager\Entity\Taxonomy as Taxonomy;
+use VolunteerManager\Helper\Admin\UI as AdminUI;
+use VolunteerManager\Helper\Admin\UrlBuilder as UrlBuilder;
+use VolunteerManager\Helper\Icon as Icon;
+use VolunteerManager\Helper\MetaBox as MetaBox;
+use VolunteerManager\Notification\NotificationHandlerInterface;
 
 class Assignment
 {
+    private NotificationHandlerInterface $notificationHandler;
     public static string $postTypeSlug;
     public static string $statusTaxonomySlug;
 
-    public function __construct()
+    public function __construct($notificationHandler)
     {
+        $this->notificationHandler = $notificationHandler;
         //Main post type
         self::$postTypeSlug = $this->postType();
-
         //Taxonomy
         self::$statusTaxonomySlug = $this->taxonomyStatus();
     }
@@ -29,6 +30,54 @@ class Assignment
     public function addHooks()
     {
         add_action('admin_post_update_post_status', array($this, 'updatePostStatus'));
+        add_action('set_object_terms', array($this, 'scheduleTermNotifications'), 10, 6);
+
+        add_filter('avm_notification', array($this, 'populateNotificationSender'), 10, 1);
+        add_filter('avm_assignment_approved_notification', array($this, 'populateNotificationReceiver'), 10, 2);
+        add_filter('avm_assignment_denied_notification', array($this, 'populateNotificationReceiver'), 10, 2);
+    }
+
+    /**
+     * Populates notifications with sender email address
+     * @param array $args
+     * @return array
+     */
+    public function populateNotificationSender(array $args): array
+    {
+        $args['from'] = 'no-reply@helsingborg.se';
+        return $args;
+    }
+
+    /**
+     * Populate notification with receiver email address
+     * @param array $args
+     * @param int   $postId
+     * @return array
+     */
+    public function populateNotificationReceiver(array $args, int $postId): array
+    {
+        // TODO: Set correct email key
+        $receiver = get_field('contact_email', $postId);
+        $args['to'] = $receiver ?? '';
+        return $args;
+    }
+
+    /**
+     * Registers notification events when status taxonomy changes
+     * @param int    $objectId
+     * @param array  $terms
+     * @param array  $newIds
+     * @param string $taxonomy
+     * @param bool   $append
+     * @param array  $oldIds
+     * @return void
+     */
+    public function scheduleTermNotifications(int $objectId, array $terms, array $newIds, string $taxonomy, bool $append, array $oldIds): void
+    {
+        if (empty($this->notificationHandler->getNotifications(self::$postTypeSlug, $taxonomy))) {
+            return;
+        }
+        $this->notificationHandler->scheduleNotificationsForTermUpdates($newIds, $oldIds, self::$postTypeSlug, $taxonomy, $objectId);
     }
 
     /**
@@ -37,7 +86,7 @@ class Assignment
      */
     public function postType(): string
     {
-        // Create posttype
+        // Create post type
         $postType = new PostType(
             _x('Assignments', 'Post type plural', 'api-volunteer-manager'),
             _x('Assignment', 'Post type singular', 'api-volunteer-manager'),
