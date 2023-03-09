@@ -33,7 +33,8 @@ class App
         $assignment = new Assignment($notificationsHandler);
         $assignment->addHooks();
 
-        new Employee();
+        $employee = new Employee();
+        $employee->addHooks();
 
         //Admin
         new Admin();
