@@ -127,7 +127,7 @@
             'allow_level' => '',
             'field_type' => 'select',
             'default_value' => array(
-                0 => __('New', 'api-volunteer-manager'),
+                0 => __('new', 'api-volunteer-manager'),
             ),
             'return_format' => 'id',
             'ui' => 0,

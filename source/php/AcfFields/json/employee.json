@@ -124,7 +124,7 @@
             "allow_level": "",
             "field_type": "select",
             "default_value": [
-                "New"
+                "new"
             ],
             "return_format": "id",
             "ui": 0,
