@@ -99,22 +99,22 @@ class Employee
     {
         $term_items = [
             [
-                'name' => 'New',
+                'name' => __('New', 'api-volunteer-manager'),
                 'slug' => 'new',
                 'description' => 'New employee. Employee needs to be processed.'
             ],
             [
-                'name' => 'Ongoing',
+                'name' => __('Ongoing', 'api-volunteer-manager'),
                 'slug' => 'ongoing',
                 'description' => 'Employee under investigation.'
             ],
             [
-                'name' => 'Approved',
+                'name' => __('Approved', 'api-volunteer-manager'),
                 'slug' => 'approved',
                 'description' => 'Employee approved for assignments.'
             ],
             [
-                'name' => 'Denied',
+                'name' => __('Denied', 'api-volunteer-manager'),
                 'slug' => 'denied',
                 'description' => 'Employee denied. Employee can\'t apply.'
             ]
