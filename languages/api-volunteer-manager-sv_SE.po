@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Volunteer Manager\n"
-"POT-Creation-Date: 2023-02-20 12:50+0100\n"
-"PO-Revision-Date: 2023-02-20 12:51+0100\n"
+"POT-Creation-Date: 2023-03-10 09:49+0100\n"
+"PO-Revision-Date: 2023-03-10 09:50+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: sv_SE\n"
@@ -22,7 +22,7 @@ msgstr ""
 
 #: source/php/AcfFields/php/assignment-status.php:6
 #: source/php/AcfFields/php/assignment-status.php:10
-#: source/php/Assignment.php:66 source/php/Assignment.php:131
+#: source/php/Assignment.php:116 source/php/Assignment.php:181
 msgid "Status"
 msgstr "Status"
 
@@ -73,58 +73,74 @@ msgid "Employee"
 msgstr "Anställd"
 
 #: source/php/AcfFields/php/employee.php:10
-#: source/php/AcfFields/php/employer.php:109
-#: source/php/AcfFields/php/signup.php:24
-#: source/php/AcfFields/php/signup.php:37
-msgid "Email"
-msgstr "E-postadress"
-
-#: source/php/AcfFields/php/employee.php:29
-msgid "Phone number"
-msgstr ""
-
-#: source/php/AcfFields/php/employee.php:51
-msgid "Surname"
-msgstr ""
-
-#: source/php/AcfFields/php/employee.php:71
 msgid "First name"
 msgstr ""
 
-#: source/php/AcfFields/php/employee.php:91
-msgid "Newsletter"
+#: source/php/AcfFields/php/employee.php:30
+msgid "Surname"
 msgstr ""
 
-#: source/php/AcfFields/php/employee.php:95
-msgid "Indicates if employee subscribes to newsletter."
+#: source/php/AcfFields/php/employee.php:50
+msgid "Swedish national identity number"
 msgstr ""
 
-#: source/php/AcfFields/php/employee.php:111
+#: source/php/AcfFields/php/employee.php:70
+#: source/php/AcfFields/php/employer.php:109
+#: source/php/AcfFields/php/signup.php:24
+#: source/php/AcfFields/php/signup.php:37 source/php/Assignment.php:237
+msgid "Email"
+msgstr "E-postadress"
+
+#: source/php/AcfFields/php/employee.php:89
+msgid "Phone number"
+msgstr "Telefonnummer"
+
+#: source/php/AcfFields/php/employee.php:109
+msgid "Employment status"
+msgstr ""
+
+#: source/php/AcfFields/php/employee.php:130
+msgid "new"
+msgstr ""
+
+#: source/php/AcfFields/php/employee.php:150
 msgid "Crime record extracts"
 msgstr ""
 
-#: source/php/AcfFields/php/employee.php:123
+#: source/php/AcfFields/php/employee.php:162
 msgid "Indicates wheter requests for criminal record extracts have been made."
 msgstr ""
 
-#: source/php/AcfFields/php/employee.php:131
+#: source/php/AcfFields/php/employee.php:170
 msgid "Crime record extracted at date"
 msgstr ""
 
-#: source/php/AcfFields/php/employee.php:149
+#: source/php/AcfFields/php/employee.php:188
+msgid "Registration date"
+msgstr ""
+
+#: source/php/AcfFields/php/employee.php:206
 msgid "Swedish Language Proficiency"
 msgstr ""
 
-#: source/php/AcfFields/php/employee.php:162
+#: source/php/AcfFields/php/employee.php:219
 msgid "Fluent"
 msgstr ""
 
-#: source/php/AcfFields/php/employee.php:163
+#: source/php/AcfFields/php/employee.php:220
 msgid "Basic"
 msgstr ""
 
-#: source/php/AcfFields/php/employee.php:164
+#: source/php/AcfFields/php/employee.php:221
 msgid "Lacks language proficiency"
+msgstr ""
+
+#: source/php/AcfFields/php/employee.php:233
+msgid "Newsletter"
+msgstr ""
+
+#: source/php/AcfFields/php/employee.php:237
+msgid "Indicates if employee subscribes to newsletter."
 msgstr ""
 
 #: source/php/AcfFields/php/employer.php:6
@@ -167,7 +183,7 @@ msgstr "Lägg till kontakt"
 
 #: source/php/AcfFields/php/employer.php:129
 #: source/php/AcfFields/php/signup.php:25
-#: source/php/AcfFields/php/signup.php:64
+#: source/php/AcfFields/php/signup.php:64 source/php/Assignment.php:238
 msgid "Phone"
 msgstr "Telefonnummer"
 
@@ -206,31 +222,39 @@ msgstr ""
 msgid "API-url"
 msgstr ""
 
-#: source/php/Assignment.php:42
+#: source/php/Assignment.php:92
 msgctxt "Post type plural"
 msgid "Assignments"
 msgstr "Uppdrag"
 
-#: source/php/Assignment.php:43
+#: source/php/Assignment.php:93
 msgctxt "Post type singular"
 msgid "Assignment"
 msgstr "Uppdrag"
 
-#: source/php/Assignment.php:46
+#: source/php/Assignment.php:96
 msgid "Assignments"
 msgstr "Uppdrag"
 
-#: source/php/Assignment.php:53
+#: source/php/Assignment.php:103
 msgid "assignment"
 msgstr ""
 
-#: source/php/Assignment.php:80
+#: source/php/Assignment.php:130
 msgid "Visibility"
 msgstr "Synlighet"
 
-#: source/php/Assignment.php:130
+#: source/php/Assignment.php:180
 msgid "Statuses"
 msgstr "Statusar"
+
+#: source/php/Assignment.php:216
+msgid "Submitted by"
+msgstr "Inskickat av"
+
+#: source/php/Assignment.php:236
+msgid "Contact details of the person who submitted the assignment."
+msgstr "Kontaktuppgifter till personen som skickat in uppdraget."
 
 #: source/php/Components/EditPostStatusButtons/DraftEditPostStatusButton.php:25
 msgid "Publish this post"
@@ -256,22 +280,42 @@ msgstr "Avpublicera det här inlägget"
 msgid "Unpublish"
 msgstr "Avpublicera"
 
-#: source/php/Employee.php:25
+#: source/php/Employee.php:34
 msgctxt "Post type plural"
 msgid "Employees"
 msgstr ""
 
-#: source/php/Employee.php:26
+#: source/php/Employee.php:35
 msgctxt "Post type singular"
 msgid "Employee"
 msgstr ""
 
-#: source/php/Employee.php:29
+#: source/php/Employee.php:38
 msgid "Employees"
 msgstr ""
 
-#: source/php/Employee.php:36
+#: source/php/Employee.php:45
 msgid "employee"
+msgstr ""
+
+#: source/php/Employee.php:65
+msgid "Registration status"
+msgstr ""
+
+#: source/php/Employee.php:102
+msgid "New"
+msgstr ""
+
+#: source/php/Employee.php:107
+msgid "Ongoing"
+msgstr ""
+
+#: source/php/Employee.php:112
+msgid "Approved"
+msgstr ""
+
+#: source/php/Employee.php:117
+msgid "Denied"
 msgstr ""
 
 #: source/php/Entity/Filter.php:26
