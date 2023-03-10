@@ -45,8 +45,20 @@ class AssignmentTest extends PluginTestCase
 
     public function testRegisterSubmitterMetaBoxWithExistingMetaValue()
     {
-        Functions\when('get_post_meta')->justReturn('foo@bar.com');
-        Functions\expect('add_meta_box')->once()->withAnyArgs();
+        Functions\when('get_post_meta')->justReturn('meta_value');
+        Functions\expect('add_meta_box')->once()
+            ->with(
+                'submitter-info',
+                'Submitted by',
+                array($this->assignment, 'renderSubmitterData'),
+                array('assignment'),
+                'normal',
+                'low',
+                array(
+                    'submittedByEmail' => 'meta_value',
+                    'submittedByPhone' => 'meta_value'
+                )
+            );
         $this->assignment->registerSubmitterMetaBox('assignment', $this->post);
     }
 
