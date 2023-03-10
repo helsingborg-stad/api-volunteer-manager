@@ -86,6 +86,8 @@ msgstr ""
 
 #: source/php/AcfFields/php/employee.php:70
 #: source/php/AcfFields/php/employer.php:109
+#: source/php/AcfFields/php/options.php:48
+#: source/php/AcfFields/php/options.php:95
 #: source/php/AcfFields/php/signup.php:24
 #: source/php/AcfFields/php/signup.php:37 source/php/Assignment.php:237
 msgid "Email"
@@ -166,6 +168,7 @@ msgstr "Intern"
 
 #: source/php/AcfFields/php/employer.php:30
 #: source/php/AcfFields/php/employer.php:88
+#: source/php/AcfFields/php/options.php:28
 msgid "Name"
 msgstr "Namn"
 
@@ -196,6 +199,30 @@ msgstr "Webbplats"
 msgid "Location"
 msgstr "Plats"
 
+#: source/php/AcfFields/php/options.php:6
+msgid "Notification options"
+msgstr ""
+
+#: source/php/AcfFields/php/options.php:10
+msgid "Sender"
+msgstr "Avsändare"
+
+#: source/php/AcfFields/php/options.php:14
+msgid "Shown as sender on outgoing email."
+msgstr "Visas som avsändare för utgående e-post."
+
+#: source/php/AcfFields/php/options.php:72
+msgid "Receivers"
+msgstr "Mottagare"
+
+#: source/php/AcfFields/php/options.php:76
+msgid "List of notification receivers."
+msgstr "Lista med notis-mottagare."
+
+#: source/php/AcfFields/php/options.php:90
+msgid "Add Row"
+msgstr ""
+
 #: source/php/AcfFields/php/signup.php:6
 msgid "Signup"
 msgstr "Registrering"
@@ -218,7 +245,7 @@ msgstr ""
 msgid "#eee"
 msgstr ""
 
-#: source/php/Admin.php:22
+#: source/php/Admin.php:28
 msgid "API-url"
 msgstr ""
 
@@ -411,6 +438,15 @@ msgstr ""
 #. Author URI of the plugin/theme
 msgid "https://github.com/helsingborg-stad"
 msgstr ""
+
+#~ msgid "List of email addresses that will receive email notifications."
+#~ msgstr "E-postadresser som kommer att få notiser via e-post."
+
+#~ msgid "Submitted by"
+#~ msgstr "Inskickat av"
+
+#~ msgid "Contact details of the person who submitted the assignment."
+#~ msgstr "Kontaktuppgifter till personen som skickat in uppdraget."
 
 #~ msgid "Review"
 #~ msgstr "Granska"
