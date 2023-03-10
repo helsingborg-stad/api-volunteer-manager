@@ -12,6 +12,7 @@ class NotificationHandlerTest extends PluginTestCase
 
     public function setUp(): void
     {
+        parent::setUp();
         $emailServiceMock = $this->getMockBuilder('VolunteerManager\Notification\EmailNotificationSender')
             ->disableOriginalConstructor()
             ->getMock();
