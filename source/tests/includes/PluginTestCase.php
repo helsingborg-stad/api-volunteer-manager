@@ -5,8 +5,9 @@ namespace PluginTestCase;
 use PHPUnit\Framework\TestCase;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use Brain\Monkey;
+use Brain\Monkey\Functions;
 
-class PluginTestCase extends \PHPUnit\Framework\TestCase
+class PluginTestCase extends TestCase
 {
     use MockeryPHPUnitIntegration;
 
@@ -19,16 +20,15 @@ class PluginTestCase extends \PHPUnit\Framework\TestCase
     {
         parent::setUp();
         Monkey\setUp();
-        // A few common passthrough
-        // 1. WordPress i18n functions
-        Monkey\Functions\when('__')
-            ->returnArg(1);
-        Monkey\Functions\when('_e')
-            ->returnArg(1);
-        Monkey\Functions\when('_n')
-            ->returnArg(1);
-        Monkey\Functions\when('_x')
-            ->returnArg(1);
+
+        Functions\stubs(
+            [
+                '__' => null,
+                '_e' => null,
+                '_n' => null,
+                '_x' => null,
+            ]
+        );
 
         if (!defined('AVM_TEXT_DOMAIN')) {
             define('AVM_TEXT_DOMAIN', 'avm-text-domain');
