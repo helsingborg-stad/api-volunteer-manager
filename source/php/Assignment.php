@@ -31,6 +31,7 @@ class Assignment
     {
         add_action('admin_post_update_post_status', array($this, 'updatePostStatus'));
         add_action('set_object_terms', array($this, 'scheduleTermNotifications'), 10, 6);
+        add_action('add_meta_boxes', array($this, 'registerSubmitterMetaBox'), 10, 2);
 
         add_filter('avm_notification', array($this, 'populateNotificationSender'), 10, 1);
         add_filter('avm_assignment_approved_notification', array($this, 'populateNotificationReceiver'), 10, 2);
@@ -199,5 +200,42 @@ class Assignment
 
         //Return taxonomy slug
         return $categories->slug;
+    }
+
+    /**
+     * Register custom meta boxes
+     * @return void
+     */
+    public function registerSubmitterMetaBox($postType, $post)
+    {
+        if (!$submittedByEmail = get_post_meta($post->ID, 'submitted_by_email', true)) {
+            return;
+        }
+        add_meta_box(
+            'submitter-info',
+            __('Submitted by', AVM_TEXT_DOMAIN),
+            array($this, 'renderSubmitterData'),
+            array('assignment'),
+            'normal',
+            'low',
+            array(
+                'submittedByEmail' => $submittedByEmail,
+                'submittedByPhone' => get_post_meta($post->ID, 'submitted_by_phone', true) ?? null
+            )
+        );
+    }
+
+    /**
+     * Displays contact information about the post submitter
+     * @param object $post
+     * @param array  $args
+     * @return void
+     */
+    public function renderSubmitterData(object $post, array $args): void
+    {
+        $content = sprintf('<p>%s</p>', __('Contact details of the person who submitted the assignment.', AVM_TEXT_DOMAIN));
+        $content .= $args['args']['submittedByEmail'] ? sprintf('<p><strong>%1$s:</strong> <a href="mailto:%2$s">%2$s</a></p>', __('Email', AVM_TEXT_DOMAIN), $args['args']['submittedByEmail']) : '';
+        $content .= $args['args']['submittedByPhone'] ? sprintf('<p><strong>%s:</strong> %s</p>', __('Phone', AVM_TEXT_DOMAIN), $args['args']['submittedByPhone']) : '';
+        echo $content;
     }
 }
