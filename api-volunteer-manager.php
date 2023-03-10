@@ -42,7 +42,8 @@ add_action('acf/init', function () {
         'location' => 'group_63a0408b8601f',
         'taxonomy' => 'group_63986eae18b97',
         'assignment' => 'group_63dce32c807e2',
-        'assignment-status' => 'group_63e2023f5baca'
+        'assignment-status' => 'group_63e2023f5baca',
+        'options' => 'group_640b20dece43a'
     ));
     $acfExportManager->import();
 });
