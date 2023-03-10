@@ -27,6 +27,12 @@ class PluginTestCase extends \PHPUnit\Framework\TestCase
             ->returnArg(1);
         Monkey\Functions\when('_n')
             ->returnArg(1);
+        Monkey\Functions\when('_x')
+            ->returnArg(1);
+
+        if (!defined('AVM_TEXT_DOMAIN')) {
+            define('AVM_TEXT_DOMAIN', 'avm-text-domain');
+        }
     }
 
     /**
