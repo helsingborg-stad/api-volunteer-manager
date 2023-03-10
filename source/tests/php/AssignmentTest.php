@@ -68,4 +68,21 @@ class AssignmentTest extends PluginTestCase
         Functions\expect('add_meta_box')->never()->withAnyArgs();
         $this->assignment->registerSubmitterMetaBox('assignment', $this->post);
     }
+
+    public function testPopulateNotificationWithSubmitter()
+    {
+        $args = [
+            'to' => '',
+            'from' => 'from@email.com',
+            'message' => [
+                'subject' => 'subject',
+                'content' => 'content',
+            ]
+        ];
+        $expectedResult = $args;
+        $expectedResult['to'] = 'foo@bar.com';
+        Functions\when('get_post_meta')->justReturn('foo@bar.com');
+        $actualResult = $this->assignment->populateNotificationWithSubmitter($args, 123);
+        $this->assertEquals($expectedResult, $actualResult);
+    }
 }
