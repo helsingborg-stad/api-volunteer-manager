@@ -3,7 +3,7 @@
 if (function_exists('acf_add_local_field_group')) {
     acf_add_local_field_group(array(
     'key' => 'group_640b20dece43a',
-    'title' => __('Notification options', 'api-volunteer-manager'),
+    'title' => __('Options', 'api-volunteer-manager'),
     'fields' => array(
         0 => array(
             'key' => 'field_640b25ba50bba',
@@ -124,7 +124,7 @@
     ),
     'menu_order' => 0,
     'position' => 'normal',
-    'style' => 'default',
+    'style' => 'seamless',
     'label_placement' => 'left',
     'instruction_placement' => 'label',
     'hide_on_screen' => '',

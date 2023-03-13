@@ -1,6 +1,6 @@
 [{
     "key": "group_640b20dece43a",
-    "title": "Notification options",
+    "title": "Options",
     "fields": [
         {
             "key": "field_640b25ba50bba",
@@ -121,7 +121,7 @@
     ],
     "menu_order": 0,
     "position": "normal",
-    "style": "default",
+    "style": "seamless",
     "label_placement": "left",
     "instruction_placement": "label",
     "hide_on_screen": "",
