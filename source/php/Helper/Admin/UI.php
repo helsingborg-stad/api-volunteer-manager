@@ -53,7 +53,7 @@ class UI
      */
     public static function taxonomyColorContrast($termId, $taxonomySlug)
     {
-        $color = self::taxonomyColor($termId, $taxonomySlug);
+        $hexcolor = self::taxonomyColor($termId, $taxonomySlug);
 
         $r = hexdec(substr($hexcolor, 1, 2));
         $g = hexdec(substr($hexcolor, 3, 2));
