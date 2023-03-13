@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Volunteer Manager\n"
-"POT-Creation-Date: 2023-03-10 09:49+0100\n"
-"PO-Revision-Date: 2023-03-10 09:50+0100\n"
+"POT-Creation-Date: 2023-03-13 08:37+0100\n"
+"PO-Revision-Date: 2023-03-13 08:37+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: sv_SE\n"
@@ -22,7 +22,7 @@ msgstr ""
 
 #: source/php/AcfFields/php/assignment-status.php:6
 #: source/php/AcfFields/php/assignment-status.php:10
-#: source/php/Assignment.php:116 source/php/Assignment.php:181
+#: source/php/Assignment.php:115 source/php/Assignment.php:180
 msgid "Status"
 msgstr "Status"
 
@@ -86,8 +86,10 @@ msgstr ""
 
 #: source/php/AcfFields/php/employee.php:70
 #: source/php/AcfFields/php/employer.php:109
+#: source/php/AcfFields/php/options.php:48
+#: source/php/AcfFields/php/options.php:95
 #: source/php/AcfFields/php/signup.php:24
-#: source/php/AcfFields/php/signup.php:37 source/php/Assignment.php:237
+#: source/php/AcfFields/php/signup.php:37 source/php/Assignment.php:236
 msgid "Email"
 msgstr "E-postadress"
 
@@ -166,6 +168,7 @@ msgstr "Intern"
 
 #: source/php/AcfFields/php/employer.php:30
 #: source/php/AcfFields/php/employer.php:88
+#: source/php/AcfFields/php/options.php:28
 msgid "Name"
 msgstr "Namn"
 
@@ -183,7 +186,7 @@ msgstr "Lägg till kontakt"
 
 #: source/php/AcfFields/php/employer.php:129
 #: source/php/AcfFields/php/signup.php:25
-#: source/php/AcfFields/php/signup.php:64 source/php/Assignment.php:238
+#: source/php/AcfFields/php/signup.php:64 source/php/Assignment.php:237
 msgid "Phone"
 msgstr "Telefonnummer"
 
@@ -195,6 +198,31 @@ msgstr "Webbplats"
 #: source/php/AcfFields/php/location.php:10
 msgid "Location"
 msgstr "Plats"
+
+#: source/php/AcfFields/php/options.php:6 source/php/Admin.php:38
+#: source/php/Admin.php:39
+msgid "Options"
+msgstr "Inställningar"
+
+#: source/php/AcfFields/php/options.php:10
+msgid "Sender"
+msgstr "Avsändare"
+
+#: source/php/AcfFields/php/options.php:14
+msgid "Shown as sender on outgoing email."
+msgstr "Visas som avsändare för utgående e-post."
+
+#: source/php/AcfFields/php/options.php:72
+msgid "Receivers"
+msgstr "Mottagare"
+
+#: source/php/AcfFields/php/options.php:76
+msgid "List of notification receivers."
+msgstr "Lista med mottagare för notiser."
+
+#: source/php/AcfFields/php/options.php:90
+msgid "Add Row"
+msgstr ""
 
 #: source/php/AcfFields/php/signup.php:6
 msgid "Signup"
@@ -218,41 +246,41 @@ msgstr ""
 msgid "#eee"
 msgstr ""
 
-#: source/php/Admin.php:22
+#: source/php/Admin.php:28
 msgid "API-url"
 msgstr ""
 
-#: source/php/Assignment.php:92
+#: source/php/Assignment.php:91
 msgctxt "Post type plural"
 msgid "Assignments"
 msgstr "Uppdrag"
 
-#: source/php/Assignment.php:93
+#: source/php/Assignment.php:92
 msgctxt "Post type singular"
 msgid "Assignment"
 msgstr "Uppdrag"
 
-#: source/php/Assignment.php:96
+#: source/php/Assignment.php:95
 msgid "Assignments"
 msgstr "Uppdrag"
 
-#: source/php/Assignment.php:103
+#: source/php/Assignment.php:102
 msgid "assignment"
 msgstr ""
 
-#: source/php/Assignment.php:130
+#: source/php/Assignment.php:129
 msgid "Visibility"
 msgstr "Synlighet"
 
-#: source/php/Assignment.php:180
+#: source/php/Assignment.php:179
 msgid "Statuses"
 msgstr "Statusar"
 
-#: source/php/Assignment.php:216
+#: source/php/Assignment.php:215
 msgid "Submitted by"
 msgstr "Inskickat av"
 
-#: source/php/Assignment.php:236
+#: source/php/Assignment.php:235
 msgid "Contact details of the person who submitted the assignment."
 msgstr "Kontaktuppgifter till personen som skickat in uppdraget."
 
@@ -411,6 +439,9 @@ msgstr ""
 #. Author URI of the plugin/theme
 msgid "https://github.com/helsingborg-stad"
 msgstr ""
+
+#~ msgid "List of email addresses that will receive email notifications."
+#~ msgstr "E-postadresser som kommer att få notiser via e-post."
 
 #~ msgid "Review"
 #~ msgstr "Granska"

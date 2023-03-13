@@ -36,8 +36,7 @@ class App
         $employee = new Employee();
         $employee->addHooks();
 
-        //Admin
-        new Admin();
+        (new Admin())->addHooks();
     }
 
     /**
