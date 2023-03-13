@@ -9,13 +9,6 @@ use VolunteerManager\Employee as Employee;
 
 class EmployeeTest extends PluginTestCase
 {
-    public function setUp(): void
-    {
-        parent::setUp();
-
-        Functions\when('_x')->returnArg();
-    }
-
     /**
      * @throws ExpectationArgsRequired
      */
