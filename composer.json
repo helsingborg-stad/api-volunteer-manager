@@ -26,7 +26,7 @@
   "require-dev": {
     "mockery/mockery": "dev-master@dev",
     "brain/monkey": "^2.6",
-    "codedungeon/phpunit-result-printer": "^0.31.0",
-    "phpunit/phpunit": "^9.5"
+    "codedungeon/phpunit-result-printer": "^0.32.0",
+    "phpunit/phpunit": "^9.6"
   }
 }
