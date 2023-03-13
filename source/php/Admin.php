@@ -35,7 +35,7 @@ class Admin
     public function addOptionsPage(): void
     {
         acf_add_options_sub_page(array(
-            'page_title' => __('Volunteer options', 'api-volunteer-manager'),
+            'page_title' => __('Options', 'api-volunteer-manager'),
             'menu_title' => __('Options', 'api-volunteer-manager'),
             'menu_slug' => 'options',
             'parent_slug' => 'edit.php?post_type=assignment',
