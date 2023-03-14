@@ -85,4 +85,38 @@ class AssignmentTest extends PluginTestCase
         $actualResult = $this->assignment->populateNotificationWithSubmitter($args, 123);
         $this->assertEquals($expectedResult, $actualResult);
     }
+
+    public function testPopulateNotificationSenderWithEmailAndName()
+    {
+        $args = [
+            'to' => 'to@email.com',
+            'from' => '',
+            'message' => [
+                'subject' => 'subject',
+                'content' => 'content',
+            ]
+        ];
+        $expectedResult = $args;
+        $expectedResult['from'] = 'Foo Bar <foo@bar.com>';
+        Functions\when('get_field')->justReturn(['email' => 'foo@bar.com', 'name' => 'Foo Bar']);
+        $actualResult = $this->assignment->populateNotificationSender($args, 1);
+        $this->assertEquals($expectedResult, $actualResult);
+    }
+
+    public function testPopulateNotificationSenderWithEmail()
+    {
+        $args = [
+            'to' => 'to@email.com',
+            'from' => '',
+            'message' => [
+                'subject' => 'subject',
+                'content' => 'content',
+            ]
+        ];
+        $expectedResult = $args;
+        $expectedResult['from'] = 'foo@bar.com';
+        Functions\when('get_field')->justReturn(['email' => 'foo@bar.com', 'name' => null]);
+        $actualResult = $this->assignment->populateNotificationSender($args, 1);
+        $this->assertEquals($expectedResult, $actualResult);
+    }
 }
