@@ -69,54 +69,58 @@ class AssignmentTest extends PluginTestCase
         $this->assignment->registerSubmitterMetaBox('assignment', $this->post);
     }
 
-    public function testPopulateNotificationWithSubmitter()
+    /**
+     * @dataProvider notificationReceiverProvider
+     */
+    public function testPopulateNotificationWithSubmitter($args, $getPostMetaResult, $expectedResult)
     {
-        $args = [
-            'to' => '',
-            'from' => 'from@email.com',
-            'message' => [
-                'subject' => 'subject',
-                'content' => 'content',
-            ]
-        ];
-        $expectedResult = $args;
-        $expectedResult['to'] = 'foo@bar.com';
-        Functions\when('get_post_meta')->justReturn('foo@bar.com');
-        $actualResult = $this->assignment->populateNotificationWithSubmitter($args, 123);
-        $this->assertEquals($expectedResult, $actualResult);
+        Functions\when('get_post_meta')->justReturn($getPostMetaResult);
+        $this->assertEquals($expectedResult, $this->assignment->populateNotificationWithSubmitter($args, 123));
     }
 
-    public function testPopulateNotificationSenderWithEmailAndName()
+    public function notificationReceiverProvider()
     {
-        $args = [
-            'to' => 'to@email.com',
-            'from' => '',
-            'message' => [
-                'subject' => 'subject',
-                'content' => 'content',
-            ]
+        return [
+            [
+                ['to' => '', 'from' => '', 'message' => ['subject' => 'Subject', 'content' => 'Content']],
+                'foo@email.bar',
+                ['to' => 'foo@email.bar', 'from' => '', 'message' => ['subject' => 'Subject', 'content' => 'Content']]
+            ],
+            [
+                ['to' => '', 'from' => '', 'message' => ['subject' => 'Subject', 'content' => 'Content']],
+                null,
+                ['to' => '', 'from' => '', 'message' => ['subject' => 'Subject', 'content' => 'Content']]
+            ],
         ];
-        $expectedResult = $args;
-        $expectedResult['from'] = 'Foo Bar <foo@bar.com>';
-        Functions\when('get_field')->justReturn(['email' => 'foo@bar.com', 'name' => 'Foo Bar']);
-        $actualResult = $this->assignment->populateNotificationSender($args, 1);
-        $this->assertEquals($expectedResult, $actualResult);
     }
 
-    public function testPopulateNotificationSenderWithEmail()
+    /**
+     * @dataProvider notificationSenderProvider
+     */
+    public function testPopulateNotificationSenderWithEmail($args, $getFieldResult, $expectedResult)
     {
-        $args = [
-            'to' => 'to@email.com',
-            'from' => '',
-            'message' => [
-                'subject' => 'subject',
-                'content' => 'content',
+        Functions\when('get_field')->justReturn($getFieldResult);
+        $this->assertEquals($expectedResult, $this->assignment->populateNotificationSender($args, 1));
+    }
+
+    public function notificationSenderProvider()
+    {
+        return [
+            [
+                ['to' => 'foo@bar.receiver', 'from' => '', 'message' => ['subject' => 'Subject', 'content' => 'Content']],
+                ['email' => 'foo@bar.email', 'name' => 'Foo Bar'],
+                ['to' => 'foo@bar.receiver', 'from' => 'Foo Bar <foo@bar.email>', 'message' => ['subject' => 'Subject', 'content' => 'Content']]
+            ],
+            [
+                ['to' => 'foo@bar.receiver', 'from' => '', 'message' => ['subject' => 'Subject', 'content' => 'Content']],
+                ['email' => 'foo@bar.email', 'name' => null],
+                ['to' => 'foo@bar.receiver', 'from' => 'foo@bar.email', 'message' => ['subject' => 'Subject', 'content' => 'Content']]
+            ],
+            [
+                ['to' => 'foo@bar.receiver', 'from' => '', 'message' => ['subject' => 'Subject', 'content' => 'Content']],
+                ['email' => null, 'name' => null],
+                ['to' => 'foo@bar.receiver', 'from' => '', 'message' => ['subject' => 'Subject', 'content' => 'Content']]
             ]
         ];
-        $expectedResult = $args;
-        $expectedResult['from'] = 'foo@bar.com';
-        Functions\when('get_field')->justReturn(['email' => 'foo@bar.com', 'name' => null]);
-        $actualResult = $this->assignment->populateNotificationSender($args, 1);
-        $this->assertEquals($expectedResult, $actualResult);
     }
 }
