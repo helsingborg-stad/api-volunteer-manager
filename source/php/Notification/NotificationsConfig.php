@@ -17,7 +17,7 @@ class NotificationsConfig
                     ],
                     'rule' => [
                         'key' => 'source',
-                        'value' => 'internal',
+                        'value' => '',
                         'operator' => 'NOT_EQUAL'
                     ]
                 ],
@@ -31,7 +31,7 @@ class NotificationsConfig
                     ],
                     'rule' => [
                         'key' => 'source',
-                        'value' => 'internal',
+                        'value' => '',
                         'operator' => 'NOT_EQUAL'
                     ]
                 ]
