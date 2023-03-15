@@ -112,7 +112,7 @@ class Assignment
 
         $postType->addTableColumn(
             'status',
-            __('Status', 'api-volunteer-manager'),
+            __('Status', AVM_TEXT_DOMAIN),
             true,
             function ($column, $postId) {
                 echo AdminUI::createTaxonomyPills(
@@ -126,12 +126,21 @@ class Assignment
 
         $postType->addTableColumn(
             'visibility',
-            __('Visibility', 'api-volunteer-manager'),
+            __('Visibility', AVM_TEXT_DOMAIN),
             false,
             function ($column, $postId) {
                 $postStatus = get_post_status($postId);
                 $editButton = EditPostStatusButtonFactory::create($postId, $postStatus, new UrlBuilder());
                 echo $editButton->getHtml();
+            }
+        );
+
+        $postType->addTableColumn(
+            'submitted_from',
+            __('Submitted from', AVM_TEXT_DOMAIN),
+            false,
+            function ($column, $postId) {
+                echo get_post_meta($postId, 'source', true);
             }
         );
 
