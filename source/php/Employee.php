@@ -68,6 +68,15 @@ class Employee
                 echo "-";
             }
         );
+
+        $postType->addTableColumn(
+            'submitted_from',
+            __('Submitted from', AVM_TEXT_DOMAIN),
+            false,
+            function ($column, $postId) {
+                echo get_post_meta($postId, 'source', true);
+            }
+        );
     }
 
     /**
