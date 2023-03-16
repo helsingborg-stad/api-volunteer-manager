@@ -2,6 +2,7 @@
 
 namespace VolunteerManager;
 
+use VolunteerManager\Entity\Term;
 use VolunteerManager\Helper\CacheBust;
 use VolunteerManager\Notification\NotificationsConfig;
 use VolunteerManager\Notification\EmailNotificationSender;
@@ -33,7 +34,9 @@ class App
         $assignment = new Assignment();
         $assignment->addHooks();
 
-        $employee = new Employee();
+        $termHandler = new Term();
+
+        $employee = new Employee($termHandler);
         $employee->addHooks();
 
         (new Admin())->addHooks();

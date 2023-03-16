@@ -2,8 +2,10 @@
 
 namespace VolunteerManager;
 
+use VolunteerManager\Entity\ITerm;
 use \VolunteerManager\Entity\PostType as PostType;
 use \VolunteerManager\Entity\Taxonomy as Taxonomy;
+use VolunteerManager\Entity\Term;
 use \VolunteerManager\Helper\Icon as Icon;
 
 class Employee
@@ -12,12 +14,16 @@ class Employee
 
     private Taxonomy $employeeTaxonomy;
 
-    public function __construct()
+    private ITerm $termHandler;
+
+    public function __construct(ITerm $termHandler)
     {
         self::$postType = $this->postType();
         $this->addPostTypeTableColumn(self::$postType);
 
         $this->registerEmployeeStatusTaxonomy(self::$postType);
+
+        $this->termHandler = $termHandler;
     }
 
     public function addHooks()
@@ -161,8 +167,6 @@ class Employee
             ]
         ];
 
-        if (isset($this->employeeTaxonomy)) {
-            $this->employeeTaxonomy->insertTerms($term_items, 'employee-registration-status');
-        }
+        $this->termHandler->insertTerms($term_items, 'employee-registration-status');
     }
 }
