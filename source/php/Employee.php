@@ -10,6 +10,8 @@ class Employee
 {
     private static PostType $postType;
 
+    private Taxonomy $employeeTaxonomy;
+
     public function __construct()
     {
         self::$postType = $this->postType();
@@ -117,7 +119,7 @@ class Employee
      */
     private function registerEmployeeStatusTaxonomy($postType) : void
     {
-        new Taxonomy(
+        $this->employeeTaxonomy = new Taxonomy(
             'Registration statuses',
             'Registration status',
             'employee-registration-status',
@@ -159,18 +161,8 @@ class Employee
             ]
         ];
 
-        foreach ($term_items as $term) {
-            if (!term_exists($term['name'], 'employee-registration-status'))
-            {
-                $result = wp_insert_term(
-                    $term['name'],
-                    'employee-registration-status',
-                    [
-                        'slug' => $term['slug'],
-                        'description' => $term['description'],
-                    ]
-                );
-            }
+        if (isset($this->employeeTaxonomy)) {
+            $this->employeeTaxonomy->insertTerms($term_items, 'employee-registration-status');
         }
     }
 }
