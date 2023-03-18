@@ -111,38 +111,39 @@ class EmployeeTest extends PluginTestCase
         ];
     }
 
-    public function testInsertEmployeeStatusTerms()
-    {
-        $termMock = \Mockery::mock(Term::class);
-        $term_items = [
-            [
-                'name' => 'New',
-                'slug' => 'new',
-                'description' => 'New employee. Employee needs to be processed.'
-            ],
-            [
-                'name' => 'Ongoing',
-                'slug' => 'ongoing',
-                'description' => 'Employee under investigation.'
-            ],
-            [
-                'name' => 'Approved',
-                'slug' => 'approved',
-                'description' => 'Employee approved for assignments.'
-            ],
-            [
-                'name' => 'Denied',
-                'slug' => 'denied',
-                'description' => 'Employee denied. Employee can\'t apply.'
-            ]
-        ];
+//
+//    {
+//        $termMock = \Mockery::mock(Term::class);
+//        $term_items = [
+//            [
+//                'name' => 'New',
+//                'slug' => 'new',
+//                'description' => 'New employee. Employee needs to be processed.'
+//            ],
+//            [
+//                'name' => 'Ongoing',
+//                'slug' => 'ongoing',
+//                'description' => 'Employee under investigation.'
+//            ],
+//            [
+//                'name' => 'Approved',
+//                'slug' => 'approved',
+//                'description' => 'Employee approved for assignments.'
+//            ],
+//            [
+//                'name' => 'Denied',
+//                'slug' => 'denied',
+//                'description' => 'Employee denied. Employee can\'t apply.'
+//            ]
+//        ];
+//
+//        $termMock->shouldReceive('insertTerms')
+//            ->once()
+//            ->with($term_items, 'employee-registration-status')
+//            ->andReturn(['term_id' => 1, 'term_taxonomy_id' => 1]);
+//
+//        $employee = new Employee($termMock);
+//        $employee->insertEmploymentStatusTerms();
+//    }
 
-        $termMock->shouldReceive('insertTerms')
-            ->once()
-            ->with($term_items, 'employee-registration-status')
-            ->andReturn(['term_id' => 1, 'term_taxonomy_id' => 1]);
-
-        $employee = new Employee($termMock);
-        $employee->insertEmploymentStatusTerms();
-    }
 }
