@@ -13,12 +13,17 @@ use VolunteerManager\Helper\MetaBox as MetaBox;
 
 class Assignment
 {
+    private NotificationHandlerInterface $notificationHandler;
+    // public static string $postTypeSlug;
+    private PostType $postType;
     public static string $postTypeSlug;
 
     public function __construct()
     {
         //Main post type
-        self::$postTypeSlug = $this->postType();
+        //self::$postTypeSlug = $this->postType();
+        $this->postType = $this->setupPostType();
+        $this->addPostTypeTableColumn($this->postType);
     }
 
 
@@ -62,13 +67,30 @@ class Assignment
     }
 
     /**
+     * Registers notification events when status taxonomy changes
+     * @param int    $objectId
+     * @param array  $terms
+     * @param array  $newIds
+     * @param string $taxonomy
+     * @param bool   $append
+     * @param array  $oldIds
+     * @return void
+     */
+    public function scheduleTermNotifications(int $objectId, array $terms, array $newIds, string $taxonomy, bool $append, array $oldIds): void
+    {
+        if (empty($this->notificationHandler->getNotifications(self::$postTypeSlug, $taxonomy))) {
+            return;
+        }
+        $this->notificationHandler->scheduleNotificationsForTermUpdates($newIds, $oldIds, self::$postTypeSlug, $taxonomy, $objectId);
+    }
+
+    /**
      * Create post type
      * @return void
      */
-    public function postType(): string
+    public function setupPostType(): PostType
     {
-        // Create post type
-        $postType = new PostType(
+        return new PostType(
             _x('Assignments', 'Post type plural', 'api-volunteer-manager'),
             _x('Assignment', 'Post type singular', 'api-volunteer-manager'),
             'assignment',
@@ -90,7 +112,17 @@ class Assignment
                 'show_in_rest' => true
             )
         );
+    }
 
+    /**
+     * Adds custom table columns to the specified post type's admin list table.
+     *
+     * @param PostType $postType The post type object to which the columns should be added.
+     *
+     * @return void
+     */
+    private function addPostTypeTableColumn(PostType $postType): void
+    {
         $postType->addTableColumn(
             'status',
             __('Status', AVM_TEXT_DOMAIN),
@@ -124,8 +156,6 @@ class Assignment
                 echo get_post_meta($postId, 'source', true);
             }
         );
-
-        return $postType->slug;
     }
 
     /**
@@ -168,7 +198,7 @@ class Assignment
             __('Statuses', 'api-volunteer-manager'),
             __('Status', 'api-volunteer-manager'),
             'assignment-status',
-            array(self::$postTypeSlug),
+            array($this->postType->slug),
             array(
                 'hierarchical' => false
             )
@@ -179,7 +209,7 @@ class Assignment
         //Remove default UI
         (new MetaBox)->remove(
             "tagsdiv-assignment-status",
-            self::$postTypeSlug
+            $this->postType->slug,
         );
 
         //Add filter

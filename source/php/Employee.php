@@ -14,7 +14,7 @@ class Employee
 
     public function __construct()
     {
-        $this->postType = $this->postType();
+        $this->postType = $this->setupPostType();
         $this->addPostTypeTableColumn($this->postType);
     }
 
@@ -58,7 +58,7 @@ class Employee
      * Create post type
      * @return PostType
      */
-    public function postType(): PostType
+    public function setupPostType(): PostType
     {
         // Create post type
         return new PostType(
