@@ -4,6 +4,7 @@ namespace VolunteerManager;
 
 use VolunteerManager\Components\EditPostStatusButtons\EditPostStatusButtonFactory as EditPostStatusButtonFactory;
 use VolunteerManager\Entity\Filter as Filter;
+use VolunteerManager\Entity\ITerm;
 use VolunteerManager\Entity\PostType as PostType;
 use VolunteerManager\Entity\Taxonomy as Taxonomy;
 use VolunteerManager\Helper\Admin\UI as AdminUI;
@@ -14,20 +15,20 @@ use VolunteerManager\Helper\MetaBox as MetaBox;
 class Assignment
 {
     public static string $postTypeSlug;
-    public static string $statusTaxonomySlug;
 
     public function __construct()
     {
         //Main post type
         self::$postTypeSlug = $this->postType();
-        //Taxonomy
-        self::$statusTaxonomySlug = $this->taxonomyStatus();
     }
+
+
 
     public function addHooks()
     {
         add_action('admin_post_update_post_status', array($this, 'updatePostStatus'));
         add_action('add_meta_boxes', array($this, 'registerSubmitterMetaBox'), 10, 2);
+        add_action('init', array($this, 'registerStatusTaxonomy'));
 
         add_filter('avm_notification', array($this, 'populateNotificationSender'), 10, 1);
         add_filter('avm_external_assignment_approved_notification', array($this, 'populateNotificationReceiverWithSubmitter'), 10, 2);
@@ -99,7 +100,7 @@ class Assignment
                 echo AdminUI::createTaxonomyPills(
                     get_the_terms(
                         $postId,
-                        self::$statusTaxonomySlug
+                        'assignment-status'
                     )
                 );
             }
@@ -160,12 +161,11 @@ class Assignment
 
     /**
      * Create status taxonomy
-     * @return string
      */
-    public function taxonomyStatus(): string
+    public function registerStatusTaxonomy()
     {
         //Register new taxonomy
-        $categories = new Taxonomy(
+        $status = new Taxonomy(
             __('Statuses', 'api-volunteer-manager'),
             __('Status', 'api-volunteer-manager'),
             'assignment-status',
@@ -174,6 +174,8 @@ class Assignment
                 'hierarchical' => false
             )
         );
+
+        $status->registerTaxonomy();
 
         //Remove default UI
         (new MetaBox)->remove(
@@ -186,9 +188,6 @@ class Assignment
             'assignment-status',
             'assignment'
         );
-
-        //Return taxonomy slug
-        return $categories->slug;
     }
 
     /**
@@ -226,5 +225,37 @@ class Assignment
         $content .= $args['args']['submittedByEmail'] ? sprintf('<p><strong>%1$s:</strong> <a href="mailto:%2$s">%2$s</a></p>', __('Email', AVM_TEXT_DOMAIN), $args['args']['submittedByEmail']) : '';
         $content .= $args['args']['submittedByPhone'] ? sprintf('<p><strong>%s:</strong> %s</p>', __('Phone', AVM_TEXT_DOMAIN), $args['args']['submittedByPhone']) : '';
         echo $content;
+    }
+
+    public function insertAssignmentStatusTerms(): void
+    {
+        $term_items = [
+            [
+                'name' => __('Approved', 'api-volunteer-manager'),
+                'slug' => 'approved',
+                'description' => __('Approved assignment', 'api-volunteer-manager'),
+                'color' => '#EEE'
+            ],
+            [
+                'name' => __('Ongoing', 'api-volunteer-manager'),
+                'slug' => 'ongoing',
+                'description' => __('Ongoing assignment', 'api-volunteer-manager'),
+                'color' => '#81D742'
+            ],
+            [
+                'name' => __('Pending', 'api-volunteer-manager'),
+                'slug' => 'pending',
+                'description' => __('Pending assignment', 'api-volunteer-manager'),
+                'color' => '#EEE'
+            ],
+            [
+                'name' => __('Recurring', 'api-volunteer-manager'),
+                'slug' => 'recurring',
+                'description' => __('Recurring assignment', 'api-volunteer-manager'),
+                'color' => '#8224e3'
+            ]
+        ];
+
+
     }
 }
