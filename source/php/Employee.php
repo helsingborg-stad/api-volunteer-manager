@@ -5,7 +5,6 @@ namespace VolunteerManager;
 use VolunteerManager\Entity\ITerm;
 use \VolunteerManager\Entity\PostType as PostType;
 use \VolunteerManager\Entity\Taxonomy as Taxonomy;
-use VolunteerManager\Entity\Term;
 use \VolunteerManager\Helper\Icon as Icon;
 
 class Employee
@@ -14,20 +13,15 @@ class Employee
 
     private Taxonomy $employeeTaxonomy;
 
-    private ITerm $termHandler;
-
-    public function __construct(ITerm $termHandler)
+    public function __construct()
     {
         self::$postType = $this->postType();
         $this->addPostTypeTableColumn(self::$postType);
-
-        $this->registerEmployeeStatusTaxonomy(self::$postType);
-
-        $this->termHandler = $termHandler;
     }
 
     public function addHooks()
     {
+        add_action('init', array($this, 'registerStatusTaxonomy'));
         add_action('init', array($this, 'insertEmploymentStatusTerms'));
         add_filter('avm_external_volunteer_new_notification', array($this, 'populateNotificationReceiverWithSubmitter'), 10, 2);
         add_filter('avm_admin_external_volunteer_new_notification', array($this, 'populateNotificationReceiverWithAdmin'), 10, 2);
@@ -123,16 +117,17 @@ class Employee
      * @param $postType
      * @return void
      */
-    private function registerEmployeeStatusTaxonomy($postType) : void
+    public function registerStatusTaxonomy() : void
     {
         $this->employeeTaxonomy = new Taxonomy(
             'Registration statuses',
             'Registration status',
             'employee-registration-status',
-            array($postType->slug),
+            // array($postType->slug),
+            array(self::$postType->slug),
             array (
                 'hierarchical' => false,
-                'show_ui' => false
+                'show_ui' => true
             )
         );
     }
@@ -140,9 +135,8 @@ class Employee
     /**
      * Insert terms for the employee status taxonomy
      *
-     * @return void
      */
-    public function insertEmploymentStatusTerms(): void
+    public function insertEmploymentStatusTerms()
     {
         $term_items = [
             [
@@ -167,6 +161,6 @@ class Employee
             ]
         ];
 
-        $this->termHandler->insertTerms($term_items, 'employee-registration-status');
+        return $this->employeeTaxonomy->insertTerms($term_items);
     }
 }
