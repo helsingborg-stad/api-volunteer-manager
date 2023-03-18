@@ -8,14 +8,14 @@ use \VolunteerManager\Helper\Icon as Icon;
 
 class Employee
 {
-    private static PostType $postType;
+    private PostType $postType;
 
     private Taxonomy $employeeTaxonomy;
 
     public function __construct()
     {
-        self::$postType = $this->postType();
-        $this->addPostTypeTableColumn(self::$postType);
+        $this->postType = $this->postType();
+        $this->addPostTypeTableColumn($this->postType);
     }
 
     public function addHooks()
@@ -121,7 +121,7 @@ class Employee
             'Registration statuses',
             'Registration status',
             'employee-registration-status',
-            array(self::$postType->slug),
+            array($this->postType->slug),
             array (
                 'hierarchical' => false,
                 'show_ui' => true
