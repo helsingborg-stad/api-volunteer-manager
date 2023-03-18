@@ -2,7 +2,6 @@
 
 namespace VolunteerManager;
 
-use VolunteerManager\Entity\ITerm;
 use \VolunteerManager\Entity\PostType as PostType;
 use \VolunteerManager\Entity\Taxonomy as Taxonomy;
 use \VolunteerManager\Helper\Icon as Icon;
@@ -114,7 +113,6 @@ class Employee
     /**
      * Create terms for the employee status taxonomy
      *
-     * @param $postType
      * @return void
      */
     public function registerStatusTaxonomy() : void
@@ -123,7 +121,6 @@ class Employee
             'Registration statuses',
             'Registration status',
             'employee-registration-status',
-            // array($postType->slug),
             array(self::$postType->slug),
             array (
                 'hierarchical' => false,

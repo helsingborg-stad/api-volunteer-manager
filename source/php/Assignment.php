@@ -4,7 +4,6 @@ namespace VolunteerManager;
 
 use VolunteerManager\Components\EditPostStatusButtons\EditPostStatusButtonFactory as EditPostStatusButtonFactory;
 use VolunteerManager\Entity\Filter as Filter;
-use VolunteerManager\Entity\ITerm;
 use VolunteerManager\Entity\PostType as PostType;
 use VolunteerManager\Entity\Taxonomy as Taxonomy;
 use VolunteerManager\Helper\Admin\UI as AdminUI;
