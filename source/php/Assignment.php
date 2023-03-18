@@ -10,18 +10,18 @@ use VolunteerManager\Helper\Admin\UI as AdminUI;
 use VolunteerManager\Helper\Admin\UrlBuilder as UrlBuilder;
 use VolunteerManager\Helper\Icon as Icon;
 use VolunteerManager\Helper\MetaBox as MetaBox;
+use VolunteerManager\Notification\NotificationHandlerInterface;
 
 class Assignment
 {
     private NotificationHandlerInterface $notificationHandler;
     // public static string $postTypeSlug;
     private PostType $postType;
-    public static string $postTypeSlug;
+    private Taxonomy $assignmentTaxonomy;
 
-    public function __construct()
+    public function __construct($notificationHandler)
     {
-        //Main post type
-        //self::$postTypeSlug = $this->postType();
+        $this->notificationHandler = $notificationHandler;
         $this->postType = $this->setupPostType();
         $this->addPostTypeTableColumn($this->postType);
     }
@@ -33,6 +33,7 @@ class Assignment
         add_action('admin_post_update_post_status', array($this, 'updatePostStatus'));
         add_action('add_meta_boxes', array($this, 'registerSubmitterMetaBox'), 10, 2);
         add_action('init', array($this, 'registerStatusTaxonomy'));
+        add_action('init', array($this, 'insertAssignmentStatusTerms'));
 
         add_filter('avm_notification', array($this, 'populateNotificationSender'), 10, 1);
         add_filter('avm_external_assignment_approved_notification', array($this, 'populateNotificationReceiverWithSubmitter'), 10, 2);
@@ -78,10 +79,10 @@ class Assignment
      */
     public function scheduleTermNotifications(int $objectId, array $terms, array $newIds, string $taxonomy, bool $append, array $oldIds): void
     {
-        if (empty($this->notificationHandler->getNotifications(self::$postTypeSlug, $taxonomy))) {
+        if (empty($this->notificationHandler->getNotifications($this->postType->slug, $taxonomy))) {
             return;
         }
-        $this->notificationHandler->scheduleNotificationsForTermUpdates($newIds, $oldIds, self::$postTypeSlug, $taxonomy, $objectId);
+        $this->notificationHandler->scheduleNotificationsForTermUpdates($newIds, $oldIds, $this->postType->slug, $taxonomy, $objectId);
     }
 
     /**
@@ -170,7 +171,7 @@ class Assignment
         $postStatus = filter_input(INPUT_GET, 'post_status');
 
         $queryString = http_build_query(array(
-            'post_type' => self::$postTypeSlug,
+            'post_type' => $this->postType->slug,
             'paged' => $paged,
         ));
 
@@ -194,7 +195,7 @@ class Assignment
     public function registerStatusTaxonomy()
     {
         //Register new taxonomy
-        $status = new Taxonomy(
+        $this->assignmentTaxonomy = new Taxonomy(
             __('Statuses', 'api-volunteer-manager'),
             __('Status', 'api-volunteer-manager'),
             'assignment-status',
@@ -204,7 +205,7 @@ class Assignment
             )
         );
 
-        $status->registerTaxonomy();
+        $this->assignmentTaxonomy->registerTaxonomy();
 
         //Remove default UI
         (new MetaBox)->remove(
@@ -256,35 +257,8 @@ class Assignment
         echo $content;
     }
 
-    public function insertAssignmentStatusTerms(): void
+    public function insertAssignmentStatusTerms()
     {
-        $term_items = [
-            [
-                'name' => __('Approved', 'api-volunteer-manager'),
-                'slug' => 'approved',
-                'description' => __('Approved assignment', 'api-volunteer-manager'),
-                'color' => '#EEE'
-            ],
-            [
-                'name' => __('Ongoing', 'api-volunteer-manager'),
-                'slug' => 'ongoing',
-                'description' => __('Ongoing assignment', 'api-volunteer-manager'),
-                'color' => '#81D742'
-            ],
-            [
-                'name' => __('Pending', 'api-volunteer-manager'),
-                'slug' => 'pending',
-                'description' => __('Pending assignment', 'api-volunteer-manager'),
-                'color' => '#EEE'
-            ],
-            [
-                'name' => __('Recurring', 'api-volunteer-manager'),
-                'slug' => 'recurring',
-                'description' => __('Recurring assignment', 'api-volunteer-manager'),
-                'color' => '#8224e3'
-            ]
-        ];
-
-
+        return $this->assignmentTaxonomy->insertTerms(AssignmentConfiguration::getStatusTerms());
     }
 }
