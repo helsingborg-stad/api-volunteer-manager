@@ -3,7 +3,8 @@
 namespace VolunteerManager;
 
 class EmployeeConfiguration {
-    public static function getStatusTerms(): array {
+    public static function getStatusTerms(): array
+    {
         return [
             [
                 'name' => __('New', 'api-volunteer-manager'),
