@@ -127,6 +127,8 @@ class Employee
                 'show_ui' => true
             )
         );
+
+        $this->employeeTaxonomy->registerTaxonomy();
     }
 
     /**
