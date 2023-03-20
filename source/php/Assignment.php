@@ -45,7 +45,10 @@ class Assignment
      */
     public function populateNotificationSender(array $args): array
     {
-        $args['from'] = 'no-reply@helsingborg.se';
+        $senderOption = get_field('notification_sender', 'option');
+        $senderEmail = $senderOption['email'] ?? '';
+        $sender = $senderOption['name'] ? "{$senderOption['name']} <{$senderEmail}>" : $senderEmail;
+        $args['from'] = $sender;
         return $args;
     }
 
