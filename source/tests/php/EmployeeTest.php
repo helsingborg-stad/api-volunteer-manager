@@ -40,7 +40,7 @@ class EmployeeTest extends PluginTestCase
     /**
      * @dataProvider populateNotificationReceiverProvider
      */
-    public function testPopulateNotificationWithSubmitter($args, $expectedResult, $getFieldResult)
+    public function testPopulateNotificationWithSubmitter($args, $getFieldResult, $expectedResult)
     {
         Functions\when('get_field')->justReturn($getFieldResult);
         $this->assertEquals(
@@ -52,43 +52,15 @@ class EmployeeTest extends PluginTestCase
     public function populateNotificationReceiverProvider(): array
     {
         return [
-            "Existing email address" => [
-                [
-                    'to' => '',
-                    'from' => 'from@email.com',
-                    'message' => [
-                        'subject' => 'subject',
-                        'content' => 'content',
-                    ]
-                ],
-                [
-                    'to' => 'foo@bar.com',
-                    'from' => 'from@email.com',
-                    'message' => [
-                        'subject' => 'subject',
-                        'content' => 'content',
-                    ]
-                ],
-                'foo@bar.com'
+            [
+                ['to' => '', 'from' => '', 'message' => ['subject' => 'Subject', 'content' => 'Content']],
+                'foo@email.bar',
+                ['to' => 'foo@email.bar', 'from' => '', 'message' => ['subject' => 'Subject', 'content' => 'Content']]
             ],
-            "Missing email address" => [
-                [
-                    'to' => '',
-                    'from' => 'from@email.com',
-                    'message' => [
-                        'subject' => 'subject',
-                        'content' => 'content',
-                    ]
-                ],
-                [
-                    'to' => '',
-                    'from' => 'from@email.com',
-                    'message' => [
-                        'subject' => 'subject',
-                        'content' => 'content',
-                    ]
-                ],
-                null
+            [
+                ['to' => '', 'from' => '', 'message' => ['subject' => 'Subject', 'content' => 'Content']],
+                null,
+                ['to' => '', 'from' => '', 'message' => ['subject' => 'Subject', 'content' => 'Content']]
             ],
         ];
     }
