@@ -20,14 +20,14 @@ class Employee
 
     public function addHooks()
     {
-        add_action('init', array($this, 'initEmployee'));
+        add_action('init', array($this, 'initTaxonomiesAndTerms'));
 
         add_filter('avm_external_volunteer_new_notification', array($this, 'populateNotificationReceiverWithSubmitter'), 10, 2);
         add_filter('avm_admin_external_volunteer_new_notification', array($this, 'populateNotificationReceiverWithAdmin'), 10, 2);
 
     }
 
-    public function initEmployee() {
+    public function initTaxonomiesAndTerms() {
         $this->registerStatusTaxonomy();
         $this->insertEmploymentStatusTerms();
     }
