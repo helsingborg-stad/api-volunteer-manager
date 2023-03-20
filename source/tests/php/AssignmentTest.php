@@ -5,7 +5,6 @@ namespace php;
 use Brain\Monkey\Functions;
 use PluginTestCase\PluginTestCase;
 use VolunteerManager\Assignment;
-use VolunteerManager\Notification\NotificationHandler;
 
 class AssignmentTest extends PluginTestCase
 {
@@ -18,12 +17,7 @@ class AssignmentTest extends PluginTestCase
 
         $this->post = new \stdClass();
         $this->post->ID = 123;
-
-        $emailServiceMock = $this->getMockBuilder('VolunteerManager\Notification\EmailNotificationSender')
-            ->disableOriginalConstructor()
-            ->getMock();
-        $notificationHandler = new NotificationHandler([], $emailServiceMock);
-        $this->assignment = new Assignment($notificationHandler);
+        $this->assignment = new Assignment();
     }
 
     public function testRenderSubmitterData(): void
@@ -75,10 +69,10 @@ class AssignmentTest extends PluginTestCase
     public function testPopulateNotificationWithSubmitter($args, $getPostMetaResult, $expectedResult)
     {
         Functions\when('get_post_meta')->justReturn($getPostMetaResult);
-        $this->assertEquals($expectedResult, $this->assignment->populateNotificationWithSubmitter($args, 123));
+        $this->assertEquals($expectedResult, $this->assignment->populateNotificationWithSubmitter($args, $this->post->ID));
     }
 
-    public function notificationReceiverProvider()
+    public function notificationReceiverProvider(): array
     {
         return [
             [
@@ -100,10 +94,10 @@ class AssignmentTest extends PluginTestCase
     public function testPopulateNotificationSenderWithEmail($args, $getFieldResult, $expectedResult)
     {
         Functions\when('get_field')->justReturn($getFieldResult);
-        $this->assertEquals($expectedResult, $this->assignment->populateNotificationSender($args, 1));
+        $this->assertEquals($expectedResult, $this->assignment->populateNotificationSender($args, $this->post->ID));
     }
 
-    public function notificationSenderProvider()
+    public function notificationSenderProvider(): array
     {
         return [
             [

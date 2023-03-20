@@ -20,22 +20,34 @@ class NotificationHandlerTest extends PluginTestCase
     }
 
     private static array $config = [
-        'post_type' => [
-            'taxonomy' => [
-                [
-                    'key' => 'post_approved',
-                    'oldValue' => 'foo',
-                    'newValue' => 'bar',
-                    'message' => [
-                        'subject' => 'Subject',
-                        'content' => 'Content',
-                    ],
-                    'rule' => [
-                        'key' => 'foo_key',
-                        'value' => 'foo',
-                        'operator' => 'EQUAL'
-                    ]
-                ],
+        "Some test" => [
+            'key' => 'post_approved',
+            'taxonomy' => 'custom_taxonomy',
+            'oldValue' => 'foo',
+            'newValue' => 'bar',
+            'message' => [
+                'subject' => 'Subject',
+                'content' => 'Content',
+            ],
+            'rule' => [
+                'key' => 'foo_key',
+                'value' => 'foo',
+                'operator' => 'EQUAL'
+            ]
+        ],
+        "Other test" => [
+            'key' => 'other',
+            'taxonomy' => 'other_taxonomy',
+            'oldValue' => 'old',
+            'newValue' => 'new',
+            'message' => [
+                'subject' => 'Subject',
+                'content' => 'Content',
+            ],
+            'rule' => [
+                'key' => 'foo_key',
+                'value' => 'bar',
+                'operator' => 'NOT_EQUAL'
             ]
         ]
     ];
@@ -97,13 +109,32 @@ class NotificationHandlerTest extends PluginTestCase
         $this->assertFalse($result);
     }
 
-    public function testGetNotifications()
+    /**
+     * @dataProvider getNotificationsProvider
+     */
+    public function testGetTaxonomyNotifications($expected)
     {
-        $result = $this->notificationHandler->getNotifications('post_type', 'taxonomy');
-        $this->assertEquals($result, self::$config['post_type']['taxonomy']);
+        $actual = $this->notificationHandler->getNotificationsByTaxonomy(self::$config, 'custom_taxonomy');
+        $this->assertEquals($expected, $actual);
+    }
 
-        $result = $this->notificationHandler->getNotifications('post_type', 'unknown_taxonomy');
-        $this->assertEquals([], $result);
+    public function getNotificationsProvider(): array
+    {
+        return [[[[
+            'key' => 'post_approved',
+            'taxonomy' => 'custom_taxonomy',
+            'oldValue' => 'foo',
+            'newValue' => 'bar',
+            'message' => [
+                'subject' => 'Subject',
+                'content' => 'Content',
+            ],
+            'rule' => [
+                'key' => 'foo_key',
+                'value' => 'foo',
+                'operator' => 'EQUAL'
+            ]
+        ]]]];
     }
 
     /**
@@ -153,21 +184,37 @@ class NotificationHandlerTest extends PluginTestCase
         ];
     }
 
-    public function testCombineOldAndNewValues(): void
+    /**
+     * @dataProvider oldAndNewValuesProvider
+     */
+    public function testCombineOldAndNewValues($expected, $oldValues, $newValues): void
     {
-        $oldValues = [1, 2, 3];
-        $newValues = [4, 5, 6];
-
-        $expectedCombinedValues = [
-            ["oldValue" => 1, "newValue" => 4],
-            ["oldValue" => 2, "newValue" => 5],
-            ["oldValue" => 3, "newValue" => 6],
-        ];
-
         $this->assertEquals(
-            $expectedCombinedValues,
+            $expected,
             $this->notificationHandler->combineOldAndNewValues($oldValues, $newValues)
         );
     }
+
+    public function oldAndNewValuesProvider(): array
+    {
+        return [
+            "Existing new and old values" => [
+                [
+                    ["oldValue" => 1, "newValue" => 4],
+                    ["oldValue" => 2, "newValue" => 5],
+                    ["oldValue" => 3, "newValue" => 6],
+                ],
+                [1, 2, 3],
+                [4, 5, 6]
+            ],
+            "Empty old value" => [
+                [["oldValue" => null, "newValue" => 1]], [], [1]
+            ],
+            "Empty new value" => [
+                [], [1], []
+            ],
+        ];
+    }
+
 
 }

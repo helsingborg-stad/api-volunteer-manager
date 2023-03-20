@@ -10,7 +10,7 @@ interface NotificationHandlerInterface
 
     public function scheduleNotificationCronEvent(array $notification, int $postId): void;
 
-    public function scheduleNotificationsForTermUpdates(array $newTermIds, array $oldTermIds, string $postType, string $taxonomy, int $postId): void;
+    public function scheduleNotificationsForTermUpdates(array $newTermIds, array $oldTermIds, string $taxonomy, int $postId): void;
 
     public function shouldScheduleNotification(int $postId, array $rule, callable $getFieldFn): bool;
 
@@ -20,5 +20,5 @@ interface NotificationHandlerInterface
 
     public function convertTermIdsToSlugs(array $termIds, string $taxonomy): array;
 
-    public function getNotifications(string $postType, string $taxonomy): array;
+    public function getNotificationsByTaxonomy(array $notifications, string $taxonomy): array;
 }
