@@ -78,7 +78,7 @@ class AssignmentTest extends PluginTestCase
         $this->assertEquals($expectedResult, $this->assignment->populateNotificationWithSubmitter($args, 123));
     }
 
-    public function notificationReceiverProvider()
+    public function notificationReceiverProvider(): array
     {
         return [
             [
@@ -103,7 +103,7 @@ class AssignmentTest extends PluginTestCase
         $this->assertEquals($expectedResult, $this->assignment->populateNotificationSender($args, 1));
     }
 
-    public function notificationSenderProvider()
+    public function notificationSenderProvider(): array
     {
         return [
             [
