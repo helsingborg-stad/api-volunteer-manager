@@ -87,7 +87,7 @@ class NotificationHandler implements NotificationHandlerInterface
         $taxonomyNotifications = $this->getNotificationsByTaxonomy($this->config, $taxonomy);
         $matchingEvents = $this->findMatchingEvents($taxonomyNotifications, $oldAndNewValues);
         foreach ($matchingEvents as $event) {
-            if ($this->shouldScheduleNotification($postId, $event['rule'], 'get_field')) {
+            if ($this->shouldScheduleNotification($postId, $event['rule'] ?? [], 'get_field')) {
                 $this->scheduleNotificationCronEvent($event, $postId);
             }
         }
