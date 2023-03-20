@@ -34,9 +34,7 @@ class App
         $assignment = new Assignment();
         $assignment->addHooks();
 
-        $termHandler = new Term();
-
-        $employee = new Employee($termHandler);
+        $employee = new Employee();
         $employee->addHooks();
 
         (new Admin())->addHooks();
