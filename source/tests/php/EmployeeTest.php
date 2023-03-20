@@ -28,13 +28,11 @@ class EmployeeTest extends PluginTestCase
      */
     public function testAddHooks()
     {
-        $employee = new Employee();
-
         Functions\expect('add_action')
             ->once()
-            ->with('init', [$employee, 'insertEmploymentStatusTerms']);
+            ->with('init', [$this->employee, 'insertEmploymentStatusTerms']);
 
-        $employee->addHooks();
+        $this->employee->addHooks();
     }
 
     /**
