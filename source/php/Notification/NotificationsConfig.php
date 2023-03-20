@@ -5,7 +5,7 @@ namespace VolunteerManager\Notification;
 class NotificationsConfig
 {
     public static array $notifications = [
-        [
+        "Message to submitter when externally created assignments is approved" => [
             'key' => 'external_assignment_approved',
             'taxonomy' => 'assignment-status',
             'oldValue' => 'pending',
@@ -20,7 +20,7 @@ class NotificationsConfig
                 'operator' => 'NOT_EQUAL'
             ]
         ],
-        [
+        "Message to submitter when externally created assignments is denied" => [
             'key' => 'external_assignment_denied',
             'taxonomy' => 'assignment-status',
             'oldValue' => 'pending',
@@ -35,7 +35,7 @@ class NotificationsConfig
                 'operator' => 'NOT_EQUAL'
             ]
         ],
-        [
+        "Message to volunteer when a new application is created" => [
             'key' => 'external_volunteer_new',
             'taxonomy' => 'employee-registration-status',
             'oldValue' => '',

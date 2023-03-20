@@ -20,7 +20,7 @@ class NotificationHandlerTest extends PluginTestCase
     }
 
     private static array $config = [
-        [
+        "Some test" => [
             'key' => 'post_approved',
             'taxonomy' => 'custom_taxonomy',
             'oldValue' => 'foo',
@@ -35,7 +35,7 @@ class NotificationHandlerTest extends PluginTestCase
                 'operator' => 'EQUAL'
             ]
         ],
-        [
+        "Other test" => [
             'key' => 'other',
             'taxonomy' => 'other_taxonomy',
             'oldValue' => 'old',
