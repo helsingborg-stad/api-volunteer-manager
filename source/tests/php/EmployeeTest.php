@@ -36,15 +36,61 @@ class EmployeeTest extends PluginTestCase
     }
 
     /**
-     * @dataProvider populateNotificationReceiverProvider
+     * @dataProvider populateNotificationReceiverWithAdminProvider
      */
-    public function testPopulateNotificationWithSubmitter($args, $getFieldResult, $expectedResult)
+    public function testPopulateNotificationReceiverWithAdmin($args, $getFieldResult, $expectedResult)
     {
         Functions\when('get_field')->justReturn($getFieldResult);
-        $this->assertEquals($expectedResult, $this->employee->populateNotificationWithReceiver($args, $this->post->ID));
+        $this->assertEquals(
+            $expectedResult,
+            $this->employee->populateNotificationReceiverWithAdmin($args, $this->post->ID)
+        );
     }
 
-    public function populateNotificationReceiverProvider(): array
+    public function populateNotificationReceiverWithAdminProvider(): array
+    {
+        return [
+            [
+                ['to' => '', 'from' => '', 'message' => ['subject' => 'Subject', 'content' => 'Content']],
+                [['email' => 'foo@admin.bar']],
+                ['to' => 'foo@admin.bar', 'from' => '', 'message' => ['subject' => 'Subject', 'content' => 'Content']]
+            ],
+            [
+                ['to' => '', 'from' => '', 'message' => ['subject' => 'Subject', 'content' => 'Content']],
+                [['email' => 'foo@admin.bar'], ['email' => 'bar@admin.foo']],
+                ['to' => 'foo@admin.bar,bar@admin.foo', 'from' => '', 'message' => ['subject' => 'Subject', 'content' => 'Content']]
+            ],
+            [
+                ['to' => '', 'from' => '', 'message' => ['subject' => 'Subject', 'content' => 'Content']],
+                [['email' => 'foo@admin.bar'], ['unknown' => 'unknown']],
+                ['to' => 'foo@admin.bar', 'from' => '', 'message' => ['subject' => 'Subject', 'content' => 'Content']]
+            ],
+            [
+                ['to' => '', 'from' => '', 'message' => ['subject' => 'Subject', 'content' => 'Content']],
+                [],
+                ['to' => '', 'from' => '', 'message' => ['subject' => 'Subject', 'content' => 'Content']]
+            ],
+            [
+                ['to' => '', 'from' => '', 'message' => ['subject' => 'Subject', 'content' => 'Content']],
+                null,
+                ['to' => '', 'from' => '', 'message' => ['subject' => 'Subject', 'content' => 'Content']]
+            ],
+        ];
+    }
+
+    /**
+     * @dataProvider notificationReceiverWithSubmitterProvider
+     */
+    public function testPopulateNotificationReceiverWithSubmitter($args, $getPostMetaResult, $expectedResult)
+    {
+        Functions\when('get_field')->justReturn($getPostMetaResult);
+        $this->assertEquals(
+            $expectedResult,
+            $this->employee->populateNotificationReceiverWithSubmitter($args, $this->post->ID)
+        );
+    }
+
+    public function notificationReceiverWithSubmitterProvider(): array
     {
         return [
             [

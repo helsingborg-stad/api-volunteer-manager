@@ -30,8 +30,8 @@ class Assignment
         add_action('add_meta_boxes', array($this, 'registerSubmitterMetaBox'), 10, 2);
 
         add_filter('avm_notification', array($this, 'populateNotificationSender'), 10, 1);
-        add_filter('avm_external_assignment_approved_notification', array($this, 'populateNotificationWithSubmitter'), 10, 2);
-        add_filter('avm_external_assignment_denied_notification', array($this, 'populateNotificationWithSubmitter'), 10, 2);
+        add_filter('avm_external_assignment_approved_notification', array($this, 'populateNotificationReceiverWithSubmitter'), 10, 2);
+        add_filter('avm_external_assignment_denied_notification', array($this, 'populateNotificationReceiverWithSubmitter'), 10, 2);
     }
 
     /**
@@ -54,7 +54,7 @@ class Assignment
      * @param int   $postId
      * @return array
      */
-    public function populateNotificationWithSubmitter(array $args, int $postId): array
+    public function populateNotificationReceiverWithSubmitter(array $args, int $postId): array
     {
         $receiver = get_post_meta($postId, 'submitted_by_email', true);
         $args['to'] = $receiver ?? '';

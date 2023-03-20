@@ -66,10 +66,13 @@ class AssignmentTest extends PluginTestCase
     /**
      * @dataProvider notificationReceiverProvider
      */
-    public function testPopulateNotificationWithSubmitter($args, $getPostMetaResult, $expectedResult)
+    public function testPopulateNotificationReceiverWithSubmitter($args, $getPostMetaResult, $expectedResult)
     {
         Functions\when('get_post_meta')->justReturn($getPostMetaResult);
-        $this->assertEquals($expectedResult, $this->assignment->populateNotificationWithSubmitter($args, $this->post->ID));
+        $this->assertEquals(
+            $expectedResult,
+            $this->assignment->populateNotificationReceiverWithSubmitter($args, $this->post->ID)
+        );
     }
 
     public function notificationReceiverProvider(): array
@@ -91,7 +94,7 @@ class AssignmentTest extends PluginTestCase
     /**
      * @dataProvider notificationSenderProvider
      */
-    public function testPopulateNotificationSenderWithEmail($args, $getFieldResult, $expectedResult)
+    public function testPopulateNotificationSender($args, $getFieldResult, $expectedResult)
     {
         Functions\when('get_field')->justReturn($getFieldResult);
         $this->assertEquals($expectedResult, $this->assignment->populateNotificationSender($args, $this->post->ID));
