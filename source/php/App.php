@@ -30,7 +30,7 @@ class App
         new Api();
 
         //Post types
-        $assignment = new Assignment($notificationsHandler);
+        $assignment = new Assignment();
         $assignment->addHooks();
 
         $employee = new Employee();

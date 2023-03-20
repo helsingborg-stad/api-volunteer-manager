@@ -15,7 +15,23 @@ class NotificationHandler implements NotificationHandlerInterface
 
     public function addHooks(): void
     {
+        add_action('set_object_terms', array($this, 'scheduleTermNotifications'), 10, 6);
         add_action('avm_send_notification', array($this, 'sendNotification'), 10, 4);
+    }
+
+    /**
+     * Registers notification events when status taxonomy changes
+     * @param int    $objectId
+     * @param array  $terms
+     * @param array  $newIds
+     * @param string $taxonomy
+     * @param bool   $append
+     * @param array  $oldIds
+     * @return void
+     */
+    public function scheduleTermNotifications(int $objectId, array $terms, array $newIds, string $taxonomy, bool $append, array $oldIds): void
+    {
+        $this->scheduleNotificationsForTermUpdates($newIds, $oldIds, $taxonomy, $objectId);
     }
 
     /**
@@ -59,19 +75,17 @@ class NotificationHandler implements NotificationHandlerInterface
      *
      * @param array  $newTermIds An array of term IDs that were newly assigned to the post.
      * @param array  $oldTermIds An array of term IDs that were previously assigned to the post.
-     * @param string $postType   The type of post being updated.
      * @param string $taxonomy   The taxonomy for which the terms are being updated.
      * @param int    $postId     The ID of the post being updated.
      * @return void
      */
-    public function scheduleNotificationsForTermUpdates(array $newTermIds, array $oldTermIds, string $postType, string $taxonomy, int $postId): void
+    public function scheduleNotificationsForTermUpdates(array $newTermIds, array $oldTermIds, string $taxonomy, int $postId): void
     {
         $oldTermSlugs = $this->convertTermIdsToSlugs($oldTermIds, $taxonomy);
         $newTermSlugs = $this->convertTermIdsToSlugs($newTermIds, $taxonomy);
         $oldAndNewValues = $this->combineOldAndNewValues($oldTermSlugs, $newTermSlugs);
-        $allTaxonomyNotifications = $this->getNotifications($postType, $taxonomy);
-        $matchingEvents = $this->findMatchingEvents($allTaxonomyNotifications, $oldAndNewValues);
-
+        $taxonomyNotifications = $this->getNotificationsByTaxonomy($this->config, $taxonomy);
+        $matchingEvents = $this->findMatchingEvents($taxonomyNotifications, $oldAndNewValues);
         foreach ($matchingEvents as $event) {
             if ($this->shouldScheduleNotification($postId, $event['rule'], 'get_field')) {
                 $this->scheduleNotificationCronEvent($event, $postId);
@@ -108,7 +122,8 @@ class NotificationHandler implements NotificationHandlerInterface
     /**
      * Returns an array of events for all events that has the same old and new values.
      *
-     * @param array $searchCriteria An array of search criteria to match against the events.
+     * @param array $notifications
+     * @param array $searchCriteria An array of search criteria to match against the events
      * @return array An array of event enums for all matching events.
      */
     public function findMatchingEvents(array $notifications, array $searchCriteria): array
@@ -134,7 +149,7 @@ class NotificationHandler implements NotificationHandlerInterface
         $combinedValues = array();
         for ($i = 0; $i < count($newValues); $i++) {
             $combinedValues[] = array(
-                "oldValue" => $oldValues[$i],
+                "oldValue" => $oldValues[$i] ?? null,
                 "newValue" => $newValues[$i]
             );
         }
@@ -158,14 +173,20 @@ class NotificationHandler implements NotificationHandlerInterface
     }
 
     /**
-     * Gets the notifications for a given post type and key.
+     * Returns an array of all notifications that have a certain taxonomy value.
      *
-     * @param string $postType The post type to get notifications for.
-     * @param string $key      The taxonomy or meta field of the notifications to get.
-     * @return array An array of notifications for the given post type and key.
+     * @param array  $notifications List of notifications.
+     * @param string $taxonomy      The desired taxonomy value to match notifications against.
+     * @return array An array of matching notifications.
      */
-    public function getNotifications(string $postType, string $key): array
+    public function getNotificationsByTaxonomy(array $notifications, string $taxonomy): array
     {
-        return $this->config[$postType][$key] ?? [];
+        $matchingNotifications = [];
+        foreach ($notifications as $notification) {
+            if ($notification['taxonomy'] === $taxonomy) {
+                $matchingNotifications[] = $notification;
+            }
+        }
+        return $matchingNotifications;
     }
 }
