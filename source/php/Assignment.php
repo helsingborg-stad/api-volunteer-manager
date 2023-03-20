@@ -201,7 +201,8 @@ class Assignment
             'assignment-status',
             array($this->postType->slug),
             array(
-                'hierarchical' => false
+                'hierarchical' => false,
+                'show_ui' => false
             )
         );
 

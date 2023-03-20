@@ -130,7 +130,7 @@ class Employee
             array($this->postType->slug),
             array (
                 'hierarchical' => false,
-                'show_ui' => true
+                'show_ui' => false
             )
         );
 
