@@ -61,7 +61,7 @@ class NotificationsConfig
             ],
             'rule' => [
                 'key' => 'source',
-                'value' => 'TEST!',
+                'value' => '',
                 'operator' => 'NOT_EQUAL'
             ]
         ]
