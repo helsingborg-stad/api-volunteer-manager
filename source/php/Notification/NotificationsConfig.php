@@ -49,6 +49,21 @@ class NotificationsConfig
                 'value' => '',
                 'operator' => 'NOT_EQUAL'
             ]
+        ],
+        "Message to admin when a new application is created" => [
+            'key' => 'admin_external_volunteer_new',
+            'taxonomy' => 'employee-registration-status',
+            'oldValue' => '',
+            'newValue' => 'new',
+            'message' => [
+                'subject' => 'Application created',
+                'content' => 'A new application has been created. More info here...',
+            ],
+            'rule' => [
+                'key' => 'source',
+                'value' => 'TEST!',
+                'operator' => 'NOT_EQUAL'
+            ]
         ]
     ];
 }
