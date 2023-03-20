@@ -43,10 +43,7 @@ class EmployeeTest extends PluginTestCase
     public function testPopulateNotificationWithSubmitter($args, $getFieldResult, $expectedResult)
     {
         Functions\when('get_field')->justReturn($getFieldResult);
-        $this->assertEquals(
-            $expectedResult,
-            $this->employee->populateNotificationWithReceiver($args, $this->post->ID)
-        );
+        $this->assertEquals($expectedResult, $this->employee->populateNotificationWithReceiver($args, $this->post->ID));
     }
 
     public function populateNotificationReceiverProvider(): array
