@@ -26,7 +26,7 @@ class UrlBuilder implements UrlBuilderInterface
      */
     public function createPostActionUrl(string $action, array $args): string
     {
-        $paged = filter_input(INPUT_GET, 'paged', FILTER_SANITIZE_STRING);
+        $paged = filter_input(INPUT_GET, 'paged');
         $args = array_merge(
             array(
                 'nonce' => call_user_func($this->createNonce, $action),

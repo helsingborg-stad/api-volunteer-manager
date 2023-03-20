@@ -156,10 +156,10 @@ class Assignment
      */
     public function updatePostStatus()
     {
-        $paged = filter_input(INPUT_GET, 'paged', FILTER_SANITIZE_STRING);
-        $nonce = filter_input(INPUT_GET, 'nonce', FILTER_SANITIZE_STRING);
-        $postId = filter_input(INPUT_GET, 'post_id', FILTER_SANITIZE_STRING);
-        $postStatus = filter_input(INPUT_GET, 'post_status', FILTER_SANITIZE_STRING);
+        $paged = filter_input(INPUT_GET, 'paged',);
+        $nonce = filter_input(INPUT_GET, 'nonce',);
+        $postId = filter_input(INPUT_GET, 'post_id');
+        $postStatus = filter_input(INPUT_GET, 'post_status');
 
         $queryString = http_build_query(array(
             'post_type' => self::$postTypeSlug,
