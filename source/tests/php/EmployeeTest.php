@@ -6,7 +6,6 @@ use Brain\Monkey\Expectation\Exception\ExpectationArgsRequired;
 use Brain\Monkey\Functions;
 use PluginTestCase\PluginTestCase;
 use VolunteerManager\Employee as Employee;
-use VolunteerManager\Entity\Term;
 
 class EmployeeTest extends PluginTestCase
 {
@@ -32,6 +31,9 @@ class EmployeeTest extends PluginTestCase
         Functions\expect('add_action')
             ->once()
             ->with('init', [$this->employee, 'initTaxonomiesAndTerms']);
+
+        $this->employee->addHooks();
+    }
 
     /**
      * @dataProvider populateNotificationReceiverWithAdminProvider
