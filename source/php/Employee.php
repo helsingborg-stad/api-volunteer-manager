@@ -68,18 +68,18 @@ class Employee
     {
         // Create post type
         return new PostType(
-            _x('Employees', 'Post type plural', 'api-volunteer-manager'),
-            _x('Employee', 'Post type singular', 'api-volunteer-manager'),
+            _x('Employees', 'Post type plural', AVM_TEXT_DOMAIN),
+            _x('Employee', 'Post type singular', AVM_TEXT_DOMAIN),
             'employee',
             array(
-                'description'          =>   __('Employees', 'api-volunteer-manager'),
+                'description'          =>   __('Employees', AVM_TEXT_DOMAIN),
                 'menu_icon'            =>   Icon::get('person'),
                 'publicly_queriable'   =>   true,
                 'show_ui'              =>   true,
                 'show_in_nav_menus'    =>   true,
                 'has_archive'          =>   true,
                 'rewrite'              =>   array(
-                    'slug'       =>   __('employee', 'api-volunteer-manager'),
+                    'slug'       =>   __('employee', AVM_TEXT_DOMAIN),
                     'with_front' =>   false
                 ),
                 'hierarchical'          =>  false,
@@ -99,7 +99,7 @@ class Employee
     {
         $postType->addTableColumn(
             'registration_status',
-            __('Registration status', 'api-volunteer-manager'),
+            __('Registration status', AVM_TEXT_DOMAIN),
             true,
             function ($column, $postId) {
                 echo "-";
