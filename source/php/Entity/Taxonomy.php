@@ -2,6 +2,8 @@
 
 namespace VolunteerManager\Entity;
 
+use WP_Error;
+
 class Taxonomy
 {
     public $namePlural;
@@ -24,8 +26,6 @@ class Taxonomy
             $this->defaultArgs,
             $args
         );
-
-        add_action('init', array($this, 'registerTaxonomy'));
     }
 
     public function registerTaxonomy() : string
@@ -47,7 +47,64 @@ class Taxonomy
         $this->args['labels'] = $labels;
 
         register_taxonomy($this->slug, $this->postTypes, $this->args);
-        
+
         return $this->slug;
+    }
+
+    /**
+     * Inserts terms into the given taxonomy if they do not already exist.
+     *
+     * @param array  $terms         An array of terms to be inserted. Each term should be an associative array
+     *                              with keys: 'name', 'slug' (optional), and 'description' (optional).
+     * @param array  $args          An optional array of arguments to override the default term properties.
+     *
+     * @return array|WP_Error       Returns an array of successfully inserted terms' information
+     *                              (term_id and term_taxonomy_id) or a WP_Error object if the provided
+     *                              taxonomy does not exist.
+     */
+    public function insertTerms(array $terms, array $args = [])
+    {
+        $inserted_terms = [];
+
+        if (!taxonomy_exists($this->slug)) {
+            return new WP_Error(
+                'invalid_taxonomy',
+                'The provided taxonomy does not exist.');
+        }
+
+        $terms = $this->validateTerms($terms);
+
+        foreach ($terms as $term) {
+            $default_args = [
+                'slug' => $term['slug'] ?? '',
+                'description' => $term['description'] ?? '',
+            ];
+
+            $result = wp_insert_term(
+                $term['name'],
+                $this->slug,
+                array_merge($default_args, $args)
+            );
+
+            if (!is_wp_error($result)) {
+                $inserted_terms[] = $result;
+            }
+        }
+
+        return $inserted_terms;
+    }
+
+    /**
+     * Validates the terms array, ensuring each term is well-formed and removing any existing terms.
+     *
+     * @param array $terms An array of terms to be validated.
+     *
+     * @return array Returns an array of well-formed terms with existing terms removed.
+     */
+    private function validateTerms(array $terms): array
+    {
+        return array_filter($terms, function ($term) {
+            return !empty($term['name']) && !term_exists($term['name'], $this->slug);
+        });
     }
 }

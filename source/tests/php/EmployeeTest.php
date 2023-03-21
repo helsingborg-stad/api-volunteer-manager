@@ -30,7 +30,7 @@ class EmployeeTest extends PluginTestCase
     {
         Functions\expect('add_action')
             ->once()
-            ->with('init', [$this->employee, 'insertEmploymentStatusTerms']);
+            ->with('init', [$this->employee, 'initTaxonomiesAndTerms']);
 
         $this->employee->addHooks();
     }

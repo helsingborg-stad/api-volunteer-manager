@@ -13,21 +13,21 @@ use VolunteerManager\Helper\MetaBox as MetaBox;
 
 class Assignment
 {
-    public static string $postTypeSlug;
-    public static string $statusTaxonomySlug;
+    private PostType $postType;
+    private Taxonomy $assignmentTaxonomy;
 
     public function __construct()
     {
-        //Main post type
-        self::$postTypeSlug = $this->postType();
-        //Taxonomy
-        self::$statusTaxonomySlug = $this->taxonomyStatus();
+        $this->postType = $this->setupPostType();
+        $this->addPostTypeTableColumn($this->postType);
     }
 
     public function addHooks()
     {
         add_action('admin_post_update_post_status', array($this, 'updatePostStatus'));
         add_action('add_meta_boxes', array($this, 'registerSubmitterMetaBox'), 10, 2);
+        add_action('init', array($this, 'registerStatusTaxonomy'));
+        add_action('init', array($this, 'insertAssignmentStatusTerms'));
 
         add_filter('avm_notification', array($this, 'populateNotificationSender'), 10, 1);
         add_filter('avm_external_assignment_approved_notification', array($this, 'populateNotificationReceiverWithSubmitter'), 10, 2);
@@ -62,13 +62,30 @@ class Assignment
     }
 
     /**
+     * Registers notification events when status taxonomy changes
+     * @param int    $objectId
+     * @param array  $terms
+     * @param array  $newIds
+     * @param string $taxonomy
+     * @param bool   $append
+     * @param array  $oldIds
+     * @return void
+     */
+    public function scheduleTermNotifications(int $objectId, array $terms, array $newIds, string $taxonomy, bool $append, array $oldIds): void
+    {
+        if (empty($this->notificationHandler->getNotifications($this->postType->slug, $taxonomy))) {
+            return;
+        }
+        $this->notificationHandler->scheduleNotificationsForTermUpdates($newIds, $oldIds, $this->postType->slug, $taxonomy, $objectId);
+    }
+
+    /**
      * Create post type
      * @return void
      */
-    public function postType(): string
+    public function setupPostType(): PostType
     {
-        // Create post type
-        $postType = new PostType(
+        return new PostType(
             _x('Assignments', 'Post type plural', 'api-volunteer-manager'),
             _x('Assignment', 'Post type singular', 'api-volunteer-manager'),
             'assignment',
@@ -90,7 +107,17 @@ class Assignment
                 'show_in_rest' => true
             )
         );
+    }
 
+    /**
+     * Adds custom table columns to the specified post type's admin list table.
+     *
+     * @param PostType $postType The post type object to which the columns should be added.
+     *
+     * @return void
+     */
+    private function addPostTypeTableColumn(PostType $postType): void
+    {
         $postType->addTableColumn(
             'status',
             __('Status', AVM_TEXT_DOMAIN),
@@ -99,7 +126,7 @@ class Assignment
                 echo AdminUI::createTaxonomyPills(
                     get_the_terms(
                         $postId,
-                        self::$statusTaxonomySlug
+                        'assignment-status'
                     )
                 );
             }
@@ -124,8 +151,6 @@ class Assignment
                 echo get_post_meta($postId, 'source', true);
             }
         );
-
-        return $postType->slug;
     }
 
     /**
@@ -140,7 +165,7 @@ class Assignment
         $postStatus = filter_input(INPUT_GET, 'post_status');
 
         $queryString = http_build_query(array(
-            'post_type' => self::$postTypeSlug,
+            'post_type' => $this->postType->slug,
             'paged' => $paged,
         ));
 
@@ -160,25 +185,27 @@ class Assignment
 
     /**
      * Create status taxonomy
-     * @return string
      */
-    public function taxonomyStatus(): string
+    public function registerStatusTaxonomy()
     {
         //Register new taxonomy
-        $categories = new Taxonomy(
+        $this->assignmentTaxonomy = new Taxonomy(
             __('Statuses', 'api-volunteer-manager'),
             __('Status', 'api-volunteer-manager'),
             'assignment-status',
-            array(self::$postTypeSlug),
+            array($this->postType->slug),
             array(
-                'hierarchical' => false
+                'hierarchical' => false,
+                'show_ui' => false
             )
         );
+
+        $this->assignmentTaxonomy->registerTaxonomy();
 
         //Remove default UI
         (new MetaBox)->remove(
             "tagsdiv-assignment-status",
-            self::$postTypeSlug
+            $this->postType->slug,
         );
 
         //Add filter
@@ -186,9 +213,6 @@ class Assignment
             'assignment-status',
             'assignment'
         );
-
-        //Return taxonomy slug
-        return $categories->slug;
     }
 
     /**
@@ -226,5 +250,10 @@ class Assignment
         $content .= $args['args']['submittedByEmail'] ? sprintf('<p><strong>%1$s:</strong> <a href="mailto:%2$s">%2$s</a></p>', __('Email', AVM_TEXT_DOMAIN), $args['args']['submittedByEmail']) : '';
         $content .= $args['args']['submittedByPhone'] ? sprintf('<p><strong>%s:</strong> %s</p>', __('Phone', AVM_TEXT_DOMAIN), $args['args']['submittedByPhone']) : '';
         echo $content;
+    }
+
+    public function insertAssignmentStatusTerms()
+    {
+        return $this->assignmentTaxonomy->insertTerms(AssignmentConfiguration::getStatusTerms());
     }
 }

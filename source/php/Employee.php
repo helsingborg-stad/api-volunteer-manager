@@ -8,21 +8,28 @@ use \VolunteerManager\Helper\Icon as Icon;
 
 class Employee
 {
-    private static PostType $postType;
+    private PostType $postType;
+
+    private Taxonomy $employeeTaxonomy;
 
     public function __construct()
     {
-        self::$postType = $this->postType();
-        $this->addPostTypeTableColumn(self::$postType);
-
-        $this->registerEmployeeStatusTaxonomy(self::$postType);
+        $this->postType = $this->setupPostType();
+        $this->addPostTypeTableColumn($this->postType);
     }
 
     public function addHooks()
     {
-        add_action('init', array($this, 'insertEmploymentStatusTerms'));
+        add_action('init', array($this, 'initTaxonomiesAndTerms'));
+
         add_filter('avm_external_volunteer_new_notification', array($this, 'populateNotificationReceiverWithSubmitter'), 10, 2);
         add_filter('avm_admin_external_volunteer_new_notification', array($this, 'populateNotificationReceiverWithAdmin'), 10, 2);
+
+    }
+
+    public function initTaxonomiesAndTerms() {
+        $this->registerStatusTaxonomy();
+        $this->insertEmploymentStatusTerms();
     }
 
     /**
@@ -57,7 +64,7 @@ class Employee
      * Create post type
      * @return PostType
      */
-    public function postType(): PostType
+    public function setupPostType(): PostType
     {
         // Create post type
         return new PostType(
@@ -112,65 +119,30 @@ class Employee
     /**
      * Create terms for the employee status taxonomy
      *
-     * @param $postType
      * @return void
      */
-    private function registerEmployeeStatusTaxonomy($postType) : void
+    public function registerStatusTaxonomy() : void
     {
-        new Taxonomy(
+        $this->employeeTaxonomy = new Taxonomy(
             'Registration statuses',
             'Registration status',
             'employee-registration-status',
-            array($postType->slug),
+            array($this->postType->slug),
             array (
                 'hierarchical' => false,
                 'show_ui' => false
             )
         );
+
+        $this->employeeTaxonomy->registerTaxonomy();
     }
 
     /**
      * Insert terms for the employee status taxonomy
      *
-     * @return void
      */
-    public function insertEmploymentStatusTerms(): void
+    public function insertEmploymentStatusTerms()
     {
-        $term_items = [
-            [
-                'name' => __('New', 'api-volunteer-manager'),
-                'slug' => 'new',
-                'description' => 'New employee. Employee needs to be processed.'
-            ],
-            [
-                'name' => __('Ongoing', 'api-volunteer-manager'),
-                'slug' => 'ongoing',
-                'description' => 'Employee under investigation.'
-            ],
-            [
-                'name' => __('Approved', 'api-volunteer-manager'),
-                'slug' => 'approved',
-                'description' => 'Employee approved for assignments.'
-            ],
-            [
-                'name' => __('Denied', 'api-volunteer-manager'),
-                'slug' => 'denied',
-                'description' => 'Employee denied. Employee can\'t apply.'
-            ]
-        ];
-
-        foreach ($term_items as $term) {
-            if (!term_exists($term['name'], 'employee-registration-status'))
-            {
-                $result = wp_insert_term(
-                    $term['name'],
-                    'employee-registration-status',
-                    [
-                        'slug' => $term['slug'],
-                        'description' => $term['description'],
-                    ]
-                );
-            }
-        }
+        return $this->employeeTaxonomy->insertTerms(EmployeeConfiguration::getStatusTerms());
     }
 }

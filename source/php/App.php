@@ -2,6 +2,7 @@
 
 namespace VolunteerManager;
 
+use VolunteerManager\Entity\Term;
 use VolunteerManager\Helper\CacheBust;
 use VolunteerManager\Notification\NotificationsConfig;
 use VolunteerManager\Notification\EmailNotificationSender;
