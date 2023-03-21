@@ -10,23 +10,17 @@ use VolunteerManager\Helper\Admin\UI as AdminUI;
 use VolunteerManager\Helper\Admin\UrlBuilder as UrlBuilder;
 use VolunteerManager\Helper\Icon as Icon;
 use VolunteerManager\Helper\MetaBox as MetaBox;
-use VolunteerManager\Notification\NotificationHandlerInterface;
 
 class Assignment
 {
-    private NotificationHandlerInterface $notificationHandler;
-    // public static string $postTypeSlug;
     private PostType $postType;
     private Taxonomy $assignmentTaxonomy;
 
-    public function __construct($notificationHandler)
+    public function __construct()
     {
-        $this->notificationHandler = $notificationHandler;
         $this->postType = $this->setupPostType();
         $this->addPostTypeTableColumn($this->postType);
     }
-
-
 
     public function addHooks()
     {
