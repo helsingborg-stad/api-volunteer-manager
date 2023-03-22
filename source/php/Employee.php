@@ -159,7 +159,7 @@ class Employee
         }
 
         $firstName = get_field('first_name', $postId) ?? '';
-        $surname = get_field('first_name', $postId) ?? '';
+        $surname = get_field('surname', $postId) ?? '';
         $postData = array(
             'ID' => $postId,
             'post_title' => trim("{$firstName} {$surname}"),
