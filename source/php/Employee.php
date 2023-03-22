@@ -27,7 +27,8 @@ class Employee
 
     }
 
-    public function initTaxonomiesAndTerms() {
+    public function initTaxonomiesAndTerms()
+    {
         $this->registerStatusTaxonomy();
         $this->insertEmploymentStatusTerms();
     }
@@ -72,21 +73,21 @@ class Employee
             _x('Employee', 'Post type singular', AVM_TEXT_DOMAIN),
             'employee',
             array(
-                'description'          =>   __('Employees', AVM_TEXT_DOMAIN),
-                'menu_icon'            =>   Icon::get('person'),
-                'publicly_queriable'   =>   true,
-                'show_ui'              =>   true,
-                'show_in_nav_menus'    =>   true,
-                'has_archive'          =>   true,
-                'rewrite'              =>   array(
-                    'slug'       =>   __('employee', AVM_TEXT_DOMAIN),
-                    'with_front' =>   false
+                'description' => __('Employees', AVM_TEXT_DOMAIN),
+                'menu_icon' => Icon::get('person'),
+                'publicly_queriable' => true,
+                'show_ui' => true,
+                'show_in_nav_menus' => true,
+                'has_archive' => true,
+                'rewrite' => array(
+                    'slug' => __('employee', AVM_TEXT_DOMAIN),
+                    'with_front' => false
                 ),
-                'hierarchical'          =>  false,
-                'exclude_from_search'   =>  true,
-                'taxonomies'            =>  array(),
-                'supports'              =>  array('title'),
-                'show_in_rest'          =>  true
+                'hierarchical' => false,
+                'exclude_from_search' => true,
+                'taxonomies' => array(),
+                'supports' => array(''),
+                'show_in_rest' => true
             )
         );
     }
@@ -121,14 +122,14 @@ class Employee
      *
      * @return void
      */
-    public function registerStatusTaxonomy() : void
+    public function registerStatusTaxonomy(): void
     {
         $this->employeeTaxonomy = new Taxonomy(
             'Registration statuses',
             'Registration status',
             'employee-registration-status',
             array($this->postType->slug),
-            array (
+            array(
                 'hierarchical' => false,
                 'show_ui' => false
             )
