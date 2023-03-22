@@ -105,4 +105,15 @@ class EmployeeTest extends PluginTestCase
             ],
         ];
     }
+
+    /**
+     * @throws \Brain\Monkey\Expectation\Exception\ExpectationArgsRequired
+     */
+    public function testSetPostTitle()
+    {
+        Functions\when('get_post_type')->justReturn("employee");
+        Functions\when('get_field')->justReturn("Foo");
+        Functions\expect('wp_update_post')->once()->with(['post_title' => 'Foo Foo', 'ID' => $this->post->ID]);
+        $this->employee->setPostTitle($this->post->ID);
+    }
 }
