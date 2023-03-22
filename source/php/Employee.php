@@ -21,10 +21,10 @@ class Employee
     public function addHooks()
     {
         add_action('init', array($this, 'initTaxonomiesAndTerms'));
+        add_action('acf/save_post', array($this, 'setPostTitle'));
 
         add_filter('avm_external_volunteer_new_notification', array($this, 'populateNotificationReceiverWithSubmitter'), 10, 2);
         add_filter('avm_admin_external_volunteer_new_notification', array($this, 'populateNotificationReceiverWithAdmin'), 10, 2);
-
     }
 
     public function initTaxonomiesAndTerms()
@@ -145,5 +145,25 @@ class Employee
     public function insertEmploymentStatusTerms()
     {
         return $this->employeeTaxonomy->insertTerms(EmployeeConfiguration::getStatusTerms());
+    }
+
+    /**
+     * Update post title with name
+     * @param $postId
+     * @return void
+     */
+    public function setPostTitle($postId)
+    {
+        if (get_post_type($postId) !== 'employee') {
+            return;
+        }
+
+        $firstName = get_field('first_name', $postId) ?? '';
+        $surname = get_field('first_name', $postId) ?? '';
+        $postData = array(
+            'ID' => $postId,
+            'post_title' => trim("{$firstName} {$surname}"),
+        );
+        wp_update_post($postData);
     }
 }
