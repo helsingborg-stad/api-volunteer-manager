@@ -296,7 +296,7 @@
                 1 => array(
                     'key' => 'field_641c5611b6d8d',
                     'label' => __('Date updated', 'api-volunteer-manager'),
-                    'name' => 'date_updated',
+                    'name' => 'notes_date_updated',
                     'aria-label' => '',
                     'type' => 'date_picker',
                     'instructions' => __('Used for taking track of when the note was taken.', 'api-volunteer-manager'),
@@ -310,6 +310,7 @@
                     'display_format' => 'Y-m-d',
                     'return_format' => 'd/m/Y',
                     'first_day' => 1,
+                    'default_value' => __('2023-03-23', 'api-volunteer-manager'),
                     'parent_repeater' => 'field_641c54b9b6d8b',
                 ),
             ),
