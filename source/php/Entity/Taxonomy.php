@@ -2,6 +2,7 @@
 
 namespace VolunteerManager\Entity;
 
+use VolunteerManager\Helper\Field;
 use WP_Error;
 
 class Taxonomy
@@ -87,6 +88,10 @@ class Taxonomy
             );
 
             if (!is_wp_error($result)) {
+                if (isset($term['color'])) {
+                    Field::update('taxonomy_color', $term['color'], $this->slug . '_' . $result['term_id']);
+                }
+
                 $inserted_terms[] = $result;
             }
         }
