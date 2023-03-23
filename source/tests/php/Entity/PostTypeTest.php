@@ -1,9 +1,9 @@
 <?php
 
-namespace php;
+namespace php\Entity;
 
-use PluginTestCase\PluginTestCase;
 use Brain\Monkey\Functions;
+use PluginTestCase\PluginTestCase;
 use VolunteerManager\Entity\PostTypeNew;
 
 class PostTypeTest extends PluginTestCase
@@ -132,7 +132,7 @@ class PostTypeTest extends PluginTestCase
             echo $postId;
         };
 
-        $customPostType->tableColumnsContentCallback['column1'] = $mockCallback;
+        $customPostType->tableColumnsContentCallback = ['column1' => $mockCallback];
 
         Functions\expect('call_user_func_array')
             ->once()
@@ -140,5 +140,4 @@ class PostTypeTest extends PluginTestCase
 
         $customPostType->tableColumnsContent('column1', 123);
     }
-
 }
