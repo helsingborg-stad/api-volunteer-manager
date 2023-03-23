@@ -40,21 +40,21 @@ class PostType
      * Register the actual post type
      * @return string Registered post type slug
      */
-    public function registerPostType() : string
+    public function registerPostType(): string
     {
         $labels = array(
-            'name'                => $this->namePlural,
-            'singular_name'       => $this->nameSingular,
-            'add_new'             => sprintf(__('Add new %s', 'api-volunteer-manager'), $this->nameSingular),
-            'add_new_item'        => sprintf(__('Add new %s', 'api-volunteer-manager'), $this->nameSingular),
-            'edit_item'           => sprintf(__('Edit %s', 'api-volunteer-manager'), $this->nameSingular),
-            'new_item'            => sprintf(__('New %s', 'api-volunteer-manager'), $this->nameSingular),
-            'view_item'           => sprintf(__('View %s', 'api-volunteer-manager'), $this->nameSingular),
-            'search_items'        => sprintf(__('Search %s', 'api-volunteer-manager'), $this->namePlural),
-            'not_found'           => sprintf(__('No %s found', 'api-volunteer-manager'), $this->namePlural),
-            'not_found_in_trash'  => sprintf(__('No %s found in trash', 'api-volunteer-manager'), $this->namePlural),
-            'parent_item_colon'   => sprintf(__('Parent %s:', 'api-volunteer-manager'), $this->nameSingular),
-            'menu_name'           => $this->namePlural,
+            'name' => $this->namePlural,
+            'singular_name' => $this->nameSingular,
+            'add_new' => sprintf(__('Add new %s', 'api-volunteer-manager'), $this->nameSingular),
+            'add_new_item' => sprintf(__('Add new %s', 'api-volunteer-manager'), $this->nameSingular),
+            'edit_item' => sprintf(__('Edit %s', 'api-volunteer-manager'), $this->nameSingular),
+            'new_item' => sprintf(__('New %s', 'api-volunteer-manager'), $this->nameSingular),
+            'view_item' => sprintf(__('View %s', 'api-volunteer-manager'), $this->nameSingular),
+            'search_items' => sprintf(__('Search %s', 'api-volunteer-manager'), $this->namePlural),
+            'not_found' => sprintf(__('No %s found', 'api-volunteer-manager'), $this->namePlural),
+            'not_found_in_trash' => sprintf(__('No %s found in trash', 'api-volunteer-manager'), $this->namePlural),
+            'parent_item_colon' => sprintf(__('Parent %s:', 'api-volunteer-manager'), $this->nameSingular),
+            'menu_name' => $this->namePlural,
         );
 
         $this->args['labels'] = $labels;
@@ -72,7 +72,7 @@ class PostType
      * @param callback $contentCallback Callback function for displaying
      *                                  column content (params: $columnKey, $postId)
      */
-    public function addTableColumn($key, $title, $sortable = false, $contentCallback = false) : bool
+    public function addTableColumn($key, $title, $sortable = false, $contentCallback = false): bool
     {
         $this->tableColumns[$key] = $title;
 
@@ -89,10 +89,10 @@ class PostType
 
     /**
      * Set up table columns
-     * @param  array $columns Default columns
+     * @param array $columns Default columns
      * @return array          New columns
      */
-    public function tableColumns($columns) : array
+    public function tableColumns($columns): array
     {
         if (!empty($this->tableColumns) && is_array($this->tableColumns)) {
             $columns = array_merge(
@@ -107,13 +107,13 @@ class PostType
 
     /**
      * Setup sortable columns
-     * @param  array $columns Default columns
+     * @param array $columns Default columns
      * @return array          New columns
      */
-    public function tableSortableColumns($columns) : array
+    public function tableSortableColumns($columns): array
     {
         if (!empty($this->tableSortableColumns) && is_array($this->tableSortableColumns)) {
-            $columns = $this->tableColumns;
+            $columns = $this->tableSortableColumns;
         }
 
         return unserialize(strtolower(serialize($columns)));
@@ -121,8 +121,8 @@ class PostType
 
     /**
      * Set table column content with callback functions
-     * @param  string  $column Key of the column
-     * @param  integer $postId Post id of the current row in table
+     * @param string  $column Key of the column
+     * @param integer $postId Post id of the current row in table
      * @return void
      */
     public function tableColumnsContent($column, $postId)
