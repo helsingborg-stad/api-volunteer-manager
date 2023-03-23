@@ -25,6 +25,7 @@ class Employee
 
         add_filter('avm_external_volunteer_new_notification', array($this, 'populateNotificationReceiverWithSubmitter'), 10, 2);
         add_filter('avm_admin_external_volunteer_new_notification', array($this, 'populateNotificationReceiverWithAdmin'), 10, 2);
+        add_filter('acf/load_field/name=notes_date_updated', array($this, 'acfSetNotesDefaultDate'));
     }
 
     public function initTaxonomiesAndTerms()
@@ -165,5 +166,16 @@ class Employee
             'post_title' => trim("{$firstName} {$surname}"),
         );
         wp_update_post($postData);
+    }
+
+    /**
+     * Set the current date as the default value for ACF notes date picker
+     *
+     * @param $field
+     * @return mixed
+     */
+    private function acfSetNotesDefaultDate($field) {
+        $field['default_value'] = date( 'Y-m-d' );
+        return $field;
     }
 }
