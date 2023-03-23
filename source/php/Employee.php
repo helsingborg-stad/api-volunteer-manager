@@ -86,7 +86,7 @@ class Employee
                 'hierarchical' => false,
                 'exclude_from_search' => true,
                 'taxonomies' => array(),
-                'supports' => array(''),
+                'supports' => false,
                 'show_in_rest' => true
             )
         );
