@@ -11,7 +11,6 @@ use Brain\Monkey\Functions;
 class TaxonomyTest extends PluginTestCase
 {
     protected Taxonomy $taxonomy;
-    protected array $term_items;
 
     public function setUp(): void
     {
@@ -27,32 +26,12 @@ class TaxonomyTest extends PluginTestCase
                 'show_ui' => true
             )
         );
-
-        $this->term_items = [
-            [
-                'name' => 'New',
-                'slug' => 'new',
-                'description' => 'New employee. Employee needs to be processed.'
-            ],
-            [
-                'name' => 'Ongoing',
-                'slug' => 'ongoing',
-                'description' => 'Employee under investigation.'
-            ],
-            [
-                'name' => 'Approved',
-                'slug' => 'approved',
-                'description' => 'Employee approved for assignments.'
-            ],
-            [
-                'name' => 'Denied',
-                'slug' => 'denied',
-                'description' => 'Employee denied. Employee can\'t apply.'
-            ]
-        ];
     }
 
-    public function testInsertTermsSuccessfully()
+    /**
+     * @dataProvider termItemsProvider
+     */
+    public function testInsertTermsSuccessfully(array $term_items)
     {
         Functions\when('taxonomy_exists')
             ->justReturn(true);
@@ -63,14 +42,45 @@ class TaxonomyTest extends PluginTestCase
         Functions\when('wp_insert_term')
             ->justReturn(['term_id' => 1, 'term_taxonomy_id' => 1]);
 
-
-
-        $this->taxonomy->insertTerms($this->term_items);
+        $this->taxonomy->insertTerms($term_items);
 
         $this->assertIsArray(['term_id' => 1, 'term_taxonomy_id' => 1]);
     }
 
-    public function testInsertTermThatAlreadyExists()
+    public function termItemsProvider(): array
+    {
+        return [
+            [
+                [
+                    [
+                        'name' => 'New',
+                        'slug' => 'new',
+                        'description' => 'New employee. Employee needs to be processed.'
+                    ],
+                    [
+                        'name' => 'Ongoing',
+                        'slug' => 'ongoing',
+                        'description' => 'Employee under investigation.'
+                    ],
+                    [
+                        'name' => 'Approved',
+                        'slug' => 'approved',
+                        'description' => 'Employee approved for assignments.'
+                    ],
+                    [
+                        'name' => 'Denied',
+                        'slug' => 'denied',
+                        'description' => 'Employee denied. Employee can\'t apply.'
+                    ]
+                ]
+            ]
+        ];
+    }
+
+    /**
+     * @dataProvider termItemsProvider
+     */
+    public function testInsertTermThatAlreadyExists(array $term_items)
     {
         Functions\when('taxonomy_exists')
             ->justReturn(false);
@@ -80,7 +90,7 @@ class TaxonomyTest extends PluginTestCase
         Functions\when('WP_Error')
             ->justReturn($mock_wp_error);
 
-        $result = $this->taxonomy->insertTerms($this->term_items);
+        $result = $this->taxonomy->insertTerms($term_items);
 
         $this->assertInstanceOf('WP_Error', $result);
     }
