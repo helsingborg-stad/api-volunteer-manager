@@ -2,6 +2,7 @@
 
 namespace php\Entity;
 
+use Brain\Monkey\Expectation\Exception\ExpectationArgsRequired;
 use Exception;
 use PhpParser\Node\Expr\FuncCall;
 use PluginTestCase\PluginTestCase;
@@ -26,6 +27,38 @@ class TaxonomyTest extends PluginTestCase
                 'show_ui' => true
             )
         );
+    }
+
+    /**
+     * @throws ExpectationArgsRequired
+     */
+    public function testRegisterTaxonomy()
+    {
+        $taxonomy = new Taxonomy(
+            'Registration statuses',
+            'Registration status',
+            'employee-registration-status',
+            array('some-post-type-slug'),
+            array (
+                'hierarchical' => false,
+                'show_ui' => true
+            )
+        );
+
+        Functions\expect('register_taxonomy')
+            ->once()
+            ->with(
+            'employee-registration-status',
+            array('some-post-type-slug'),
+            \Mockery::on(function ($args) {
+                return isset($args['labels']['singular_name']) && $args['labels']['singular_name'] === 'Registration status'
+                    && isset($args['labels']['name']) && $args['labels']['name'] === 'Registration statuses'
+                    && isset($args['hierarchical']) && $args['hierarchical'] === false
+                    && isset($args['show_ui']) && $args['show_ui'] === true;
+            })
+        );
+
+        $taxonomy->registerTaxonomy();
     }
 
     /**
@@ -194,4 +227,60 @@ class TaxonomyTest extends PluginTestCase
         $this->assertEquals([['term_id' => 1, 'term_taxonomy_id' => 1]], $result);
     }
 
+    /**
+     * @dataProvider termWithColorsProvider
+     */
+    public function testInsertTermsWithColors(array $term_items)
+    {
+        Functions\when('taxonomy_exists')
+            ->justReturn(true);
+
+        Functions\when('term_exists')
+            ->justReturn(false);
+
+        Functions\when('wp_insert_term')
+            ->justReturn(['term_id' => 1, 'term_taxonomy_id' => 1]);
+
+        Functions\expect('update_field')
+            ->once()
+            ->with('taxonomy_color', '#00ff00', 'employee-registration-status_1');
+
+        Functions\expect('update_field')
+            ->once()
+            ->with('taxonomy_color', '#0000ff', 'employee-registration-status_1');
+
+        $this->taxonomy->insertTerms($term_items);
+    }
+
+    public function termWithColorsProvider(): array
+    {
+        return [
+            "Mixed color terms" => [
+                [
+                    [
+                        'name' => 'New',
+                        'slug' => 'new',
+                        'description' => 'New employee. Employee needs to be processed.',
+                        'color' => '#00ff00',
+                    ],
+                    [
+                        'name' => 'Ongoing',
+                        'slug' => 'ongoing',
+                        'description' => 'Employee under investigation.',
+                    ],
+                    [
+                        'name' => 'Approved',
+                        'slug' => 'approved',
+                        'description' => 'Employee approved for assignments.',
+                        'color' => '#0000ff',
+                    ],
+                    [
+                        'name' => 'Denied',
+                        'slug' => 'denied',
+                        'description' => 'Employee denied. Employee can\'t apply.',
+                    ]
+                ]
+            ]
+        ];
+    }
 }
