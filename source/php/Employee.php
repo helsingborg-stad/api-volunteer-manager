@@ -174,7 +174,7 @@ class Employee
      * @param $field
      * @return mixed
      */
-    private function acfSetNotesDefaultDate($field) {
+    public function acfSetNotesDefaultDate($field) {
         $field['default_value'] = date( 'Y-m-d' );
         return $field;
     }
