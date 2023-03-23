@@ -24,18 +24,6 @@ class EmployeeTest extends PluginTestCase
         $this->employee = new Employee();
     }
 
-//    /**
-//     * @throws ExpectationArgsRequired
-//     */
-//    public function testAddHooks()
-//    {
-//        Functions\expect('add_action')
-//            ->once()
-//            ->with('init', [$this->employee, 'initTaxonomiesAndTerms']);
-//
-//        $this->employee->addHooks();
-//    }
-
     /**
      * @dataProvider populateNotificationReceiverWithAdminProvider
      */
