@@ -140,4 +140,31 @@ class PostTypeTest extends PluginTestCase
 
         $customPostType->tableColumnsContent('column1', 123);
     }
+
+    /**
+     * Alternative test for tableColumnsContent method
+     *
+     * @dataProvider postTypeProvider
+     */
+    public function testTableColumnsContentV2($args)
+    {
+        $customPostType = new PostTypeNew(...$args);
+
+        $columnKey = 'column1';
+        $postId = 123;
+
+        $callback = function ($column, $id) {
+            echo "Column: {$column}, post ID: {$id}";
+        };
+
+        $customPostType->tableColumnsContentCallback = [$columnKey => $callback];
+
+        ob_start();
+        $customPostType->tableColumnsContent($columnKey, $postId);
+        $output = ob_get_clean();
+
+        $expectedOutput = "Column: {$columnKey}, post ID: {$postId}";
+        $this->assertEquals($expectedOutput, $output);
+    }
+
 }
