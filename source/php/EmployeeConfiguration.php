@@ -9,22 +9,26 @@ class EmployeeConfiguration {
             [
                 'name' => __('New', 'api-volunteer-manager'),
                 'slug' => 'new',
-                'description' => 'New employee. Employee needs to be processed.'
+                'description' => 'New employee. Employee needs to be processed.',
+                'color' => '#eeee22'
             ],
             [
                 'name' => __('Ongoing', 'api-volunteer-manager'),
                 'slug' => 'ongoing',
-                'description' => 'Employee under investigation.'
+                'description' => 'Employee under investigation.',
+                'color' => '#81d742'
             ],
             [
                 'name' => __('Approved', 'api-volunteer-manager'),
                 'slug' => 'approved',
-                'description' => 'Employee approved for assignments.'
+                'description' => 'Employee approved for assignments.',
+                'color' => '#1e73be'
             ],
             [
                 'name' => __('Denied', 'api-volunteer-manager'),
                 'slug' => 'denied',
-                'description' => 'Employee denied. Employee can\'t apply.'
+                'description' => 'Employee denied. Employee can\'t apply.',
+                'color' => '#dd3333'
             ]
         ];
     }
