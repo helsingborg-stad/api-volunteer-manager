@@ -6,7 +6,6 @@ use \VolunteerManager\Entity\PostType as PostType;
 use \VolunteerManager\Entity\Taxonomy as Taxonomy;
 use VolunteerManager\Helper\Admin\UI as AdminUI;
 use \VolunteerManager\Helper\Icon as Icon;
-use VolunteerManager\Helper\Admin\UI as AdminUI;
 
 class Employee
 {
