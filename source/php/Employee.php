@@ -4,6 +4,7 @@ namespace VolunteerManager;
 
 use \VolunteerManager\Entity\PostType as PostType;
 use \VolunteerManager\Entity\Taxonomy as Taxonomy;
+use VolunteerManager\Helper\Admin\UI as AdminUI;
 use \VolunteerManager\Helper\Icon as Icon;
 use VolunteerManager\Helper\Admin\UI as AdminUI;
 
@@ -106,7 +107,10 @@ class Employee
             true,
             function ($column, $postId) {
                 echo AdminUI::createTaxonomyPills(
-                    get_the_terms($postId, 'employee-registration-status'),
+                    get_the_terms(
+                        $postId,
+                        'employee-registration-status'
+                    )
                 );
             }
         );
