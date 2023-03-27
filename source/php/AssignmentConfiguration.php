@@ -11,7 +11,7 @@ class AssignmentConfiguration
                 'name' => __('Approved', 'api-volunteer-manager'),
                 'slug' => 'approved',
                 'description' => __('Approved assignment', 'api-volunteer-manager'),
-                'color' => '#EEE'
+                'color' => '#1e73be'
             ],
             [
                 'name' => __('Ongoing', 'api-volunteer-manager'),
@@ -23,13 +23,13 @@ class AssignmentConfiguration
                 'name' => __('Pending', 'api-volunteer-manager'),
                 'slug' => 'pending',
                 'description' => __('Pending assignment', 'api-volunteer-manager'),
-                'color' => '#EEE'
+                'color' => '#dd9933'
             ],
             [
-                'name' => __('Recurring', 'api-volunteer-manager'),
-                'slug' => 'recurring',
-                'description' => __('Recurring assignment', 'api-volunteer-manager'),
-                'color' => '#8224e3'
+                'name' => __('Denied', 'api-volunteer-manager'),
+                'slug' => 'denied',
+                'description' => __('Denied assignment', 'api-volunteer-manager'),
+                'color' => '#dd3333'
             ]
         ];
     }
