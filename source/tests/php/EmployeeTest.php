@@ -5,6 +5,7 @@ namespace php;
 use Brain\Monkey\Expectation\Exception\ExpectationArgsRequired;
 use Brain\Monkey\Functions;
 use PluginTestCase\PluginTestCase;
+use ReflectionException;
 use VolunteerManager\Employee as Employee;
 
 class EmployeeTest extends PluginTestCase
@@ -21,18 +22,6 @@ class EmployeeTest extends PluginTestCase
         $this->post->ID = 99;
 
         $this->employee = new Employee();
-    }
-
-    /**
-     * @throws ExpectationArgsRequired
-     */
-    public function testAddHooks()
-    {
-        Functions\expect('add_action')
-            ->once()
-            ->with('init', [$this->employee, 'initTaxonomiesAndTerms']);
-
-        $this->employee->addHooks();
     }
 
     /**
@@ -117,5 +106,39 @@ class EmployeeTest extends PluginTestCase
             ->andReturn('Foo', 'Bar');
         Functions\expect('wp_update_post')->once()->with(['post_title' => 'Foo Bar', 'ID' => $this->post->ID]);
         $this->employee->setPostTitle($this->post->ID);
+    }
+
+    /**
+     * @dataProvider acfSetNotesDefaultDateProvider
+     * @throws ReflectionException|ExpectationArgsRequired
+     */
+    public function testAcfSetNotesDefaultDate($field, $expectedField)
+    {
+        Functions\expect('add_filter')
+            ->once()
+            ->with('acf/load_field/name=notes_date_updated', [$this->employee, 'acfSetNotesDefaultDate']);
+
+        $this->employee->addHooks();
+
+        $reflection = new \ReflectionClass(Employee::class);
+        $method = $reflection->getMethod('acfSetNotesDefaultDate');
+        $method->setAccessible(true);
+
+        $result = $method->invoke($this->employee, $field);
+        $this->assertEquals($expectedField, $result);
+    }
+
+    public function acfSetNotesDefaultDateProvider(): array
+    {
+        return [
+            "Test setting default_value when value is empty" => [
+                ['type' => 'date_picker', 'name' => 'notes_date_updated', 'value' => ''],
+                ['type' => 'date_picker', 'name' => 'notes_date_updated', 'value' => '', 'default_value' => '2023-03-23']
+            ],
+            "Test setting default_value when value is not empty" => [
+                ['type' => 'date_picker', 'name' => 'notes_date_updated', 'value' => '2023-03-22'],
+                ['type' => 'date_picker', 'name' => 'notes_date_updated', 'value' => '2023-03-22', 'default_value' => '2023-03-23']
+            ],
+        ];
     }
 }
