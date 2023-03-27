@@ -120,33 +120,8 @@ class PostTypeTest extends PluginTestCase
 
     /**
      * @dataProvider postTypeProvider
-     * @throws \Brain\Monkey\Expectation\Exception\ExpectationArgsRequired
      */
     public function testTableColumnsContent($args)
-    {
-        $customPostType = new PostTypeNew(...$args);
-
-        $mockCallback = function (string $column, int $postId) {
-            $this->assertEquals('column1', $column);
-            $this->assertEquals(123, $postId);
-            echo $postId;
-        };
-
-        $customPostType->tableColumnsContentCallback = ['column1' => $mockCallback];
-
-        Functions\expect('call_user_func_array')
-            ->once()
-            ->with($mockCallback, ['column1', 123]);
-
-        $customPostType->tableColumnsContent('column1', 123);
-    }
-
-    /**
-     * Alternative test for tableColumnsContent method
-     *
-     * @dataProvider postTypeProvider
-     */
-    public function testTableColumnsContentV2($args)
     {
         $customPostType = new PostTypeNew(...$args);
 
@@ -166,5 +141,4 @@ class PostTypeTest extends PluginTestCase
         $expectedOutput = "Column: {$columnKey}, post ID: {$postId}";
         $this->assertEquals($expectedOutput, $output);
     }
-
 }
