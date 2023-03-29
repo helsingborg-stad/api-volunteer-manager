@@ -2,7 +2,6 @@
 
 namespace VolunteerManager;
 
-use VolunteerManager\Entity\Term;
 use VolunteerManager\Helper\CacheBust;
 use VolunteerManager\Notification\NotificationsConfig;
 use VolunteerManager\Notification\EmailNotificationSender;
@@ -29,6 +28,8 @@ class App
 
         //General
         new Api();
+        $admin = new Admin();
+        $admin->addHooks();
 
         //Post types
         $assignment = new Assignment();
@@ -37,7 +38,8 @@ class App
         $employee = new Employee();
         $employee->addHooks();
 
-        (new Admin())->addHooks();
+        $application = new Application(...ApplicationConfiguration::getPostTypeArgs());
+        $application->addHooks();
     }
 
     /**
