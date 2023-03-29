@@ -23,4 +23,34 @@ class ApplicationConfiguration
             ]
         ];
     }
+
+    public static function getStatusTerms(): array
+    {
+        return [
+            [
+                'name' => __('Pending', AVM_TEXT_DOMAIN),
+                'slug' => 'pending',
+                'description' => 'Application is pending.',
+                'color' => '#dd9933'
+            ],
+            [
+                'name' => __('Ongoing', AVM_TEXT_DOMAIN),
+                'slug' => 'ongoing',
+                'description' => 'Application is under investigation.',
+                'color' => '#81d742'
+            ],
+            [
+                'name' => __('Closed', AVM_TEXT_DOMAIN),
+                'slug' => 'closed',
+                'description' => 'Application is closed.',
+                'color' => '#708090'
+            ],
+            [
+                'name' => __('Denied', AVM_TEXT_DOMAIN),
+                'slug' => 'denied',
+                'description' => 'Application is denied.',
+                'color' => '#dd3333'
+            ]
+        ];
+    }
 }
