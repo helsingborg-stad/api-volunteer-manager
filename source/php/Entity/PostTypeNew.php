@@ -12,7 +12,7 @@ class PostTypeNew implements PostTypeInterface
     public array $tableColumns = array();
     public array $tableSortableColumns = array();
     public array $tableColumnsContentCallback = array();
-    
+
     public function __construct(string $slug, string $namePlural, string $nameSingular, array $args = array(), array $labels = array())
     {
         $this->slug = $slug;
@@ -74,13 +74,14 @@ class PostTypeNew implements PostTypeInterface
 
     /**
      * Adds a column to the admin list table
-     * @param string         $key             Column key
-     * @param string         $title           Column title
-     * @param boolean        $sortable        Sortable or not
-     * @param callback|false $contentCallback Callback function for displaying
+     * @param string        $key              Column key
+     * @param string        $title            Column title
+     * @param boolean       $sortable         Sortable or not
+     * @param callable|null $contentCallback  Callback function for displaying
      *                                        column content (params: $columnKey, $postId)
+     * @return void
      */
-    public function addTableColumn(string $key, string $title, bool $sortable = false, callable|false $contentCallback = false): bool
+    public function addTableColumn(string $key, string $title, bool $sortable = false, $contentCallback = null): void
     {
         $this->tableColumns[$key] = $title;
 
@@ -88,11 +89,9 @@ class PostTypeNew implements PostTypeInterface
             $this->tableSortableColumns[$key] = $key;
         }
 
-        if ($contentCallback !== false) {
+        if ($contentCallback) {
             $this->tableColumnsContentCallback[$key] = $contentCallback;
         }
-
-        return true;
     }
 
     /**

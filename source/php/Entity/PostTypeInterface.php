@@ -8,7 +8,7 @@ interface PostTypeInterface
 
     public function registerPostType(): void;
 
-    public function addTableColumn(string $key, string $title, bool $sortable = false, callable|false $contentCallback = false): bool;
+    public function addTableColumn(string $key, string $title, bool $sortable = false, $contentCallback = null): void;
 
     public function setTableColumns(array $columns): array;
 
