@@ -81,8 +81,18 @@ class PostTypeTest extends PluginTestCase
     public function testAddTableColumn($args)
     {
         $customPostType = new PostTypeNew(...$args);
-        $result = $customPostType->addTableColumn('foo', 'Foo', false, fn() => "foo");
-        $this->assertTrue($result);
+        $customPostType->addTableColumn('foo', 'Foo', true, fn() => "callback");
+        $this->assertEquals(['foo' => 'Foo'], $customPostType->tableColumns);
+    }
+
+    /**
+     * @dataProvider postTypeProvider
+     */
+    public function testAddTableColumnCallback($args)
+    {
+        $customPostType = new PostTypeNew(...$args);
+        $customPostType->addTableColumn('foo', 'Foo', true, fn() => "some callback");
+        $this->assertEquals(['foo' => fn() => "some callback"], $customPostType->tableColumnsContentCallback);
     }
 
     /**
