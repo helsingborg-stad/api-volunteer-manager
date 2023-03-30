@@ -126,18 +126,20 @@ class EmployeeTest extends PluginTestCase
 
         $result = $method->invoke($this->employee, $field);
         $this->assertEquals($expectedField, $result);
+
     }
 
     public function acfSetNotesDefaultDateProvider(): array
     {
+        $currentDate = date( 'Y-m-d' );
         return [
             "Test setting default_value when value is empty" => [
                 ['type' => 'date_picker', 'name' => 'notes_date_updated', 'value' => ''],
-                ['type' => 'date_picker', 'name' => 'notes_date_updated', 'value' => '', 'default_value' => '2023-03-23']
+                ['type' => 'date_picker', 'name' => 'notes_date_updated', 'value' => '', 'default_value' => $currentDate]
             ],
             "Test setting default_value when value is not empty" => [
                 ['type' => 'date_picker', 'name' => 'notes_date_updated', 'value' => '2023-03-22'],
-                ['type' => 'date_picker', 'name' => 'notes_date_updated', 'value' => '2023-03-22', 'default_value' => '2023-03-23']
+                ['type' => 'date_picker', 'name' => 'notes_date_updated', 'value' => '2023-03-22', 'default_value' => $currentDate]
             ],
         ];
     }
