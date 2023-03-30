@@ -4,6 +4,7 @@ namespace VolunteerManager;
 
 use VolunteerManager\Entity\PostTypeNew;
 use VolunteerManager\Entity\Taxonomy as Taxonomy;
+use WP_Error;
 
 class Application extends PostTypeNew
 {
@@ -42,6 +43,11 @@ class Application extends PostTypeNew
         $this->applicationTaxonomy->registerTaxonomy();
     }
 
+    /**
+     * Insert status terms
+     *
+     * @return array|WP_Error
+     */
     public function insertStatusTerms()
     {
         return $this->applicationTaxonomy->insertTerms(ApplicationConfiguration::getStatusTerms());
