@@ -2,12 +2,9 @@
 
 namespace php;
 
-use Brain\Monkey\Expectation\Exception\ExpectationArgsRequired;
 use PluginTestCase\PluginTestCase;
 use VolunteerManager\Application;
-use PHPUnit\Framework\TestCase;
-use VolunteerManager\ApplicationConfiguration;
-use Brain\Monkey\Functions;
+use VolunteerManager\Entity\Taxonomy;
 
 class ApplicationTest extends PluginTestCase
 {
@@ -21,36 +18,43 @@ class ApplicationTest extends PluginTestCase
             'slug' => 'application',
             'namePlural' => 'applications',
             'nameSingular' => 'application',
-            'args' => [
-                'description' => 'Applications',
-                'public' => false,
-                'show_ui' => true,
-                'show_in_nav_menus' => true,
-                'exclude_from_search' => true,
-                'supports' => false,
-            ]
         ];
 
         $this->application = new Application(...$mockApplicationArgs);
-
     }
 
-    /**
-     * @throws ExpectationArgsRequired
-     */
     public function testInsertStatusTerms()
     {
-        Functions\expect('')
+        // Set up the mock for Taxonomy object
+        $taxonomyMock = $this->getMockBuilder(Taxonomy::class)
+            ->disableOriginalConstructor()
+            ->getMock();
 
-        Functions\expect('insertTerms')
-            ->once()
-            ->with(ApplicationConfiguration::getStatusTerms())
-            ->andReturn(true);
+        $insertedTerms = [
+            [
+                'term_id' => 1,
+                'term_taxonomy_id' => 1
+            ],
+            [
+                'term_id' => 2,
+                'term_taxonomy_id' => 2
+            ]
+        ];
 
-        $this->application->registerStatusTaxonomy();
-        $insertTermsResult = $this->application->insertStatusTerms();
+        // Set up the method insertTerms() for the mock Taxonomy object
+        // insertTerms() method shall return an array with term_id and term_taxonomy_id.
+        $taxonomyMock->expects($this->once())
+            ->method('insertTerms')
+            ->willReturn($insertedTerms);
 
-        $this->assertTrue($insertTermsResult);
+        // Replace the applicationTaxonomy property with the mock Taxonomy object
+        $reflection = new \ReflectionClass($this->application);
+        $applicationTaxonomyProperty = $reflection->getProperty('applicationTaxonomy');
+        $applicationTaxonomyProperty->setAccessible(true);
+        $applicationTaxonomyProperty->setValue($this->application, $taxonomyMock);
 
+        // Test insertStatusTerms() method
+        $result = $this->application->insertStatusTerms();
+        $this->assertEquals($insertedTerms, $result);
     }
 }
