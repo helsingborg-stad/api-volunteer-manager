@@ -9,12 +9,12 @@ class UI
     /**
      * Prints colorful taxonomy pills
      *
-     * @param WP_Taxonomy $taxonomy
+     * @param array|bool|\WP_Error $taxonomy
      * @return void
      */
-    public static function createTaxonomyPills($taxonomy)
+    public static function createTaxonomyPills($taxonomy): void
     {
-        if (empty($taxonomy)) {
+        if (empty($taxonomy) || is_wp_error($taxonomy)) {
             echo "-";
         } else {
             foreach ((array)$taxonomy as $item) {
