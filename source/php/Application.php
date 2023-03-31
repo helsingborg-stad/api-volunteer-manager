@@ -4,14 +4,22 @@ namespace VolunteerManager;
 
 use VolunteerManager\Entity\PostTypeNew;
 use VolunteerManager\Entity\Taxonomy as Taxonomy;
+use WP_Error;
 
 class Application extends PostTypeNew
 {
+    private Taxonomy $applicationTaxonomy;
     public function addHooks(): void
     {
         parent::addHooks();
 
-        add_action('init', [$this, 'registerStatusTaxonomy']);
+        add_action('init', [$this, 'initTaxonomiesAndTerms']);
+    }
+
+    public function initTaxonomiesAndTerms(): void
+    {
+        $this->registerStatusTaxonomy();
+        $this->insertStatusTerms();
     }
 
     /**
@@ -21,7 +29,7 @@ class Application extends PostTypeNew
      */
     public function registerStatusTaxonomy(): void
     {
-        $statusTaxonomy = new Taxonomy(
+        $this->applicationTaxonomy = new Taxonomy(
             'Application statuses',
             'Application status',
             'application-status',
@@ -32,6 +40,16 @@ class Application extends PostTypeNew
             )
         );
 
-        $statusTaxonomy->registerTaxonomy();
+        $this->applicationTaxonomy->registerTaxonomy();
+    }
+
+    /**
+     * Insert status terms
+     *
+     * @return array|WP_Error
+     */
+    public function insertStatusTerms()
+    {
+        return $this->applicationTaxonomy->insertTerms(ApplicationConfiguration::getStatusTerms());
     }
 }
