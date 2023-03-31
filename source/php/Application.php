@@ -5,16 +5,18 @@ namespace VolunteerManager;
 use VolunteerManager\Entity\ITerm;
 use VolunteerManager\Entity\PostTypeNew;
 use VolunteerManager\Entity\Taxonomy as Taxonomy;
-use WP_Error;
+use VolunteerManager\Helper\Admin\UI as AdminUI;
 
 class Application extends PostTypeNew
 {
     private Taxonomy $applicationTaxonomy;
+
     public function addHooks(): void
     {
         parent::addHooks();
 
         add_action('init', [$this, 'initTaxonomiesAndTerms']);
+        add_action('init', [$this, 'addStatusTableColumn']);
     }
 
     public function initTaxonomiesAndTerms(): void
@@ -52,5 +54,26 @@ class Application extends PostTypeNew
     public function insertStatusTerms(ITerm $taxonomy)
     {
         return $taxonomy->insertTerms(ApplicationConfiguration::getStatusTerms());
+    }
+    
+    /**
+     * Adds a column with status
+     * @return void
+     */
+    public function addStatusTableColumn(): void
+    {
+        $this->addTableColumn(
+            'status',
+            __('Status', AVM_TEXT_DOMAIN),
+            true,
+            function ($column, $postId) {
+                AdminUI::createTaxonomyPills(
+                    get_the_terms(
+                        $postId,
+                        'application-status'
+                    )
+                );
+            }
+        );
     }
 }
