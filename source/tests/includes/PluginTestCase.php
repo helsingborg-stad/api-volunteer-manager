@@ -21,14 +21,7 @@ class PluginTestCase extends TestCase
         parent::setUp();
         Monkey\setUp();
 
-        Functions\stubs(
-            [
-                '__' => null,
-                '_e' => null,
-                '_n' => null,
-                '_x' => null,
-            ]
-        );
+        Functions\stubTranslationFunctions();
 
         if (!defined('AVM_TEXT_DOMAIN')) {
             define('AVM_TEXT_DOMAIN', 'avm-text-domain');
