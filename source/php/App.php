@@ -2,11 +2,12 @@
 
 namespace VolunteerManager;
 
+use VolunteerManager\Employee\Employee;
 use VolunteerManager\Helper\CacheBust;
-use VolunteerManager\Notification\NotificationsConfig;
 use VolunteerManager\Notification\EmailNotificationSender;
 use VolunteerManager\Notification\LoggingNotificationSender;
 use VolunteerManager\Notification\NotificationHandler;
+use VolunteerManager\Notification\NotificationsConfig;
 
 class App
 {

@@ -1,11 +1,21 @@
 <?php
 
-namespace VolunteerManager;
+namespace VolunteerManager\Employee;
 
+<<<<<<< master:source/php/Employee.php
 use VolunteerManager\Components\ApplicationMetaBox\EmployeeApplicationMetaBox;
+=======
+<<<<<<< master:source/php/Employee.php
+>>>>>>> moved employee to own folder:source/php/Employee/Employee.php
 use VolunteerManager\Entity\PostType;
 use \VolunteerManager\Entity\Taxonomy as Taxonomy;
 use VolunteerManager\Helper\Admin\UI as AdminUI;
+=======
+use VolunteerManager\Entity\PostType as PostType;
+use VolunteerManager\Entity\Taxonomy as Taxonomy;
+use VolunteerManager\Helper\Admin\UI as AdminUI;
+use VolunteerManager\Helper\Icon as Icon;
+>>>>>>> moved employee to own folder:source/php/Employee/Employee.php
 
 class Employee extends PostType
 {
@@ -149,6 +159,7 @@ class Employee extends PostType
         return $field;
     }
 
+<<<<<<< master:source/php/Employee.php
     /**
      * Register applications meta box
      * @return void
@@ -165,4 +176,6 @@ class Employee extends PostType
         );
         $applicationMetaBox->register();
     }
+=======
+>>>>>>> moved employee to own folder:source/php/Employee/Employee.php
 }

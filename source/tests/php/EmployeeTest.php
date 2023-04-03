@@ -6,7 +6,7 @@ use Brain\Monkey\Expectation\Exception\ExpectationArgsRequired;
 use Brain\Monkey\Functions;
 use PluginTestCase\PluginTestCase;
 use ReflectionException;
-use VolunteerManager\Employee as Employee;
+use VolunteerManager\Employee\Employee as Employee;
 
 class EmployeeTest extends PluginTestCase
 {
