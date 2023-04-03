@@ -5,7 +5,7 @@ namespace VolunteerManager\Entity;
 use VolunteerManager\Helper\Field;
 use WP_Error;
 
-class Taxonomy
+class Taxonomy implements ITerm
 {
     public $namePlural;
     public $nameSingular;
