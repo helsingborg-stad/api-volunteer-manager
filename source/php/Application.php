@@ -2,6 +2,7 @@
 
 namespace VolunteerManager;
 
+use VolunteerManager\Entity\ITerm;
 use VolunteerManager\Entity\PostTypeNew;
 use VolunteerManager\Entity\Taxonomy as Taxonomy;
 use WP_Error;
@@ -19,7 +20,7 @@ class Application extends PostTypeNew
     public function initTaxonomiesAndTerms(): void
     {
         $this->registerStatusTaxonomy();
-        $this->insertStatusTerms();
+        $this->insertStatusTerms($this->applicationTaxonomy);
     }
 
     /**
@@ -48,8 +49,8 @@ class Application extends PostTypeNew
      *
      * @return array|WP_Error
      */
-    public function insertStatusTerms()
+    public function insertStatusTerms(ITerm $taxonomy)
     {
-        return $this->applicationTaxonomy->insertTerms(ApplicationConfiguration::getStatusTerms());
+        return $taxonomy->insertTerms(ApplicationConfiguration::getStatusTerms());
     }
 }
