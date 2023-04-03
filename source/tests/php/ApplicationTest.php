@@ -47,14 +47,9 @@ class ApplicationTest extends PluginTestCase
             ->method('insertTerms')
             ->willReturn($insertedTerms);
 
-        // Replace the applicationTaxonomy property with the mock Taxonomy object
-        $reflection = new \ReflectionClass($this->application);
-        $applicationTaxonomyProperty = $reflection->getProperty('applicationTaxonomy');
-        $applicationTaxonomyProperty->setAccessible(true);
-        $applicationTaxonomyProperty->setValue($this->application, $taxonomyMock);
 
         // Test insertStatusTerms() method
-        $result = $this->application->insertStatusTerms();
+        $result = $this->application->insertStatusTerms($taxonomyMock);
         $this->assertEquals($insertedTerms, $result);
     }
 }
