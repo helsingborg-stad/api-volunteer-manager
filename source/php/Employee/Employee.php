@@ -43,7 +43,7 @@ class Employee extends PostType
     /**
      * Populate notification receiver with submitter email address
      * @param array $args
-     * @param int   $postId
+     * @param int $postId
      * @return array
      */
     public function populateNotificationReceiverWithSubmitter(array $args, int $postId): array
@@ -56,7 +56,7 @@ class Employee extends PostType
     /**
      * Populate notification receiver with admin email addresses
      * @param array $args
-     * @param int   $postId
+     * @param int $postId
      * @return array
      */
     public function populateNotificationReceiverWithAdmin(array $args, int $postId): array
