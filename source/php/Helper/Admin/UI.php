@@ -9,24 +9,37 @@ class UI
     /**
      * Prints colorful taxonomy pills
      *
-     * @param WP_Taxonomy $taxonomy
-     * @return void
+     * @param array|bool|\WP_Error $taxonomy
+     * @return string
      */
-    public static function createTaxonomyPills($taxonomy)
+    public static function createTaxonomyPills($taxonomy): string
     {
-        if (empty($taxonomy)) {
-            echo "-";
-        } else {
-            foreach ((array)$taxonomy as $item) {
-                echo sprintf(
-                    '<span style="background: %s; color: %s;" class="term-pill term-pill-%s">%s</span>',
-                    self::taxonomyColor($item->term_id, $item->taxonomy),
-                    self::taxonomyColorContrast($item->term_id, $item->taxonomy),
-                    $item->slug,
-                    $item->name
-                );
-            }
+        if (empty($taxonomy) || is_wp_error($taxonomy)) {
+            return "-";
         }
+
+        $pillsHtml = '';
+        foreach ((array)$taxonomy as $item) {
+            $pillsHtml .= self::generateTaxonomyPillHtml($item);
+        }
+
+        return $pillsHtml;
+    }
+
+    /**
+     * Generates taxonomy pills html
+     * @param object $item
+     * @return string
+     */
+    public static function generateTaxonomyPillHtml(object $item): string
+    {
+        return sprintf(
+            '<span style="background: %s; color: %s;" class="term-pill term-pill-%s">%s</span>',
+            self::taxonomyColor($item->term_id, $item->taxonomy),
+            self::taxonomyColorContrast($item->term_id, $item->taxonomy),
+            $item->slug,
+            $item->name
+        );
     }
 
     /**
