@@ -61,8 +61,8 @@ class Api
         add_action('template_redirect', array($this, 'redirectToApi'));
         
         //Filter data output
-        if (is_iterable($this->postTypes)) {
-            foreach ($this->postTypes as $postType) {
+        if(is_iterable($this->postTypes)) {
+            foreach($this->postTypes as $postType) {
                 add_filter('rest_prepare_' . $postType, array($this, 'removeLinks'), 10000, 3);
                 add_filter('rest_prepare_' . $postType, array($this, 'removeResponseKeys'), 5000, 3);
                 add_filter('rest_prepare_' . $postType, array($this, 'renameResponseKeys'), 6000, 3);
@@ -73,7 +73,7 @@ class Api
         }
 
         //Remove all endpoints not created by this addon
-        add_filter('rest_endpoints', array($this, 'removeDefaultEndpoints'));
+        add_filter( 'rest_endpoints', array($this, 'removeDefaultEndpoints'));
     }
 
     /**
@@ -82,10 +82,9 @@ class Api
      * @param array $endpoints
      * @return array
      */
-    function removeDefaultEndpoints($endpoints)
-    {
-        foreach ($endpoints as $endpoint => $details) {
-            if (in_array($endpoint, ["/", "/wp/v2"])) {
+    function removeDefaultEndpoints($endpoints) {
+        foreach ($endpoints as $endpoint => $details ) {
+            if(in_array($endpoint, ["/", "/wp/v2"])) {
                 continue;
             }
             //unset($endpoints[$endpoint]);
@@ -103,7 +102,7 @@ class Api
             return;
         }
 
-        if (is_admin()) {
+        if(is_admin()) {
             return;
         }
 
@@ -116,18 +115,18 @@ class Api
     /**
      * Rename keys to a more appropriate name
      *
-     * @param object $response The unfiltered response
-     * @param object $post The post currently being filtered
-     * @param object $request The request data
+     * @param object    $response  The unfiltered response
+     * @param object    $post      The post currently being filtered
+     * @param object    $request   The request data
      * @return object   $response  The filtered response
      */
     public function renameResponseKeys($response, $post, $request)
     {
-        $keys = (array)$this->renameResponseKeys;
+        $keys = (array) $this->renameResponseKeys;
 
-        if (is_iterable($keys)) {
-            foreach ($keys as $from => $to) {
-                if (array_key_exists($from, $response->data)) {
+        if(is_iterable($keys)) {
+            foreach($keys as $from => $to) {
+                if(array_key_exists($from, $response->data)) {
                     $response->data[$to] = $response->data[$from];
                     unset($response->data[$from]);
                 }
@@ -140,16 +139,16 @@ class Api
     /**
      * If there are rendered key, use that on item level.
      *
-     * @param object $response The unfiltered response
-     * @param object $post The post currently being filtered
-     * @param object $request The request data
+     * @param object    $response  The unfiltered response
+     * @param object    $post      The post currently being filtered
+     * @param object    $request   The request data
      * @return object   $response  The filtered response
      */
     public function useRenderedAsMainValue($response, $post, $request)
     {
-        if (is_iterable($response->data)) {
-            foreach ($response->data as $key => $item) {
-                if (isset($item['rendered'])) {
+        if(is_iterable($response->data)) {
+            foreach($response->data as $key => $item) {
+                if(isset($item['rendered'])) {
                     $response->data[$key] = $item['rendered'];
                 }
             }
@@ -160,9 +159,9 @@ class Api
     /**
      * Reorder response keys to a logical order
      *
-     * @param object $response The unfiltered response
-     * @param object $post The post currently being filtered
-     * @param object $request The request data
+     * @param object    $response  The unfiltered response
+     * @param object    $post      The post currently being filtered
+     * @param object    $request   The request data
      * @return object   $response  The filtered response
      */
     public function reorderResponseKeys($response, $post, $request)
@@ -177,14 +176,14 @@ class Api
     /**
      * Remove response keys not needed
      *
-     * @param object $response The unfiltered response
-     * @param object $post The post currently being filtered
-     * @param object $request The request data
+     * @param object    $response  The unfiltered response
+     * @param object    $post      The post currently being filtered
+     * @param object    $request   The request data
      * @return object   $response  The filtered response
      */
     public function removeResponseKeys($response, $post, $request)
     {
-        $keys = (array)$this->removableResponseKeys;
+        $keys = (array) $this->removableResponseKeys;
 
         $response->data = array_filter($response->data, function ($k) use ($keys) {
             return !in_array($k, $keys, true);
@@ -196,16 +195,15 @@ class Api
     /**
      * Remove links from the reponse
      *
-     * @param object $response The unfiltered response
-     * @param object $post The post currently being filtered
-     * @param object $request The request data
+     * @param object    $response  The unfiltered response
+     * @param object    $post      The post currently being filtered
+     * @param object    $request   The request data
      * @return object   $response  The filtered response
      */
-    public function removeLinks($response, $post, $request)
-    {
-        if (is_iterable($response->get_links())) {
-            foreach ($response->get_links() as $_linkKey => $_linkVal) {
-                if (in_array($_linkKey, $this->disallowedLinkKeys)) {
+    public function removeLinks($response, $post, $request) {
+        if(is_iterable($response->get_links())) {
+            foreach($response->get_links() as $_linkKey => $_linkVal) {
+                if(in_array($_linkKey, $this->disallowedLinkKeys)) {
                     $response->remove_link($_linkKey);
                 }
             }
@@ -218,20 +216,19 @@ class Api
      * Simplifies for other services to know, when
      * data needs to be re-synced.
      *
-     * @param object $response The unfiltered response
-     * @param object $post The post currently being filtered
-     * @param object $request The request data
+     * @param object    $response  The unfiltered response
+     * @param object    $post      The post currently being filtered
+     * @param object    $request   The request data
      * @return object   $response  The filtered response
      */
-    public function addSignature($response, $post, $request)
-    {
+    public function addSignature($response, $post, $request) {
 
-        $doNotIncludeInSignature = (array)$this->doNotIncludeInSignature;
+        $doNotIncludeInSignature = (array) $this->doNotIncludeInSignature;
 
         $stack = [];
-        if (is_iterable($response->data)) {
-            foreach ($response->data as $key => $item) {
-                if (!in_array($key, $doNotIncludeInSignature)) {
+        if(is_iterable($response->data)) {
+            foreach($response->data as $key => $item) {
+                if(!in_array($key, $doNotIncludeInSignature)) {
                     $stack[] = $item;
                 }
             }
