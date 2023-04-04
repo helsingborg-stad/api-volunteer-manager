@@ -2,8 +2,31 @@
 
 namespace VolunteerManager;
 
+use VolunteerManager\Helper\Icon as Icon;
+
 class AssignmentConfiguration
 {
+    public static function getPostTypeArgs(): array
+    {
+        return [
+            'slug' => 'assignment',
+            'namePlural' => 'assignments',
+            'nameSingular' => 'assignment',
+            'args' => [
+                'description' => __('Assignments', AVM_TEXT_DOMAIN),
+                'menu_icon' => Icon::get('person'),
+                'publicly_queryable' => true,
+                'show_ui' => true,
+                'show_in_nav_menus' => true,
+                'has_archive' => true,
+                'hierarchical' => false,
+                'exclude_from_search' => true,
+                'supports' => array('title', 'revisions'),
+                'show_in_rest' => true
+            ]
+        ];
+    }
+
     public static function getStatusTerms(): array
     {
         return [

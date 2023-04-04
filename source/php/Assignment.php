@@ -4,30 +4,24 @@ namespace VolunteerManager;
 
 use VolunteerManager\Components\EditPostStatusButtons\EditPostStatusButtonFactory as EditPostStatusButtonFactory;
 use VolunteerManager\Entity\Filter as Filter;
-use VolunteerManager\Entity\PostType as PostType;
+use VolunteerManager\Entity\PostTypeNew;
 use VolunteerManager\Entity\Taxonomy as Taxonomy;
 use VolunteerManager\Helper\Admin\UI as AdminUI;
 use VolunteerManager\Helper\Admin\UrlBuilder as UrlBuilder;
-use VolunteerManager\Helper\Icon as Icon;
 use VolunteerManager\Helper\MetaBox as MetaBox;
 
-class Assignment
+class Assignment extends PostTypeNew
 {
-    private PostType $postType;
     private Taxonomy $assignmentTaxonomy;
 
-    public function __construct()
+    public function addHooks(): void
     {
-        $this->postType = $this->setupPostType();
-        $this->addPostTypeTableColumn($this->postType);
-    }
-
-    public function addHooks()
-    {
+        parent::addHooks();
         add_action('admin_post_update_post_status', array($this, 'updatePostStatus'));
         add_action('add_meta_boxes', array($this, 'registerSubmitterMetaBox'), 10, 2);
         add_action('init', array($this, 'registerStatusTaxonomy'));
         add_action('init', array($this, 'insertAssignmentStatusTerms'));
+        add_action('init', array($this, 'addPostTypeTableColumn'));
 
         add_filter('avm_notification', array($this, 'populateNotificationSender'), 10, 1);
         add_filter('avm_external_assignment_approved_notification', array($this, 'populateNotificationReceiverWithSubmitter'), 10, 2);
@@ -62,63 +56,13 @@ class Assignment
     }
 
     /**
-     * Registers notification events when status taxonomy changes
-     * @param int    $objectId
-     * @param array  $terms
-     * @param array  $newIds
-     * @param string $taxonomy
-     * @param bool   $append
-     * @param array  $oldIds
-     * @return void
-     */
-    public function scheduleTermNotifications(int $objectId, array $terms, array $newIds, string $taxonomy, bool $append, array $oldIds): void
-    {
-        if (empty($this->notificationHandler->getNotifications($this->postType->slug, $taxonomy))) {
-            return;
-        }
-        $this->notificationHandler->scheduleNotificationsForTermUpdates($newIds, $oldIds, $this->postType->slug, $taxonomy, $objectId);
-    }
-
-    /**
-     * Create post type
-     * @return void
-     */
-    public function setupPostType(): PostType
-    {
-        return new PostType(
-            _x('Assignments', 'Post type plural', 'api-volunteer-manager'),
-            _x('Assignment', 'Post type singular', 'api-volunteer-manager'),
-            'assignment',
-            array(
-                'description' => __('Assignments', 'api-volunteer-manager'),
-                'menu_icon' => Icon::get('person'),
-                'publicly_queriable' => true,
-                'show_ui' => true,
-                'show_in_nav_menus' => true,
-                'has_archive' => true,
-                'rewrite' => array(
-                    'slug' => __('assignment', 'api-volunteer-manager'),
-                    'with_front' => false
-                ),
-                'hierarchical' => false,
-                'exclude_from_search' => true,
-                'taxonomies' => array(),
-                'supports' => array('title', 'revisions'),
-                'show_in_rest' => true
-            )
-        );
-    }
-
-    /**
      * Adds custom table columns to the specified post type's admin list table.
      *
-     * @param PostType $postType The post type object to which the columns should be added.
-     *
      * @return void
      */
-    private function addPostTypeTableColumn(PostType $postType): void
+    public function addPostTypeTableColumn(): void
     {
-        $postType->addTableColumn(
+        $this->addTableColumn(
             'status',
             __('Status', AVM_TEXT_DOMAIN),
             true,
@@ -132,7 +76,7 @@ class Assignment
             }
         );
 
-        $postType->addTableColumn(
+        $this->addTableColumn(
             'visibility',
             __('Visibility', AVM_TEXT_DOMAIN),
             false,
@@ -143,7 +87,7 @@ class Assignment
             }
         );
 
-        $postType->addTableColumn(
+        $this->addTableColumn(
             'submitted_from',
             __('Submitted from', AVM_TEXT_DOMAIN),
             false,
@@ -193,7 +137,7 @@ class Assignment
             __('Statuses', 'api-volunteer-manager'),
             __('Status', 'api-volunteer-manager'),
             'assignment-status',
-            array($this->postType->slug),
+            array($this->slug),
             array(
                 'hierarchical' => false,
                 'show_ui' => false
@@ -205,7 +149,7 @@ class Assignment
         //Remove default UI
         (new MetaBox)->remove(
             "tagsdiv-assignment-status",
-            $this->postType->slug,
+            $this->slug,
         );
 
         //Add filter
