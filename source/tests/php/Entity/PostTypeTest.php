@@ -4,7 +4,7 @@ namespace php\Entity;
 
 use Brain\Monkey\Functions;
 use PluginTestCase\PluginTestCase;
-use VolunteerManager\Entity\PostTypeNew;
+use VolunteerManager\Entity\PostType;
 
 class PostTypeTest extends PluginTestCase
 {
@@ -54,7 +54,7 @@ class PostTypeTest extends PluginTestCase
      */
     public function testAddHooks($args)
     {
-        $customPostType = new PostTypeNew(...$args);
+        $customPostType = new PostType(...$args);
         $customPostType->addHooks();
         self::assertNotFalse(has_action('init', [$customPostType, 'registerPostType']));
         self::assertNotFalse(has_action('manage_' . $customPostType->slug . '_posts_custom_column', [$customPostType, 'tableColumnsContent']));
@@ -68,7 +68,7 @@ class PostTypeTest extends PluginTestCase
      */
     public function testRegisterPostType($args, $expectedArgs)
     {
-        $customPostType = new PostTypeNew(...$args);
+        $customPostType = new PostType(...$args);
         Functions\expect('register_post_type')
             ->once()
             ->with($customPostType->slug, $expectedArgs);
@@ -80,7 +80,7 @@ class PostTypeTest extends PluginTestCase
      */
     public function testAddTableColumn($args)
     {
-        $customPostType = new PostTypeNew(...$args);
+        $customPostType = new PostType(...$args);
         $customPostType->addTableColumn('foo', 'Foo', true, fn() => "callback");
         $this->assertEquals(['foo' => 'Foo'], $customPostType->tableColumns);
     }
@@ -90,7 +90,7 @@ class PostTypeTest extends PluginTestCase
      */
     public function testAddTableColumnCallback($args)
     {
-        $customPostType = new PostTypeNew(...$args);
+        $customPostType = new PostType(...$args);
         $customPostType->addTableColumn('foo', 'Foo', true, fn() => "some callback");
         $this->assertEquals(['foo' => fn() => "some callback"], $customPostType->tableColumnsContentCallback);
     }
@@ -100,7 +100,7 @@ class PostTypeTest extends PluginTestCase
      */
     public function testSetTableColumns($args)
     {
-        $customPostType = new PostTypeNew(...$args);
+        $customPostType = new PostType(...$args);
         $customPostType->tableColumns = [
             'column1' => 'Column 1',
         ];
@@ -116,7 +116,7 @@ class PostTypeTest extends PluginTestCase
      */
     public function testTableSortableColumns($args)
     {
-        $customPostType = new PostTypeNew(...$args);
+        $customPostType = new PostType(...$args);
         $customPostType->tableColumns = [
             'column1' => 'Column 1',
             'column2' => 'Column 2',
@@ -133,7 +133,7 @@ class PostTypeTest extends PluginTestCase
      */
     public function testTableColumnsContent($args)
     {
-        $customPostType = new PostTypeNew(...$args);
+        $customPostType = new PostType(...$args);
 
         $columnKey = 'column1';
         $postId = 123;

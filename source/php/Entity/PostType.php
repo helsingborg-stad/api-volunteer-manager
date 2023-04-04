@@ -2,77 +2,86 @@
 
 namespace VolunteerManager\Entity;
 
-class PostType
+class PostType implements PostTypeInterface
 {
-    public $namePlural;
-    public $nameSingular;
-    public $slug;
-    public $args;
+    public string $slug;
+    public string $namePlural;
+    public string $nameSingular;
+    public array $labels;
+    public array $args;
+    public array $tableColumns = array();
+    public array $tableSortableColumns = array();
+    public array $tableColumnsContentCallback = array();
 
-    public $tableColumns = array();
-    public $tableSortableColumns = array();
-    public $tableColumnsContentCallback = array();
-
-    /**
-     * Registers a custom post type
-     * @param string $namePlural
-     * @param string $nameSingular
-     * @param string $slug
-     * @param array  $args
-     */
-    public function __construct($namePlural, $nameSingular, $slug, $args = array())
+    public function __construct(string $slug, string $namePlural, string $nameSingular, array $args = array(), array $labels = array())
     {
+        $this->slug = $slug;
         $this->namePlural = $namePlural;
         $this->nameSingular = $nameSingular;
-        $this->slug = $slug;
         $this->args = $args;
-
-        // Register post type
-        add_action('init', array($this, 'registerPostType'));
-
-        // Handle list table columns
-        add_filter('manage_edit-' . $this->slug . '_columns', array($this, 'tableColumns'));
-        add_filter('manage_edit-' . $this->slug . '_sortable_columns', array($this, 'tableSortableColumns'));
-        add_action('manage_' . $this->slug . '_posts_custom_column', array($this, 'tableColumnsContent'), 10, 2);
+        $this->labels = $labels;
     }
 
     /**
-     * Register the actual post type
-     * @return string Registered post type slug
+     * Register wp actions and filters
+     * @return void
      */
-    public function registerPostType(): string
+    public function addHooks(): void
     {
-        $labels = array(
-            'name' => $this->namePlural,
-            'singular_name' => $this->nameSingular,
-            'add_new' => sprintf(__('Add new %s', 'api-volunteer-manager'), $this->nameSingular),
-            'add_new_item' => sprintf(__('Add new %s', 'api-volunteer-manager'), $this->nameSingular),
-            'edit_item' => sprintf(__('Edit %s', 'api-volunteer-manager'), $this->nameSingular),
-            'new_item' => sprintf(__('New %s', 'api-volunteer-manager'), $this->nameSingular),
-            'view_item' => sprintf(__('View %s', 'api-volunteer-manager'), $this->nameSingular),
-            'search_items' => sprintf(__('Search %s', 'api-volunteer-manager'), $this->namePlural),
-            'not_found' => sprintf(__('No %s found', 'api-volunteer-manager'), $this->namePlural),
-            'not_found_in_trash' => sprintf(__('No %s found in trash', 'api-volunteer-manager'), $this->namePlural),
-            'parent_item_colon' => sprintf(__('Parent %s:', 'api-volunteer-manager'), $this->nameSingular),
-            'menu_name' => $this->namePlural,
+        add_action('init', [$this, 'registerPostType']);
+        add_action('manage_' . $this->slug . '_posts_custom_column', [$this, 'tableColumnsContent'], 10, 2);
+        add_filter('manage_edit-' . $this->slug . '_columns', [$this, 'setTableColumns']);
+        add_filter('manage_edit-' . $this->slug . '_sortable_columns', [$this, 'tableSortableColumns']);
+    }
+
+    /**
+     * Registers a custom post type
+     * @return void
+     */
+    public function registerPostType(): void
+    {
+        $labels = array_merge(
+            array(
+                'name' => ucfirst($this->namePlural),
+                'singular_name' => ucfirst($this->nameSingular),
+                'add_new' => sprintf(__('Add new %s', AVM_TEXT_DOMAIN), strtolower($this->nameSingular)),
+                'add_new_item' => sprintf(__('Add new %s', AVM_TEXT_DOMAIN), strtolower($this->nameSingular)),
+                'edit_item' => sprintf(__('Edit %s', AVM_TEXT_DOMAIN), strtolower($this->nameSingular)),
+                'new_item' => sprintf(__('New %s', AVM_TEXT_DOMAIN), strtolower($this->nameSingular)),
+                'view_item' => sprintf(__('View %s', AVM_TEXT_DOMAIN), strtolower($this->nameSingular)),
+                'search_items' => sprintf(__('Search %s', AVM_TEXT_DOMAIN), strtolower($this->namePlural)),
+                'not_found' => sprintf(__('No %s found', AVM_TEXT_DOMAIN), strtolower($this->namePlural)),
+                'not_found_in_trash' => sprintf(__('No %s found in trash', AVM_TEXT_DOMAIN), strtolower($this->namePlural)),
+                'parent_item_colon' => sprintf(__('Parent %s:', AVM_TEXT_DOMAIN), strtolower($this->nameSingular)),
+                'menu_name' => ucfirst($this->namePlural),
+            ),
+            $this->labels
         );
 
-        $this->args['labels'] = $labels;
+        $mergedArgs = array_merge(
+            array(
+                'labels' => $labels,
+                'rewrite' => array(
+                    'slug' => $this->slug,
+                    'with_front' => false
+                ),
+            ),
+            $this->args
+        );
 
-        register_post_type($this->slug, $this->args);
-
-        return $this->slug;
+        register_post_type($this->slug, $mergedArgs);
     }
 
     /**
      * Adds a column to the admin list table
-     * @param string   $key             Column key
-     * @param string   $title           Column title
-     * @param boolean  $sortable        Sortable or not
-     * @param callback $contentCallback Callback function for displaying
-     *                                  column content (params: $columnKey, $postId)
+     * @param string        $key              Column key
+     * @param string        $title            Column title
+     * @param boolean       $sortable         Sortable or not
+     * @param callable|null $contentCallback  Callback function for displaying
+     *                                        column content (params: $columnKey, $postId)
+     * @return void
      */
-    public function addTableColumn($key, $title, $sortable = false, $contentCallback = false): bool
+    public function addTableColumn(string $key, string $title, bool $sortable = false, $contentCallback = null): void
     {
         $this->tableColumns[$key] = $title;
 
@@ -80,11 +89,9 @@ class PostType
             $this->tableSortableColumns[$key] = $key;
         }
 
-        if ($contentCallback !== false) {
+        if ($contentCallback) {
             $this->tableColumnsContentCallback[$key] = $contentCallback;
         }
-
-        return true;
     }
 
     /**
@@ -92,9 +99,9 @@ class PostType
      * @param array $columns Default columns
      * @return array          New columns
      */
-    public function tableColumns($columns): array
+    public function setTableColumns(array $columns): array
     {
-        if (!empty($this->tableColumns) && is_array($this->tableColumns)) {
+        if (!empty($this->tableColumns)) {
             $columns = array_merge(
                 array_splice($columns, 0, 2),
                 $this->tableColumns,
@@ -110,9 +117,9 @@ class PostType
      * @param array $columns Default columns
      * @return array          New columns
      */
-    public function tableSortableColumns($columns): array
+    public function tableSortableColumns(array $columns): array
     {
-        if (!empty($this->tableSortableColumns) && is_array($this->tableSortableColumns)) {
+        if (!empty($this->tableSortableColumns)) {
             $columns = $this->tableSortableColumns;
         }
 
@@ -125,7 +132,7 @@ class PostType
      * @param integer $postId Post id of the current row in table
      * @return void
      */
-    public function tableColumnsContent($column, $postId)
+    public function tableColumnsContent(string $column, int $postId): void
     {
         if (!isset($this->tableColumnsContentCallback[$column])) {
             return;

@@ -4,13 +4,13 @@ namespace VolunteerManager;
 
 use VolunteerManager\Components\EditPostStatusButtons\EditPostStatusButtonFactory as EditPostStatusButtonFactory;
 use VolunteerManager\Entity\Filter as Filter;
-use VolunteerManager\Entity\PostTypeNew;
+use VolunteerManager\Entity\PostType;
 use VolunteerManager\Entity\Taxonomy as Taxonomy;
 use VolunteerManager\Helper\Admin\UI as AdminUI;
 use VolunteerManager\Helper\Admin\UrlBuilder as UrlBuilder;
 use VolunteerManager\Helper\MetaBox as MetaBox;
 
-class Assignment extends PostTypeNew
+class Assignment extends PostType
 {
     private Taxonomy $assignmentTaxonomy;
 

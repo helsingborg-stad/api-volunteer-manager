@@ -2,11 +2,11 @@
 
 namespace VolunteerManager;
 
-use VolunteerManager\Entity\PostTypeNew;
+use VolunteerManager\Entity\PostType;
 use \VolunteerManager\Entity\Taxonomy as Taxonomy;
 use VolunteerManager\Helper\Admin\UI as AdminUI;
 
-class Employee extends PostTypeNew
+class Employee extends PostType
 {
     private Taxonomy $employeeTaxonomy;
 

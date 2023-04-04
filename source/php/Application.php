@@ -3,11 +3,11 @@
 namespace VolunteerManager;
 
 use VolunteerManager\Entity\ITerm;
-use VolunteerManager\Entity\PostTypeNew;
+use VolunteerManager\Entity\PostType;
 use VolunteerManager\Entity\Taxonomy as Taxonomy;
 use VolunteerManager\Helper\Admin\UI as AdminUI;
 
-class Application extends PostTypeNew
+class Application extends PostType
 {
     private Taxonomy $applicationTaxonomy;
 
