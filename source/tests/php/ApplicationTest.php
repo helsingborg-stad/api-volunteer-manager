@@ -9,16 +9,17 @@ use VolunteerManager\Entity\Taxonomy;
 class ApplicationTest extends PluginTestCase
 {
     private Application $application;
+
     public function setUp(): void
     {
         parent::setUp();
 
         $mockApplicationArgs =
             [
-            'slug' => 'application',
-            'namePlural' => 'applications',
-            'nameSingular' => 'application',
-        ];
+                'slug' => 'application',
+                'namePlural' => 'applications',
+                'nameSingular' => 'application',
+            ];
 
         $this->application = new Application(...$mockApplicationArgs);
     }
@@ -51,5 +52,12 @@ class ApplicationTest extends PluginTestCase
         // Test insertStatusTerms() method
         $result = $this->application->insertStatusTerms($taxonomyMock);
         $this->assertEquals($insertedTerms, $result);
+    }
+
+    public function testAddTableColumn()
+    {
+        $this->application->addStatusTableColumn();
+        $actual = $this->application->tableColumns;
+        $this->assertEquals(['status' => 'Status'], $actual);
     }
 }
