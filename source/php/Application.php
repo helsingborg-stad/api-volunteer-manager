@@ -55,7 +55,7 @@ class Application extends PostTypeNew
     {
         return $taxonomy->insertTerms(ApplicationConfiguration::getStatusTerms());
     }
-    
+
     /**
      * Adds a column with status
      * @return void
@@ -67,7 +67,7 @@ class Application extends PostTypeNew
             __('Status', AVM_TEXT_DOMAIN),
             true,
             function ($column, $postId) {
-                AdminUI::createTaxonomyPills(
+                echo AdminUI::createTaxonomyPills(
                     get_the_terms(
                         $postId,
                         'application-status'
