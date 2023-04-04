@@ -15,9 +15,16 @@ class AssignmentTest extends PluginTestCase
     {
         parent::setUp();
 
+        $mockAssignmentArgs =
+            [
+                'slug' => 'assignment',
+                'namePlural' => 'assignments',
+                'nameSingular' => 'assignment',
+            ];
+
         $this->post = new \stdClass();
         $this->post->ID = 123;
-        $this->assignment = new Assignment();
+        $this->assignment = new Assignment(...$mockAssignmentArgs);
     }
 
     public function testRenderSubmitterData(): void
