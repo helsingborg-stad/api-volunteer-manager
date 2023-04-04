@@ -2,7 +2,31 @@
 
 namespace VolunteerManager;
 
-class EmployeeConfiguration {
+use VolunteerManager\Helper\Icon as Icon;
+
+class EmployeeConfiguration
+{
+    public static function getPostTypeArgs(): array
+    {
+        return [
+            'slug' => 'employee',
+            'namePlural' => 'employees',
+            'nameSingular' => 'employee',
+            'args' => [
+                'description' => __('Employees', AVM_TEXT_DOMAIN),
+                'menu_icon' => Icon::get('person'),
+                'publicly_queryable' => true,
+                'show_ui' => true,
+                'show_in_nav_menus' => true,
+                'has_archive' => true,
+                'hierarchical' => false,
+                'exclude_from_search' => true,
+                'taxonomies' => array(),
+                'supports' => false,
+                'show_in_rest' => true]
+        ];
+    }
+
     public static function getStatusTerms(): array
     {
         return [

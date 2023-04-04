@@ -2,26 +2,19 @@
 
 namespace VolunteerManager;
 
-use \VolunteerManager\Entity\PostType as PostType;
+use VolunteerManager\Entity\PostTypeNew;
 use \VolunteerManager\Entity\Taxonomy as Taxonomy;
 use VolunteerManager\Helper\Admin\UI as AdminUI;
-use \VolunteerManager\Helper\Icon as Icon;
 
-class Employee
+class Employee extends PostTypeNew
 {
-    private PostType $postType;
-
     private Taxonomy $employeeTaxonomy;
 
-    public function __construct()
+    public function addHooks(): void
     {
-        $this->postType = $this->setupPostType();
-        $this->addPostTypeTableColumn($this->postType);
-    }
-
-    public function addHooks()
-    {
+        parent::addHooks();
         add_action('init', array($this, 'initTaxonomiesAndTerms'));
+        add_action('init', array($this, 'addPostTypeTableColumn'));
         add_action('acf/save_post', array($this, 'setPostTitle'));
 
         add_filter('avm_external_volunteer_new_notification', array($this, 'populateNotificationReceiverWithSubmitter'), 10, 2);
@@ -64,43 +57,11 @@ class Employee
     }
 
     /**
-     * Create post type
-     * @return PostType
-     */
-    public function setupPostType(): PostType
-    {
-        // Create post type
-        return new PostType(
-            _x('Employees', 'Post type plural', AVM_TEXT_DOMAIN),
-            _x('Employee', 'Post type singular', AVM_TEXT_DOMAIN),
-            'employee',
-            array(
-                'description' => __('Employees', AVM_TEXT_DOMAIN),
-                'menu_icon' => Icon::get('person'),
-                'publicly_queriable' => true,
-                'show_ui' => true,
-                'show_in_nav_menus' => true,
-                'has_archive' => true,
-                'rewrite' => array(
-                    'slug' => __('employee', AVM_TEXT_DOMAIN),
-                    'with_front' => false
-                ),
-                'hierarchical' => false,
-                'exclude_from_search' => true,
-                'taxonomies' => array(),
-                'supports' => false,
-                'show_in_rest' => true
-            )
-        );
-    }
-
-    /**
-     * @param PostType $postType
      * @return void
      */
-    private function addPostTypeTableColumn(PostType $postType): void
+    public function addPostTypeTableColumn(): void
     {
-        $postType->addTableColumn(
+        $this->addTableColumn(
             'registration_status',
             __('Registration status', AVM_TEXT_DOMAIN),
             true,
@@ -114,7 +75,7 @@ class Employee
             }
         );
 
-        $postType->addTableColumn(
+        $this->addTableColumn(
             'submitted_from',
             __('Submitted from', AVM_TEXT_DOMAIN),
             false,
@@ -135,7 +96,7 @@ class Employee
             'Registration statuses',
             'Registration status',
             'employee-registration-status',
-            array($this->postType->slug),
+            array($this->slug),
             array(
                 'hierarchical' => false,
                 'show_ui' => false
@@ -180,8 +141,9 @@ class Employee
      * @param $field
      * @return mixed
      */
-    public function acfSetNotesDefaultDate($field) {
-        $field['default_value'] = date( 'Y-m-d' );
+    public function acfSetNotesDefaultDate($field)
+    {
+        $field['default_value'] = date('Y-m-d');
         return $field;
     }
 }

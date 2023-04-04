@@ -21,7 +21,13 @@ class EmployeeTest extends PluginTestCase
         $this->post = new \stdClass();
         $this->post->ID = 99;
 
-        $this->employee = new Employee();
+        $mockApplicationArgs =
+            [
+                'slug' => 'employee',
+                'namePlural' => 'employees',
+                'nameSingular' => 'employee',
+            ];
+        $this->employee = new Employee(...$mockApplicationArgs);
     }
 
     /**
@@ -131,7 +137,7 @@ class EmployeeTest extends PluginTestCase
 
     public function acfSetNotesDefaultDateProvider(): array
     {
-        $currentDate = date( 'Y-m-d' );
+        $currentDate = date('Y-m-d');
         return [
             "Test setting default_value when value is empty" => [
                 ['type' => 'date_picker', 'name' => 'notes_date_updated', 'value' => ''],
