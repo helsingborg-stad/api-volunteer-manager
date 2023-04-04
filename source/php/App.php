@@ -35,7 +35,7 @@ class App
         $assignment = new Assignment(...AssignmentConfiguration::getPostTypeArgs());
         $assignment->addHooks();
 
-        $employee = new Employee();
+        $employee = new Employee(...EmployeeConfiguration::getPostTypeArgs());
         $employee->addHooks();
 
         $application = new Application(...ApplicationConfiguration::getPostTypeArgs());
