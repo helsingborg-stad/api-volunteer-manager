@@ -24,6 +24,13 @@ class ApplicationTest extends PluginTestCase
         $this->application = new Application(...$mockApplicationArgs);
     }
 
+    public function testAddHooks()
+    {
+        $this->application->addHooks();
+        self::assertNotFalse(has_action('init', [$this->application, 'initTaxonomiesAndTerms']));
+        self::assertNotFalse(has_action('init', [$this->application, 'addStatusTableColumn']));
+    }
+
     public function testInsertStatusTerms()
     {
         // Set up the mock for Taxonomy object
