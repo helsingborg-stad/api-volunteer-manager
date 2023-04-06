@@ -23,6 +23,16 @@ class EmployeeApiManagerTest extends PluginTestCase
             {
                 return $this->validate_required_params($params);
             }
+
+            public function is_email_in_use_test($email)
+            {
+                return $this->is_email_in_use($email);
+            }
+
+            public function is_national_identity_number_in_use_test($national_identity_number)
+            {
+                return $this->is_national_identity_number_in_use($national_identity_number);
+            }
         };
     }
 
@@ -88,4 +98,55 @@ class EmployeeApiManagerTest extends PluginTestCase
         ];
     }
 
+    /**
+     * @dataProvider emailInUseDataProvider
+     */
+    public function testIsEmailInUse($email, $expectedResult)
+    {
+        Functions\when('get_posts')->justReturn($expectedResult ? ['dummy_post'] : []);
+
+        $result = $this->employeeApiManager->is_email_in_use_test($email);
+
+        $this->assertEquals($expectedResult, $result);
+    }
+
+    public function emailInUseDataProvider(): array
+    {
+        return [
+            'Email In Use' => [
+                'john.doe@example.com',
+                true,
+            ],
+            'Email Not In Use' => [
+                'jane.doe@example.com',
+                false,
+            ],
+        ];
+    }
+
+    /**
+     * @dataProvider nationalIdentityNumberInUseDataProvider
+     */
+    public function testIsNationalIdentityNumberInUse($national_identity_number, $expectedResult)
+    {
+        Functions\when('get_posts')->justReturn($expectedResult ? ['dummy_post'] : []);
+
+        $result = $this->employeeApiManager->is_national_identity_number_in_use_test($national_identity_number);
+
+        $this->assertEquals($expectedResult, $result);
+    }
+
+    public function nationalIdentityNumberInUseDataProvider(): array
+    {
+        return [
+            'National Identity Number In Use' => [
+                '123456789',
+                true,
+            ],
+            'National Identity Number Not In Use' => [
+                '987654321',
+                false,
+            ],
+        ];
+    }
 }
