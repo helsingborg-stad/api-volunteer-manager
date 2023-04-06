@@ -4,10 +4,17 @@ namespace php\Employee;
 
 use PluginTestCase\PluginTestCase;
 use VolunteerManager\Employee\EmployeeApiManager;
-use PHPUnit\Framework\TestCase;
 use WP_Error;
 use Brain\Monkey\Functions;
 
+/**
+ * Run tests in separate processes and disable global state preservation
+ * to avoid conflicts with WP_Error.
+ * https://docs.mockery.io/en/latest/cookbook/mocking_hard_dependencies.html
+ *
+ * @runTestsInSeparateProcesses
+ * @preserveGlobalState disabled
+ */
 class EmployeeApiManagerTest extends PluginTestCase
 {
     private $employeeApiManager;
