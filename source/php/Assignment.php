@@ -19,6 +19,7 @@ class Assignment extends PostType
         parent::addHooks();
         add_action('admin_post_update_post_status', array($this, 'updatePostStatus'));
         add_action('add_meta_boxes', array($this, 'registerSubmitterMetaBox'), 10, 2);
+        add_action('add_meta_boxes', array($this, 'registerApplicationsMetaBox'), 10, 2);
         add_action('init', array($this, 'registerStatusTaxonomy'));
         add_action('init', array($this, 'insertAssignmentStatusTerms'));
         add_action('init', array($this, 'addPostTypeTableColumn'));
@@ -194,6 +195,76 @@ class Assignment extends PostType
         $content .= $args['args']['submittedByEmail'] ? sprintf('<p><strong>%1$s:</strong> <a href="mailto:%2$s">%2$s</a></p>', __('Email', AVM_TEXT_DOMAIN), $args['args']['submittedByEmail']) : '';
         $content .= $args['args']['submittedByPhone'] ? sprintf('<p><strong>%s:</strong> %s</p>', __('Phone', AVM_TEXT_DOMAIN), $args['args']['submittedByPhone']) : '';
         echo $content;
+    }
+
+    /**
+     * Register employees meta box
+     * @return void
+     */
+    public function registerApplicationsMetaBox($postType, $post)
+    {
+        add_meta_box(
+            'assignment_employees',
+            __('Employees', AVM_TEXT_DOMAIN),
+            array($this, 'renderEmployeesList'),
+            array('assignment'),
+            'normal',
+            'low',
+        );
+    }
+
+    /**
+     * Renders a list of employees assigned to a particular post.
+     * @param object $post The post object to which the employees are assigned.
+     * @return void
+     */
+    public function renderEmployeesList(object $post)
+    {
+        $applications = get_posts(array(
+            'post_type' => 'application',
+            'orderby' => 'post_date',
+            'order' => 'ASC',
+            'posts_per_page' => -1,
+            'suppress_filters' => true,
+            'meta_query' => array(
+                array(
+                    'key' => 'application_assignment',
+                    'value' => $post->ID,
+                    'compare' => '='
+                )
+            ),
+        ));
+
+        $html = '';
+        if ($applications) {
+            $html .= '<table>';
+            $html .= '<tr>
+                        <th>' . __('Name', AVM_TEXT_DOMAIN) . '</th>
+                        <th>' . __('Date', AVM_TEXT_DOMAIN) . '</th>
+                        <th>' . __('Status', AVM_TEXT_DOMAIN) . '</th>
+                        <th>' . __('Actions', AVM_TEXT_DOMAIN) . '</th>
+                      </tr>';
+            foreach ($applications as $application) {
+                $employee = get_field('application_employee', $application->ID);
+                $date = get_the_date('y-m-d H:i', $application->ID);
+                $status = get_field('application_status', $application->ID);
+                $html .=
+                    '<tr>
+                        <td class="employee_name"><a href="' . get_edit_post_link($employee->ID) . '">' . $employee->post_title . '</a></td>
+                        <td>' . $date . '</td>
+                        <td>' . AdminUI::createTaxonomyPills([$status]) . '</td>
+                        <td class="actions">
+                            <a href="' . get_edit_post_link($application->ID) . '">' . __('Edit', AVM_TEXT_DOMAIN) . '</a>
+                            <a href="' . get_delete_post_link($application->ID) . '" class="delete">' . __('Delete', AVM_TEXT_DOMAIN) . '</a>
+                        </td>
+                    </tr>';
+            }
+            $html .= '</table>';
+        } else {
+            $html = 'No applications found.';
+        }
+
+        echo $html;
     }
 
     public function insertAssignmentStatusTerms()
