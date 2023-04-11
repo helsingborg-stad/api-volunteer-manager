@@ -53,10 +53,13 @@
 #assignment_employees .delete {
   color: #b32d2e;
 }
+#assignment_employees .empty_result {
+  padding: 8px;
+}
 
 .term-pill {
   padding: 3px 7px;
   border-radius: 3px;
 }
 
-/*# sourceMappingURL=api-volunteer-manager.35c659e6a66ff1fc1922.css.map*/
+/*# sourceMappingURL=api-volunteer-manager.9615f4f44b4c2b31bd4f.css.map*/
