@@ -210,46 +210,62 @@ class Assignment extends PostType
             array('assignment'),
             'normal',
             'low',
+            ['applications' => $this->getApplications($post)]
+        );
+    }
+
+    /**
+     * Retrieves list of assignments applications
+     * @param object $post
+     * @param array  $args
+     * @return array
+     */
+    public function getApplications(object $post, array $args = []): array
+    {
+        return get_posts(
+            array_merge([
+                'post_type' => 'application',
+                'orderby' => 'post_date',
+                'order' => 'ASC',
+                'posts_per_page' => -1,
+                'suppress_filters' => true,
+                'meta_query' => [
+                    [
+                        'key' => 'application_assignment',
+                        'value' => $post->ID,
+                        'compare' => '='
+                    ]
+                ],
+            ], $args)
         );
     }
 
     /**
      * Renders a list of employees assigned to a particular post.
-     * @param object $post The post object to which the employees are assigned.
+     * @param object $post
+     * @param array  $args
      * @return void
      */
-    public function renderEmployeesList(object $post)
+    public function renderEmployeesList(object $post, array $args): void
     {
-        $applications = get_posts(array(
-            'post_type' => 'application',
-            'orderby' => 'post_date',
-            'order' => 'ASC',
-            'posts_per_page' => -1,
-            'suppress_filters' => true,
-            'meta_query' => array(
-                array(
-                    'key' => 'application_assignment',
-                    'value' => $post->ID,
-                    'compare' => '='
-                )
-            ),
-        ));
+        if (empty($args['args']['applications'])) {
+            echo '<div class="empty_result">' . __('No employees found.', AVM_TEXT_DOMAIN) . '</div>';
+            return;
+        }
 
-        $html = '';
-        if ($applications) {
-            $html .= '<table>';
-            $html .= '<tr>
-                        <th>' . __('Name', AVM_TEXT_DOMAIN) . '</th>
-                        <th>' . __('Date', AVM_TEXT_DOMAIN) . '</th>
-                        <th>' . __('Status', AVM_TEXT_DOMAIN) . '</th>
-                        <th>' . __('Actions', AVM_TEXT_DOMAIN) . '</th>
-                      </tr>';
-            foreach ($applications as $application) {
-                $employee = get_field('application_employee', $application->ID);
-                $date = get_the_date('y-m-d H:i', $application->ID);
-                $status = get_field('application_status', $application->ID);
-                $html .=
-                    '<tr>
+        $html = '<table>';
+        $html .= '<tr>
+                    <th>' . __('Name', AVM_TEXT_DOMAIN) . '</th>
+                    <th>' . __('Date', AVM_TEXT_DOMAIN) . '</th>
+                    <th>' . __('Status', AVM_TEXT_DOMAIN) . '</th>
+                    <th>' . __('Actions', AVM_TEXT_DOMAIN) . '</th>
+                  </tr>';
+        foreach ($args['args']['applications'] as $application) {
+            $employee = get_field('application_employee', $application->ID);
+            $date = get_the_date('y-m-d H:i', $application->ID);
+            $status = get_field('application_status', $application->ID);
+            $html .=
+                '<tr>
                         <td class="employee_name"><a href="' . get_edit_post_link($employee->ID) . '">' . $employee->post_title . '</a></td>
                         <td>' . $date . '</td>
                         <td>' . AdminUI::createTaxonomyPills([$status]) . '</td>
@@ -258,11 +274,8 @@ class Assignment extends PostType
                             <a href="' . get_delete_post_link($application->ID) . '" class="delete">' . __('Delete', AVM_TEXT_DOMAIN) . '</a>
                         </td>
                     </tr>';
-            }
-            $html .= '</table>';
-        } else {
-            $html = 'No applications found.';
         }
+        $html .= '</table>';
 
         echo $html;
     }
