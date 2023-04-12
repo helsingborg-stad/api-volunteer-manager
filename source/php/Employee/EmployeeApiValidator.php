@@ -10,6 +10,10 @@ use WP_REST_Response;
 
 class EmployeeApiValidator implements IEmployeeApiValidator
 {
+    /**
+     * @param $params
+     * @return bool|WP_Error
+     */
     public function validate_required_params($params)
     {
         foreach ($params as $key => $value) {
@@ -25,6 +29,10 @@ class EmployeeApiValidator implements IEmployeeApiValidator
         return true;
     }
 
+    /**
+     * @param string $national_identity_number
+     * @return bool|WP_Error
+     */
     public function is_national_identity_number_in_use(string $national_identity_number): bool
     {
         $employees = get_posts(array(
@@ -41,6 +49,10 @@ class EmployeeApiValidator implements IEmployeeApiValidator
         return !empty($employees);
     }
 
+    /**
+     * @param string $email
+     * @return bool|WP_Error
+     */
     public function is_email_in_use($email): bool
     {
         $employees = get_posts(array(
