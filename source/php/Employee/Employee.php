@@ -36,7 +36,9 @@ class Employee extends PostType
 
     public function setupCustomEndpoints()
     {
-        $apiPostSetup = new EmployeeApiManager();
+        $validator = new EmployeeApiValidator();
+        $apiPostSetup = new EmployeeApiManager($validator);
+
         $apiPostSetup->registerPostEndpoint();
     }
 

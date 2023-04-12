@@ -2,8 +2,11 @@
 
 namespace php\Employee;
 
-use PluginTestCase\PluginTestCase;
 use VolunteerManager\Employee\EmployeeApiManager;
+use VolunteerManager\Employee\EmployeeApiValidator;
+use PHPUnit\Framework\TestCase;
+
+use PluginTestCase\PluginTestCase;
 use WP_Error;
 use Brain\Monkey\Functions;
 
@@ -15,32 +18,15 @@ use Brain\Monkey\Functions;
  * @runTestsInSeparateProcesses
  * @preserveGlobalState disabled
  */
-class EmployeeApiManagerTest extends PluginTestCase
+class EmployeeApiValidatorTest extends PluginTestCase
 {
-    private $employeeApiManager;
+    private EmployeeApiValidator $employeeApiValidator;
 
     public function setUp(): void
     {
         parent::setUp();
 
-        $this->employeeApiManager = new class extends EmployeeApiManager {
-
-            // Make protected methods available for testing
-            public function validate_required_params_test($params)
-            {
-                return $this->validate_required_params($params);
-            }
-
-            public function is_email_in_use_test($email)
-            {
-                return $this->is_email_in_use($email);
-            }
-
-            public function is_national_identity_number_in_use_test($national_identity_number)
-            {
-                return $this->is_national_identity_number_in_use($national_identity_number);
-            }
-        };
+        $this->employeeApiValidator = new EmployeeApiValidator();
     }
 
     /**
@@ -48,7 +34,7 @@ class EmployeeApiManagerTest extends PluginTestCase
      */
     public function testValidRequiredParams($params)
     {
-        $result = $this->employeeApiManager->validate_required_params_test($params);
+        $result = $this->employeeApiValidator->validate_required_params($params);
 
         $this->assertTrue($result);
     }
@@ -66,7 +52,7 @@ class EmployeeApiManagerTest extends PluginTestCase
             ->once()
             ->andReturn($expectedErrorParam);
 
-        $result = $this->employeeApiManager->validate_required_params_test($params);
+        $result = $this->employeeApiValidator->validate_required_params($params);
 
         $this->assertInstanceOf(WP_Error::class, $result);
         $this->assertEquals($expectedErrorCode, $result->get_error_code());
@@ -112,7 +98,7 @@ class EmployeeApiManagerTest extends PluginTestCase
     {
         Functions\when('get_posts')->justReturn($expectedResult ? ['dummy_post'] : []);
 
-        $result = $this->employeeApiManager->is_email_in_use_test($email);
+        $result = $this->employeeApiValidator->is_email_in_use($email);
 
         $this->assertEquals($expectedResult, $result);
     }
@@ -138,7 +124,7 @@ class EmployeeApiManagerTest extends PluginTestCase
     {
         Functions\when('get_posts')->justReturn($expectedResult ? ['dummy_post'] : []);
 
-        $result = $this->employeeApiManager->is_national_identity_number_in_use_test($national_identity_number);
+        $result = $this->employeeApiValidator->is_national_identity_number_in_use($national_identity_number);
 
         $this->assertEquals($expectedResult, $result);
     }
@@ -156,4 +142,5 @@ class EmployeeApiManagerTest extends PluginTestCase
             ],
         ];
     }
+
 }

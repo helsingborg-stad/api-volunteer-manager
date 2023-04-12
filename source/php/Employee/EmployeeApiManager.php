@@ -10,6 +10,13 @@ use WP_REST_Response;
 
 class EmployeeApiManager
 {
+    private EmployeeApiValidator $validator;
+
+    public function __construct(IEmployeeApiValidator $validator)
+    {
+        $this->validator = $validator;
+    }
+
     public function registerPostEndpoint()
     {
         (new Api())->registerPostEndpoint(
@@ -43,14 +50,14 @@ class EmployeeApiManager
 
         // TODO: Handle all params
 
-        // Loop through the params and return WP_Error and status code 400, if any of them are empty
-        $validation_result = $this->validate_required_params($params);
+        // Loop through the params and return WP_Error and status code 400 if a param is empty
+        $validation_result = $this->validator->validate_required_params($params);
         if (is_wp_error($validation_result)) {
             return $validation_result;
         }
 
         // Check if the email address is already in use
-        $emailInUse = $this->is_email_in_use($params['email']);
+        $emailInUse = $this->validator->is_email_in_use($params['email']);
         if ($emailInUse) {
             return WPResponseFactory::wp_error_response(
                 'avm_employee_registration_error',
@@ -60,7 +67,7 @@ class EmployeeApiManager
         }
 
         // Check if the national identity number is already in use
-        $nationalIdentityNumberInUse = $this->is_national_identity_number_in_use($params['national_identity_number']);
+        $nationalIdentityNumberInUse = $this->validator->is_national_identity_number_in_use($params['national_identity_number']);
         if ($nationalIdentityNumberInUse) {
             return WPResponseFactory::wp_error_response(
                 'avm_employee_registration_error',
@@ -93,52 +100,5 @@ class EmployeeApiManager
             __('Employee created', AVM_TEXT_DOMAIN),
             $employeePostId
         );
-    }
-
-    protected function validate_required_params($params)
-    {
-        foreach ($params as $key => $value) {
-            if (empty($value)) {
-                return WPResponseFactory::wp_error_response(
-                    'avm_employee_registration_error',
-                    __('Missing required parameter', AVM_TEXT_DOMAIN),
-                    $key
-                );
-            }
-        }
-
-        return true;
-    }
-
-    protected function is_email_in_use($email): bool
-    {
-        $employees = get_posts(array(
-            'post_type' => 'employee',
-            'meta_query' => array(
-                array(
-                    'key' => 'email',
-                    'value' => $email,
-                    'compare' => '=',
-                )
-            )
-        ));
-
-        return !empty($employees);
-    }
-
-    protected function is_national_identity_number_in_use($national_identity_number): bool
-    {
-        $employees = get_posts(array(
-            'post_type' => 'employee',
-            'meta_query' => array(
-                array(
-                    'key' => 'national_identity_number',
-                    'value' => $national_identity_number,
-                    'compare' => '=',
-                )
-            )
-        ));
-
-        return !empty($employees);
     }
 }
