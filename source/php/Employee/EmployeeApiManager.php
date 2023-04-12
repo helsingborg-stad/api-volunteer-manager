@@ -10,7 +10,6 @@ use WP_REST_Response;
 
 class EmployeeApiManager
 {
-    // TODO: Set correct endpoint. This is just a placeholder.
     public function registerPostEndpoint()
     {
         (new Api())->registerPostEndpoint(
