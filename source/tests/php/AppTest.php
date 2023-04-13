@@ -1,4 +1,5 @@
 <?php
+
 namespace VolunteerManager;
 
 use VolunteerManager\App;
@@ -10,10 +11,12 @@ class AppTest extends \PluginTestCase\PluginTestCase
 {
     public function testAddHooks()
     {
-        new App();
-    
-        self::assertNotFalse(has_action('admin_enqueue_scripts', 'VolunteerManager\App->enqueueStyles()'));
-        self::assertNotFalse(has_action('admin_enqueue_scripts', 'VolunteerManager\App->enqueueScripts()'));
+        $app = new App();
+        self::assertNotFalse(has_action('admin_enqueue_scripts', [$app, 'enqueueStyles']));
+        self::assertNotFalse(has_action('admin_enqueue_scripts', [$app, 'enqueueScripts']));
+        self::assertNotFalse(has_action('plugins_loaded', [$app, 'init']));
+        self::assertNotFalse(has_action('after_setup_theme', [$app, 'themeSupport']));
+        self::assertNotFalse(has_filter('acf/fields/google_map/api', [$app, 'setGoogleApiKey']));
     }
 
     public function testEnqueueStyles()
