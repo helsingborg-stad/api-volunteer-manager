@@ -42,8 +42,8 @@ class PostType implements PostTypeInterface
     {
         $labels = array_merge(
             array(
-                'name' => ucfirst($this->namePlural),
-                'singular_name' => ucfirst($this->nameSingular),
+                'name' => __(ucfirst($this->namePlural), AVM_TEXT_DOMAIN),
+                'singular_name' => __(ucfirst($this->nameSingular), AVM_TEXT_DOMAIN),
                 'add_new' => sprintf(__('Add new %s', AVM_TEXT_DOMAIN), strtolower($this->nameSingular)),
                 'add_new_item' => sprintf(__('Add new %s', AVM_TEXT_DOMAIN), strtolower($this->nameSingular)),
                 'edit_item' => sprintf(__('Edit %s', AVM_TEXT_DOMAIN), strtolower($this->nameSingular)),
@@ -53,7 +53,7 @@ class PostType implements PostTypeInterface
                 'not_found' => sprintf(__('No %s found', AVM_TEXT_DOMAIN), strtolower($this->namePlural)),
                 'not_found_in_trash' => sprintf(__('No %s found in trash', AVM_TEXT_DOMAIN), strtolower($this->namePlural)),
                 'parent_item_colon' => sprintf(__('Parent %s:', AVM_TEXT_DOMAIN), strtolower($this->nameSingular)),
-                'menu_name' => ucfirst($this->namePlural),
+                'menu_name' => __(ucfirst($this->namePlural), AVM_TEXT_DOMAIN)
             ),
             $this->labels
         );
