@@ -8,7 +8,7 @@
             "name": "employer_name",
             "aria-label": "",
             "type": "text",
-            "instructions": "Name of the company\/organisation.",
+            "instructions": "Company\/organisation.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {

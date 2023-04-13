@@ -11,7 +11,7 @@
             'name' => 'employer_name',
             'aria-label' => '',
             'type' => 'text',
-            'instructions' => __('Name of the company/organisation.', 'api-volunteer-manager'),
+            'instructions' => __('Company/organisation.', 'api-volunteer-manager'),
             'required' => 0,
             'conditional_logic' => 0,
             'wrapper' => array(
