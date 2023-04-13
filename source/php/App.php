@@ -32,13 +32,13 @@ class App
         $admin->addHooks();
 
         //Post types
-        $assignment = new Assignment(...AssignmentConfiguration::getPostTypeArgs());
+        $assignment = new Assignment(...array_values(AssignmentConfiguration::getPostTypeArgs()));
         $assignment->addHooks();
 
-        $employee = new Employee(...EmployeeConfiguration::getPostTypeArgs());
+        $employee = new Employee(...array_values(EmployeeConfiguration::getPostTypeArgs()));
         $employee->addHooks();
 
-        $application = new Application(...ApplicationConfiguration::getPostTypeArgs());
+        $application = new Application(...array_values(ApplicationConfiguration::getPostTypeArgs()));
         $application->addHooks();
     }
 
