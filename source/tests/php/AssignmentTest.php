@@ -127,4 +127,82 @@ class AssignmentTest extends PluginTestCase
             ]
         ];
     }
+
+    public function testRegisterApplicationsMetaBox()
+    {
+        Functions\expect('add_meta_box')->once()
+            ->with(
+                'assignment_employees',
+                'Employees',
+                array($this->assignment, 'renderEmployeesList'),
+                array('assignment'),
+                'normal',
+                'low',
+                array(
+                    'applications' => [],
+                )
+            );
+        Functions\when('get_posts')->justReturn([]);
+        $this->assignment->registerApplicationsMetaBox('', $this->post);
+    }
+
+    /**
+     * @throws \Brain\Monkey\Expectation\Exception\ExpectationArgsRequired
+     */
+    public function testGetApplications()
+    {
+        Functions\expect('get_posts')->once()
+            ->with(
+                [
+                    'post_type' => 'application',
+                    'orderby' => 'post_date',
+                    'order' => 'ASC',
+                    'posts_per_page' => -1,
+                    'suppress_filters' => true,
+                    'meta_query' => [
+                        [
+                            'key' => 'application_assignment',
+                            'value' => $this->post->ID,
+                            'compare' => '='
+                        ]
+                    ]
+                ])->andReturn([]);
+        $this->assignment->getApplications($this->post);
+    }
+
+    public function testRenderEmployeesListWithEmptyArgs()
+    {
+        $post = new \stdClass();
+        $args = array('args' => array('applications' => array()));
+        Functions\Expect('get_field')->never();
+        Functions\Expect('get_the_date')->never();
+
+        ob_start();
+        $this->assignment->renderEmployeesList($post, $args);
+        $output = ob_get_clean();
+
+        $this->assertStringContainsString('No employees found.', $output);
+    }
+
+    public function testRenderEmployeesListWithArgs()
+    {
+        $applications = [(object)['ID' => 1]];
+        $args = array('args' => array('applications' => $applications));
+        $employee = (object)['ID' => 99, 'post_title' => 'Foo Bar'];
+        $status = (object)['term_id' => 10, 'taxonomy' => 'tax', 'slug' => 'tax', 'name' => 'Tax'];
+
+        Functions\Expect('get_field')->times(4)->andReturn($employee, $status, '#ddd', '#fff');
+        Functions\Expect('get_the_date')->times(1)->andReturn('2000-01-01');
+        Functions\Expect('get_edit_post_link')->times(2)->andReturn('https://url.com/1/edit.php', 'https://url.com/2/edit.php');
+        Functions\Expect('get_delete_post_link')->once()->andReturn('https://url.com/1/delete.php');
+
+        ob_start();
+        $this->assignment->renderEmployeesList($this->post, $args);
+        $output = ob_get_clean();
+        $output = str_replace("\n", "", $output);
+        $output = preg_replace('/\s*(<[^>]*>)\s*/', '$1', $output);
+
+        $expected = '<table><tr><th>Name</th><th>Date</th><th>Status</th><th>Actions</th></tr><tr><td class="employee_name"><a href="https://url.com/1/edit.php">Foo Bar</a></td><td>2000-01-01</td><td><span style="background: #ddd; color: #fff;" class="term-pill term-pill-tax">Tax</span></td><td class="actions"><a href="https://url.com/2/edit.php">Edit</a><a href="https://url.com/1/delete.php" class="delete">Delete</a></td></tr></table>';
+        $this->assertEquals($expected, $output);
+    }
 }
