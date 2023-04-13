@@ -30,6 +30,7 @@ class ApplicationTest extends PluginTestCase
         $this->application->addHooks();
         self::assertNotFalse(has_action('init', [$this->application, 'initTaxonomiesAndTerms']));
         self::assertNotFalse(has_action('init', [$this->application, 'addStatusTableColumn']));
+        self::assertNotFalse(has_action('acf/save_post', [$this->application, 'setApplicationPostTitle']));
     }
 
     public function testInsertStatusTerms()
