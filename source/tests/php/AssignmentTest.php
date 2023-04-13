@@ -202,7 +202,7 @@ class AssignmentTest extends PluginTestCase
         $output = str_replace("\n", "", $output);
         $output = preg_replace('/\s*(<[^>]*>)\s*/', '$1', $output);
 
-        $expected = '<table><tr><th>Name</th><th>Date</th><th>Status</th><th>Actions</th></tr><tr><td class="employee_name"><a href="https://url.com/1/edit.php">Foo Bar</a></td><td>2000-01-01</td><td><span style="background: #ddd; color: #fff;" class="term-pill term-pill-tax">Tax</span></td><td class="actions"><a href="https://url.com/2/edit.php">Edit</a><a href="https://url.com/1/delete.php" class="delete">Delete</a></td></tr></table>';
+        $expected = '<table><tr><th>Name</th><th>Date</th><th>Status</th><th></th></tr><tr><td class="employee_name"><a href="https://url.com/1/edit.php">Foo Bar</a></td><td>2000-01-01</td><td><span style="background: #ddd; color: #fff;" class="term-pill term-pill-tax">Tax</span></td><td class="actions"><a href="https://url.com/2/edit.php">Edit</a><a href="https://url.com/1/delete.php" class="delete">Delete</a></td></tr></table>';
         $this->assertEquals($expected, $output);
     }
 }

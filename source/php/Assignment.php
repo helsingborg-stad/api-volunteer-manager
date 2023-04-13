@@ -258,7 +258,7 @@ class Assignment extends PostType
                     <th>' . __('Name', AVM_TEXT_DOMAIN) . '</th>
                     <th>' . __('Date', AVM_TEXT_DOMAIN) . '</th>
                     <th>' . __('Status', AVM_TEXT_DOMAIN) . '</th>
-                    <th>' . __('Actions', AVM_TEXT_DOMAIN) . '</th>
+                    <th></th>
                   </tr>';
         foreach ($args['args']['applications'] as $application) {
             $employee = get_field('application_employee', $application->ID);
