@@ -6,6 +6,26 @@
     'title' => __('Signup', 'api-volunteer-manager'),
     'fields' => array(
         0 => array(
+            'key' => 'field_639af11ba5ae7',
+            'label' => __('Internal assignment', 'api-volunteer-manager'),
+            'name' => 'internal_assignment',
+            'aria-label' => '',
+            'type' => 'true_false',
+            'instructions' => __('Toggle to indicate whether the assignment is managed internally by the city or externally by a third party.', 'api-volunteer-manager'),
+            'required' => 0,
+            'conditional_logic' => 0,
+            'wrapper' => array(
+                'width' => '',
+                'class' => '',
+                'id' => '',
+            ),
+            'message' => '',
+            'default_value' => 1,
+            'ui_on_text' => __('Internal', 'api-volunteer-manager'),
+            'ui_off_text' => __('External', 'api-volunteer-manager'),
+            'ui' => 1,
+        ),
+        1 => array(
             'key' => 'field_639b06c1a6e7a',
             'label' => __('Signup methods', 'api-volunteer-manager'),
             'name' => 'signup_methods',
@@ -13,7 +33,15 @@
             'type' => 'checkbox',
             'instructions' => '',
             'required' => 1,
-            'conditional_logic' => 0,
+            'conditional_logic' => array(
+                0 => array(
+                    0 => array(
+                        'field' => 'field_639af11ba5ae7',
+                        'operator' => '!=',
+                        'value' => '1',
+                    ),
+                ),
+            ),
             'wrapper' => array(
                 'width' => '',
                 'class' => '',
@@ -32,7 +60,7 @@
             'toggle' => 1,
             'save_custom' => 0,
         ),
-        1 => array(
+        2 => array(
             'key' => 'field_639b0713a6e7b',
             'label' => __('Email', 'api-volunteer-manager'),
             'name' => 'signup_email',
@@ -59,7 +87,7 @@
             'prepend' => '',
             'append' => '',
         ),
-        2 => array(
+        3 => array(
             'key' => 'field_639b0727a6e7c',
             'label' => __('Phone', 'api-volunteer-manager'),
             'name' => 'signup_phone',
@@ -87,7 +115,7 @@
             'prepend' => '',
             'append' => '',
         ),
-        3 => array(
+        4 => array(
             'key' => 'field_639b072ea6e7d',
             'label' => __('Link', 'api-volunteer-manager'),
             'name' => 'signup_link',
@@ -134,5 +162,10 @@
     'active' => true,
     'description' => '',
     'show_in_rest' => 1,
+    'acfe_display_title' => '',
+    'acfe_autosync' => '',
+    'acfe_form' => 0,
+    'acfe_meta' => '',
+    'acfe_note' => '',
 ));
 }

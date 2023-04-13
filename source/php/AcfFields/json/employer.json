@@ -3,42 +3,14 @@
     "title": "Employer",
     "fields": [
         {
-            "key": "field_639af11ba5ae7",
-            "label": "Employer",
-            "name": "external_employer",
-            "aria-label": "",
-            "type": "true_false",
-            "instructions": "Enable if the employer is external ie. not arranged by the city.",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "message": "If the employer is external.",
-            "default_value": 1,
-            "ui_on_text": "External",
-            "ui_off_text": "Internal",
-            "ui": 1
-        },
-        {
             "key": "field_63dce23b8f9ce",
             "label": "Name",
             "name": "employer_name",
             "aria-label": "",
             "type": "text",
             "instructions": "Name of the company\/organisation.",
-            "required": 1,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_639af11ba5ae7",
-                        "operator": "==",
-                        "value": "1"
-                    }
-                ]
-            ],
+            "required": 0,
+            "conditional_logic": 0,
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -58,20 +30,13 @@
             "type": "repeater",
             "instructions": "",
             "required": 0,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_639af11ba5ae7",
-                        "operator": "==",
-                        "value": "1"
-                    }
-                ]
-            ],
+            "conditional_logic": 0,
             "wrapper": {
                 "width": "",
                 "class": "",
                 "id": ""
             },
+            "acfe_repeater_stylised_button": 0,
             "layout": "table",
             "pagination": 0,
             "min": 0,
@@ -144,8 +109,7 @@
                     "append": "",
                     "parent_repeater": "field_639af218edf0b"
                 }
-            ],
-            "acfe_repeater_stylised_button": 0
+            ]
         },
         {
             "key": "field_639af303f57b8",
@@ -155,15 +119,7 @@
             "type": "url",
             "instructions": "",
             "required": 0,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_639af11ba5ae7",
-                        "operator": "==",
-                        "value": "1"
-                    }
-                ]
-            ],
+            "conditional_logic": 0,
             "wrapper": {
                 "width": "",
                 "class": "",
