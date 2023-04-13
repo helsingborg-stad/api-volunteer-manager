@@ -17,6 +17,7 @@ class Application extends PostType
 
         add_action('init', [$this, 'initTaxonomiesAndTerms']);
         add_action('init', [$this, 'addStatusTableColumn']);
+        add_action('acf/save_post', array($this, 'setApplicationPostTitle'));
     }
 
     public function initTaxonomiesAndTerms(): void
@@ -75,5 +76,26 @@ class Application extends PostType
                 );
             }
         );
+    }
+
+    /**
+     * Sets post title
+     * @param $postId
+     * @return void
+     */
+    public function setApplicationPostTitle($postId)
+    {
+        if (get_post_type($postId) !== 'application') {
+            return;
+        }
+
+        $employee = get_field('application_employee', $postId);
+        $assignment = get_field('application_assignment', $postId);
+
+        $postData = array(
+            'ID' => $postId,
+            'post_title' => trim("{$employee->post_title} - {$assignment->post_title}"),
+        );
+        wp_update_post($postData);
     }
 }
