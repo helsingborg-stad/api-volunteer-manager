@@ -15,7 +15,8 @@ class App
         add_action('admin_enqueue_scripts', array($this, 'enqueueStyles'));
         add_action('admin_enqueue_scripts', array($this, 'enqueueScripts'));
         add_action('plugins_loaded', array($this, 'init'));
-
+        add_action('after_setup_theme', array($this, 'themeSupport'));
+        
         add_filter('acf/fields/google_map/api', array($this, 'setGoogleApiKey'));
     }
 
@@ -81,5 +82,13 @@ class App
     {
         $api['key'] = defined('GOOGLE_API_KEY') ? GOOGLE_API_KEY : '';
         return $api;
+    }
+
+    /**
+     * Add theme support
+     */
+    public function themeSupport()
+    {
+        add_theme_support('post-thumbnails');
     }
 }
