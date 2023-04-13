@@ -21,38 +21,38 @@
   box-shadow: inset 0 2px 0 #ac2925;
 }
 
-#assignment_employees .inside {
+#applications_meta_box .inside {
   margin: 0;
   padding: 0;
 }
-#assignment_employees table {
+#applications_meta_box table {
   width: 100%;
   border-collapse: collapse;
 }
-#assignment_employees th, #assignment_employees td {
+#applications_meta_box th, #applications_meta_box td {
   text-align: left;
   padding: 10px;
 }
-#assignment_employees .employee_name a {
+#applications_meta_box .title a {
   text-decoration: none;
 }
-#assignment_employees th {
+#applications_meta_box th {
   background-color: #f2f2f2;
 }
-#assignment_employees tr:nth-child(odd) {
+#applications_meta_box tr:nth-child(odd) {
   background-color: #f2f2f2;
 }
-#assignment_employees tr:hover {
+#applications_meta_box tr:hover {
   background-color: #ddd;
 }
-#assignment_employees .actions {
+#applications_meta_box .actions {
   display: flex;
   justify-content: space-evenly;
 }
-#assignment_employees .delete {
+#applications_meta_box .delete {
   color: #b32d2e;
 }
-#assignment_employees .empty_result {
+#applications_meta_box .empty_result {
   padding: 8px;
 }
 
@@ -61,4 +61,4 @@
   border-radius: 3px;
 }
 
-/*# sourceMappingURL=api-volunteer-manager.f453728775ed56c9172e.css.map*/
+/*# sourceMappingURL=api-volunteer-manager.57610640fe42cf547b54.css.map*/
