@@ -148,6 +148,7 @@
                     'parent_repeater' => 'field_639af218edf0b',
                 ),
             ),
+            'acfe_repeater_stylised_button' => 0,
         ),
         3 => array(
             'key' => 'field_639af303f57b8',
@@ -189,22 +190,14 @@
     'style' => 'default',
     'label_placement' => 'left',
     'instruction_placement' => 'label',
-    'hide_on_screen' => array(
-        0 => 'excerpt',
-        1 => 'discussion',
-        2 => 'comments',
-        3 => 'revisions',
-        4 => 'slug',
-        5 => 'author',
-        6 => 'format',
-        7 => 'page_attributes',
-        8 => 'featured_image',
-        9 => 'categories',
-        10 => 'tags',
-        11 => 'send-trackbacks',
-    ),
+    'hide_on_screen' => '',
     'active' => true,
     'description' => 'Metadata',
     'show_in_rest' => 1,
+    'acfe_display_title' => '',
+    'acfe_autosync' => '',
+    'acfe_form' => 0,
+    'acfe_meta' => '',
+    'acfe_note' => '',
 ));
 }

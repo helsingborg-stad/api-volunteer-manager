@@ -21,8 +21,10 @@ class AssignmentConfiguration
                 'has_archive' => true,
                 'hierarchical' => false,
                 'exclude_from_search' => true,
-                'supports' => array('title', 'revisions'),
-                'show_in_rest' => true
+                'supports' => array('title', 'revisions', 'thumbnail'),
+                'show_in_rest' => true,
+                'capability_type' => 'post',
+                'map_meta_cap' => true
             ]
         ];
     }
