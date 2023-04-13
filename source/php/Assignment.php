@@ -2,6 +2,7 @@
 
 namespace VolunteerManager;
 
+use VolunteerManager\Components\ApplicationMetaBox\AssignmentApplicationMetaBox;
 use VolunteerManager\Components\EditPostStatusButtons\EditPostStatusButtonFactory as EditPostStatusButtonFactory;
 use VolunteerManager\Entity\Filter as Filter;
 use VolunteerManager\Entity\PostType;
@@ -198,86 +199,20 @@ class Assignment extends PostType
     }
 
     /**
-     * Register employees meta box
+     * Register applications meta box
      * @return void
      */
     public function registerApplicationsMetaBox($postType, $post)
     {
-        add_meta_box(
-            'assignment_employees',
-            __('Employees', AVM_TEXT_DOMAIN),
-            array($this, 'renderEmployeesList'),
-            array('assignment'),
-            'normal',
-            'low',
-            ['applications' => $this->getApplications($post)]
-        );
-    }
-
-    /**
-     * Retrieves list of assignments applications
-     * @param object $post
-     * @param array  $args
-     * @return array
-     */
-    public function getApplications(object $post, array $args = []): array
-    {
-        return get_posts(
-            array_merge([
-                'post_type' => 'application',
-                'orderby' => 'post_date',
-                'order' => 'ASC',
-                'posts_per_page' => -1,
-                'suppress_filters' => true,
-                'meta_query' => [
-                    [
-                        'key' => 'application_assignment',
-                        'value' => $post->ID,
-                        'compare' => '='
-                    ]
-                ],
-            ], $args)
-        );
-    }
-
-    /**
-     * Renders a list of employees assigned to a particular post.
-     * @param object $post
-     * @param array  $args
-     * @return void
-     */
-    public function renderEmployeesList(object $post, array $args): void
-    {
-        if (empty($args['args']['applications'])) {
-            echo '<div class="empty_result">' . __('No employees found.', AVM_TEXT_DOMAIN) . '</div>';
+        if ($postType !== 'assignment') {
             return;
         }
-
-        $html = '<table>';
-        $html .= '<tr>
-                    <th>' . __('Name', AVM_TEXT_DOMAIN) . '</th>
-                    <th>' . __('Date', AVM_TEXT_DOMAIN) . '</th>
-                    <th>' . __('Status', AVM_TEXT_DOMAIN) . '</th>
-                    <th></th>
-                  </tr>';
-        foreach ($args['args']['applications'] as $application) {
-            $employee = get_field('application_employee', $application->ID);
-            $date = get_the_date('y-m-d H:i', $application->ID);
-            $status = get_field('application_status', $application->ID);
-            $html .=
-                '<tr>
-                        <td class="employee_name"><a href="' . get_edit_post_link($employee->ID) . '">' . $employee->post_title . '</a></td>
-                        <td>' . $date . '</td>
-                        <td>' . AdminUI::createTaxonomyPills([$status]) . '</td>
-                        <td class="actions">
-                            <a href="' . get_edit_post_link($application->ID) . '">' . __('Edit', AVM_TEXT_DOMAIN) . '</a>
-                            <a href="' . get_delete_post_link($application->ID) . '" class="delete">' . __('Delete', AVM_TEXT_DOMAIN) . '</a>
-                        </td>
-                    </tr>';
-        }
-        $html .= '</table>';
-
-        echo $html;
+        $applicationMetaBox = new AssignmentApplicationMetaBox(
+            $post,
+            __('Employees', AVM_TEXT_DOMAIN),
+            'application_assignment'
+        );
+        $applicationMetaBox->register();
     }
 
     public function insertAssignmentStatusTerms()
