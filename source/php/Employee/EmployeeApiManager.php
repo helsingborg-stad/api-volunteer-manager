@@ -56,9 +56,9 @@ class EmployeeApiManager
             return $validation_result;
         }
 
-        // Check if the email address is already in use
-        $emailInUse = $this->validator->is_email_in_use($params['email']);
-        if ($emailInUse) {
+        // Check if the email address is unique
+        $isEmailUnique = $this->validator->is_email_unique($params['email']);
+        if (!$isEmailUnique) {
             return WPResponseFactory::wp_error_response(
                 'avm_employee_registration_error',
                 __('Email address already in use', AVM_TEXT_DOMAIN),
@@ -66,9 +66,9 @@ class EmployeeApiManager
             );
         }
 
-        // Check if the national identity number is already in use
-        $nationalIdentityNumberInUse = $this->validator->is_national_identity_number_in_use($params['national_identity_number']);
-        if ($nationalIdentityNumberInUse) {
+        // Check if the national identity number is unique
+        $isNationalIdentityNumberUnique = $this->validator->is_national_identity_unique($params['national_identity_number']);
+        if (!$isNationalIdentityNumberUnique) {
             return WPResponseFactory::wp_error_response(
                 'avm_employee_registration_error',
                 __('National identity number already in use', AVM_TEXT_DOMAIN),

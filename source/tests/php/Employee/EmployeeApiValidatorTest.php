@@ -98,7 +98,7 @@ class EmployeeApiValidatorTest extends PluginTestCase
     {
         Functions\when('get_posts')->justReturn($expectedResult ? ['dummy_post'] : []);
 
-        $result = $this->employeeApiValidator->is_email_in_use($email);
+        $result = $this->employeeApiValidator->is_email_unique($email);
 
         $this->assertEquals($expectedResult, $result);
     }
@@ -124,7 +124,7 @@ class EmployeeApiValidatorTest extends PluginTestCase
     {
         Functions\when('get_posts')->justReturn($expectedResult ? ['dummy_post'] : []);
 
-        $result = $this->employeeApiValidator->is_national_identity_number_in_use($national_identity_number);
+        $result = $this->employeeApiValidator->is_national_identity_unique($national_identity_number);
 
         $this->assertEquals($expectedResult, $result);
     }
