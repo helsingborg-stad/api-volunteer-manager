@@ -4,7 +4,7 @@ namespace VolunteerManager\Components\ApplicationMetaBox;
 
 abstract class ApplicationMetaBox implements ApplicationMetaBoxInterface
 {
-    private \WP_Post $post;
+    private object $post;
     private string $metaKey;
     private string $title;
 
@@ -24,24 +24,26 @@ abstract class ApplicationMetaBox implements ApplicationMetaBoxInterface
         add_meta_box(
             'applications_meta_box',
             $this->title,
-            [$this, 'render'],
+            function ($post, $args) {
+                $this->render($args['args']['applications']);
+            },
             [$this->post->post_type],
             'normal',
             'low',
-            ['applications' => $this->getApplications($this->post->ID)]
+            ['applications' => $this->getApplications()]
         );
     }
 
     /**
      * Retrieves list of applications
-     * @param $postId
      * @return array
      */
-    public function getApplications($postId): array
+    public function getApplications(): array
     {
         return get_posts(
             [
                 'post_type' => 'application',
+                'post_status' => 'any',
                 'orderby' => 'post_date',
                 'order' => 'ASC',
                 'posts_per_page' => -1,
@@ -49,7 +51,7 @@ abstract class ApplicationMetaBox implements ApplicationMetaBoxInterface
                 'meta_query' => [
                     [
                         'key' => $this->metaKey,
-                        'value' => $postId,
+                        'value' => $this->post->ID,
                         'compare' => '='
                     ]
                 ],
@@ -59,13 +61,12 @@ abstract class ApplicationMetaBox implements ApplicationMetaBoxInterface
 
     /**
      * Renders a list of applications assigned to a particular post.
-     * @param object $post
-     * @param array  $args
+     * @param array $posts
      * @return void
      */
-    public function render(object $post, array $args): void
+    public function render(array $posts): void
     {
-        if (empty($args['args']['applications'])) {
+        if (empty($posts)) {
             echo '<div class="empty_result">' . __('No applications found.', AVM_TEXT_DOMAIN) . '</div>';
             return;
         }
@@ -77,8 +78,8 @@ abstract class ApplicationMetaBox implements ApplicationMetaBoxInterface
                     <th>' . __('Status', AVM_TEXT_DOMAIN) . '</th>
                     <th></th>
                   </tr>';
-        foreach ($args['args']['applications'] as $application) {
-            $html .= $this->getApplicationRow($application);
+        foreach ($posts as $post) {
+            $html .= $this->getApplicationRow($post);
         }
         $html .= '</table>';
 
@@ -86,8 +87,8 @@ abstract class ApplicationMetaBox implements ApplicationMetaBoxInterface
     }
 
     /**
-     * Renders an individual application row
-     * @param \WP_Post $application
+     * Returns an individual application row
+     * @param object $post
      */
-    abstract protected function getApplicationRow(\WP_Post $application): string;
+    abstract protected function getApplicationRow(object $post): string;
 }
