@@ -6,7 +6,7 @@ interface ApplicationMetaBoxInterface
 {
     public function register(): void;
 
-    public function getApplications($postId): array;
+    public function getApplications(): array;
 
-    public function render(object $post, array $args): void;
+    public function render(array $posts): void;
 }
