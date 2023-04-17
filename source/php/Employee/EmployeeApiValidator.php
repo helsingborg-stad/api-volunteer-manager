@@ -68,9 +68,6 @@ class EmployeeApiValidator implements IEmployeeApiValidator
             )
         ));
 
-        error_log('is_email_unique: ' . $email . ' ' . empty($employees));
-        error_log(print_r($employees, true));
-
         return empty($employees);
     }
 }
