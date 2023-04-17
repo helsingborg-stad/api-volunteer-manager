@@ -35,7 +35,7 @@ class NotificationsConfig
                 'operator' => 'NOT_EQUAL'
             ]
         ],
-        "Message to volunteer when a new application is created" => [
+        "Message to the volunteer when a new volunteer is created" => [
             'key' => 'external_volunteer_new',
             'taxonomy' => 'employee-registration-status',
             'oldValue' => '',
@@ -50,7 +50,7 @@ class NotificationsConfig
                 'operator' => 'NOT_EQUAL'
             ]
         ],
-        "Message to admin when a new application is created" => [
+        "Message to admin when a new volunteer is created" => [
             'key' => 'admin_external_volunteer_new',
             'taxonomy' => 'employee-registration-status',
             'oldValue' => '',
