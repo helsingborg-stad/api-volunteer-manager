@@ -2,7 +2,10 @@
 
 namespace VolunteerManager;
 
+use VolunteerManager\API\WPResponseFactory;
+use VolunteerManager\Employee\IEmployeeApiValidator;
 use \VolunteerManager\Helper\Url as Url;
+use WP_Error;
 
 class Api
 {
@@ -253,19 +256,34 @@ class Api
      *
      */
     public function registerPostEndpoint(
-        string   $endpoint,
-        callable $callback,
-        string   $namespace = 'wp/v2'
+        string                $endpoint,
+        callable              $callback,
+        IEmployeeApiValidator $validator,
+        string                $namespace = 'wp/v2'
     ): void
     {
         register_rest_route($namespace, $endpoint, array(
             'methods' => 'POST',
             'callback' => $callback,
             'permission_callback' => function () {
-                // TODO: Return false if user is not allowed to edit posts.
                 // return current_user_can('edit_posts');
+
                 return true;
-            }
+            },
+            'args' => array(
+                'email' => array(
+                    'validate_callback' => function ($param) use ($validator) {
+                        return $validator->is_email_unique($param);
+                    },
+                    'required' => true,
+                ),
+                'national_identity_number' => array(
+                    'validate_callback' => function ($param) use ($validator) {
+                        return $validator->is_national_identity_unique($param);
+                    },
+                    'required' => true,
+                ),
+            )
         ));
     }
 }

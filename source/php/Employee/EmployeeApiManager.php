@@ -21,7 +21,8 @@ class EmployeeApiManager
     {
         (new Api())->registerPostEndpoint(
             'employee',
-            array($this, 'registerEmployee')
+            array($this, 'registerEmployee'),
+            $this->validator
         );
     }
 
@@ -55,27 +56,7 @@ class EmployeeApiManager
         if (is_wp_error($validation_result)) {
             return $validation_result;
         }
-
-        // Check if the email address is unique
-        $isEmailUnique = $this->validator->is_email_unique($params['email']);
-        if (!$isEmailUnique) {
-            return WPResponseFactory::wp_error_response(
-                'avm_employee_registration_error',
-                __('Email address already in use', AVM_TEXT_DOMAIN),
-                'email'
-            );
-        }
-
-        // Check if the national identity number is unique
-        $isNationalIdentityNumberUnique = $this->validator->is_national_identity_unique($params['national_identity_number']);
-        if (!$isNationalIdentityNumberUnique) {
-            return WPResponseFactory::wp_error_response(
-                'avm_employee_registration_error',
-                __('National identity number already in use', AVM_TEXT_DOMAIN),
-                'national_identity_number'
-            );
-        }
-
+        
         // Create the employee post
         $employeePostId = wp_insert_post(
             array(
