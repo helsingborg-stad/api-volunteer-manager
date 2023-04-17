@@ -76,12 +76,14 @@ class Taxonomy implements ITerm
         $terms = $this->validateTerms($terms);
 
         foreach ($terms as $term) {
-            if (term_exists($term['slug'], $this->slug)) {
+            $term_slug = $term['slug'] ?? '';
+
+            if (isset($term_slug) && term_exists($term_slug, $this->slug)) {
                 continue;
             }
 
             $default_args = [
-                'slug' => $term['slug'] ?? '',
+                'slug' => $term_slug,
                 'description' => $term['description'] ?? '',
             ];
 
