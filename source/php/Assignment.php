@@ -2,6 +2,7 @@
 
 namespace VolunteerManager;
 
+use VolunteerManager\Components\ApplicationMetaBox\AssignmentApplicationMetaBox;
 use VolunteerManager\Components\EditPostStatusButtons\EditPostStatusButtonFactory as EditPostStatusButtonFactory;
 use VolunteerManager\Entity\Filter as Filter;
 use VolunteerManager\Entity\PostType;
@@ -19,6 +20,7 @@ class Assignment extends PostType
         parent::addHooks();
         add_action('admin_post_update_post_status', array($this, 'updatePostStatus'));
         add_action('add_meta_boxes', array($this, 'registerSubmitterMetaBox'), 10, 2);
+        add_action('add_meta_boxes', array($this, 'registerApplicationsMetaBox'), 10, 2);
         add_action('init', array($this, 'registerStatusTaxonomy'));
         add_action('init', array($this, 'insertAssignmentStatusTerms'));
         add_action('init', array($this, 'addPostTypeTableColumn'));
@@ -194,6 +196,23 @@ class Assignment extends PostType
         $content .= $args['args']['submittedByEmail'] ? sprintf('<p><strong>%1$s:</strong> <a href="mailto:%2$s">%2$s</a></p>', __('Email', AVM_TEXT_DOMAIN), $args['args']['submittedByEmail']) : '';
         $content .= $args['args']['submittedByPhone'] ? sprintf('<p><strong>%s:</strong> %s</p>', __('Phone', AVM_TEXT_DOMAIN), $args['args']['submittedByPhone']) : '';
         echo $content;
+    }
+
+    /**
+     * Register applications meta box
+     * @return void
+     */
+    public function registerApplicationsMetaBox($postType, $post)
+    {
+        if ($postType !== 'assignment') {
+            return;
+        }
+        $applicationMetaBox = new AssignmentApplicationMetaBox(
+            $post,
+            __('Employees', AVM_TEXT_DOMAIN),
+            'application_assignment'
+        );
+        $applicationMetaBox->register();
     }
 
     public function insertAssignmentStatusTerms()

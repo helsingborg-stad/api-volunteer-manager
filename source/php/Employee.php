@@ -2,6 +2,7 @@
 
 namespace VolunteerManager;
 
+use VolunteerManager\Components\ApplicationMetaBox\EmployeeApplicationMetaBox;
 use VolunteerManager\Entity\PostType;
 use \VolunteerManager\Entity\Taxonomy as Taxonomy;
 use VolunteerManager\Helper\Admin\UI as AdminUI;
@@ -16,6 +17,7 @@ class Employee extends PostType
         add_action('init', array($this, 'initTaxonomiesAndTerms'));
         add_action('init', array($this, 'addPostTypeTableColumn'));
         add_action('acf/save_post', array($this, 'setPostTitle'));
+        add_action('add_meta_boxes', array($this, 'registerApplicationsMetaBox'), 10, 2);
 
         add_filter('avm_external_volunteer_new_notification', array($this, 'populateNotificationReceiverWithSubmitter'), 10, 2);
         add_filter('avm_admin_external_volunteer_new_notification', array($this, 'populateNotificationReceiverWithAdmin'), 10, 2);
@@ -145,5 +147,22 @@ class Employee extends PostType
     {
         $field['default_value'] = date('Y-m-d');
         return $field;
+    }
+
+    /**
+     * Register applications meta box
+     * @return void
+     */
+    public function registerApplicationsMetaBox($postType, $post)
+    {
+        if ($postType !== 'employee') {
+            return;
+        }
+        $applicationMetaBox = new EmployeeApplicationMetaBox(
+            $post,
+            __('Assignments', AVM_TEXT_DOMAIN),
+            'application_employee'
+        );
+        $applicationMetaBox->register();
     }
 }

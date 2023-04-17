@@ -51,9 +51,10 @@ class UI
      */
     public static function taxonomyColor($termId, $taxonomySlug): string
     {
-        return Field::get(
+        return get_field(
             'taxonomy_color',
-            $taxonomySlug . '_' . $termId
+            $taxonomySlug . '_' . $termId,
+            true
         ) ?? '#eee';
     }
 

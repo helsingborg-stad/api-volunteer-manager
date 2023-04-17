@@ -1,0 +1,64 @@
+/*!**********************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[0].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[0].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[0].use[3]!./node_modules/import-glob-loader/index.js!./source/sass/api-volunteer-manager.scss ***!
+  \**********************************************************************************************************************************************************************************************************************************************************************************************************/
+.button-primary__red.button-primary {
+  color: #fff;
+  background-color: #d63638;
+  border-color: #d63638;
+  text-shadow: 0 -1px 1px #ac2925, 1px 0 1px #ac2925, 0 1px 1px #ac2925, -1px 0 1px #ac2925;
+  box-shadow: 0 1px 0 #ac2925;
+}
+
+.button-primary__red.button-primary:hover,
+.button-primary__red.button-primary:focus,
+.button-primary__red.button-primary:active {
+  color: #fff;
+  background-color: #bd2f31;
+  border-color: #ac2925;
+}
+
+.button-primary__red.button-primary:active {
+  box-shadow: inset 0 2px 0 #ac2925;
+}
+
+#applications_meta_box .inside {
+  margin: 0;
+  padding: 0;
+}
+#applications_meta_box table {
+  width: 100%;
+  border-collapse: collapse;
+}
+#applications_meta_box th, #applications_meta_box td {
+  text-align: left;
+  padding: 10px;
+}
+#applications_meta_box .title a {
+  text-decoration: none;
+}
+#applications_meta_box th {
+  background-color: #f2f2f2;
+}
+#applications_meta_box tr:nth-child(odd) {
+  background-color: #f2f2f2;
+}
+#applications_meta_box tr:hover {
+  background-color: #ddd;
+}
+#applications_meta_box .actions {
+  display: flex;
+  justify-content: space-evenly;
+}
+#applications_meta_box .delete {
+  color: #b32d2e;
+}
+#applications_meta_box .empty_result {
+  padding: 8px;
+}
+
+.term-pill {
+  padding: 3px 7px;
+  border-radius: 3px;
+}
+
+/*# sourceMappingURL=api-volunteer-manager.57610640fe42cf547b54.css.map*/
