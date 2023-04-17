@@ -59,10 +59,7 @@ class Api
     {
         //Actions
         add_action('template_redirect', array($this, 'redirectToApi'));
-
-        //Change REST prefix
-        add_filter('rest_url_prefix', array($this, 'apiBasePrefix'), 5000, 1);
-
+        
         //Filter data output
         if(is_iterable($this->postTypes)) {
             foreach($this->postTypes as $postType) {
@@ -93,15 +90,6 @@ class Api
             //unset($endpoints[$endpoint]);
         }
         return $endpoints;
-    }
-
-    /**
-     * Rename /wp-json/ to /json/.
-     * @return string Returning "json".
-     */
-    public function apiBasePrefix($prefix)
-    {
-        return "json";
     }
 
     /**
