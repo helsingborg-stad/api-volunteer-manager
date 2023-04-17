@@ -213,7 +213,9 @@ class Assignment extends PostType
             'low',
             array(
                 'submittedByEmail' => $submittedByEmail,
-                'submittedByPhone' => get_post_meta($post->ID, 'submitted_by_phone', true) ?? null
+                'submittedByPhone' => get_post_meta($post->ID, 'submitted_by_phone', true) ?? '',
+                'submittedByFirstName' => get_post_meta($post->ID, 'submitted_by_first_name', true) ?? '',
+                'submittedBySurname' => get_post_meta($post->ID, 'submitted_by_surname', true) ?? '',
             )
         );
     }
@@ -227,8 +229,9 @@ class Assignment extends PostType
     public function renderSubmitterData(object $post, array $args): void
     {
         $content = sprintf('<p>%s</p>', __('Contact details of the person who submitted the assignment.', AVM_TEXT_DOMAIN));
-        $content .= $args['args']['submittedByEmail'] ? sprintf('<p><strong>%1$s:</strong> <a href="mailto:%2$s">%2$s</a></p>', __('Email', AVM_TEXT_DOMAIN), $args['args']['submittedByEmail']) : '';
-        $content .= $args['args']['submittedByPhone'] ? sprintf('<p><strong>%s:</strong> %s</p>', __('Phone', AVM_TEXT_DOMAIN), $args['args']['submittedByPhone']) : '';
+        $content .= sprintf('<p><strong>%s:</strong> %s %s</p>', __('Name', AVM_TEXT_DOMAIN), $args['args']['submittedByFirstName'], $args['args']['submittedBySurname']);
+        $content .= sprintf('<p><strong>%1$s:</strong> <a href="mailto:%2$s">%2$s</a></p>', __('Email', AVM_TEXT_DOMAIN), $args['args']['submittedByEmail']);
+        $content .= sprintf('<p><strong>%s:</strong> %s</p>', __('Phone', AVM_TEXT_DOMAIN), $args['args']['submittedByPhone']);
         echo $content;
     }
 
