@@ -6,42 +6,14 @@
     'title' => __('Employer', 'api-volunteer-manager'),
     'fields' => array(
         0 => array(
-            'key' => 'field_639af11ba5ae7',
-            'label' => __('Employer', 'api-volunteer-manager'),
-            'name' => 'external_employer',
-            'aria-label' => '',
-            'type' => 'true_false',
-            'instructions' => __('Enable if the employer is external ie. not arranged by the city.', 'api-volunteer-manager'),
-            'required' => 0,
-            'conditional_logic' => 0,
-            'wrapper' => array(
-                'width' => '',
-                'class' => '',
-                'id' => '',
-            ),
-            'message' => __('If the employer is external.', 'api-volunteer-manager'),
-            'default_value' => 1,
-            'ui_on_text' => __('External', 'api-volunteer-manager'),
-            'ui_off_text' => __('Internal', 'api-volunteer-manager'),
-            'ui' => 1,
-        ),
-        1 => array(
             'key' => 'field_63dce23b8f9ce',
             'label' => __('Name', 'api-volunteer-manager'),
             'name' => 'employer_name',
             'aria-label' => '',
             'type' => 'text',
-            'instructions' => __('Name of the company/organisation.', 'api-volunteer-manager'),
-            'required' => 1,
-            'conditional_logic' => array(
-                0 => array(
-                    0 => array(
-                        'field' => 'field_639af11ba5ae7',
-                        'operator' => '==',
-                        'value' => '1',
-                    ),
-                ),
-            ),
+            'instructions' => __('Company/organisation.', 'api-volunteer-manager'),
+            'required' => 0,
+            'conditional_logic' => 0,
             'wrapper' => array(
                 'width' => '',
                 'class' => '',
@@ -53,7 +25,7 @@
             'prepend' => '',
             'append' => '',
         ),
-        2 => array(
+        1 => array(
             'key' => 'field_639af218edf0b',
             'label' => __('Contacts', 'api-volunteer-manager'),
             'name' => 'employer_contacts',
@@ -61,20 +33,13 @@
             'type' => 'repeater',
             'instructions' => '',
             'required' => 0,
-            'conditional_logic' => array(
-                0 => array(
-                    0 => array(
-                        'field' => 'field_639af11ba5ae7',
-                        'operator' => '==',
-                        'value' => '1',
-                    ),
-                ),
-            ),
+            'conditional_logic' => 0,
             'wrapper' => array(
                 'width' => '',
                 'class' => '',
                 'id' => '',
             ),
+            'acfe_repeater_stylised_button' => 0,
             'layout' => 'table',
             'pagination' => 0,
             'min' => 0,
@@ -148,9 +113,8 @@
                     'parent_repeater' => 'field_639af218edf0b',
                 ),
             ),
-            'acfe_repeater_stylised_button' => 0,
         ),
-        3 => array(
+        2 => array(
             'key' => 'field_639af303f57b8',
             'label' => __('Website', 'api-volunteer-manager'),
             'name' => 'employer_website',
@@ -158,15 +122,7 @@
             'type' => 'url',
             'instructions' => '',
             'required' => 0,
-            'conditional_logic' => array(
-                0 => array(
-                    0 => array(
-                        'field' => 'field_639af11ba5ae7',
-                        'operator' => '==',
-                        'value' => '1',
-                    ),
-                ),
-            ),
+            'conditional_logic' => 0,
             'wrapper' => array(
                 'width' => '',
                 'class' => '',

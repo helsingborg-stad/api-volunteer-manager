@@ -3,6 +3,26 @@
     "title": "Signup",
     "fields": [
         {
+            "key": "field_639af11ba5ae7",
+            "label": "Internal assignment",
+            "name": "internal_assignment",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "Toggle to indicate whether the assignment is managed internally by the city or externally by a third party.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 1,
+            "ui_on_text": "Internal",
+            "ui_off_text": "External",
+            "ui": 1
+        },
+        {
             "key": "field_639b06c1a6e7a",
             "label": "Signup methods",
             "name": "signup_methods",
@@ -10,7 +30,15 @@
             "type": "checkbox",
             "instructions": "",
             "required": 1,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_639af11ba5ae7",
+                        "operator": "!=",
+                        "value": "1"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -129,6 +157,11 @@
     "hide_on_screen": "",
     "active": true,
     "description": "",
-    "show_in_rest": 1
+    "show_in_rest": 1,
+    "acfe_display_title": "",
+    "acfe_autosync": "",
+    "acfe_form": 0,
+    "acfe_meta": "",
+    "acfe_note": ""
 }]
 
