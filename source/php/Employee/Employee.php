@@ -7,8 +7,6 @@ use VolunteerManager\Components\ApplicationMetaBox\EmployeeApplicationMetaBox;
 use VolunteerManager\Entity\PostType as PostType;
 use VolunteerManager\Entity\Taxonomy as Taxonomy;
 use VolunteerManager\Helper\Admin\UI as AdminUI;
-use VolunteerManager\Helper\Icon as Icon;
->>>>>>> moved employee to own folder:source/php/Employee/Employee.php
 
 class Employee extends PostType
 {

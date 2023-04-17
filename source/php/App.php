@@ -3,6 +3,7 @@
 namespace VolunteerManager;
 
 use VolunteerManager\Employee\Employee;
+use VolunteerManager\Employee\EmployeeConfiguration;
 use VolunteerManager\Helper\CacheBust;
 use VolunteerManager\Notification\EmailNotificationSender;
 use VolunteerManager\Notification\LoggingNotificationSender;
@@ -17,7 +18,7 @@ class App
         add_action('admin_enqueue_scripts', array($this, 'enqueueScripts'));
         add_action('plugins_loaded', array($this, 'init'));
         add_action('after_setup_theme', array($this, 'themeSupport'));
-        
+
         add_filter('acf/fields/google_map/api', array($this, 'setGoogleApiKey'));
     }
 
