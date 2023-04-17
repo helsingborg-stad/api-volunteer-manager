@@ -26,8 +26,6 @@ class EmployeeApiManager
         );
     }
 
-// TODO: Wrap DB operations (`wp_insert_post` and `update_post_meta`) in transactions.
-
     /**
      * Callback function to handle the employee registration POST request
      *
@@ -44,7 +42,6 @@ class EmployeeApiManager
         ];
 
         $params = [];
-
         foreach ($param_keys as $key) {
             $params[$key] = $request->get_param($key);
         }
@@ -56,7 +53,7 @@ class EmployeeApiManager
         if (is_wp_error($validation_result)) {
             return $validation_result;
         }
-        
+
         // Create the employee post
         $employeePostId = wp_insert_post(
             array(
