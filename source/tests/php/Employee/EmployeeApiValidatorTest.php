@@ -94,9 +94,9 @@ class EmployeeApiValidatorTest extends PluginTestCase
     /**
      * @dataProvider emailInUseDataProvider
      */
-    public function testIsEmailInUse($email, $expectedResult)
+    public function testIfEmailUnique($email, $expectedResult)
     {
-        Functions\when('get_posts')->justReturn($expectedResult ? ['dummy_post'] : []);
+        Functions\when('get_posts')->justReturn($expectedResult ? [] : ['dummy_found_post']);
 
         $result = $this->employeeApiValidator->is_email_unique($email);
 
@@ -106,11 +106,11 @@ class EmployeeApiValidatorTest extends PluginTestCase
     public function emailInUseDataProvider(): array
     {
         return [
-            'Email In Use' => [
+            'Email is unique' => [
                 'john.doe@example.com',
                 true,
             ],
-            'Email Not In Use' => [
+            'Email not unique' => [
                 'jane.doe@example.com',
                 false,
             ],
@@ -120,9 +120,9 @@ class EmployeeApiValidatorTest extends PluginTestCase
     /**
      * @dataProvider nationalIdentityNumberInUseDataProvider
      */
-    public function testIsNationalIdentityNumberInUse($national_identity_number, $expectedResult)
+    public function testIfNationalIdentityNumberUnique($national_identity_number, $expectedResult)
     {
-        Functions\when('get_posts')->justReturn($expectedResult ? ['dummy_post'] : []);
+        Functions\when('get_posts')->justReturn($expectedResult ? [] : ['dummy_post']);
 
         $result = $this->employeeApiValidator->is_national_identity_unique($national_identity_number);
 
@@ -132,11 +132,11 @@ class EmployeeApiValidatorTest extends PluginTestCase
     public function nationalIdentityNumberInUseDataProvider(): array
     {
         return [
-            'National Identity Number In Use' => [
+            'National Identity Number unique' => [
                 '123456789',
                 true,
             ],
-            'National Identity Number Not In Use' => [
+            'National Identity Number not unique' => [
                 '987654321',
                 false,
             ],
