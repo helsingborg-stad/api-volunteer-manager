@@ -15,8 +15,8 @@ msgstr ""
 "X-Poedit-WPHeader: api-volunteer-manager.php\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
-"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;"
-"_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
+"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 
@@ -227,7 +227,7 @@ msgstr "Lägg till kontakt"
 msgid "Phone"
 msgstr "Telefonnummer"
 
-#: source/php/AcfFields/php/employer.php:154
+#: source/php/AcfFields/php/employer.php:155
 msgid "Website"
 msgstr "Webbplats"
 
@@ -469,6 +469,49 @@ msgstr ""
 #, php-format
 msgid "New %s Name"
 msgstr ""
+
+#: source/php/PostType/Assignment/Notifications.php:54
+#, php-format
+msgid "Your assignment \"%s\" is approved"
+msgstr "Ditt uppdrag \"%s\" har godkänts"
+
+#: source/php/PostType/Assignment/Notifications.php:56
+#, php-format
+msgid ""
+"Hello %s,<br><br>It's great that you want to involve more people from "
+"Helsingborg! Your assignment \"%s\" has now been approved for publication on "
+"<a href=\"https://helsingborg.se\">helsingborg.se</a> and will be visible to "
+"many engaged Helsingborg residents. If you would like to make changes, "
+"update something, or remove the assignment, please send an email to "
+"engagemang@helsingborg.se.<br><br>Good luck!<br><br>Best regards,"
+"<br>Engagemang Helsingborg"
+msgstr ""
+"Hej %s,<br><br>Så kul att du vill engagera fler helsingborgare! Ditt uppdrag "
+"“%s” är nu godkänt för publicering på <a href=\"https://helsingborg.se"
+"\">helsingborg.se</a> och kommer bli synligt för många engagerade "
+"helsingborgare. Skulle du vilja ändra, uppdatera något eller avpublicera "
+"uppdraget så skicka ett mejl till engagemang@helsingborg.se.<br><br>Lycka "
+"till!<br><br>Med vänliga hälsningar,<br>Engagemang Helsingborg"
+
+#: source/php/PostType/Assignment/Notifications.php:74
+#, php-format
+msgid "Your assignment \"%s\" is denied"
+msgstr "Ditt uppdrag \"%s\" har nekats"
+
+#: source/php/PostType/Assignment/Notifications.php:76
+#, php-format
+msgid ""
+"Hello %s,<br><br>Thank you for wanting to register an assignment for engaged "
+"residents of Helsingborg. The assignment \"%s\" has been processed by an "
+"administrator and unfortunately it cannot be published. Please contact "
+"Engagemang Helsingborg for more information at engagemang@helsingborg.se."
+"<br><br>Best regards,<br>Engagemang Helsingborg"
+msgstr ""
+"Hej %s,<br><br>Tack för att du vill registrera ett uppdrag för engagerade "
+"helsingborgare. Uppdraget \"%s\" har behandlats av handläggare och tyvärr så "
+"kan det inte publiceras. Kontakta Engagemang Helsingborg för mer information "
+"på engagemang@helsingborg.se.<br><br>Med vänliga hälsningar,<br>Engagemang "
+"Helsingborg"
 
 #: vendor/helsingborg-stad/acf-export-manager/src/AcfExportManager.php:364
 msgid "Export with AcfExportManager"
