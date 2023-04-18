@@ -33,9 +33,11 @@ class AssignmentTest extends PluginTestCase
             'args' => [
                 'submittedByEmail' => 'foo@bar.com',
                 'submittedByPhone' => '123-456-7890',
+                'submittedByFirstName' => 'Foo',
+                'submittedBySurname' => 'Bar',
             ],
         ];
-        $expectedOutput = '<p>Contact details of the person who submitted the assignment.</p><p><strong>Email:</strong> <a href="mailto:foo@bar.com">foo@bar.com</a></p><p><strong>Phone:</strong> 123-456-7890</p>';
+        $expectedOutput = '<p>Contact details of the person who submitted the assignment.</p><p><strong>Name:</strong> Foo Bar</p><p><strong>Email:</strong> <a href="mailto:foo@bar.com">foo@bar.com</a></p><p><strong>Phone:</strong> 123-456-7890</p>';
 
         ob_start();
         $this->assignment->renderSubmitterData($this->post, $args);
@@ -46,7 +48,7 @@ class AssignmentTest extends PluginTestCase
 
     public function testRegisterSubmitterMetaBoxWithExistingMetaValue()
     {
-        Functions\when('get_post_meta')->justReturn('meta_value');
+        Functions\expect('get_post_meta')->times(4)->andReturn('foo@bar.se', '1234567', 'Foo', 'Bar');
         Functions\expect('add_meta_box')->once()
             ->with(
                 'submitter-info',
@@ -56,8 +58,10 @@ class AssignmentTest extends PluginTestCase
                 'normal',
                 'low',
                 array(
-                    'submittedByEmail' => 'meta_value',
-                    'submittedByPhone' => 'meta_value'
+                    'submittedByEmail' => 'foo@bar.se',
+                    'submittedByPhone' => '1234567',
+                    'submittedByFirstName' => 'Foo',
+                    'submittedBySurname' => 'Bar',
                 )
             );
         $this->assignment->registerSubmitterMetaBox('assignment', $this->post);
@@ -68,63 +72,5 @@ class AssignmentTest extends PluginTestCase
         Functions\when('get_post_meta')->justReturn(null);
         Functions\expect('add_meta_box')->never()->withAnyArgs();
         $this->assignment->registerSubmitterMetaBox('assignment', $this->post);
-    }
-
-    /**
-     * @dataProvider notificationReceiverProvider
-     */
-    public function testPopulateNotificationReceiverWithSubmitter($args, $getPostMetaResult, $expectedResult)
-    {
-        Functions\when('get_post_meta')->justReturn($getPostMetaResult);
-        $this->assertEquals(
-            $expectedResult,
-            $this->assignment->populateNotificationReceiverWithSubmitter($args, $this->post->ID)
-        );
-    }
-
-    public function notificationReceiverProvider(): array
-    {
-        return [
-            [
-                ['to' => '', 'from' => '', 'message' => ['subject' => 'Subject', 'content' => 'Content']],
-                'foo@email.bar',
-                ['to' => 'foo@email.bar', 'from' => '', 'message' => ['subject' => 'Subject', 'content' => 'Content']]
-            ],
-            [
-                ['to' => '', 'from' => '', 'message' => ['subject' => 'Subject', 'content' => 'Content']],
-                null,
-                ['to' => '', 'from' => '', 'message' => ['subject' => 'Subject', 'content' => 'Content']]
-            ],
-        ];
-    }
-
-    /**
-     * @dataProvider notificationSenderProvider
-     */
-    public function testPopulateNotificationSender($args, $getFieldResult, $expectedResult)
-    {
-        Functions\when('get_field')->justReturn($getFieldResult);
-        $this->assertEquals($expectedResult, $this->assignment->populateNotificationSender($args, $this->post->ID));
-    }
-
-    public function notificationSenderProvider(): array
-    {
-        return [
-            [
-                ['to' => 'foo@bar.receiver', 'from' => '', 'message' => ['subject' => 'Subject', 'content' => 'Content']],
-                ['email' => 'foo@bar.email', 'name' => 'Foo Bar'],
-                ['to' => 'foo@bar.receiver', 'from' => 'Foo Bar <foo@bar.email>', 'message' => ['subject' => 'Subject', 'content' => 'Content']]
-            ],
-            [
-                ['to' => 'foo@bar.receiver', 'from' => '', 'message' => ['subject' => 'Subject', 'content' => 'Content']],
-                ['email' => 'foo@bar.email', 'name' => null],
-                ['to' => 'foo@bar.receiver', 'from' => 'foo@bar.email', 'message' => ['subject' => 'Subject', 'content' => 'Content']]
-            ],
-            [
-                ['to' => 'foo@bar.receiver', 'from' => '', 'message' => ['subject' => 'Subject', 'content' => 'Content']],
-                ['email' => null, 'name' => null],
-                ['to' => 'foo@bar.receiver', 'from' => '', 'message' => ['subject' => 'Subject', 'content' => 'Content']]
-            ]
-        ];
     }
 }
