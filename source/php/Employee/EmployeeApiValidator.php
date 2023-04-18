@@ -2,11 +2,8 @@
 
 namespace VolunteerManager\Employee;
 
-use VolunteerManager\Api;
 use VolunteerManager\API\WPResponseFactory;
 use WP_Error;
-use WP_REST_Request;
-use WP_REST_Response;
 
 class EmployeeApiValidator implements IEmployeeApiValidator
 {
