@@ -24,9 +24,9 @@ class NotificationsTest extends PluginTestCase
         $this->assignmentNotifications->addHooks();
         self::assertNotFalse(has_filter('avm_notification', [$this->assignmentNotifications, 'populateNotificationSender']));
         self::assertNotFalse(has_filter('avm_external_assignment_approved_notification', [$this->assignmentNotifications, 'populateNotificationReceiverWithSubmitter']));
-        self::assertNotFalse(has_filter('avm_external_assignment_approved_notification', [$this->assignmentNotifications, 'populateAssignmentApprovedWithMessage']));
+        self::assertNotFalse(has_filter('avm_external_assignment_approved_notification', [$this->assignmentNotifications, 'populateStatusNotificationWithContent']));
         self::assertNotFalse(has_filter('avm_external_assignment_denied_notification', [$this->assignmentNotifications, 'populateNotificationReceiverWithSubmitter']));
-        self::assertNotFalse(has_filter('avm_external_assignment_denied_notification', [$this->assignmentNotifications, 'populateAssignmentDeniedWithMessage']));
+        self::assertNotFalse(has_filter('avm_external_assignment_denied_notification', [$this->assignmentNotifications, 'populateStatusNotificationWithContent']));
     }
 
     /**
@@ -87,21 +87,12 @@ class NotificationsTest extends PluginTestCase
         ];
     }
 
-    public function testPopulateAssignmentApprovedWithMessage()
+    public function testPopulateStatusNotificationWithContent()
     {
-        $args = ['subject' => '', 'content' => ''];
+        $args = ['subject' => 'Your assignment "%s" is approved', 'content' => 'Your assignment "%s" is approved'];
         Functions\expect('get_post')->andReturn($this->post);
         Functions\expect('get_post_meta')->andReturn('Foo');
-        $result = $this->assignmentNotifications->populateAssignmentApprovedWithMessage($args, $this->post->ID);
+        $result = $this->assignmentNotifications->populateStatusNotificationWithContent($args, $this->post->ID);
         $this->assertContains('Your assignment "Some title" is approved', $result);
-    }
-
-    public function testPopulateAssignmentDeniedWithMessage()
-    {
-        $args = ['subject' => '', 'content' => ''];
-        Functions\expect('get_post')->andReturn($this->post);
-        Functions\expect('get_post_meta')->andReturn('Foo');
-        $result = $this->assignmentNotifications->populateAssignmentDeniedWithMessage($args, $this->post->ID);
-        $this->assertContains('Your assignment "Some title" is denied', $result);
     }
 }
