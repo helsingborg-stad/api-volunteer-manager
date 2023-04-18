@@ -71,7 +71,7 @@ class EmployeeApiManager
 
         $new_status_term = get_term_by('slug', 'new', 'employee-registration-status');
         if ($new_status_term) {
-            update_post_meta($employeePostId, 'employment_status', $new_status_term->term_id);
+            wp_set_post_terms($employeePostId, array($new_status_term->term_id), 'employee-registration-status');
         }
 
         return WPResponseFactory::wp_rest_response(
