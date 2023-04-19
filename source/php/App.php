@@ -2,6 +2,7 @@
 
 namespace VolunteerManager;
 
+use VolunteerManager\API\Api;
 use VolunteerManager\Employee\Employee;
 use VolunteerManager\Employee\EmployeeConfiguration;
 use VolunteerManager\Helper\CacheBust;

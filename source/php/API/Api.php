@@ -1,6 +1,6 @@
 <?php
 
-namespace VolunteerManager;
+namespace VolunteerManager\API;
 
 use VolunteerManager\API\WPResponseFactory;
 use VolunteerManager\Employee\IEmployeeApiValidator;

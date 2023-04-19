@@ -5,7 +5,7 @@ namespace php;
 use Brain\Monkey\Expectation\Exception\ExpectationArgsRequired;
 use Mockery;
 use PluginTestCase\PluginTestCase;
-use VolunteerManager\Api;
+use VolunteerManager\API\Api;
 use Brain\Monkey\Functions;
 use VolunteerManager\Employee\IEmployeeApiValidator;
 
