@@ -159,4 +159,20 @@ class Employee extends PostType
         return $field;
     }
 
+    /**
+     * Register applications meta box
+     * @return void
+     */
+    public function registerApplicationsMetaBox($postType, $post)
+    {
+        if ($postType !== 'employee') {
+            return;
+        }
+        $applicationMetaBox = new EmployeeApplicationMetaBox(
+            $post,
+            __('Assignments', AVM_TEXT_DOMAIN),
+            'application_employee'
+        );
+        $applicationMetaBox->register();
+    }
 }
