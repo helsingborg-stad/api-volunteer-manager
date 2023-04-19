@@ -14,6 +14,7 @@ use VolunteerManager\Helper\MetaBox as MetaBox;
 class Assignment extends PostType
 {
     private Taxonomy $assignmentTaxonomy;
+    private Taxonomy $eligibilityTaxonomy;
 
     public function addHooks(): void
     {
@@ -23,6 +24,8 @@ class Assignment extends PostType
         add_action('add_meta_boxes', array($this, 'registerApplicationsMetaBox'), 10, 2);
         add_action('init', array($this, 'registerStatusTaxonomy'));
         add_action('init', array($this, 'insertAssignmentStatusTerms'));
+        add_action('init', array($this, 'registerEligibilityTaxonomy'));
+        add_action('init', array($this, 'insertAssignmentEligibilityTerms'));
         add_action('init', array($this, 'addPostTypeTableColumn'));
 
         add_filter('avm_notification', array($this, 'populateNotificationSender'), 10, 1);
@@ -162,6 +165,37 @@ class Assignment extends PostType
     }
 
     /**
+     * Create eligibility taxonomy
+     */
+    public function registerEligibilityTaxonomy()
+    {
+        $this->eligibilityTaxonomy = new Taxonomy(
+            __('Eligibility', 'api-volunteer-manager'),
+            __('Eligibility', 'api-volunteer-manager'),
+            'assignment-eligibility',
+            array($this->slug),
+            array(
+                'hierarchical' => false,
+                'show_ui' => false
+            )
+        );
+
+        $this->eligibilityTaxonomy->registerTaxonomy();
+
+        //Remove default UI
+        (new MetaBox)->remove(
+            "tagsdiv-assignment-eligibility",
+            $this->slug,
+        );
+
+        //Add filter
+        new Filter(
+            'assignment-eligibility',
+            'assignment'
+        );
+    }
+
+    /**
      * Register custom meta boxes
      * @return void
      */
@@ -218,5 +252,10 @@ class Assignment extends PostType
     public function insertAssignmentStatusTerms()
     {
         return $this->assignmentTaxonomy->insertTerms(AssignmentConfiguration::getStatusTerms());
+    }
+
+    public function insertAssignmentEligibilityTerms()
+    {
+        return $this->eligibilityTaxonomy->insertTerms(AssignmentConfiguration::getEligibilityTerms());
     }
 }
