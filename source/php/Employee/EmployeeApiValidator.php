@@ -5,7 +5,7 @@ namespace VolunteerManager\Employee;
 use VolunteerManager\API\WPResponseFactory;
 use WP_Error;
 
-class EmployeeApiValidator implements IEmployeeApiValidator
+class EmployeeApiValidator implements EmployeeApiValidatorInterface
 {
     /**
      * @param $params

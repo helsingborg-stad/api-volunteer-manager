@@ -7,7 +7,7 @@ use Mockery;
 use PluginTestCase\PluginTestCase;
 use VolunteerManager\API\Api;
 use Brain\Monkey\Functions;
-use VolunteerManager\Employee\IEmployeeApiValidator;
+use VolunteerManager\Employee\EmployeeApiValidatorInterface;
 
 class ApiTest extends PluginTestCase
 {
@@ -28,7 +28,7 @@ class ApiTest extends PluginTestCase
         $callback = function () {
             return 'Test callback';
         };
-        $validator = Mockery::mock(IEmployeeApiValidator::class);
+        $validator = Mockery::mock(EmployeeApiValidatorInterface::class);
         $namespace = 'volunteer-manager/v1';
 
         Functions\expect('register_rest_route')

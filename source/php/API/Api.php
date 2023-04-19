@@ -3,7 +3,7 @@
 namespace VolunteerManager\API;
 
 use VolunteerManager\API\WPResponseFactory;
-use VolunteerManager\Employee\IEmployeeApiValidator;
+use VolunteerManager\Employee\EmployeeApiValidatorInterface;
 use \VolunteerManager\Helper\Url as Url;
 use WP_Error;
 
@@ -256,10 +256,10 @@ class Api
      *
      */
     public function registerPostEndpoint(
-        string                $endpoint,
-        callable              $callback,
-        IEmployeeApiValidator $validator,
-        string                $namespace = 'wp/v2'
+        string                        $endpoint,
+        callable                      $callback,
+        EmployeeApiValidatorInterface $validator,
+        string                        $namespace = 'wp/v2'
     ): void
     {
         register_rest_route($namespace, $endpoint, array(

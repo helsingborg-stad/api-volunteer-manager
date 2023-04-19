@@ -12,7 +12,7 @@ class EmployeeApiManager
 {
     private EmployeeApiValidator $validator;
 
-    public function __construct(IEmployeeApiValidator $validator)
+    public function __construct(EmployeeApiValidatorInterface $validator)
     {
         $this->validator = $validator;
     }

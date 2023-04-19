@@ -4,7 +4,7 @@ namespace VolunteerManager\Employee;
 
 use WP_Error;
 
-interface IEmployeeApiValidator
+interface EmployeeApiValidatorInterface
 {
     /**
      * Validate required parameters
