@@ -9,12 +9,12 @@ class EmployeeApi
     /**
      * Register custom REST API POST endpoints for Employee
      *
-     * The endpoint is registered in the namespace 'volunteer-manager/v1'.
+     * The endpoint is registered in the namespace 'wp/v2'.
      * Permissions are set to 'edit_posts' if current user can edit posts.
      *
      * @param string $endpoint The endpoints to register.
      * @param callable $callback The callback function to call when the endpoint is called.
-     * @param string $namespace The namespace for the endpoints. Defaults to 'volunteer-manager/v1'
+     * @param string $namespace The namespace for the endpoints. Defaults to 'wp/v2'.
      *
      */
     public function registerPostEndpoint(
