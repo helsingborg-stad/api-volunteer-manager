@@ -17,6 +17,11 @@ class EmployeeApiManager
         $this->validator = $validator;
     }
 
+    public function addHooks(): void
+    {
+        add_action('rest_api_init', array($this, 'registerPostEndpoint'));
+    }
+
     public function registerPostEndpoint()
     {
         (new Api())->registerPostEndpoint(

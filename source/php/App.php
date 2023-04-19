@@ -4,6 +4,8 @@ namespace VolunteerManager;
 
 use VolunteerManager\API\Api;
 use VolunteerManager\Employee\Employee;
+use VolunteerManager\Employee\EmployeeApiManager;
+use VolunteerManager\Employee\EmployeeApiValidator;
 use VolunteerManager\Employee\EmployeeConfiguration;
 use VolunteerManager\Helper\CacheBust;
 use VolunteerManager\Notification\EmailNotificationSender;
@@ -41,6 +43,9 @@ class App
 
         $employee = new Employee(...array_values(EmployeeConfiguration::getPostTypeArgs()));
         $employee->addHooks();
+
+        $employeeApiManager = new EmployeeApiManager(new EmployeeApiValidator());
+        $employeeApiManager->addHooks();
 
         $application = new Application(...array_values(ApplicationConfiguration::getPostTypeArgs()));
         $application->addHooks();

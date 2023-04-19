@@ -19,7 +19,6 @@ class Employee extends PostType
         add_action('init', array($this, 'addPostTypeTableColumn'));
         add_action('acf/save_post', array($this, 'setPostTitle'));
         add_action('add_meta_boxes', array($this, 'registerApplicationsMetaBox'), 10, 2);
-        add_action('rest_api_init', array($this, 'setupCustomEndpoints'));
 
         add_filter('avm_external_volunteer_new_notification', array($this, 'populateNotificationReceiverWithSubmitter'), 10, 2);
         add_filter('avm_admin_external_volunteer_new_notification', array($this, 'populateNotificationReceiverWithAdmin'), 10, 2);
@@ -30,14 +29,6 @@ class Employee extends PostType
     {
         $this->registerStatusTaxonomy();
         $this->insertEmploymentStatusTerms();
-    }
-
-    public function setupCustomEndpoints()
-    {
-        $validator = new EmployeeApiValidator();
-        $apiPostSetup = new EmployeeApiManager($validator);
-
-        $apiPostSetup->registerPostEndpoint();
     }
 
     /**
