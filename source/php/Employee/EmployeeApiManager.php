@@ -3,6 +3,7 @@
 namespace VolunteerManager\Employee;
 
 use VolunteerManager\API\Api;
+use VolunteerManager\API\EmployeeApi;
 use VolunteerManager\API\WPResponseFactory;
 use WP_Error;
 use WP_REST_Request;
@@ -24,7 +25,7 @@ class EmployeeApiManager
 
     public function registerPostEndpoint()
     {
-        (new Api())->registerPostEndpoint(
+        (new EmployeeApi())->registerPostEndpoint(
             'employee',
             array($this, 'registerEmployee'),
             $this->validator
