@@ -2,11 +2,16 @@
 
 namespace VolunteerManager;
 
+use VolunteerManager\API\Api;
+use VolunteerManager\Employee\Employee;
+use VolunteerManager\Employee\EmployeeApiManager;
+use VolunteerManager\Employee\EmployeeApiValidator;
+use VolunteerManager\Employee\EmployeeConfiguration;
 use VolunteerManager\Helper\CacheBust;
-use VolunteerManager\Notification\NotificationsConfig;
 use VolunteerManager\Notification\EmailNotificationSender;
 use VolunteerManager\Notification\LoggingNotificationSender;
 use VolunteerManager\Notification\NotificationHandler;
+use VolunteerManager\Notification\NotificationsConfig;
 
 class App
 {
@@ -16,7 +21,7 @@ class App
         add_action('admin_enqueue_scripts', array($this, 'enqueueScripts'));
         add_action('plugins_loaded', array($this, 'init'));
         add_action('after_setup_theme', array($this, 'themeSupport'));
-        
+
         add_filter('acf/fields/google_map/api', array($this, 'setGoogleApiKey'));
     }
 
@@ -38,6 +43,9 @@ class App
 
         $employee = new Employee(...array_values(EmployeeConfiguration::getPostTypeArgs()));
         $employee->addHooks();
+
+        $employeeApiManager = new EmployeeApiManager(new EmployeeApiValidator());
+        $employeeApiManager->addHooks();
 
         $application = new Application(...array_values(ApplicationConfiguration::getPostTypeArgs()));
         $application->addHooks();

@@ -1,8 +1,11 @@
 <?php
 
-namespace VolunteerManager;
+namespace VolunteerManager\API;
 
+use VolunteerManager\API\WPResponseFactory;
+use VolunteerManager\Employee\EmployeeApiValidatorInterface;
 use \VolunteerManager\Helper\Url as Url;
+use WP_Error;
 
 class Api
 {
@@ -59,7 +62,7 @@ class Api
     {
         //Actions
         add_action('template_redirect', array($this, 'redirectToApi'));
-        
+
         //Filter data output
         if(is_iterable($this->postTypes)) {
             foreach($this->postTypes as $postType) {
@@ -223,18 +226,20 @@ class Api
      */
     public function addSignature($response, $post, $request) {
 
-        $doNotIncludeInSignature = (array) $this->doNotIncludeInSignature;
+        $doNotIncludeInSignature = (array)$this->doNotIncludeInSignature;
 
         $stack = [];
+
         if(is_iterable($response->data)) {
-            foreach($response->data as $key => $item) {
-                if(!in_array($key, $doNotIncludeInSignature)) {
+            foreach ($response->data as $key => $item) {
+                if (!in_array($key, $doNotIncludeInSignature)) {
                     $stack[] = $item;
                 }
             }
         }
 
         $response->data['md5'] = md5(serialize($stack));
+
 
         return $response;
     }
