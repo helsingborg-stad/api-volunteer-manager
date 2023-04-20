@@ -2,7 +2,7 @@
 
 namespace VolunteerManager\PostType\Assignment;
 
-class Notifications
+class AssignmentNotifications
 {
     public function addHooks()
     {
