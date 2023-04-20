@@ -1,8 +1,7 @@
 <?php
 
-namespace VolunteerManager\Employee;
+namespace VolunteerManager\PostType\Employee;
 
-use VolunteerManager\API\Api;
 use VolunteerManager\API\EmployeeApi;
 use VolunteerManager\API\WPResponseFactory;
 use WP_Error;

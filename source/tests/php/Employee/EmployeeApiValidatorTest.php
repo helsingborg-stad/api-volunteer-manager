@@ -2,13 +2,10 @@
 
 namespace php\Employee;
 
-use VolunteerManager\Employee\EmployeeApiManager;
-use VolunteerManager\Employee\EmployeeApiValidator;
-use PHPUnit\Framework\TestCase;
-
-use PluginTestCase\PluginTestCase;
-use WP_Error;
 use Brain\Monkey\Functions;
+use PluginTestCase\PluginTestCase;
+use VolunteerManager\PostType\Employee\EmployeeApiValidator;
+use WP_Error;
 
 /**
  * Run tests in separate processes and disable global state preservation

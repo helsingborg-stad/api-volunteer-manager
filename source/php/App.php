@@ -3,10 +3,6 @@
 namespace VolunteerManager;
 
 use VolunteerManager\API\Api;
-use VolunteerManager\Employee\Employee;
-use VolunteerManager\Employee\EmployeeApiManager;
-use VolunteerManager\Employee\EmployeeApiValidator;
-use VolunteerManager\Employee\EmployeeConfiguration;
 use VolunteerManager\Helper\CacheBust;
 use VolunteerManager\Notification\EmailNotificationSender;
 use VolunteerManager\Notification\LoggingNotificationSender;
@@ -17,6 +13,10 @@ use VolunteerManager\PostType\Application\ApplicationConfiguration;
 use VolunteerManager\PostType\Assignment\Assignment;
 use VolunteerManager\PostType\Assignment\AssignmentConfiguration;
 use VolunteerManager\PostType\Assignment\Notifications;
+use VolunteerManager\PostType\Employee\Employee;
+use VolunteerManager\PostType\Employee\EmployeeApiManager;
+use VolunteerManager\PostType\Employee\EmployeeApiValidator;
+use VolunteerManager\PostType\Employee\EmployeeConfiguration;
 
 class App
 {
