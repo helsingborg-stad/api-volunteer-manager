@@ -12,6 +12,7 @@ use VolunteerManager\Notification\EmailNotificationSender;
 use VolunteerManager\Notification\LoggingNotificationSender;
 use VolunteerManager\Notification\NotificationHandler;
 use VolunteerManager\Notification\NotificationsConfig;
+use VolunteerManager\PostType\Assignment\Notifications;
 
 class App
 {
@@ -40,6 +41,8 @@ class App
         //Post types
         $assignment = new Assignment(...array_values(AssignmentConfiguration::getPostTypeArgs()));
         $assignment->addHooks();
+        $assignmentNotifications = new Notifications();
+        $assignmentNotifications->addHooks();
 
         $employee = new Employee(...array_values(EmployeeConfiguration::getPostTypeArgs()));
         $employee->addHooks();

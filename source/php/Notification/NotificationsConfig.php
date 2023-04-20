@@ -11,8 +11,8 @@ class NotificationsConfig
             'oldValue' => 'pending',
             'newValue' => 'approved',
             'message' => [
-                'subject' => 'Assignment approved subject',
-                'content' => 'Assignment approved message',
+                'subject' => 'Your assignment "%s" is approved',
+                'content' => 'Hello %s,<br><br>It\'s great that you want to involve more people from Helsingborg! Your assignment "%s" has now been approved for publication on <a href="https://helsingborg.se">helsingborg.se</a> and will be visible to many engaged Helsingborg residents. If you would like to make changes, update something, or remove the assignment, please send an email to engagemang@helsingborg.se.<br><br>Good luck!<br><br>Best regards,<br>Engagemang Helsingborg',
             ],
             'rule' => [
                 'key' => 'source',
@@ -26,8 +26,8 @@ class NotificationsConfig
             'oldValue' => 'pending',
             'newValue' => 'denied',
             'message' => [
-                'subject' => 'Assignment denied subject',
-                'content' => 'Assignment denied message',
+                'subject' => 'Your assignment "%s" is denied',
+                'content' => 'Hello %s,<br><br>Thank you for wanting to register an assignment for engaged residents of Helsingborg. The assignment "%s" has been processed by an administrator and unfortunately it cannot be published. Please contact Engagemang Helsingborg for more information at engagemang@helsingborg.se.<br><br>Best regards,<br>Engagemang Helsingborg',
             ],
             'rule' => [
                 'key' => 'source',
@@ -35,7 +35,7 @@ class NotificationsConfig
                 'operator' => 'NOT_EQUAL'
             ]
         ],
-        "Message to volunteer when a new application is created" => [
+        "Message to the volunteer when a new volunteer is created" => [
             'key' => 'external_volunteer_new',
             'taxonomy' => 'employee-registration-status',
             'oldValue' => '',
@@ -50,7 +50,7 @@ class NotificationsConfig
                 'operator' => 'NOT_EQUAL'
             ]
         ],
-        "Message to admin when a new application is created" => [
+        "Message to admin when a new volunteer is created" => [
             'key' => 'admin_external_volunteer_new',
             'taxonomy' => 'employee-registration-status',
             'oldValue' => '',

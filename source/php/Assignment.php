@@ -27,37 +27,6 @@ class Assignment extends PostType
         add_action('init', array($this, 'registerEligibilityTaxonomy'));
         add_action('init', array($this, 'insertAssignmentEligibilityTerms'));
         add_action('init', array($this, 'addPostTypeTableColumn'));
-
-        add_filter('avm_notification', array($this, 'populateNotificationSender'), 10, 1);
-        add_filter('avm_external_assignment_approved_notification', array($this, 'populateNotificationReceiverWithSubmitter'), 10, 2);
-        add_filter('avm_external_assignment_denied_notification', array($this, 'populateNotificationReceiverWithSubmitter'), 10, 2);
-    }
-
-    /**
-     * Populates notifications with sender email address
-     * @param array $args
-     * @return array
-     */
-    public function populateNotificationSender(array $args): array
-    {
-        $senderOption = get_field('notification_sender', 'option');
-        $senderEmail = $senderOption['email'] ?? '';
-        $sender = $senderOption['name'] ? "{$senderOption['name']} <{$senderEmail}>" : $senderEmail;
-        $args['from'] = $sender;
-        return $args;
-    }
-
-    /**
-     * Populate notification with receiver email address
-     * @param array $args
-     * @param int   $postId
-     * @return array
-     */
-    public function populateNotificationReceiverWithSubmitter(array $args, int $postId): array
-    {
-        $receiver = get_post_meta($postId, 'submitted_by_email', true);
-        $args['to'] = $receiver ?? '';
-        return $args;
     }
 
     /**
@@ -213,7 +182,9 @@ class Assignment extends PostType
             'low',
             array(
                 'submittedByEmail' => $submittedByEmail,
-                'submittedByPhone' => get_post_meta($post->ID, 'submitted_by_phone', true) ?? null
+                'submittedByPhone' => get_post_meta($post->ID, 'submitted_by_phone', true) ?? '',
+                'submittedByFirstName' => get_post_meta($post->ID, 'submitted_by_first_name', true) ?? '',
+                'submittedBySurname' => get_post_meta($post->ID, 'submitted_by_surname', true) ?? '',
             )
         );
     }
@@ -227,8 +198,9 @@ class Assignment extends PostType
     public function renderSubmitterData(object $post, array $args): void
     {
         $content = sprintf('<p>%s</p>', __('Contact details of the person who submitted the assignment.', AVM_TEXT_DOMAIN));
-        $content .= $args['args']['submittedByEmail'] ? sprintf('<p><strong>%1$s:</strong> <a href="mailto:%2$s">%2$s</a></p>', __('Email', AVM_TEXT_DOMAIN), $args['args']['submittedByEmail']) : '';
-        $content .= $args['args']['submittedByPhone'] ? sprintf('<p><strong>%s:</strong> %s</p>', __('Phone', AVM_TEXT_DOMAIN), $args['args']['submittedByPhone']) : '';
+        $content .= sprintf('<p><strong>%s:</strong> %s %s</p>', __('Name', AVM_TEXT_DOMAIN), $args['args']['submittedByFirstName'], $args['args']['submittedBySurname']);
+        $content .= sprintf('<p><strong>%1$s:</strong> <a href="mailto:%2$s">%2$s</a></p>', __('Email', AVM_TEXT_DOMAIN), $args['args']['submittedByEmail']);
+        $content .= sprintf('<p><strong>%s:</strong> %s</p>', __('Phone', AVM_TEXT_DOMAIN), $args['args']['submittedByPhone']);
         echo $content;
     }
 
