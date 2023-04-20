@@ -1,11 +1,12 @@
 <?php
 
-namespace VolunteerManager;
+namespace VolunteerManager\PostType\Application;
 
 use VolunteerManager\Entity\ITerm;
 use VolunteerManager\Entity\PostType;
 use VolunteerManager\Entity\Taxonomy as Taxonomy;
 use VolunteerManager\Helper\Admin\UI as AdminUI;
+use WP_Error;
 
 class Application extends PostType
 {

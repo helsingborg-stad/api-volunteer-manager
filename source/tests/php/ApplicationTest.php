@@ -2,10 +2,10 @@
 
 namespace php;
 
-use PluginTestCase\PluginTestCase;
 use Brain\Monkey\Functions;
-use VolunteerManager\Application;
+use PluginTestCase\PluginTestCase;
 use VolunteerManager\Entity\Taxonomy;
+use VolunteerManager\PostType\Application\Application;
 
 class ApplicationTest extends PluginTestCase
 {
