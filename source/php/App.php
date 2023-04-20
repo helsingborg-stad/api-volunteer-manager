@@ -26,8 +26,6 @@ class App
         add_action('admin_enqueue_scripts', array($this, 'enqueueScripts'));
         add_action('plugins_loaded', array($this, 'init'));
         add_action('after_setup_theme', array($this, 'themeSupport'));
-
-        add_filter('acf/fields/google_map/api', array($this, 'setGoogleApiKey'));
     }
 
     public function init()
@@ -87,18 +85,7 @@ class App
 
         wp_enqueue_script('api-volunteer-manager-js');
     }
-
-    /**
-     * Filter that sets Google Maps API key
-     * @param array $api
-     * @return array $api
-     */
-    public function setGoogleApiKey($api)
-    {
-        $api['key'] = defined('GOOGLE_API_KEY') ? GOOGLE_API_KEY : '';
-        return $api;
-    }
-
+    
     /**
      * Add theme support
      */
