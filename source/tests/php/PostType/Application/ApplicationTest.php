@@ -1,6 +1,6 @@
 <?php
 
-namespace php;
+namespace php\PostType\Application;
 
 use Brain\Monkey\Functions;
 use PluginTestCase\PluginTestCase;
