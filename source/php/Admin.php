@@ -2,12 +2,17 @@
 
 namespace VolunteerManager;
 
+use VolunteerManager\Helper\CacheBust;
+
 class Admin
 {
     public function addHooks()
     {
         add_filter('get_sample_permalink_html', array($this, 'replacePermalink'), 10, 5);
         add_action('acf/init', array($this, 'addOptionsPage'));
+        add_action('admin_enqueue_scripts', array($this, 'enqueueStyles'));
+        add_action('admin_enqueue_scripts', array($this, 'enqueueScripts'));
+        add_action('after_setup_theme', array($this, 'themeSupport'));
     }
 
     /**
@@ -41,5 +46,43 @@ class Admin
             'parent_slug' => 'edit.php?post_type=assignment',
             'capability' => 'install_themes'
         ));
+    }
+
+    /**
+     * Enqueue required style
+     * @return void
+     */
+    public function enqueueStyles()
+    {
+        wp_register_style(
+            'api-volunteer-manager-css',
+            VOLUNTEER_MANAGER_URL . '/dist/' .
+            (new CacheBust())->name('css/api-volunteer-manager.css')
+        );
+
+        wp_enqueue_style('api-volunteer-manager-css');
+    }
+
+    /**
+     * Enqueue required scripts
+     * @return void
+     */
+    public function enqueueScripts()
+    {
+        wp_register_script(
+            'api-volunteer-manager-js',
+            VOLUNTEER_MANAGER_URL . '/dist/' .
+            (new CacheBust())->name('js/api-volunteer-manager.js')
+        );
+
+        wp_enqueue_script('api-volunteer-manager-js');
+    }
+
+    /**
+     * Add theme support
+     */
+    public function themeSupport()
+    {
+        add_theme_support('post-thumbnails');
     }
 }

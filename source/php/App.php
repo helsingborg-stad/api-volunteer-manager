@@ -3,7 +3,6 @@
 namespace VolunteerManager;
 
 use VolunteerManager\API\Api;
-use VolunteerManager\Helper\CacheBust;
 use VolunteerManager\Notification\EmailNotificationSender;
 use VolunteerManager\Notification\LoggingNotificationSender;
 use VolunteerManager\Notification\NotificationHandler;
@@ -22,10 +21,7 @@ class App
 {
     public function __construct()
     {
-        add_action('admin_enqueue_scripts', array($this, 'enqueueStyles'));
-        add_action('admin_enqueue_scripts', array($this, 'enqueueScripts'));
         add_action('plugins_loaded', array($this, 'init'));
-        add_action('after_setup_theme', array($this, 'themeSupport'));
     }
 
     public function init()
@@ -54,43 +50,5 @@ class App
 
         $application = new Application(...array_values(ApplicationConfiguration::getPostTypeArgs()));
         $application->addHooks();
-    }
-
-    /**
-     * Enqueue required style
-     * @return void
-     */
-    public function enqueueStyles()
-    {
-        wp_register_style(
-            'api-volunteer-manager-css',
-            VOLUNTEER_MANAGER_URL . '/dist/' .
-            (new CacheBust())->name('css/api-volunteer-manager.css')
-        );
-
-        wp_enqueue_style('api-volunteer-manager-css');
-    }
-
-    /**
-     * Enqueue required scripts
-     * @return void
-     */
-    public function enqueueScripts()
-    {
-        wp_register_script(
-            'api-volunteer-manager-js',
-            VOLUNTEER_MANAGER_URL . '/dist/' .
-            (new CacheBust())->name('js/api-volunteer-manager.js')
-        );
-
-        wp_enqueue_script('api-volunteer-manager-js');
-    }
-    
-    /**
-     * Add theme support
-     */
-    public function themeSupport()
-    {
-        add_theme_support('post-thumbnails');
     }
 }
