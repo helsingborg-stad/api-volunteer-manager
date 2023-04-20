@@ -1,6 +1,6 @@
 <?php
 
-namespace php\Employee;
+namespace php\PostType\Employee;
 
 use Brain\Monkey\Functions;
 use PluginTestCase\PluginTestCase;
