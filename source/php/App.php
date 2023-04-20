@@ -12,6 +12,8 @@ use VolunteerManager\Notification\EmailNotificationSender;
 use VolunteerManager\Notification\LoggingNotificationSender;
 use VolunteerManager\Notification\NotificationHandler;
 use VolunteerManager\Notification\NotificationsConfig;
+use VolunteerManager\PostType\Assignment\Assignment;
+use VolunteerManager\PostType\Assignment\AssignmentConfiguration;
 use VolunteerManager\PostType\Assignment\Notifications;
 
 class App

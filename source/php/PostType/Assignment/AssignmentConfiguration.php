@@ -1,6 +1,6 @@
 <?php
 
-namespace VolunteerManager;
+namespace VolunteerManager\PostType\Assignment;
 
 use VolunteerManager\Helper\Icon as Icon;
 

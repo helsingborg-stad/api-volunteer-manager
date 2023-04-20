@@ -1,6 +1,6 @@
 <?php
 
-namespace VolunteerManager;
+namespace VolunteerManager\PostType\Assignment;
 
 use VolunteerManager\Components\ApplicationMetaBox\AssignmentApplicationMetaBox;
 use VolunteerManager\Components\EditPostStatusButtons\EditPostStatusButtonFactory as EditPostStatusButtonFactory;
