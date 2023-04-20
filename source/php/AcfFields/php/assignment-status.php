@@ -12,7 +12,7 @@
             'aria-label' => '',
             'type' => 'taxonomy',
             'instructions' => '',
-            'required' => 0,
+            'required' => 1,
             'conditional_logic' => 0,
             'wrapper' => array(
                 'width' => '',
@@ -26,6 +26,35 @@
             'return_format' => 'object',
             'field_type' => 'select',
             'allow_null' => 1,
+            'acfe_bidirectional' => array(
+                'acfe_bidirectional_enabled' => '0',
+            ),
+            'multiple' => 0,
+        ),
+        1 => array(
+            'key' => 'field_643fba720c8ae',
+            'label' => __('Eligibility', 'api-volunteer-manager'),
+            'name' => 'assignment_eligibility',
+            'aria-label' => '',
+            'type' => 'taxonomy',
+            'instructions' => '',
+            'required' => 1,
+            'conditional_logic' => 0,
+            'wrapper' => array(
+                'width' => '',
+                'class' => '',
+                'id' => '',
+            ),
+            'taxonomy' => 'assignment-eligibility',
+            'add_term' => 0,
+            'save_terms' => 1,
+            'load_terms' => 1,
+            'return_format' => 'object',
+            'field_type' => 'select',
+            'allow_null' => 0,
+            'acfe_bidirectional' => array(
+                'acfe_bidirectional_enabled' => '0',
+            ),
             'multiple' => 0,
         ),
     ),
@@ -47,5 +76,10 @@
     'active' => true,
     'description' => '',
     'show_in_rest' => 1,
+    'acfe_display_title' => '',
+    'acfe_autosync' => '',
+    'acfe_form' => 0,
+    'acfe_meta' => '',
+    'acfe_note' => '',
 ));
 }
