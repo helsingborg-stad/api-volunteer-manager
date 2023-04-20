@@ -1,6 +1,6 @@
 <?php
 
-namespace VolunteerManager\Employee;
+namespace VolunteerManager\PostType\Employee;
 
 use WP_Error;
 

@@ -6,9 +6,8 @@ use Brain\Monkey\Expectation\Exception\ExpectationArgsRequired;
 use Brain\Monkey\Functions;
 use Mockery;
 use PluginTestCase\PluginTestCase;
-use VolunteerManager\API\Api;
 use VolunteerManager\API\EmployeeApi;
-use VolunteerManager\Employee\EmployeeApiValidatorInterface;
+use VolunteerManager\PostType\Employee\EmployeeApiValidatorInterface;
 
 class EmployeeApiTest extends PluginTestCase
 {

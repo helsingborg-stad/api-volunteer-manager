@@ -1,13 +1,12 @@
 <?php
 
-namespace php\Employee;
+namespace php\PostType\Employee;
 
 use Brain\Monkey\Expectation\Exception\ExpectationArgsRequired;
 use Brain\Monkey\Functions;
 use PluginTestCase\PluginTestCase;
 use ReflectionException;
-use VolunteerManager\Employee\Employee as Employee;
-use function Brain\Monkey\Functions;
+use VolunteerManager\PostType\Employee\Employee as Employee;
 
 class EmployeeTest extends PluginTestCase
 {

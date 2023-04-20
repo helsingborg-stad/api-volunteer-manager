@@ -1,10 +1,10 @@
 <?php
 
-namespace php;
+namespace php\PostType\Assignment;
 
 use Brain\Monkey\Functions;
 use PluginTestCase\PluginTestCase;
-use VolunteerManager\Assignment;
+use VolunteerManager\PostType\Assignment\Assignment;
 
 class AssignmentTest extends PluginTestCase
 {

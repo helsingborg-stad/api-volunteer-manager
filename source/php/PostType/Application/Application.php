@@ -1,11 +1,12 @@
 <?php
 
-namespace VolunteerManager;
+namespace VolunteerManager\PostType\Application;
 
-use VolunteerManager\Entity\ITerm;
+use VolunteerManager\Entity\TermInterface;
 use VolunteerManager\Entity\PostType;
 use VolunteerManager\Entity\Taxonomy as Taxonomy;
 use VolunteerManager\Helper\Admin\UI as AdminUI;
+use WP_Error;
 
 class Application extends PostType
 {
@@ -52,7 +53,7 @@ class Application extends PostType
      *
      * @return array|WP_Error
      */
-    public function insertStatusTerms(ITerm $taxonomy)
+    public function insertStatusTerms(TermInterface $taxonomy)
     {
         return $taxonomy->insertTerms(ApplicationConfiguration::getStatusTerms());
     }

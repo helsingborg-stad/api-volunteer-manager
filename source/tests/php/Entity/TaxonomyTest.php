@@ -3,8 +3,6 @@
 namespace php\Entity;
 
 use Brain\Monkey\Expectation\Exception\ExpectationArgsRequired;
-use Exception;
-use PhpParser\Node\Expr\FuncCall;
 use PluginTestCase\PluginTestCase;
 use VolunteerManager\Entity\Taxonomy;
 use Brain\Monkey\Functions;
