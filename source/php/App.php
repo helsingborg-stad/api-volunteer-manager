@@ -16,6 +16,7 @@ use VolunteerManager\PostType\Employee\Employee;
 use VolunteerManager\PostType\Employee\EmployeeApiManager;
 use VolunteerManager\PostType\Employee\EmployeeApiValidator;
 use VolunteerManager\PostType\Employee\EmployeeConfiguration;
+use VolunteerManager\PostType\Employee\EmployeeNotifications;
 
 class App
 {
@@ -44,6 +45,8 @@ class App
 
         $employee = new Employee(...array_values(EmployeeConfiguration::getPostTypeArgs()));
         $employee->addHooks();
+        $employeeNotifications = new EmployeeNotifications();
+        $employeeNotifications->addHooks();
 
         $employeeApiManager = new EmployeeApiManager(new EmployeeApiValidator());
         $employeeApiManager->addHooks();
