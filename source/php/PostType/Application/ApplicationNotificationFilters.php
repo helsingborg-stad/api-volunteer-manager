@@ -23,7 +23,7 @@ class ApplicationNotificationFilters extends NotificationFilters
         $assignment = get_field('application_assignment', $postId);
         $adminUrl = get_edit_post_link($assignment->ID);
         $args['content'] = sprintf(
-            __($args['content'], AVM_TEXT_DOMAIN),
+            $args['content'],
             $assignment->post_title,
             $adminUrl
         );
