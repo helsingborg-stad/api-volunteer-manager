@@ -19,8 +19,6 @@ class Employee extends PostType
         add_action('acf/save_post', array($this, 'setPostTitle'));
         add_action('add_meta_boxes', array($this, 'registerApplicationsMetaBox'), 10, 2);
 
-        add_filter('avm_external_volunteer_new_notification', array($this, 'populateNotificationReceiverWithSubmitter'), 10, 2);
-        add_filter('avm_admin_external_volunteer_new_notification', array($this, 'populateNotificationReceiverWithAdmin'), 10, 2);
         add_filter('acf/load_field/name=notes_date_updated', array($this, 'acfSetNotesDefaultDate'));
     }
 
@@ -28,34 +26,6 @@ class Employee extends PostType
     {
         $this->registerStatusTaxonomy();
         $this->insertEmploymentStatusTerms();
-    }
-
-    /**
-     * Populate notification receiver with submitter email address
-     * @param array $args
-     * @param int   $postId
-     * @return array
-     */
-    public function populateNotificationReceiverWithSubmitter(array $args, int $postId): array
-    {
-        $receiver = get_field('email', $postId);
-        $args['to'] = $receiver ?? '';
-        return $args;
-    }
-
-    /**
-     * Populate notification receiver with admin email addresses
-     * @param array $args
-     * @param int   $postId
-     * @return array
-     */
-    public function populateNotificationReceiverWithAdmin(array $args, int $postId): array
-    {
-        $receivers = get_field('notification_receivers', 'option') ?? [];
-        $emailArray = array_column($receivers, 'email');
-        $emailsString = implode(',', $emailArray);
-        $args['to'] = $emailsString;
-        return $args;
     }
 
     /**
