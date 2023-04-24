@@ -2,7 +2,7 @@
 
 namespace VolunteerManager\PostType\Assignment;
 
-class AssignmentNotifications
+class AssignmentNotificationFilters
 {
     public function addHooks()
     {
@@ -51,11 +51,11 @@ class AssignmentNotifications
         $post = get_post($postId);
         $submitterFirstName = get_post_meta($postId, 'submitted_by_first_name', true) ?? '';
         $args['subject'] = sprintf(
-            __($args['subject'], AVM_TEXT_DOMAIN),
+            $args['subject'],
             $post->post_title
         );
         $args['content'] = sprintf(
-            __($args['content'], AVM_TEXT_DOMAIN),
+            $args['content'],
             $submitterFirstName,
             $post->post_title
         );

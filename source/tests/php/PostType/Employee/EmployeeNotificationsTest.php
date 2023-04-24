@@ -4,11 +4,11 @@ namespace php\PostType\Employee;
 
 use Brain\Monkey\Functions;
 use PluginTestCase\PluginTestCase;
-use VolunteerManager\PostType\Employee\EmployeeNotifications;
+use VolunteerManager\PostType\Employee\EmployeeNotificationFilters;
 
 class EmployeeNotificationsTest extends PluginTestCase
 {
-    private EmployeeNotifications $employeeNotification;
+    private EmployeeNotificationFilters $employeeNotification;
     private object $post;
 
     public function setUp(): void
@@ -18,7 +18,7 @@ class EmployeeNotificationsTest extends PluginTestCase
         $this->post = new \stdClass();
         $this->post->ID = 99;
 
-        $this->employeeNotification = new EmployeeNotifications();
+        $this->employeeNotification = new EmployeeNotificationFilters();
     }
 
     /**

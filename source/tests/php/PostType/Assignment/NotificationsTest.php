@@ -4,11 +4,11 @@ namespace php\PostType\Assignment;
 
 use Brain\Monkey\Functions;
 use PluginTestCase\PluginTestCase;
-use VolunteerManager\PostType\Assignment\AssignmentNotifications;
+use VolunteerManager\PostType\Assignment\AssignmentNotificationFilters;
 
 class NotificationsTest extends PluginTestCase
 {
-    private AssignmentNotifications $assignmentNotifications;
+    private AssignmentNotificationFilters $assignmentNotifications;
     private object $post;
 
     public function setUp(): void
@@ -16,7 +16,7 @@ class NotificationsTest extends PluginTestCase
         parent::setUp();
 
         $this->post = (object)['ID' => 123, 'post_title' => 'Some title'];
-        $this->assignmentNotifications = new AssignmentNotifications();
+        $this->assignmentNotifications = new AssignmentNotificationFilters();
     }
 
     public function testAddHooks()
