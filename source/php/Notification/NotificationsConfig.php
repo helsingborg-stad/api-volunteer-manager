@@ -74,7 +74,7 @@ class NotificationsConfig
                 'newValue' => 'pending',
                 'message' => [
                     'subject' => __('A new application to assignment is created', AVM_TEXT_DOMAIN),
-                    'content' => __('Hello,<br><br>A new application for the volunteer assignment %s has been created in our system and is ready to be processed.<br>%s<br><br>Sincerely,<br><br>Engagement Helsingborg', AVM_TEXT_DOMAIN),
+                    'content' => __('Hello,<br><br>A new application for the volunteer assignment "%s" has been created in our system and is ready to be processed.<br>%s<br><br>Sincerely,<br><br>Engagement Helsingborg', AVM_TEXT_DOMAIN),
                 ],
                 'rule' => [
                     'key' => 'source',
