@@ -74,7 +74,22 @@ class NotificationsConfig
                 'newValue' => 'pending',
                 'message' => [
                     'subject' => __('A new application to assignment is created', AVM_TEXT_DOMAIN),
-                    'content' => __('Hello,<br><br>A new application for the volunteer assignment "%s" has been created in our system and is ready to be processed.<br>%s<br><br>Sincerely,<br><br>Engagement Helsingborg', AVM_TEXT_DOMAIN),
+                    'content' => __('Hello,<br><br>A new application for the volunteer assignment "%s" has been created in our system and is ready to be processed.<br>%s<br><br>Sincerely,<br><br>Engagemang Helsingborg', AVM_TEXT_DOMAIN)
+                ],
+                'rule' => [
+                    'key' => 'source',
+                    'value' => '',
+                    'operator' => 'NOT_EQUAL'
+                ]
+            ],
+            "Message to the volunteer when a new application for an assignment is created" => [
+                'key' => 'external_application_new',
+                'taxonomy' => 'application-status',
+                'oldValue' => '',
+                'newValue' => 'pending',
+                'message' => [
+                    'subject' => __('Your application is received', AVM_TEXT_DOMAIN),
+                    'content' => __('Hello %s,<br><br>Thank you for your application to the assignment "%s". You will shortly receive notification if your application has been approved.<br><br>Sincerely,<br><br>Engagement Helsingborg', AVM_TEXT_DOMAIN),
                 ],
                 'rule' => [
                     'key' => 'source',

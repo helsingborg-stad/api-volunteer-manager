@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Volunteer Manager\n"
-"POT-Creation-Date: 2023-04-24 14:21+0200\n"
-"PO-Revision-Date: 2023-04-24 14:22+0200\n"
+"POT-Creation-Date: 2023-04-24 15:32+0200\n"
+"PO-Revision-Date: 2023-04-24 15:33+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: sv_SE\n"
@@ -460,6 +460,7 @@ msgstr ""
 "Helsingborg"
 
 #: source/php/Notification/NotificationsConfig.php:46
+#: source/php/Notification/NotificationsConfig.php:91
 msgid "Your application is received"
 msgstr "Din ansökan har tagits emot"
 
@@ -502,11 +503,11 @@ msgid ""
 msgstr ""
 "Hej,<br><br>En ny ansökan har skapats i vårt system och är redo att "
 "behandlas. Ansökan gäller en ny volontär som vill hjälpa till att göra en "
-"positiv skillnad i Helsingborg.<br><br>\n"
-"Vi ber dig vänligen att ta en titt på ansökan och att behandla den så snart "
-"som möjligt. Vi vill se till att varje volontär som är intresserad av att "
-"hjälpa till att förbättra vår stad får en chans att göra det.<br><br>Med "
-"vänliga hälsningar,<br><br>Engagemang Helsingborg"
+"positiv skillnad i Helsingborg.<br><br>Vi ber dig vänligen att ta en titt på "
+"ansökan och att behandla den så snart som möjligt. Vi vill se till att varje "
+"volontär som är intresserad av att hjälpa till att förbättra vår stad får en "
+"chans att göra det.<br><br>Med vänliga hälsningar,<br><br>Engagemang "
+"Helsingborg"
 
 #: source/php/Notification/NotificationsConfig.php:76
 msgid "A new application to assignment is created"
@@ -515,13 +516,21 @@ msgstr "En ny ansökan till volontäruppdrag har skapats"
 #: source/php/Notification/NotificationsConfig.php:77
 #, php-format
 msgid ""
-"Hello,<br><br>A new application for the volunteer assignment %s has been "
+"Hello,<br><br>A new application for the volunteer assignment \"%s\" has been "
 "created in our system and is ready to be processed.<br>%s<br><br>Sincerely,"
-"<br><br>Engagement Helsingborg"
+"<br><br>Engagemang Helsingborg"
 msgstr ""
-"Hej,<br><br>En ny ansökan till volontäruppdraget %s har skapats i vårt "
-"system och är redo att behandlas.<br>%s<br><br>Med vänliga hälsningar,"
-"<br><br>Engagemang Helsingborg\r"
+
+#: source/php/Notification/NotificationsConfig.php:92
+#, php-format
+msgid ""
+"Hello %s,<br><br>Thank you for your application to the assignment \"%s\". "
+"You will shortly receive notification if your application has been approved."
+"<br><br>Sincerely,<br><br>Engagement Helsingborg"
+msgstr ""
+"Hej %s,<br><br>Tack för din ansökan till uppdraget %s. Inom kort kommer du "
+"få besked om din ansökan blivit godkänd.<br><br>Med vänliga hälsningar,"
+"<br><br>Engagemang Helsingborg"
 
 #: source/php/PostType/Application/Application.php:83
 #: source/php/PostType/Assignment/Assignment.php:66
@@ -661,49 +670,3 @@ msgstr ""
 #. Author URI of the plugin/theme
 msgid "https://github.com/helsingborg-stad"
 msgstr ""
-
-#~ msgid "Enable if the employer is external ie. not arranged by the city."
-#~ msgstr "Aktivera om arbetsgivaren är extern dvs. inte arrangerad av staden."
-
-#~ msgid "If the employer is external."
-#~ msgstr "Om arbetsgivaren är extern."
-
-#~ msgid "Name of the company/organisation."
-#~ msgstr "Företagets/organisationens namn."
-
-#~ msgctxt "Post type plural"
-#~ msgid "Assignments"
-#~ msgstr "Uppdrag"
-
-#~ msgctxt "Post type singular"
-#~ msgid "Assignment"
-#~ msgstr "Uppdrag"
-
-#~ msgid "assignment"
-#~ msgstr "uppdrag"
-
-#~ msgctxt "Post type plural"
-#~ msgid "Employees"
-#~ msgstr "Volontärer"
-
-#~ msgctxt "Post type singular"
-#~ msgid "Employee"
-#~ msgstr "Volontär"
-
-#~ msgid "employee"
-#~ msgstr "volonätr"
-
-#~ msgid "List of email addresses that will receive email notifications."
-#~ msgstr "E-postadresser som kommer att få notiser via e-post."
-
-#~ msgid "Review"
-#~ msgstr "Granska"
-
-#~ msgid "Qualifications"
-#~ msgstr "Kvalifikationer"
-
-#~ msgid "Employer name"
-#~ msgstr "Arbetsgivarens namn"
-
-#~ msgid "Employer Website"
-#~ msgstr "Arbetsgivarens webbplats"
