@@ -2,7 +2,9 @@
 
 namespace VolunteerManager\PostType\Assignment;
 
-class AssignmentNotifications
+use VolunteerManager\Notification\NotificationFilters;
+
+class AssignmentNotificationFilters extends NotificationFilters
 {
     public function addHooks()
     {
@@ -11,20 +13,8 @@ class AssignmentNotifications
         add_filter('avm_external_assignment_approved_notification', array($this, 'populateStatusNotificationWithContent'), 11, 2);
         add_filter('avm_external_assignment_denied_notification', array($this, 'populateNotificationReceiverWithSubmitter'), 10, 2);
         add_filter('avm_external_assignment_denied_notification', array($this, 'populateStatusNotificationWithContent'), 10, 2);
-    }
-
-    /**
-     * Populates notifications with sender email address
-     * @param array $args
-     * @return array
-     */
-    public function populateNotificationSender(array $args): array
-    {
-        $senderOption = get_field('notification_sender', 'option');
-        $senderEmail = $senderOption['email'] ?? '';
-        $sender = $senderOption['name'] ? "{$senderOption['name']} <{$senderEmail}>" : $senderEmail;
-        $args['from'] = $sender;
-        return $args;
+        add_filter('avm_admin_external_assignment_new_notification', array($this, 'populateNotificationReceiverWithAdmin'), 10, 2);
+        add_filter('avm_admin_external_assignment_new_notification', array($this, 'populateAdminNotificationWithContent'), 10, 2);
     }
 
     /**
@@ -51,13 +41,31 @@ class AssignmentNotifications
         $post = get_post($postId);
         $submitterFirstName = get_post_meta($postId, 'submitted_by_first_name', true) ?? '';
         $args['subject'] = sprintf(
-            __($args['subject'], AVM_TEXT_DOMAIN),
+            $args['subject'],
             $post->post_title
         );
         $args['content'] = sprintf(
-            __($args['content'], AVM_TEXT_DOMAIN),
+            $args['content'],
             $submitterFirstName,
             $post->post_title
+        );
+        return $args;
+    }
+
+    /**
+     * Populate notification with content
+     * @param array $args
+     * @param int   $postId
+     * @return array
+     */
+    public function populateAdminNotificationWithContent(array $args, int $postId): array
+    {
+        $post = get_post($postId);
+        $adminUrl = get_edit_post_link($postId);
+        $args['content'] = sprintf(
+            $args['content'],
+            $post->post_title,
+            $adminUrl
         );
         return $args;
     }

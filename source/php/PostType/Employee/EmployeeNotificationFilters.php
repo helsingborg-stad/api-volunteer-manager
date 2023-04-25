@@ -2,7 +2,9 @@
 
 namespace VolunteerManager\PostType\Employee;
 
-class EmployeeNotifications
+use VolunteerManager\Notification\NotificationFilters;
+
+class EmployeeNotificationFilters extends NotificationFilters
 {
     public function addHooks()
     {
@@ -25,21 +27,6 @@ class EmployeeNotifications
     }
 
     /**
-     * Populate notification receiver with admin email addresses
-     * @param array $args
-     * @param int   $postId
-     * @return array
-     */
-    public function populateNotificationReceiverWithAdmin(array $args, int $postId): array
-    {
-        $receivers = get_field('notification_receivers', 'option') ?? [];
-        $emailArray = array_column($receivers, 'email');
-        $emailsString = implode(',', $emailArray);
-        $args['to'] = $emailsString;
-        return $args;
-    }
-
-    /**
      * Populate notification with subject and content
      * @param array $args
      * @param int   $postId
@@ -48,10 +35,8 @@ class EmployeeNotifications
     public function populateNotificationWithContent(array $args, int $postId): array
     {
         $firstName = get_field($postId, 'first_name') ?? '';
-        $args['subject'] = __($args['subject'], AVM_TEXT_DOMAIN);
         $args['content'] = sprintf(
-            __($args['content'], AVM_TEXT_DOMAIN),
-            $firstName,
+            $args['content'], $firstName,
         );
         return $args;
     }

@@ -37,6 +37,21 @@ class NotificationsConfig
                     'operator' => 'NOT_EQUAL'
                 ]
             ],
+            "Message to admin when a new assignment is created" => [
+                'key' => 'admin_external_assignment_new',
+                'taxonomy' => 'assignment-status',
+                'oldValue' => '',
+                'newValue' => 'pending',
+                'message' => [
+                    'subject' => __('A new assignment is created', AVM_TEXT_DOMAIN),
+                    'content' => __('Hello,<br><br>A new volunteer assignment "%s" has been created in our system and is ready to be processed.<br>%s<br><br>Sincerely,<br><br>Engagemang Helsingborg', AVM_TEXT_DOMAIN)
+                ],
+                'rule' => [
+                    'key' => 'source',
+                    'value' => '',
+                    'operator' => 'NOT_EQUAL'
+                ]
+            ],
             "Message to the volunteer when a new volunteer is created" => [
                 'key' => 'external_volunteer_new',
                 'taxonomy' => 'employee-registration-status',
@@ -66,7 +81,67 @@ class NotificationsConfig
                     'value' => '',
                     'operator' => 'NOT_EQUAL'
                 ]
-            ]
+            ],
+            "Message to admin when a new application for an assignment is created" => [
+                'key' => 'admin_external_application_new',
+                'taxonomy' => 'application-status',
+                'oldValue' => '',
+                'newValue' => 'pending',
+                'message' => [
+                    'subject' => __('A new application to assignment is created', AVM_TEXT_DOMAIN),
+                    'content' => __('Hello,<br><br>A new application for the volunteer assignment "%s" has been created in our system and is ready to be processed.<br>%s<br><br>Sincerely,<br><br>Engagemang Helsingborg', AVM_TEXT_DOMAIN)
+                ],
+                'rule' => [
+                    'key' => 'source',
+                    'value' => '',
+                    'operator' => 'NOT_EQUAL'
+                ]
+            ],
+            "Message to the volunteer when a new application for an assignment is created" => [
+                'key' => 'external_application_new',
+                'taxonomy' => 'application-status',
+                'oldValue' => '',
+                'newValue' => 'pending',
+                'message' => [
+                    'subject' => __('Your application is received', AVM_TEXT_DOMAIN),
+                    'content' => __('Hello %s,<br><br>Thank you for your application to the assignment "%s". You will shortly receive notification if your application has been approved.<br><br>Sincerely,<br><br>Engagement Helsingborg', AVM_TEXT_DOMAIN),
+                ],
+                'rule' => [
+                    'key' => 'source',
+                    'value' => '',
+                    'operator' => 'NOT_EQUAL'
+                ]
+            ],
+            "Message to the volunteer when a new application for an assignment is approved" => [
+                'key' => 'external_application_approved',
+                'taxonomy' => 'application-status',
+                'oldValue' => 'pending',
+                'newValue' => 'approved',
+                'message' => [
+                    'subject' => __('Your application is approved', AVM_TEXT_DOMAIN),
+                    'content' => __('Hi %s,<br><br>Your application for the assignment "%s" has now been approved. You will be contacted in a separate email with instructions and prerequisites for the assignment. If you have any questions, you can always contact us at engagement@helsingborg.se or on 042-105000.<br>Good luck with your mission and thank you for making a difference!<br><br>Sincerely,<br><br>Engagemang Helsingborg', AVM_TEXT_DOMAIN),
+                ],
+                'rule' => [
+                    'key' => 'source',
+                    'value' => '',
+                    'operator' => 'NOT_EQUAL'
+                ]
+            ],
+            "Message to the volunteer when a new application for an assignment is denied" => [
+                'key' => 'external_application_denied',
+                'taxonomy' => 'application-status',
+                'oldValue' => 'pending',
+                'newValue' => 'denied',
+                'message' => [
+                    'subject' => __('Your application is denied', AVM_TEXT_DOMAIN),
+                    'content' => __('Hi %s,<br><br>Your application to "%s" has not been approved. Engagement Helsingborg will contact you and tell you why. If you have other questions, please contact kontaktcenter@helsingborg.se or 042-105000.<br>Thanks!<br><br>Sincerely,<br><br>Engagemang Helsingborg', AVM_TEXT_DOMAIN),
+                ],
+                'rule' => [
+                    'key' => 'source',
+                    'value' => '',
+                    'operator' => 'NOT_EQUAL'
+                ]
+            ],
         ];
     }
 }
