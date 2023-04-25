@@ -96,7 +96,37 @@ class NotificationsConfig
                     'value' => '',
                     'operator' => 'NOT_EQUAL'
                 ]
-            ]
+            ],
+            "Message to the volunteer when a new application for an assignment is approved" => [
+                'key' => 'external_application_approved',
+                'taxonomy' => 'application-status',
+                'oldValue' => 'pending',
+                'newValue' => 'approved',
+                'message' => [
+                    'subject' => __('Your application is approved', AVM_TEXT_DOMAIN),
+                    'content' => __('Hi %s,<br><br>Your application for the assignment "%s" has now been approved. You will be contacted in a separate email with instructions and prerequisites for the assignment. If you have any questions, you can always contact us at engagement@helsingborg.se or on 042-105000.<br>Good luck with your mission and thank you for making a difference!<br><br>Sincerely,<br><br>Engagemang Helsingborg', AVM_TEXT_DOMAIN),
+                ],
+                'rule' => [
+                    'key' => 'source',
+                    'value' => '',
+                    'operator' => 'NOT_EQUAL'
+                ]
+            ],
+            "Message to the volunteer when a new application for an assignment is denied" => [
+                'key' => 'external_application_denied',
+                'taxonomy' => 'application-status',
+                'oldValue' => 'pending',
+                'newValue' => 'denied',
+                'message' => [
+                    'subject' => __('Your application is denied', AVM_TEXT_DOMAIN),
+                    'content' => __('Hi %s,<br><br>Your application to "%s" has not been approved. Engagement Helsingborg will contact you and tell you why. If you have other questions, please contact kontaktcenter@helsingborg.se or 042-105000.<br>Thanks!<br><br>Sincerely,<br><br>Engagemang Helsingborg', AVM_TEXT_DOMAIN),
+                ],
+                'rule' => [
+                    'key' => 'source',
+                    'value' => '',
+                    'operator' => 'NOT_EQUAL'
+                ]
+            ],
         ];
     }
 }

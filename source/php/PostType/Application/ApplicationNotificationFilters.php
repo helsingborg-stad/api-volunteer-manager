@@ -10,8 +10,12 @@ class ApplicationNotificationFilters extends NotificationFilters
     {
         add_filter('avm_admin_external_application_new_notification', array($this, 'populateNotificationReceiverWithAdmin'), 10, 2);
         add_filter('avm_admin_external_application_new_notification', array($this, 'populateAdminNotificationWithContent'), 10, 2);
-        add_filter('avm_external_application_new_notification', array($this, 'populateReceiverWithSubmitter'), 10, 2);
+        add_filter('avm_external_application_new_notification', array($this, 'populateReceiverWithEmployee'), 10, 2);
         add_filter('avm_external_application_new_notification', array($this, 'populateApplicationWithContent'), 10, 2);
+        add_filter('avm_external_application_approved_notification', array($this, 'populateReceiverWithEmployee'), 10, 2);
+        add_filter('avm_external_application_approved_notification', array($this, 'populateApplicationWithContent'), 10, 2);
+        add_filter('avm_external_application_denied_notification', array($this, 'populateReceiverWithEmployee'), 10, 2);
+        add_filter('avm_external_application_denied_notification', array($this, 'populateApplicationWithContent'), 10, 2);
     }
 
     /**
@@ -38,7 +42,7 @@ class ApplicationNotificationFilters extends NotificationFilters
      * @param int   $postId
      * @return array
      */
-    public function populateReceiverWithSubmitter(array $args, int $postId): array
+    public function populateReceiverWithEmployee(array $args, int $postId): array
     {
         $employee = get_field('application_employee', $postId);
         $receiver = get_field('email', $employee->ID);

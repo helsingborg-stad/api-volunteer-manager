@@ -1,6 +1,5 @@
 <?php
 
-
 namespace php\PostType\Application;
 
 use Brain\Monkey\Functions;
@@ -25,8 +24,12 @@ class ApplicationNotificationFiltersTest extends PluginTestCase
         $this->applicationNotificationFilters->addHooks();
         self::assertNotFalse(has_filter('avm_admin_external_application_new_notification', [$this->applicationNotificationFilters, 'populateNotificationReceiverWithAdmin']));
         self::assertNotFalse(has_filter('avm_admin_external_application_new_notification', [$this->applicationNotificationFilters, 'populateAdminNotificationWithContent']));
-        self::assertNotFalse(has_filter('avm_external_application_new_notification', [$this->applicationNotificationFilters, 'populateReceiverWithSubmitter']));
+        self::assertNotFalse(has_filter('avm_external_application_new_notification', [$this->applicationNotificationFilters, 'populateReceiverWithEmployee']));
         self::assertNotFalse(has_filter('avm_external_application_new_notification', [$this->applicationNotificationFilters, 'populateApplicationWithContent']));
+        self::assertNotFalse(has_filter('avm_external_application_approved_notification', [$this->applicationNotificationFilters, 'populateReceiverWithEmployee']));
+        self::assertNotFalse(has_filter('avm_external_application_approved_notification', [$this->applicationNotificationFilters, 'populateApplicationWithContent']));
+        self::assertNotFalse(has_filter('avm_external_application_denied_notification', [$this->applicationNotificationFilters, 'populateReceiverWithEmployee']));
+        self::assertNotFalse(has_filter('avm_external_application_denied_notification', [$this->applicationNotificationFilters, 'populateApplicationWithContent']));
     }
 
     public function testPopulateAdminNotificationWithContent()
@@ -48,7 +51,7 @@ class ApplicationNotificationFiltersTest extends PluginTestCase
         Functions\expect('get_field')->times(2)->andReturn((object)['ID' => 1], 'foo@bar.com');
         $this->assertEquals(
             $expectedResult,
-            $this->applicationNotificationFilters->populateReceiverWithSubmitter($args, $this->post->ID)
+            $this->applicationNotificationFilters->populateReceiverWithEmployee($args, $this->post->ID)
         );
     }
 
