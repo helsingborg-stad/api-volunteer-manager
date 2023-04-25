@@ -34,9 +34,9 @@ class ApplicationConfiguration
                 'color' => '#dd9933'
             ],
             [
-                'name' => __('Ongoing', AVM_TEXT_DOMAIN),
-                'slug' => 'ongoing',
-                'description' => 'Application is under investigation.',
+                'name' => __('Approved', AVM_TEXT_DOMAIN),
+                'slug' => 'approved',
+                'description' => 'Application is approved.',
                 'color' => '#81d742'
             ],
             [
