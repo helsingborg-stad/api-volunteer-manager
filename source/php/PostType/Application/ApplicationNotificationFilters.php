@@ -10,7 +10,6 @@ class ApplicationNotificationFilters extends NotificationFilters
     {
         add_filter('avm_admin_external_application_new_notification', array($this, 'populateNotificationReceiverWithAdmin'), 10, 2);
         add_filter('avm_admin_external_application_new_notification', array($this, 'populateAdminNotificationWithContent'), 10, 2);
-
         add_filter('avm_external_application_new_notification', array($this, 'populateReceiverWithSubmitter'), 10, 2);
         add_filter('avm_external_application_new_notification', array($this, 'populateApplicationWithContent'), 10, 2);
     }

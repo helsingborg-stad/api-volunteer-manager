@@ -6,7 +6,7 @@ use Brain\Monkey\Functions;
 use PluginTestCase\PluginTestCase;
 use VolunteerManager\PostType\Employee\EmployeeNotificationFilters;
 
-class EmployeeNotificationsTest extends PluginTestCase
+class EmployeeNotificationFiltersTest extends PluginTestCase
 {
     private EmployeeNotificationFilters $employeeNotification;
     private object $post;
@@ -14,11 +14,17 @@ class EmployeeNotificationsTest extends PluginTestCase
     public function setUp(): void
     {
         parent::setUp();
-
         $this->post = new \stdClass();
         $this->post->ID = 99;
-
         $this->employeeNotification = new EmployeeNotificationFilters();
+    }
+
+    public function testAddHooks()
+    {
+        $this->employeeNotification->addHooks();
+        self::assertNotFalse(has_filter('avm_external_volunteer_new_notification', [$this->employeeNotification, 'populateNotificationReceiverWithSubmitter']));
+        self::assertNotFalse(has_filter('avm_external_volunteer_new_notification', [$this->employeeNotification, 'populateNotificationWithContent']));
+        self::assertNotFalse(has_filter('avm_admin_external_volunteer_new_notification', [$this->employeeNotification, 'populateNotificationReceiverWithAdmin']));
     }
 
     /**

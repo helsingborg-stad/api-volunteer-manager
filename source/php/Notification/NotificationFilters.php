@@ -18,4 +18,18 @@ class NotificationFilters
         $args['to'] = $emailsString;
         return $args;
     }
+
+    /**
+     * Populates notifications with sender email address
+     * @param array $args
+     * @return array
+     */
+    public function populateNotificationSender(array $args): array
+    {
+        $senderOption = get_field('notification_sender', 'option');
+        $senderEmail = $senderOption['email'] ?? '';
+        $sender = $senderOption['name'] ? "{$senderOption['name']} <{$senderEmail}>" : $senderEmail;
+        $args['from'] = $sender;
+        return $args;
+    }
 }
