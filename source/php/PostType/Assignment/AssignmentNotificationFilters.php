@@ -13,6 +13,8 @@ class AssignmentNotificationFilters extends NotificationFilters
         add_filter('avm_external_assignment_approved_notification', array($this, 'populateStatusNotificationWithContent'), 11, 2);
         add_filter('avm_external_assignment_denied_notification', array($this, 'populateNotificationReceiverWithSubmitter'), 10, 2);
         add_filter('avm_external_assignment_denied_notification', array($this, 'populateStatusNotificationWithContent'), 10, 2);
+        add_filter('avm_admin_external_assignment_new_notification', array($this, 'populateNotificationReceiverWithAdmin'), 10, 2);
+        add_filter('avm_admin_external_assignment_new_notification', array($this, 'populateAdminNotificationWithContent'), 10, 2);
     }
 
     /**
@@ -46,6 +48,24 @@ class AssignmentNotificationFilters extends NotificationFilters
             $args['content'],
             $submitterFirstName,
             $post->post_title
+        );
+        return $args;
+    }
+
+    /**
+     * Populate notification with content
+     * @param array $args
+     * @param int   $postId
+     * @return array
+     */
+    public function populateAdminNotificationWithContent(array $args, int $postId): array
+    {
+        $post = get_post($postId);
+        $adminUrl = get_edit_post_link($postId);
+        $args['content'] = sprintf(
+            $args['content'],
+            $post->post_title,
+            $adminUrl
         );
         return $args;
     }

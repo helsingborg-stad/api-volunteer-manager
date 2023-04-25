@@ -26,6 +26,8 @@ class AssignmentNotificationFiltersTest extends PluginTestCase
         self::assertNotFalse(has_filter('avm_external_assignment_approved_notification', [$this->assignmentNotifications, 'populateStatusNotificationWithContent']));
         self::assertNotFalse(has_filter('avm_external_assignment_denied_notification', [$this->assignmentNotifications, 'populateNotificationReceiverWithSubmitter']));
         self::assertNotFalse(has_filter('avm_external_assignment_denied_notification', [$this->assignmentNotifications, 'populateStatusNotificationWithContent']));
+        self::assertNotFalse(has_filter('avm_admin_external_assignment_new_notification', [$this->assignmentNotifications, 'populateNotificationReceiverWithAdmin']));
+        self::assertNotFalse(has_filter('avm_admin_external_assignment_new_notification', [$this->assignmentNotifications, 'populateAdminNotificationWithContent']));
     }
 
     /**
@@ -93,5 +95,17 @@ class AssignmentNotificationFiltersTest extends PluginTestCase
         Functions\expect('get_post_meta')->andReturn('Foo');
         $result = $this->assignmentNotifications->populateStatusNotificationWithContent($args, $this->post->ID);
         $this->assertContains('Your assignment "Some title" is approved', $result);
+    }
+
+    public function testPopulateAdminNotificationWithContent()
+    {
+        $args = ['to' => '', 'from' => '', 'subject' => 'Subject example', 'content' => 'Lorem ipsum %s sit amet %s'];
+        $expectedResult = ['to' => '', 'from' => '', 'subject' => 'Subject example', 'content' => 'Lorem ipsum Foo Bar sit amet https://foo.bar'];
+        Functions\when('get_post')->justReturn((object)['ID' => 123, 'post_title' => 'Foo Bar']);
+        Functions\when('get_edit_post_link')->justReturn('https://foo.bar');
+        $this->assertEquals(
+            $expectedResult,
+            $this->assignmentNotifications->populateAdminNotificationWithContent($args, $this->post->ID)
+        );
     }
 }

@@ -37,6 +37,21 @@ class NotificationsConfig
                     'operator' => 'NOT_EQUAL'
                 ]
             ],
+            "Message to admin when a new assignment is created" => [
+                'key' => 'admin_external_assignment_new',
+                'taxonomy' => 'assignment-status',
+                'oldValue' => '',
+                'newValue' => 'pending',
+                'message' => [
+                    'subject' => __('A new assignment is created', AVM_TEXT_DOMAIN),
+                    'content' => __('Hello,<br><br>A new volunteer assignment "%s" has been created in our system and is ready to be processed.<br>%s<br><br>Sincerely,<br><br>Engagemang Helsingborg', AVM_TEXT_DOMAIN)
+                ],
+                'rule' => [
+                    'key' => 'source',
+                    'value' => '',
+                    'operator' => 'NOT_EQUAL'
+                ]
+            ],
             "Message to the volunteer when a new volunteer is created" => [
                 'key' => 'external_volunteer_new',
                 'taxonomy' => 'employee-registration-status',

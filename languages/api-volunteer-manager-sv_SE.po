@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Volunteer Manager\n"
-"POT-Creation-Date: 2023-04-25 11:38+0200\n"
-"PO-Revision-Date: 2023-04-25 11:41+0200\n"
+"POT-Creation-Date: 2023-04-25 16:10+0200\n"
+"PO-Revision-Date: 2023-04-25 16:15+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: sv_SE\n"
@@ -232,15 +232,15 @@ msgstr "Plats"
 
 #: source/php/AcfFields/php/location.php:10
 msgid "Street address"
-msgstr ""
+msgstr "Gatuadress"
 
 #: source/php/AcfFields/php/location.php:30
 msgid "Postal code"
-msgstr ""
+msgstr "Postnummer"
 
 #: source/php/AcfFields/php/location.php:52
 msgid "City"
-msgstr ""
+msgstr "Stad"
 
 #: source/php/AcfFields/php/options.php:6 source/php/Admin.php:43
 #: source/php/Admin.php:44
@@ -460,11 +460,26 @@ msgstr ""
 "Helsingborg"
 
 #: source/php/Notification/NotificationsConfig.php:46
-#: source/php/Notification/NotificationsConfig.php:91
+msgid "A new assignment is created"
+msgstr "Ett nytt uppdrag har skapats"
+
+#: source/php/Notification/NotificationsConfig.php:47
+#, php-format
+msgid ""
+"Hello,<br><br>A new volunteer assignment \"%s\" has been created in our "
+"system and is ready to be processed.<br>%s<br><br>Sincerely,"
+"<br><br>Engagemang Helsingborg"
+msgstr ""
+"Hej,<br><br>Ett nytt volontäruppdrag ”%s” har skapats i vårt system och är "
+"redo att behandlas.<br>%s<br><br>Med vänliga hälsningar,<br><br>Engagemang "
+"Helsingborg"
+
+#: source/php/Notification/NotificationsConfig.php:61
+#: source/php/Notification/NotificationsConfig.php:106
 msgid "Your application is received"
 msgstr "Din ansökan har tagits emot"
 
-#: source/php/Notification/NotificationsConfig.php:47
+#: source/php/Notification/NotificationsConfig.php:62
 #, php-format
 msgid ""
 "Hello %s,<br><br>We are pleased to inform you that your application to "
@@ -488,11 +503,11 @@ msgstr ""
 "kontakta oss om du har några frågor eller funderingar.<br><br>Tack igen för "
 "ditt engagemang!<br><br>Med vänliga hälsningar,<br><br>Engagemang Helsingborg"
 
-#: source/php/Notification/NotificationsConfig.php:61
+#: source/php/Notification/NotificationsConfig.php:76
 msgid "A new application is created"
 msgstr "En ny ansökan har skapats"
 
-#: source/php/Notification/NotificationsConfig.php:62
+#: source/php/Notification/NotificationsConfig.php:77
 msgid ""
 "Hello,<br><br>A new application has been created in our system and is ready "
 "to be processed. The application concerns a new volunteer who wants to help "
@@ -509,11 +524,11 @@ msgstr ""
 "chans att göra det.<br><br>Med vänliga hälsningar,<br><br>Engagemang "
 "Helsingborg"
 
-#: source/php/Notification/NotificationsConfig.php:76
+#: source/php/Notification/NotificationsConfig.php:91
 msgid "A new application to assignment is created"
 msgstr "En ny ansökan till volontäruppdrag har skapats"
 
-#: source/php/Notification/NotificationsConfig.php:77
+#: source/php/Notification/NotificationsConfig.php:92
 #, php-format
 msgid ""
 "Hello,<br><br>A new application for the volunteer assignment \"%s\" has been "
@@ -524,7 +539,7 @@ msgstr ""
 "system och är redo att behandlas.<br>%s<br><br>Med vänliga hälsningar,"
 "<br><br>Engagemang Helsingborg"
 
-#: source/php/Notification/NotificationsConfig.php:92
+#: source/php/Notification/NotificationsConfig.php:107
 #, php-format
 msgid ""
 "Hello %s,<br><br>Thank you for your application to the assignment \"%s\". "
@@ -535,11 +550,11 @@ msgstr ""
 "få besked om din ansökan blivit godkänd.<br><br>Med vänliga hälsningar,"
 "<br><br>Engagemang Helsingborg"
 
-#: source/php/Notification/NotificationsConfig.php:106
+#: source/php/Notification/NotificationsConfig.php:121
 msgid "Your application is approved"
 msgstr "Din ansökan har godkänts"
 
-#: source/php/Notification/NotificationsConfig.php:107
+#: source/php/Notification/NotificationsConfig.php:122
 #, php-format
 msgid ""
 "Hi %s,<br><br>Your application for the assignment \"%s\" has now been "
@@ -556,11 +571,11 @@ msgstr ""
 "uppdrag och tack för att du gör skillnad!<br><br>Med vänliga hälsningar,"
 "<br><br>Engagemang Helsingborg"
 
-#: source/php/Notification/NotificationsConfig.php:121
+#: source/php/Notification/NotificationsConfig.php:136
 msgid "Your application is denied"
 msgstr "Din ansökan har nekats"
 
-#: source/php/Notification/NotificationsConfig.php:122
+#: source/php/Notification/NotificationsConfig.php:137
 #, php-format
 msgid ""
 "Hi %s,<br><br>Your application to \"%s\" has not been approved. Engagement "
@@ -590,10 +605,10 @@ msgid "Pending"
 msgstr "Väntande"
 
 #: source/php/PostType/Application/ApplicationConfiguration.php:37
-#: source/php/PostType/Assignment/AssignmentConfiguration.php:42
-#: source/php/PostType/Employee/EmployeeConfiguration.php:40
-msgid "Ongoing"
-msgstr "Pågående"
+#: source/php/PostType/Assignment/AssignmentConfiguration.php:36
+#: source/php/PostType/Employee/EmployeeConfiguration.php:46
+msgid "Approved"
+msgstr "Godkänd"
 
 #: source/php/PostType/Application/ApplicationConfiguration.php:43
 msgid "Closed"
@@ -631,14 +646,14 @@ msgstr "Volontärer"
 msgid "Assignments"
 msgstr "Uppdrag"
 
-#: source/php/PostType/Assignment/AssignmentConfiguration.php:36
-#: source/php/PostType/Employee/EmployeeConfiguration.php:46
-msgid "Approved"
-msgstr "Godkänd"
-
 #: source/php/PostType/Assignment/AssignmentConfiguration.php:38
 msgid "Approved assignment"
 msgstr ""
+
+#: source/php/PostType/Assignment/AssignmentConfiguration.php:42
+#: source/php/PostType/Employee/EmployeeConfiguration.php:40
+msgid "Ongoing"
+msgstr "Pågående"
 
 #: source/php/PostType/Assignment/AssignmentConfiguration.php:44
 msgid "Ongoing assignment"
