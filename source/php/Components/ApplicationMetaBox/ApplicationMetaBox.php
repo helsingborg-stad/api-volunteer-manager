@@ -2,7 +2,9 @@
 
 namespace VolunteerManager\Components\ApplicationMetaBox;
 
-abstract class ApplicationMetaBox implements ApplicationMetaBoxInterface
+use VolunteerManager\Helper\Admin\UI as AdminUI;
+
+class ApplicationMetaBox
 {
     private object $post;
     private string $metaKey;
@@ -75,6 +77,7 @@ abstract class ApplicationMetaBox implements ApplicationMetaBoxInterface
         $html .= '<tr>
                     <th>' . __('Name', AVM_TEXT_DOMAIN) . '</th>
                     <th>' . __('Date', AVM_TEXT_DOMAIN) . '</th>
+                    <th>' . __('Eligibility', AVM_TEXT_DOMAIN) . '</th>
                     <th>' . __('Status', AVM_TEXT_DOMAIN) . '</th>
                     <th></th>
                   </tr>';
@@ -87,8 +90,46 @@ abstract class ApplicationMetaBox implements ApplicationMetaBoxInterface
     }
 
     /**
-     * Returns an individual application row
+     * Renders a list of applications assigned to a particular post.
      * @param object $post
+     * @return void
      */
-    abstract protected function getApplicationRow(object $post): string;
+    public function getApplicationRow(object $post): string
+    {
+        $employee = get_field('application_employee', $post->ID);
+        $employeeCrimeRecord = get_field('crime_record_extracted', $employee->ID);
+        $employeeEligibilityLevel = $employeeCrimeRecord ? 2 : 1;
+        $assignment = get_field('application_assignment', $post->ID);
+        $assignmentEligibilityLevel = $this->getAssignmentEligibilityLevel($assignment);
+        $eligibilityClass = $employeeEligibilityLevel < $assignmentEligibilityLevel ? 'red' : '';
+        $date = get_the_date('y-m-d H:i', $post->ID);
+        $status = get_field('application_status', $post->ID);
+
+        $employeeHtml = '<td class="title"><a href="' . get_edit_post_link($employee->ID) . '">' . $employee->post_title . '</a></td>';
+        $assignmentHtml = '<td class="title"><a href="' . get_edit_post_link($assignment->ID) . '">' . $assignment->post_title . '</a></td>';
+
+        $html = '<tr>';
+        if ($this->post->post_type === 'assignment') {
+            $html .= $employeeHtml;
+        } elseif ($this->post->post_type === 'employee') {
+            $html .= $assignmentHtml;
+        }
+        $html .= '
+        <td>' . $date . '</td>
+        <td><span class="' . $eligibilityClass . '">' . __('Level', AVM_TEXT_DOMAIN) . ' ' . $employeeEligibilityLevel . '</span></td>
+        <td>' . AdminUI::createTaxonomyPills([$status]) . '</td>
+        <td class="actions">
+            <a href="' . get_edit_post_link($post->ID) . '">' . __('Edit', AVM_TEXT_DOMAIN) . '</a>
+            <a href="' . get_delete_post_link($post->ID) . '" class="red">' . __('Delete', AVM_TEXT_DOMAIN) . '</a>
+        </td>
+        </tr>';
+
+        return $html;
+    }
+
+    public function getAssignmentEligibilityLevel($post): int
+    {
+        $eligibilityTerms = get_the_terms($post->ID, 'assignment-eligibility');
+        return isset($eligibilityTerms[0]) ? (int)$eligibilityTerms[0]->slug : 1;
+    }
 }
