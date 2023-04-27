@@ -1,6 +1,6 @@
 [{
     "key": "group_63e2023f5baca",
-    "title": "Status",
+    "title": "Taxonomier",
     "fields": [
         {
             "key": "field_63e2023fc3a36",
@@ -43,6 +43,32 @@
                 "id": ""
             },
             "taxonomy": "assignment-eligibility",
+            "add_term": 0,
+            "save_terms": 1,
+            "load_terms": 1,
+            "return_format": "object",
+            "field_type": "select",
+            "allow_null": 0,
+            "acfe_bidirectional": {
+                "acfe_bidirectional_enabled": "0"
+            },
+            "multiple": 0
+        },
+        {
+            "key": "field_644a38a755b10",
+            "label": "Category",
+            "name": "assignment_category",
+            "aria-label": "",
+            "type": "taxonomy",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "taxonomy": "assignment-category",
             "add_term": 0,
             "save_terms": 1,
             "load_terms": 1,
