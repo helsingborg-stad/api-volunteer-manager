@@ -23,6 +23,7 @@ class Assignment extends PostType
         add_action('add_meta_boxes', array($this, 'registerSubmitterMetaBox'), 10, 2);
         add_action('add_meta_boxes', array($this, 'registerApplicationsMetaBox'), 10, 2);
         add_action('init', array($this, 'registerStatusTaxonomy'));
+        add_action('init', array($this, 'registerCategoryTaxonomy'));
         add_action('init', array($this, 'insertAssignmentStatusTerms'));
         add_action('init', array($this, 'registerEligibilityTaxonomy'));
         add_action('init', array($this, 'insertAssignmentEligibilityTerms'));
@@ -129,6 +130,37 @@ class Assignment extends PostType
         //Add filter
         new Filter(
             'assignment-status',
+            'assignment'
+        );
+    }
+
+    /**
+     * Create category taxonomy
+     */
+    public function registerCategoryTaxonomy()
+    {
+        $categoryTaxonomy = new Taxonomy(
+            __('Categories', 'api-volunteer-manager'),
+            __('Category', 'api-volunteer-manager'),
+            'assignment-category',
+            array($this->slug),
+            array(
+                'hierarchical' => false,
+                'show_ui' => true
+            )
+        );
+
+        $categoryTaxonomy->registerTaxonomy();
+
+        //Remove default UI
+        (new MetaBox)->remove(
+            "tagsdiv-assignment-category",
+            $this->slug,
+        );
+
+        //Add filter
+        new Filter(
+            'assignment-category',
             'assignment'
         );
     }
