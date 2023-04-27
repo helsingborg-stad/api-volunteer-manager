@@ -84,7 +84,7 @@ class ApplicationMetaBoxTest extends PluginTestCase
         $output = ob_get_clean();
         $output = str_replace("\n", "", preg_replace('/\s*(<[^>]*>)\s*/', '$1', $output));
 
-        $expected = '<table><tr><th>Name</th><th>Date</th><th>Eligibility</th><th>Status</th><th></th></tr><tr><td class="title"><a href="https://url.com/1/edit.php">Foo Bar</a></td><td>1970-01-01</td><td><span class="">Level 2</span></td><td><span style="background: #ddd; color: #fff;" class="term-pill term-pill-tax">Tax</span></td><td class="actions"><a href="https://url.com/3/edit.php">Edit</a><a href="https://url.com/1/delete.php" class="red">Delete</a></td></tr></table>';
+        $expected = '<table><tr><th>Name</th><th>Date</th><th>Eligibility</th><th>Status</th><th></th></tr><tr><td class="title"><a href="https://url.com/1/edit.php">Foo Bar</a></td><td>1970-01-01</td><td><span class="">Level 2</span></td><td><span style="background: #ddd; color: #fff;" class="term-pill term-pill-tax">Tax</span></td><td class="actions"><a href="https://url.com/3/edit.php" >Edit</a><a href="https://url.com/1/delete.php" class="red">Delete</a></td></tr></table>';
         $this->assertEquals($expected, $output);
     }
 
@@ -102,7 +102,7 @@ class ApplicationMetaBoxTest extends PluginTestCase
         $result = $this->applicationMetaBox->getApplicationRow($post);
         $result = str_replace("\n", "", preg_replace('/\s*(<[^>]*>)\s*/', '$1', $result));
 
-        $expected = '<tr><td class="title"><a href="https://url.com/1/edit.php">Foo Bar</a></td><td>1970-01-01</td><td><span class="">Level 2</span></td><td><span style="background: #ddd; color: #fff;" class="term-pill term-pill-tax">Tax</span></td><td class="actions"><a href="https://url.com/3/edit.php">Edit</a><a href="https://url.com/1/delete.php" class="red">Delete</a></td></tr>';
+        $expected = '<tr><td class="title"><a href="https://url.com/1/edit.php">Foo Bar</a></td><td>1970-01-01</td><td><span class="">Level 2</span></td><td><span style="background: #ddd; color: #fff;" class="term-pill term-pill-tax">Tax</span></td><td class="actions"><a href="https://url.com/3/edit.php" >Edit</a><a href="https://url.com/1/delete.php" class="red">Delete</a></td></tr>';
 
         $this->assertEquals($expected, $result);
     }

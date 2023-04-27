@@ -92,42 +92,93 @@ class ApplicationMetaBox
     /**
      * Renders a list of applications assigned to a particular post.
      * @param object $post
-     * @return void
+     * @return string
      */
     public function getApplicationRow(object $post): string
     {
         $employee = get_field('application_employee', $post->ID);
-        $employeeCrimeRecord = get_field('crime_record_extracted', $employee->ID);
-        $employeeEligibilityLevel = $employeeCrimeRecord ? 2 : 1;
+        $employeeEligibilityLevel = $this->getEmployeeEligibilityLevel($employee);
         $assignment = get_field('application_assignment', $post->ID);
         $assignmentEligibilityLevel = $this->getAssignmentEligibilityLevel($assignment);
         $eligibilityClass = $employeeEligibilityLevel < $assignmentEligibilityLevel ? 'red' : '';
         $date = get_the_date('y-m-d H:i', $post->ID);
         $status = get_field('application_status', $post->ID);
 
-        $employeeHtml = '<td class="title"><a href="' . get_edit_post_link($employee->ID) . '">' . $employee->post_title . '</a></td>';
-        $assignmentHtml = '<td class="title"><a href="' . get_edit_post_link($assignment->ID) . '">' . $assignment->post_title . '</a></td>';
+        $employeeHtml = $this->createApplicationColumnHtml($employee);
+        $assignmentHtml = $this->createApplicationColumnHtml($assignment);
+        $columnHtml = $this->post->post_type === 'assignment' ? $employeeHtml : $assignmentHtml;
 
-        $html = '<tr>';
-        if ($this->post->post_type === 'assignment') {
-            $html .= $employeeHtml;
-        } elseif ($this->post->post_type === 'employee') {
-            $html .= $assignmentHtml;
-        }
-        $html .= '
-        <td>' . $date . '</td>
-        <td><span class="' . $eligibilityClass . '">' . __('Level', AVM_TEXT_DOMAIN) . ' ' . $employeeEligibilityLevel . '</span></td>
-        <td>' . AdminUI::createTaxonomyPills([$status]) . '</td>
-        <td class="actions">
-            <a href="' . get_edit_post_link($post->ID) . '">' . __('Edit', AVM_TEXT_DOMAIN) . '</a>
-            <a href="' . get_delete_post_link($post->ID) . '" class="red">' . __('Delete', AVM_TEXT_DOMAIN) . '</a>
-        </td>
-        </tr>';
-
-        return $html;
+        return sprintf(
+            '<tr>%s<td>%s</td><td><span class="%s">%s %d</span></td><td>%s</td><td class="actions">%s %s</td></tr>',
+            $columnHtml,
+            $date,
+            $eligibilityClass,
+            __('Level', AVM_TEXT_DOMAIN),
+            $employeeEligibilityLevel,
+            AdminUI::createTaxonomyPills([$status]),
+            $this->createActionLink('Edit', $post->ID),
+            $this->createActionLink('Delete', $post->ID, 'red')
+        );
     }
 
-    public function getAssignmentEligibilityLevel($post): int
+    /**
+     * Creates the HTML for an application column.
+     * @param object $application
+     * @return string
+     */
+    private function createApplicationColumnHtml(object $application): string
+    {
+        return sprintf(
+            '<td class="title"><a href="%s">%s</a></td>',
+            get_edit_post_link($application->ID),
+            $application->post_title
+        );
+    }
+
+    /**
+     * Creates an action link HTML element.
+     * @param string      $label
+     * @param int         $postId
+     * @param string|null $class
+     * @return string
+     */
+    private function createActionLink(string $label, int $postId, ?string $class = null): string
+    {
+        $url = '';
+        switch ($label) {
+            case 'Edit':
+                $url = get_edit_post_link($postId);
+                break;
+            case 'Delete':
+                $url = get_delete_post_link($postId);
+                break;
+        }
+        $classAttr = $class ? sprintf('class="%s"', $class) : '';
+        return sprintf(
+            '<a href="%s" %s>%s</a>',
+            $url,
+            $classAttr,
+            esc_html__($label, AVM_TEXT_DOMAIN)
+        );
+    }
+
+    /**
+     * Calculates an employee's eligibility level
+     * @param object $employee An object representing the employee.
+     * @return int The eligibility level, which can be either 1 (eligible) or 2 (ineligible).
+     */
+    private function getEmployeeEligibilityLevel(object $employee): int
+    {
+        $employeeCrimeRecord = get_field('crime_record_extracted', $employee->ID);
+        return $employeeCrimeRecord ? 2 : 1;
+    }
+
+    /**
+     * Gets the eligibility level for an assignment.
+     * @param object $post The post object for the assignment.
+     * @return int The eligibility level, which can be either 1 (eligible) or a higher value indicating ineligibility.
+     */
+    private function getAssignmentEligibilityLevel($post): int
     {
         $eligibilityTerms = get_the_terms($post->ID, 'assignment-eligibility');
         return isset($eligibilityTerms[0]) ? (int)$eligibilityTerms[0]->slug : 1;
