@@ -2,7 +2,7 @@
 
 namespace VolunteerManager\PostType\Assignment;
 
-use VolunteerManager\Components\ApplicationMetaBox\AssignmentApplicationMetaBox;
+use VolunteerManager\Components\ApplicationMetaBox\ApplicationMetaBox;
 use VolunteerManager\Components\EditPostStatusButtons\EditPostStatusButtonFactory as EditPostStatusButtonFactory;
 use VolunteerManager\Entity\Filter as Filter;
 use VolunteerManager\Entity\PostType;
@@ -213,7 +213,7 @@ class Assignment extends PostType
         if ($postType !== 'assignment') {
             return;
         }
-        $applicationMetaBox = new AssignmentApplicationMetaBox(
+        $applicationMetaBox = new ApplicationMetaBox(
             $post,
             __('Employees', AVM_TEXT_DOMAIN),
             'application_assignment'

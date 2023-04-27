@@ -64,13 +64,13 @@ class AssignmentConfiguration
         return [
             [
                 'name' => __('Level 1', 'api-volunteer-manager'),
-                'slug' => 'level-1',
+                'slug' => '1',
                 'description' => __('No criminal record required.', 'api-volunteer-manager'),
                 'color' => '#81D742'
             ],
             [
                 'name' => __('Level 2', 'api-volunteer-manager'),
-                'slug' => 'level-2',
+                'slug' => '2',
                 'description' => __('Criminal record is required.', 'api-volunteer-manager'),
                 'color' => '#dd9933'
             ],

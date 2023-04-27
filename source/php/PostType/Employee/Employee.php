@@ -2,7 +2,7 @@
 
 namespace VolunteerManager\PostType\Employee;
 
-use VolunteerManager\Components\ApplicationMetaBox\EmployeeApplicationMetaBox;
+use VolunteerManager\Components\ApplicationMetaBox\ApplicationMetaBox;
 use VolunteerManager\Entity\PostType as PostType;
 use VolunteerManager\Entity\Taxonomy as Taxonomy;
 use VolunteerManager\Helper\Admin\UI as AdminUI;
@@ -128,7 +128,7 @@ class Employee extends PostType
         if ($postType !== 'employee') {
             return;
         }
-        $applicationMetaBox = new EmployeeApplicationMetaBox(
+        $applicationMetaBox = new ApplicationMetaBox(
             $post,
             __('Assignments', AVM_TEXT_DOMAIN),
             'application_employee'
