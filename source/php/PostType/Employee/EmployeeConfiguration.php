@@ -10,8 +10,8 @@ class EmployeeConfiguration
     {
         return [
             'slug' => 'employee',
-            'namePlural' => 'employees',
-            'nameSingular' => 'employee',
+            'namePlural' => __('employees', AVM_TEXT_DOMAIN),
+            'nameSingular' => __('employee', AVM_TEXT_DOMAIN),
             'args' => [
                 'description' => __('Employees', AVM_TEXT_DOMAIN),
                 'menu_icon' => Icon::get('person'),

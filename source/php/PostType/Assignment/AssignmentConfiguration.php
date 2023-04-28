@@ -10,8 +10,8 @@ class AssignmentConfiguration
     {
         return [
             'slug' => 'assignment',
-            'namePlural' => 'assignments',
-            'nameSingular' => 'assignment',
+            'namePlural' => __('assignments', AVM_TEXT_DOMAIN),
+            'nameSingular' => __('assignment', AVM_TEXT_DOMAIN),
             'args' => [
                 'description' => __('Assignments', AVM_TEXT_DOMAIN),
                 'menu_icon' => Icon::get('person'),

@@ -10,8 +10,8 @@ class ApplicationConfiguration
     {
         return [
             'slug' => 'application',
-            'namePlural' => 'applications',
-            'nameSingular' => 'application',
+            'namePlural' => __('applications', AVM_TEXT_DOMAIN),
+            'nameSingular' => __('application', AVM_TEXT_DOMAIN),
             'args' => [
                 'description' => __('Applications', AVM_TEXT_DOMAIN),
                 'menu_icon' => Icon::get('person'),

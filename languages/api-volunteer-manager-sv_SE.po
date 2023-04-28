@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Volunteer Manager\n"
-"POT-Creation-Date: 2023-04-27 09:46+0200\n"
-"PO-Revision-Date: 2023-04-27 09:47+0200\n"
+"POT-Creation-Date: 2023-04-28 14:04+0200\n"
+"PO-Revision-Date: 2023-04-28 14:06+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: sv_SE\n"
@@ -27,7 +27,7 @@ msgstr "Ansökan"
 #: source/php/AcfFields/php/application.php:10
 #: source/php/AcfFields/php/employee.php:6
 msgid "Employee"
-msgstr "Volontär"
+msgstr "Medarbetare"
 
 #: source/php/AcfFields/php/application.php:39
 #: source/php/AcfFields/php/assignment.php:6
@@ -35,21 +35,29 @@ msgid "Assignment"
 msgstr "Uppdrag"
 
 #: source/php/AcfFields/php/application.php:68
-#: source/php/AcfFields/php/assignment-status.php:6
 #: source/php/AcfFields/php/assignment-status.php:10
 #: source/php/Components/ApplicationMetaBox/ApplicationMetaBox.php:81
 #: source/php/PostType/Application/Application.php:69
-#: source/php/PostType/Assignment/Assignment.php:43
-#: source/php/PostType/Assignment/Assignment.php:114
+#: source/php/PostType/Assignment/Assignment.php:42
+#: source/php/PostType/Assignment/Assignment.php:113
 msgid "Status"
 msgstr "Status"
 
+#: source/php/AcfFields/php/assignment-status.php:6
+msgid "Taxonomies"
+msgstr "Taxonomier"
+
 #: source/php/AcfFields/php/assignment-status.php:36
 #: source/php/Components/ApplicationMetaBox/ApplicationMetaBox.php:80
+#: source/php/PostType/Assignment/Assignment.php:174
 #: source/php/PostType/Assignment/Assignment.php:175
-#: source/php/PostType/Assignment/Assignment.php:176
 msgid "Eligibility"
 msgstr "Behörighet"
+
+#: source/php/AcfFields/php/assignment-status.php:62
+#: source/php/PostType/Assignment/Assignment.php:144
+msgid "Category"
+msgstr "Kategori"
 
 #: source/php/AcfFields/php/assignment.php:10
 msgid "Description"
@@ -107,7 +115,7 @@ msgstr "Svenskt personnummer"
 #: source/php/AcfFields/php/options.php:95
 #: source/php/AcfFields/php/signup.php:52
 #: source/php/AcfFields/php/signup.php:65
-#: source/php/PostType/Assignment/Assignment.php:235
+#: source/php/PostType/Assignment/Assignment.php:234
 msgid "Email"
 msgstr "E-postadress"
 
@@ -200,7 +208,7 @@ msgstr "Arbetsgivare"
 #: source/php/AcfFields/php/employer.php:53
 #: source/php/AcfFields/php/options.php:28
 #: source/php/Components/ApplicationMetaBox/ApplicationMetaBox.php:78
-#: source/php/PostType/Assignment/Assignment.php:234
+#: source/php/PostType/Assignment/Assignment.php:233
 msgid "Name"
 msgstr "Namn"
 
@@ -219,7 +227,7 @@ msgstr "Lägg till kontakt"
 #: source/php/AcfFields/php/employer.php:94
 #: source/php/AcfFields/php/signup.php:53
 #: source/php/AcfFields/php/signup.php:92
-#: source/php/PostType/Assignment/Assignment.php:236
+#: source/php/PostType/Assignment/Assignment.php:235
 msgid "Phone"
 msgstr "Telefonnummer"
 
@@ -585,10 +593,18 @@ msgstr ""
 "Helsingborg"
 
 #: source/php/PostType/Application/Application.php:83
-#: source/php/PostType/Assignment/Assignment.php:68
+#: source/php/PostType/Assignment/Assignment.php:67
 #: source/php/PostType/Employee/Employee.php:52
 msgid "Submitted from"
 msgstr "Inskickat från"
+
+#: source/php/PostType/Application/ApplicationConfiguration.php:13
+msgid "applications"
+msgstr "ansökningar"
+
+#: source/php/PostType/Application/ApplicationConfiguration.php:14
+msgid "application"
+msgstr "ansökan"
 
 #: source/php/PostType/Application/ApplicationConfiguration.php:16
 msgid "Applications"
@@ -615,34 +631,38 @@ msgstr "Stängd"
 msgid "Denied"
 msgstr "Nekad"
 
-#: source/php/PostType/Assignment/Assignment.php:57
+#: source/php/PostType/Assignment/Assignment.php:56
 msgid "Visibility"
 msgstr "Synlighet"
 
-#: source/php/PostType/Assignment/Assignment.php:113
+#: source/php/PostType/Assignment/Assignment.php:112
 msgid "Statuses"
 msgstr "Statusar"
 
-#: source/php/PostType/Assignment/Assignment.php:144
+#: source/php/PostType/Assignment/Assignment.php:143
 msgid "Categories"
 msgstr "Kategorier"
 
-#: source/php/PostType/Assignment/Assignment.php:145
-msgid "Category"
-msgstr "Kategori"
-
-#: source/php/PostType/Assignment/Assignment.php:211
+#: source/php/PostType/Assignment/Assignment.php:210
 msgid "Submitted by"
 msgstr "Inskickat av"
 
-#: source/php/PostType/Assignment/Assignment.php:233
+#: source/php/PostType/Assignment/Assignment.php:232
 msgid "Contact details of the person who submitted the assignment."
 msgstr "Kontaktuppgifter till personen som skickat in uppdraget."
 
-#: source/php/PostType/Assignment/Assignment.php:251
+#: source/php/PostType/Assignment/Assignment.php:250
 #: source/php/PostType/Employee/EmployeeConfiguration.php:16
 msgid "Employees"
-msgstr "Volontärer"
+msgstr "Medarbetare"
+
+#: source/php/PostType/Assignment/AssignmentConfiguration.php:13
+msgid "assignments"
+msgstr "uppdrag"
+
+#: source/php/PostType/Assignment/AssignmentConfiguration.php:14
+msgid "assignment"
+msgstr "uppdrag"
 
 #: source/php/PostType/Assignment/AssignmentConfiguration.php:16
 #: source/php/PostType/Employee/Employee.php:133
@@ -651,7 +671,7 @@ msgstr "Uppdrag"
 
 #: source/php/PostType/Assignment/AssignmentConfiguration.php:38
 msgid "Approved assignment"
-msgstr ""
+msgstr "Godkänt uppdrag"
 
 #: source/php/PostType/Assignment/AssignmentConfiguration.php:42
 #: source/php/PostType/Employee/EmployeeConfiguration.php:40
@@ -698,6 +718,14 @@ msgstr ""
 msgid "Missing required parameter"
 msgstr ""
 
+#: source/php/PostType/Employee/EmployeeConfiguration.php:13
+msgid "employees"
+msgstr "medarbetare"
+
+#: source/php/PostType/Employee/EmployeeConfiguration.php:14
+msgid "employee"
+msgstr "medarbetare"
+
 #: source/php/PostType/Employee/EmployeeConfiguration.php:34
 msgid "New"
 msgstr "Ny"
@@ -730,6 +758,9 @@ msgstr ""
 #. Author URI of the plugin/theme
 msgid "https://github.com/helsingborg-stad"
 msgstr ""
+
+#~ msgid "Add new lol %s"
+#~ msgstr "Lägg till ny lol %s"
 
 #~ msgid "Edit"
 #~ msgstr "Redigera"
