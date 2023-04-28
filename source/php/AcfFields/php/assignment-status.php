@@ -3,7 +3,7 @@
 if (function_exists('acf_add_local_field_group')) {
     acf_add_local_field_group(array(
     'key' => 'group_63e2023f5baca',
-    'title' => __('Taxonomier', 'api-volunteer-manager'),
+    'title' => __('Taxonomies', 'api-volunteer-manager'),
     'fields' => array(
         0 => array(
             'key' => 'field_63e2023fc3a36',
