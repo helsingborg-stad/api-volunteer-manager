@@ -158,7 +158,7 @@ class Application extends PostType
             $classAttr,
             $employeeEligibility
         );
-        $content .= $employeeEligibility < $assignmentEligibility ? '<p><i>' . __('The employees eligibility level does not match the assignment.' . '</i></p>', AVM_TEXT_DOMAIN) : '';
+        $content .= $employeeEligibility < $assignmentEligibility ? '<p><i>' . __('The employees eligibility level does not match the assignment.', AVM_TEXT_DOMAIN) . '</i></p>' : '';
         echo $content;
     }
 
