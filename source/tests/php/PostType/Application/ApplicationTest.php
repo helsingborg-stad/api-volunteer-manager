@@ -84,4 +84,25 @@ class ApplicationTest extends PluginTestCase
         Functions\expect('wp_update_post')->once()->with(['post_title' => 'Foo Bar - Assignment', 'ID' => $post->ID]);
         $this->application->setApplicationPostTitle($post->ID);
     }
+
+    public function testRegisterEligibilityMetaBoxWithEmptyResult()
+    {
+        $post = (object)['ID' => 99];
+        Functions\expect('get_field')->times(2)->andReturn(null, null);
+        Functions\expect('add_meta_box')->never();
+        $this->application->registerEligibilityMetaBox('', $post);
+    }
+
+    public function testRegisterEligibilityMetaBoxWithExistingResult()
+    {
+        $post = (object)['ID' => 1];
+        Functions\expect('get_field')->times(2)->andReturn(
+            (object)['ID' => 2],
+            (object)['ID' => 3],
+        );
+        Functions\expect('add_meta_box')->once();
+        $this->application->registerEligibilityMetaBox('', $post);
+    }
+
+    
 }
