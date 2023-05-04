@@ -127,6 +127,21 @@ class NotificationsConfig
                     'operator' => 'NOT_EQUAL'
                 ]
             ],
+            "Message to the volunteer when a new application for an assignment is approved, with condition" => [
+                'key' => 'external_application_approved_condition',
+                'taxonomy' => 'application-status',
+                'oldValue' => 'pending',
+                'newValue' => 'approved_with_condition',
+                'message' => [
+                    'subject' => __('Your application is approved', AVM_TEXT_DOMAIN),
+                    'content' => __('Hi %s,<br><br>Your application for the assignment "%s" has now been approved, but needs to be supplemented with additional information. You will be contacted in a separate email with instructions and prerequisites for the assignment. If you have any questions, you can always contact us at engagement@helsingborg.se or on 042-105000.<br>Good luck with your mission and thank you for making a difference!<br><br>Sincerely,<br><br>Engagemang Helsingborg', AVM_TEXT_DOMAIN),
+                ],
+                'rule' => [
+                    'key' => 'source',
+                    'value' => '',
+                    'operator' => 'NOT_EQUAL'
+                ]
+            ],
             "Message to the volunteer when a new application for an assignment is denied" => [
                 'key' => 'external_application_denied',
                 'taxonomy' => 'application-status',
