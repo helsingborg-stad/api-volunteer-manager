@@ -14,6 +14,8 @@ class ApplicationNotificationFilters extends NotificationFilters
         add_filter('avm_external_application_new_notification', array($this, 'populateApplicationWithContent'), 10, 2);
         add_filter('avm_external_application_approved_notification', array($this, 'populateReceiverWithEmployee'), 10, 2);
         add_filter('avm_external_application_approved_notification', array($this, 'populateApplicationWithContent'), 10, 2);
+        add_filter('avm_external_application_approved_condition_notification', array($this, 'populateReceiverWithEmployee'), 10, 2);
+        add_filter('avm_external_application_approved_condition_notification', array($this, 'populateApplicationWithContent'), 10, 2);
         add_filter('avm_external_application_denied_notification', array($this, 'populateReceiverWithEmployee'), 10, 2);
         add_filter('avm_external_application_denied_notification', array($this, 'populateApplicationWithContent'), 10, 2);
     }
