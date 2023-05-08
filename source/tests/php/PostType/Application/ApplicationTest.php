@@ -70,7 +70,6 @@ class ApplicationTest extends PluginTestCase
         $this->assertEquals(['status' => 'Status', 'submitted_from' => 'Submitted from'], $actual);
     }
 
-
     /**
      * @throws \Brain\Monkey\Expectation\Exception\ExpectationArgsRequired
      */

@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Volunteer Manager\n"
-"POT-Creation-Date: 2023-05-03 09:52+0200\n"
-"PO-Revision-Date: 2023-05-03 09:52+0200\n"
+"POT-Creation-Date: 2023-05-08 09:10+0200\n"
+"PO-Revision-Date: 2023-05-08 09:10+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: sv_SE\n"
@@ -555,6 +555,7 @@ msgstr ""
 "<br><br>Engagemang Helsingborg"
 
 #: source/php/Notification/NotificationsConfig.php:121
+#: source/php/Notification/NotificationsConfig.php:136
 msgid "Your application is approved"
 msgstr "Din ansökan har godkänts"
 
@@ -575,11 +576,30 @@ msgstr ""
 "uppdrag och tack för att du gör skillnad!<br><br>Med vänliga hälsningar,"
 "<br><br>Engagemang Helsingborg"
 
-#: source/php/Notification/NotificationsConfig.php:136
+#: source/php/Notification/NotificationsConfig.php:137
+#, php-format
+msgid ""
+"Hi %s,<br><br>Your application for the assignment \"%s\" has now been "
+"approved, but needs to be supplemented with additional information. You will "
+"be contacted in a separate email with instructions and prerequisites for the "
+"assignment. If you have any questions, you can always contact us at "
+"engagement@helsingborg.se or on 042-105000.<br>Good luck with your mission "
+"and thank you for making a difference!<br><br>Sincerely,<br><br>Engagemang "
+"Helsingborg"
+msgstr ""
+"Hej %s,<br><br>Din ansökan till uppdraget \"%s\" är nu godkänd, men behöver "
+"kompletteras med ytterligare information. Du kommer bli kontaktad i ett "
+"separat mejl gällande kompletteringen samt instruktioner och förutsättningar "
+"för uppdraget. Har du frågor kan du alltid kontakta oss på "
+"engagemang@helsingborg.se eller på 042-105000.<br>Lycka till med ditt "
+"uppdrag och tack för att du gör skillnad!<br><br>Med vänliga hälsningar,"
+"<br><br>Engagemang Helsingborg"
+
+#: source/php/Notification/NotificationsConfig.php:151
 msgid "Your application is denied"
 msgstr "Din ansökan har nekats"
 
-#: source/php/Notification/NotificationsConfig.php:137
+#: source/php/Notification/NotificationsConfig.php:152
 #, php-format
 msgid ""
 "Hi %s,<br><br>Your application to \"%s\" has not been approved. Engagement "
@@ -636,10 +656,14 @@ msgid "Approved"
 msgstr "Godkänd"
 
 #: source/php/PostType/Application/ApplicationConfiguration.php:43
+msgid "Approved with condition"
+msgstr "Godkänd med villkor"
+
+#: source/php/PostType/Application/ApplicationConfiguration.php:49
 msgid "Closed"
 msgstr "Stängd"
 
-#: source/php/PostType/Application/ApplicationConfiguration.php:49
+#: source/php/PostType/Application/ApplicationConfiguration.php:55
 #: source/php/PostType/Assignment/AssignmentConfiguration.php:54
 #: source/php/PostType/Employee/EmployeeConfiguration.php:52
 msgid "Denied"

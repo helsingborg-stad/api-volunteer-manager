@@ -40,6 +40,12 @@ class ApplicationConfiguration
                 'color' => '#81d742'
             ],
             [
+                'name' => __('Approved with condition', AVM_TEXT_DOMAIN),
+                'slug' => 'approved_with_condition',
+                'description' => 'Application is approved, with condition.',
+                'color' => '#1e73be'
+            ],
+            [
                 'name' => __('Closed', AVM_TEXT_DOMAIN),
                 'slug' => 'closed',
                 'description' => 'Application is closed.',
@@ -50,7 +56,7 @@ class ApplicationConfiguration
                 'slug' => 'denied',
                 'description' => 'Application is denied.',
                 'color' => '#dd3333'
-            ]
+            ],
         ];
     }
 }
