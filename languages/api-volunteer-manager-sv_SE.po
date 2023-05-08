@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Volunteer Manager\n"
-"POT-Creation-Date: 2023-04-28 14:04+0200\n"
-"PO-Revision-Date: 2023-04-28 14:06+0200\n"
+"POT-Creation-Date: 2023-05-03 09:52+0200\n"
+"PO-Revision-Date: 2023-05-03 09:52+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: sv_SE\n"
@@ -37,7 +37,7 @@ msgstr "Uppdrag"
 #: source/php/AcfFields/php/application.php:68
 #: source/php/AcfFields/php/assignment-status.php:10
 #: source/php/Components/ApplicationMetaBox/ApplicationMetaBox.php:81
-#: source/php/PostType/Application/Application.php:69
+#: source/php/PostType/Application/Application.php:70
 #: source/php/PostType/Assignment/Assignment.php:42
 #: source/php/PostType/Assignment/Assignment.php:113
 msgid "Status"
@@ -49,6 +49,7 @@ msgstr "Taxonomier"
 
 #: source/php/AcfFields/php/assignment-status.php:36
 #: source/php/Components/ApplicationMetaBox/ApplicationMetaBox.php:80
+#: source/php/PostType/Application/Application.php:128
 #: source/php/PostType/Assignment/Assignment.php:174
 #: source/php/PostType/Assignment/Assignment.php:175
 msgid "Eligibility"
@@ -592,11 +593,24 @@ msgstr ""
 "042-105000.<br>Tack!<br><br>Med vänliga hälsningar,<br><br>Engagemang "
 "Helsingborg"
 
-#: source/php/PostType/Application/Application.php:83
+#: source/php/PostType/Application/Application.php:84
 #: source/php/PostType/Assignment/Assignment.php:67
 #: source/php/PostType/Employee/Employee.php:52
 msgid "Submitted from"
 msgstr "Inskickat från"
+
+#: source/php/PostType/Application/Application.php:152
+#, php-format
+msgid ""
+"<p><a href=\"%s\">%s</a>:<br><span>Level %s</span></p><p><a href=\"%s\">%s</"
+"a>:<br><span %s>Level %s</span></p>"
+msgstr ""
+"<p><a href=\"%s\">%s</a>:<br><span>Nivå %s</span></p><p><a href=\"%s\">%s</"
+"a>:<br><span %s>Nivå %s</span></p>"
+
+#: source/php/PostType/Application/Application.php:161
+msgid "The employees eligibility level does not match the assignment."
+msgstr "Volontärens behörighetsnivå matchar inte uppdraget."
 
 #: source/php/PostType/Application/ApplicationConfiguration.php:13
 msgid "applications"
@@ -758,6 +772,10 @@ msgstr ""
 #. Author URI of the plugin/theme
 msgid "https://github.com/helsingborg-stad"
 msgstr ""
+
+#~ msgid ""
+#~ "The employees eligibility level does not match the assignment.</i></p>"
+#~ msgstr "Volontärens behörighetsnivå matchar inte uppdraget.</i></p>"
 
 #~ msgid "Add new lol %s"
 #~ msgstr "Lägg till ny lol %s"

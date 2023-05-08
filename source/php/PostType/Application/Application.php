@@ -19,6 +19,7 @@ class Application extends PostType
         add_action('init', [$this, 'initTaxonomiesAndTerms']);
         add_action('init', [$this, 'addStatusTableColumn']);
         add_action('acf/save_post', array($this, 'setApplicationPostTitle'));
+        add_action('add_meta_boxes', array($this, 'registerEligibilityMetaBox'), 10, 2);
     }
 
     public function initTaxonomiesAndTerms(): void
@@ -107,5 +108,79 @@ class Application extends PostType
             'post_title' => trim("{$employee->post_title} - {$assignment->post_title}"),
         );
         wp_update_post($postData);
+    }
+
+    /**
+     * Register custom meta boxes
+     * @return void
+     */
+    public function registerEligibilityMetaBox($postType, $post)
+    {
+        $employee = get_field('application_employee', $post->ID);
+        $assignment = get_field('application_assignment', $post->ID);
+
+        if (empty($employee) || empty($assignment)) {
+            return;
+        }
+
+        add_meta_box(
+            'application-eligibility',
+            __('Eligibility', AVM_TEXT_DOMAIN),
+            array($this, 'renderEligibilityMetaBox'),
+            array('application'),
+            'normal',
+            'low',
+            ['employee' => $employee, 'assignment' => $assignment]
+        );
+    }
+
+    /**
+     * Displays contact information about the post submitter
+     * @param object $post
+     * @param array  $args
+     * @return void
+     */
+    public function renderEligibilityMetaBox(object $post, array $args): void
+    {
+        $employee = $args['args']['employee'];
+        $assignment = $args['args']['assignment'];
+        $employeeEligibility = $this->getEmployeeEligibilityLevel($args['args']['employee']);
+        $assignmentEligibility = $this->getAssignmentEligibilityLevel($args['args']['assignment']);
+        $eligibilityClass = $employeeEligibility < $assignmentEligibility ? 'red' : null;
+        $classAttr = $eligibilityClass ? "class=\"{$eligibilityClass}\"" : '';
+        $content = sprintf(
+            __('<p><a href="%s">%s</a>:<br><span>Level %s</span></p><p><a href="%s">%s</a>:<br><span %s>Level %s</span></p>', AVM_TEXT_DOMAIN),
+            get_edit_post_link($assignment),
+            $assignment->post_title,
+            $assignmentEligibility,
+            get_edit_post_link($employee),
+            $employee->post_title,
+            $classAttr,
+            $employeeEligibility
+        );
+        $content .= $employeeEligibility < $assignmentEligibility ? '<p><i>' . __('The employees eligibility level does not match the assignment.', AVM_TEXT_DOMAIN) . '</i></p>' : '';
+        echo $content;
+    }
+
+    /**
+     * Calculates an employee's eligibility level
+     * @param object $employee An object representing the employee.
+     * @return int The eligibility level, which can be either 1 (eligible) or 2 (ineligible).
+     */
+    private function getEmployeeEligibilityLevel(object $employee): int
+    {
+        $employeeCrimeRecord = get_field('crime_record_extracted', $employee->ID);
+        return $employeeCrimeRecord ? 2 : 1;
+    }
+
+    /**
+     * Gets the eligibility level for an assignment.
+     * @param object $post The post object for the assignment.
+     * @return int The eligibility level, which can be either 1 (eligible) or a higher value indicating ineligibility.
+     */
+    private function getAssignmentEligibilityLevel(object $post): int
+    {
+        $eligibilityTerms = get_the_terms($post->ID, 'assignment-eligibility');
+        return isset($eligibilityTerms[0]) ? (int)$eligibilityTerms[0]->slug : 1;
     }
 }

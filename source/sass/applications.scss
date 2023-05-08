@@ -34,12 +34,14 @@
         display: flex;
         justify-content: space-evenly;
     }
-
-    .red {
-        color: #dd3333;
-    }
-
+    
     .empty_result {
         padding: 8px;
+    }
+}
+
+.inside {
+    .red {
+        color: #dd3333;
     }
 }

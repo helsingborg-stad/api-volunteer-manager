@@ -49,11 +49,12 @@
   display: flex;
   justify-content: space-evenly;
 }
-#applications_meta_box .red {
-  color: #dd3333;
-}
 #applications_meta_box .empty_result {
   padding: 8px;
+}
+
+.inside .red {
+  color: #dd3333;
 }
 
 .term-pill {
@@ -61,4 +62,4 @@
   border-radius: 3px;
 }
 
-/*# sourceMappingURL=api-volunteer-manager.b4d41b3679e4dce701ae.css.map*/
+/*# sourceMappingURL=api-volunteer-manager.ee9dc1a0bc618a5ba76f.css.map*/
