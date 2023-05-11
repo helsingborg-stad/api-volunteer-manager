@@ -103,6 +103,7 @@ class ApplicationMetaBox
         $eligibilityClass = $employeeEligibilityLevel < $assignmentEligibilityLevel ? 'red' : '';
         $date = get_the_date('y-m-d H:i', $post->ID);
         $status = get_field('application_status', $post->ID);
+        $taxonomyPills = !empty($status) ? AdminUI::createTaxonomyPills([$status]) : '';
 
         $employeeHtml = $this->createApplicationColumnHtml($employee);
         $assignmentHtml = $this->createApplicationColumnHtml($assignment);
@@ -115,7 +116,7 @@ class ApplicationMetaBox
             $eligibilityClass,
             __('Level', AVM_TEXT_DOMAIN),
             $employeeEligibilityLevel,
-            AdminUI::createTaxonomyPills([$status]),
+            $taxonomyPills,
             $this->createActionLink('Edit', $post->ID),
             $this->createActionLink('Delete', $post->ID, 'red')
         );
