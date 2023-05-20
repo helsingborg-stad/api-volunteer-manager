@@ -23,7 +23,7 @@ class EmployeeApiManager
         add_action('rest_api_init', array($this, 'registerPostEndpoint'));
     }
 
-    public function registerPostEndpoint()
+    public function registerPostEndpoint(): void
     {
         register_rest_route(
             'wp/v2',
@@ -40,12 +40,14 @@ class EmployeeApiManager
 
     public function handlePostRequest(WP_REST_Request $request): WP_REST_Response|WP_Error
     {
+        // TODO: Remove once JWT is implemented.
+        $validated_params_array = $request->get_params();
+
         $format_request = new FormatRequest();
         $unique_params = new ValidateUniqueParams($format_request);
         $required_params = new RequiredEmployeeParams($unique_params);
 
-
-        $validated_params = $required_params->formatRestRequest($request);
+        $validated_params = $required_params->formatRestRequest($validated_params_array);
         if (is_wp_error($validated_params)) {
             return $validated_params;
         }
@@ -56,29 +58,17 @@ class EmployeeApiManager
     /**
      * Callback function to handle the employee registration POST request
      *
-     * @param WP_REST_Request $request
+     * @param array $request
      * @return WP_REST_Response
      */
-    public function registerEmployee(WP_REST_Request $request)
+    public function registerEmployee(array $request): WP_REST_Response
     {
-        $param_keys = [
-            'first_name',
-            'surname',
-            'national_identity_number',
-            'email',
-        ];
-
-        $params = [];
-        foreach ($param_keys as $key) {
-            $params[$key] = $request->get_param($key);
-        }
-
         // TODO: Handle all params
 
         // Create the employee post
         $employeePostId = wp_insert_post(
             array(
-                'post_title' => $params['first_name'] . ' ' . $params['surname'],
+                'post_title' => $request['first_name'] . ' ' . $request['surname'],
                 'post_type' => 'employee',
                 'post_status' => 'pending',
                 'post_date_gmt' => current_time('mysql', true),
@@ -86,8 +76,8 @@ class EmployeeApiManager
             )
         );
 
-        foreach ($param_keys as $key) {
-            update_post_meta($employeePostId, $key, $params[$key]);
+        foreach ($request as $key => $value) {
+            update_post_meta($employeePostId, $key, $value);
         }
 
         $new_status_term = get_term_by('slug', 'new', 'employee-registration-status');

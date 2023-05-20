@@ -10,8 +10,8 @@ interface RestFormatInterface
     /**
      * Validate required parameters of the REST request
      *
-     * @param WP_REST_Request $request
-     * @return WP_REST_Request|WP_Error
+     * @param array $request
+     * @return array|WP_Error
      */
-    public function formatRestRequest(WP_REST_Request $request): WP_REST_Request|WP_Error;
+    public function formatRestRequest(array $request): array|WP_Error;
 }

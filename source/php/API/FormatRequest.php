@@ -10,7 +10,7 @@ class FormatRequest implements RestFormatInterface
     /**
      * @inheritDoc
      */
-    public function formatRestRequest(WP_REST_Request $request): WP_REST_Request|WP_Error
+    public function formatRestRequest(array $request): array|WP_Error
     {
         return $request;
     }

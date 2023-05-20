@@ -9,7 +9,7 @@ use WP_REST_Request;
 
 class RequiredEmployeeParams extends ValidateRestRequest
 {
-    protected function validator(WP_REST_Request $request): WP_REST_Request|WP_Error
+    protected function validator(array $request): array|WP_Error
     {
         $required_parameter_keys = [
             'first_name',
@@ -18,13 +18,8 @@ class RequiredEmployeeParams extends ValidateRestRequest
             'email',
         ];
 
-        $required_parameter_values = [];
         foreach ($required_parameter_keys as $key) {
-            $required_parameter_values[$key] = $request->get_param($key);
-        }
-
-        foreach ($required_parameter_values as $key => $value) {
-            if (empty($value)) {
+            if (empty($request[$key])) {
                 return WPResponseFactory::wp_error_response(
                     'avm_employee_registration_error',
                     __('Missing required parameter', AVM_TEXT_DOMAIN),
