@@ -7,14 +7,6 @@ use WP_Error;
 interface EmployeeApiValidatorInterface
 {
     /**
-     * Validate required parameters
-     *
-     * @param array $params
-     * @return bool|WP_Error
-     */
-    public function validate_required_params(array $params);
-
-    /**
      * Validate national identity number
      *
      * @param string $national_identity_number
