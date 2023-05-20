@@ -7,7 +7,6 @@ use WP_REST_Request;
 
 class FormatRequest implements RestFormatInterface
 {
-    
     /**
      * @inheritDoc
      */
