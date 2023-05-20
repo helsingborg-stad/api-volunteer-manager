@@ -31,21 +31,7 @@ class EmployeeApi
                 // return current_user_can('edit_posts');
 
                 return true;
-            },
-            'args' => array(
-                'email' => array(
-                    'validate_callback' => function ($param) use ($validator) {
-                        return $validator->is_email_unique($param);
-                    },
-                    'required' => true,
-                ),
-                'national_identity_number' => array(
-                    'validate_callback' => function ($param) use ($validator) {
-                        return $validator->is_national_identity_unique($param);
-                    },
-                    'required' => true,
-                ),
-            )
+            }
         ));
     }
 
