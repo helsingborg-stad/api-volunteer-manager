@@ -9,17 +9,7 @@ use WP_REST_Request;
 
 class ValidateUniqueParams extends ValidateRestRequest
 {
-    public function formatRestRequest(WP_REST_Request $request): WP_REST_Request|WP_Error
-    {
-        $validation_result = $this->validate_unique_parameters($request);
-        if (is_wp_error($validation_result)) {
-            return $validation_result;
-        }
-
-        return parent::formatRestRequest($request);
-    }
-
-    private function validate_unique_parameters(WP_REST_Request $request): WP_REST_Request|WP_Error
+    protected function validator(WP_REST_Request $request): WP_REST_Request|WP_Error
     {
         $email_parameter_value = $request->get_param('email');
 

@@ -8,7 +8,7 @@ use WP_REST_Request;
 /**
  * Base decorator class for validating REST requests
  */
-class ValidateRestRequest implements RestFormatInterface
+abstract class ValidateRestRequest implements RestFormatInterface
 {
     protected RestFormatInterface $rest_format;
 
@@ -22,6 +22,13 @@ class ValidateRestRequest implements RestFormatInterface
      */
     public function formatRestRequest(WP_REST_Request $request): WP_REST_Request|WP_Error
     {
+        $validation_result = $this->validator($request);
+        if (is_wp_error($validation_result)) {
+            return $validation_result;
+        }
+
         return $this->rest_format->formatRestRequest($request);
     }
+
+    abstract protected function validator(WP_REST_Request $request): WP_REST_Request|WP_Error;
 }

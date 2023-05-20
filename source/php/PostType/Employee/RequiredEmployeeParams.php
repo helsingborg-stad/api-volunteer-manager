@@ -9,17 +9,7 @@ use WP_REST_Request;
 
 class RequiredEmployeeParams extends ValidateRestRequest
 {
-    public function formatRestRequest(WP_REST_Request $request): WP_Error|WP_REST_Request
-    {
-        $validation_result = $this->validate_required_parameters($request);
-        if (is_wp_error($validation_result)) {
-            return $validation_result;
-        }
-
-        return parent::formatRestRequest($request);
-    }
-
-    private function validate_required_parameters(WP_REST_Request $request): WP_REST_Request|WP_Error
+    protected function validator(WP_REST_Request $request): WP_REST_Request|WP_Error
     {
         $required_parameter_keys = [
             'first_name',
