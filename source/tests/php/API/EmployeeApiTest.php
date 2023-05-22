@@ -7,7 +7,6 @@ use Brain\Monkey\Functions;
 use Mockery;
 use PluginTestCase\PluginTestCase;
 use VolunteerManager\API\EmployeeApi;
-use VolunteerManager\PostType\Employee\EmployeeApiValidatorInterface;
 
 class EmployeeApiTest extends PluginTestCase
 {
@@ -28,7 +27,6 @@ class EmployeeApiTest extends PluginTestCase
         $callback = function () {
             return 'Test callback';
         };
-        $validator = Mockery::mock(EmployeeApiValidatorInterface::class);
         $namespace = 'volunteer-manager/v1';
 
         Functions\expect('register_rest_route')
@@ -44,6 +42,6 @@ class EmployeeApiTest extends PluginTestCase
                 })
             );
 
-        $this->api->registerPostEndpoint($endpoint, $callback, $validator, $namespace);
+        $this->api->registerPostEndpoint($endpoint, $callback, $namespace);
     }
 }

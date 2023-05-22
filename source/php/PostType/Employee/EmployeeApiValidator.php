@@ -2,12 +2,10 @@
 
 namespace VolunteerManager\PostType\Employee;
 
-use VolunteerManager\API\WPResponseFactory;
 use WP_Error;
 
-class EmployeeApiValidator implements EmployeeApiValidatorInterface
+class EmployeeApiValidator
 {
-
     /**
      * @param string $national_identity_number
      * @return bool

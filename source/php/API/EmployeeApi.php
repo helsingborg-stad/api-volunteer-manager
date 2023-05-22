@@ -2,8 +2,6 @@
 
 namespace VolunteerManager\API;
 
-use VolunteerManager\PostType\Employee\EmployeeApiValidatorInterface;
-
 class EmployeeApi
 {
     /**
@@ -20,7 +18,6 @@ class EmployeeApi
     public function registerPostEndpoint(
         string                        $endpoint,
         callable                      $callback,
-        EmployeeApiValidatorInterface $validator,
         string                        $namespace = 'wp/v2'
     ): void
     {
