@@ -29,9 +29,9 @@ class EmployeeApiValidator
 
     /**
      * @param string $email
-     * @return bool|WP_Error
+     * @return bool
      */
-    public function is_email_unique(string $email)
+    public function is_email_unique(string $email): bool
     {
         $employees = get_posts(array(
             'post_type' => 'employee',

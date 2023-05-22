@@ -5,6 +5,7 @@ namespace VolunteerManager\PostType\Employee;
 use VolunteerManager\API\ValidateRestRequest;
 use VolunteerManager\API\WPResponseFactory;
 use WP_Error;
+use WP_REST_Request;
 
 /**
  * Validate unique parameters of the REST request
@@ -14,7 +15,7 @@ use WP_Error;
  */
 class ValidateUniqueParams extends ValidateRestRequest
 {
-    protected function validator(array $request)
+    protected function validator(WP_REST_Request $request)
     {
         $validator = new EmployeeApiValidator();
 
@@ -30,7 +31,7 @@ class ValidateUniqueParams extends ValidateRestRequest
         return $request;
     }
 
-    private function generateErrorResponse(string $message, string $param)
+    private function generateErrorResponse(string $message, string $param): WP_Error
     {
         return WPResponseFactory::wp_error_response(
             'avm_employee_registration_error',

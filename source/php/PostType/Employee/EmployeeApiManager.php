@@ -4,7 +4,6 @@ namespace VolunteerManager\PostType\Employee;
 
 use VolunteerManager\API\FormatRequest;
 use VolunteerManager\API\WPResponseFactory;
-use WP_Error;
 use WP_REST_Request;
 use WP_REST_Response;
 
@@ -32,35 +31,48 @@ class EmployeeApiManager
 
     public function handlePostRequest(WP_REST_Request $request)
     {
-        // TODO: Remove once JWT is implemented.
-        $validated_params_array = $request->get_params();
-
         $format_request = new FormatRequest();
         $unique_params = new ValidateUniqueParams($format_request);
         $required_params = new RequiredEmployeeParams($unique_params);
 
-        $validated_params = $required_params->formatRestRequest($validated_params_array);
+        $validated_params = $required_params->formatRestRequest($request);
         if (is_wp_error($validated_params)) {
             return $validated_params;
         }
 
-        return $this->registerEmployee($validated_params);
+        return $this->registerEmployee($request);
     }
 
     /**
      * Callback function to handle the employee registration POST request
      *
-     * @param array $request
+     * @param WP_REST_Request $request
      * @return WP_REST_Response
      */
-    public function registerEmployee(array $request)
+    public function registerEmployee(WP_REST_Request $request): WP_REST_Response
     {
-        // TODO: Handle all params
+        $request_decoded_token = $request->get_param('decoded_token');
+        $decode_token_params = [
+            'first_name',
+            'surname',
+            'national_identity_number',
+        ];
+        $request_params = [
+            'email',
+        ];
+
+        $params = [];
+        foreach ($decode_token_params as $param) {
+            $params[$param] = $request_decoded_token[$param];
+        }
+        foreach ($request_params as $param) {
+            $params[$param] = $request[$param];
+        }
 
         // Create the employee post
         $employeePostId = wp_insert_post(
             array(
-                'post_title' => $request['first_name'] . ' ' . $request['surname'],
+                'post_title' => $params['first_name'] . ' ' . $params['surname'],
                 'post_type' => 'employee',
                 'post_status' => 'pending',
                 'post_date_gmt' => current_time('mysql', true),
@@ -68,7 +80,7 @@ class EmployeeApiManager
             )
         );
 
-        foreach ($request as $key => $value) {
+        foreach ($params as $key => $value) {
             update_post_meta($employeePostId, $key, $value);
         }
 

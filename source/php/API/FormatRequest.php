@@ -2,14 +2,14 @@
 
 namespace VolunteerManager\API;
 
-use WP_Error;
+use WP_REST_Request;
 
 class FormatRequest implements RestFormatInterface
 {
     /**
      * @inheritDoc
      */
-    public function formatRestRequest(array $request)
+    public function formatRestRequest(WP_REST_Request $request)
     {
         return $request;
     }

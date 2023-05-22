@@ -3,6 +3,7 @@
 namespace VolunteerManager\API;
 
 use WP_Error;
+use WP_REST_Request;
 
 /**
  * Base decorator class for validating REST requests
@@ -19,7 +20,7 @@ abstract class ValidateRestRequest implements RestFormatInterface
     /**
      * @inheritDoc
      */
-    public function formatRestRequest(array $request)
+    public function formatRestRequest(WP_REST_Request $request)
     {
         $validation_result = $this->validator($request);
         if (is_wp_error($validation_result)) {
@@ -29,5 +30,5 @@ abstract class ValidateRestRequest implements RestFormatInterface
         return $this->rest_format->formatRestRequest($request);
     }
 
-    abstract protected function validator(array $request);
+    abstract protected function validator(WP_REST_Request $request);
 }

@@ -6,7 +6,7 @@ use VolunteerManager\Helper\Icon as Icon;
 
 class EmployeeConfiguration
 {
-    public static function getPostTypeArgs()
+    public static function getPostTypeArgs(): array
     {
         return [
             'slug' => 'employee',
@@ -27,7 +27,7 @@ class EmployeeConfiguration
         ];
     }
 
-    public static function getStatusTerms()
+    public static function getStatusTerms(): array
     {
         return [
             [

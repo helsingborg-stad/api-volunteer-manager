@@ -17,7 +17,7 @@ class WPResponseFactory
      * @param string $param
      * @return WP_Error
      */
-    public static function wp_error_response($error_code, string $message, string $param)
+    public static function wp_error_response($error_code, string $message, string $param): WP_Error
     {
         return new WP_Error(
             $error_code,
