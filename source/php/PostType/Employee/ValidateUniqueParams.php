@@ -5,7 +5,6 @@ namespace VolunteerManager\PostType\Employee;
 use VolunteerManager\API\ValidateRestRequest;
 use VolunteerManager\API\WPResponseFactory;
 use WP_Error;
-use WP_REST_Request;
 
 /**
  * Validate unique parameters of the REST request

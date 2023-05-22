@@ -3,7 +3,6 @@
 namespace VolunteerManager\API;
 
 use WP_Error;
-use WP_REST_Request;
 
 /**
  * Base decorator class for validating REST requests

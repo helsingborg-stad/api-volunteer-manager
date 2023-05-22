@@ -2,7 +2,6 @@
 
 namespace VolunteerManager\PostType\Employee;
 
-use VolunteerManager\API\EmployeeApi;
 use VolunteerManager\API\FormatRequest;
 use VolunteerManager\API\WPResponseFactory;
 use WP_Error;
