@@ -31,7 +31,7 @@ class Employee extends PostType
     /**
      * @return void
      */
-    public function addPostTypeTableColumn(): void
+    public function addPostTypeTableColumn()
     {
         $this->addTableColumn(
             'registration_status',
@@ -62,7 +62,7 @@ class Employee extends PostType
      *
      * @return void
      */
-    public function registerStatusTaxonomy(): void
+    public function registerStatusTaxonomy()
     {
         $this->employeeTaxonomy = new Taxonomy(
             'Registration statuses',

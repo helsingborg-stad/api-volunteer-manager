@@ -2,61 +2,71 @@
 
 namespace VolunteerManager\PostType\Employee;
 
-use VolunteerManager\API\EmployeeApi;
+use VolunteerManager\API\FormatRequest;
 use VolunteerManager\API\WPResponseFactory;
-use WP_Error;
 use WP_REST_Request;
 use WP_REST_Response;
 
 class EmployeeApiManager
 {
-    private EmployeeApiValidator $validator;
-
-    public function __construct(EmployeeApiValidatorInterface $validator)
-    {
-        $this->validator = $validator;
-    }
-
-    public function addHooks(): void
+    public function addHooks()
     {
         add_action('rest_api_init', array($this, 'registerPostEndpoint'));
     }
 
     public function registerPostEndpoint()
     {
-        (new EmployeeApi())->registerPostEndpoint(
+        register_rest_route(
+            'wp/v2',
             'employee',
-            array($this, 'registerEmployee'),
-            $this->validator
+            array(
+                'methods' => 'POST',
+                'callback' => array($this, 'handlePostRequest'),
+                'permission_callback' => function () {
+                    return true;
+                },
+            )
         );
+    }
+
+    public function handlePostRequest(WP_REST_Request $request)
+    {
+        $format_request = new FormatRequest();
+        $unique_params = new ValidateUniqueParams($format_request);
+        $required_params = new RequiredEmployeeParams($unique_params);
+
+        $validated_params = $required_params->formatRestRequest($request);
+        if (is_wp_error($validated_params)) {
+            return $validated_params;
+        }
+
+        return $this->registerEmployee($request);
     }
 
     /**
      * Callback function to handle the employee registration POST request
      *
      * @param WP_REST_Request $request
-     * @return WP_Error|WP_REST_Response
+     * @return WP_REST_Response
      */
-    public function registerEmployee(WP_REST_Request $request)
+    public function registerEmployee(WP_REST_Request $request): WP_REST_Response
     {
-        $param_keys = [
+        $request_decoded_token = $request->get_param('decoded_token');
+        $decode_token_params = [
             'first_name',
             'surname',
             'national_identity_number',
+        ];
+        $request_params = [
             'email',
         ];
 
         $params = [];
-        foreach ($param_keys as $key) {
-            $params[$key] = $request->get_param($key);
+        foreach ($decode_token_params as $param) {
+            $params[$param] = $request_decoded_token[$param];
         }
-
-        // TODO: Handle all params
-
-        // Loop through the params and return WP_Error and status code 400 if a param is empty
-        $validation_result = $this->validator->validate_required_params($params);
-        if (is_wp_error($validation_result)) {
-            return $validation_result;
+        foreach ($request_params as $param) {
+            $params[$param] = $request[$param];
         }
 
         // Create the employee post
@@ -70,8 +80,8 @@ class EmployeeApiManager
             )
         );
 
-        foreach ($param_keys as $key) {
-            update_post_meta($employeePostId, $key, $params[$key]);
+        foreach ($params as $key => $value) {
+            update_post_meta($employeePostId, $key, $value);
         }
 
         $new_status_term = get_term_by('slug', 'new', 'employee-registration-status');
