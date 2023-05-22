@@ -19,12 +19,14 @@ class ValidateUniqueParams extends ValidateRestRequest
     {
         $validator = new EmployeeApiValidator();
 
+        $email = $request->get_param('email');
         // Validate Email
-        if (!$validator->is_email_unique($request['email'])) {
+        if (!$validator->is_email_unique($email)) {
             return $this->generateErrorResponse('Email already exists', 'email');
         }
 
-        if (!$validator->is_national_identity_unique($request['national_identity_number'])) {
+        $decoded_token = $request->get_param('decoded_token');
+        if (!$validator->is_national_identity_unique($decoded_token['national_identity_number'])) {
             return $this->generateErrorResponse('National identity number already exists', 'national_identity_number');
         }
 

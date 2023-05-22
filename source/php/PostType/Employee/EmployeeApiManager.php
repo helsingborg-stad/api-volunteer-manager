@@ -66,7 +66,7 @@ class EmployeeApiManager
             $params[$param] = $request_decoded_token[$param];
         }
         foreach ($request_params as $param) {
-            $params[$param] = $request[$param];
+            $params[$param] = $request->get_param($param);
         }
 
         // Create the employee post
