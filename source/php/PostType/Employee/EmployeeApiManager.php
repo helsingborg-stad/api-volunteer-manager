@@ -11,13 +11,6 @@ use WP_REST_Response;
 
 class EmployeeApiManager
 {
-    private EmployeeApiValidator $validator;
-
-    public function __construct(EmployeeApiValidatorInterface $validator)
-    {
-        $this->validator = $validator;
-    }
-
     public function addHooks(): void
     {
         add_action('rest_api_init', array($this, 'registerPostEndpoint'));
