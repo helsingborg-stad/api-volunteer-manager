@@ -10,12 +10,12 @@ use WP_REST_Response;
 
 class EmployeeApiManager
 {
-    public function addHooks(): void
+    public function addHooks()
     {
         add_action('rest_api_init', array($this, 'registerPostEndpoint'));
     }
 
-    public function registerPostEndpoint(): void
+    public function registerPostEndpoint()
     {
         register_rest_route(
             'wp/v2',
@@ -30,7 +30,7 @@ class EmployeeApiManager
         );
     }
 
-    public function handlePostRequest(WP_REST_Request $request): WP_REST_Response|WP_Error
+    public function handlePostRequest(WP_REST_Request $request)
     {
         // TODO: Remove once JWT is implemented.
         $validated_params_array = $request->get_params();
@@ -53,7 +53,7 @@ class EmployeeApiManager
      * @param array $request
      * @return WP_REST_Response
      */
-    public function registerEmployee(array $request): WP_REST_Response
+    public function registerEmployee(array $request)
     {
         // TODO: Handle all params
 

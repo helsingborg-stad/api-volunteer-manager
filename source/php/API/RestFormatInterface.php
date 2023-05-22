@@ -12,5 +12,5 @@ interface RestFormatInterface
      * @param array $request
      * @return array|WP_Error
      */
-    public function formatRestRequest(array $request): array|WP_Error;
+    public function formatRestRequest(array $request);
 }

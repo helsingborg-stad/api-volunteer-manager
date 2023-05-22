@@ -19,7 +19,7 @@ abstract class ValidateRestRequest implements RestFormatInterface
     /**
      * @inheritDoc
      */
-    public function formatRestRequest(array $request): array|WP_Error
+    public function formatRestRequest(array $request)
     {
         $validation_result = $this->validator($request);
         if (is_wp_error($validation_result)) {
@@ -29,5 +29,5 @@ abstract class ValidateRestRequest implements RestFormatInterface
         return $this->rest_format->formatRestRequest($request);
     }
 
-    abstract protected function validator(array $request): array|WP_Error;
+    abstract protected function validator(array $request);
 }

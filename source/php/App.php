@@ -49,8 +49,7 @@ class App
         $employeeNotifications = new EmployeeNotificationFilters();
         $employeeNotifications->addHooks();
 
-        $employeeApiManager = new EmployeeApiManager();
-        $employeeApiManager->addHooks();
+        (new EmployeeApiManager())->addHooks();
 
         $application = new Application(...array_values(ApplicationConfiguration::getPostTypeArgs()));
         $application->addHooks();

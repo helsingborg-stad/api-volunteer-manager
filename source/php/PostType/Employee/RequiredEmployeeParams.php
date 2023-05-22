@@ -8,7 +8,7 @@ use WP_Error;
 
 class RequiredEmployeeParams extends ValidateRestRequest
 {
-    protected function validator(array $request): array|WP_Error
+    protected function validator(array $request)
     {
         $required_parameter_keys = [
             'first_name',

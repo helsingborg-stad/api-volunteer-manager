@@ -14,7 +14,7 @@ use WP_Error;
  */
 class ValidateUniqueParams extends ValidateRestRequest
 {
-    protected function validator(array $request): array|WP_Error
+    protected function validator(array $request)
     {
         $validator = new EmployeeApiValidator();
 
@@ -30,7 +30,7 @@ class ValidateUniqueParams extends ValidateRestRequest
         return $request;
     }
 
-    private function generateErrorResponse(string $message, string $param): WP_Error
+    private function generateErrorResponse(string $message, string $param)
     {
         return WPResponseFactory::wp_error_response(
             'avm_employee_registration_error',
