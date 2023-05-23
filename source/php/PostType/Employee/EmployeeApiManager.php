@@ -2,6 +2,8 @@
 
 namespace VolunteerManager\PostType\Employee;
 
+use VolunteerManager\API\Auth\AuthenticationInterface;
+use VolunteerManager\API\Auth\AuthenticationDecorator;
 use VolunteerManager\API\FormatRequest;
 use VolunteerManager\API\WPResponseFactory;
 use WP_REST_Request;
@@ -9,6 +11,13 @@ use WP_REST_Response;
 
 class EmployeeApiManager
 {
+    private AuthenticationInterface $authentication;
+
+    public function __construct(AuthenticationInterface $authentication)
+    {
+        $this->authentication = $authentication;
+    }
+
     public function addHooks()
     {
         add_action('rest_api_init', array($this, 'registerPostEndpoint'));
@@ -21,7 +30,7 @@ class EmployeeApiManager
             'employee',
             array(
                 'methods' => 'POST',
-                'callback' => array($this, 'handlePostRequest'),
+                'callback' => new AuthenticationDecorator([$this, 'handlePostRequest'], $this->authentication),
                 'permission_callback' => function () {
                     return true;
                 },
@@ -51,20 +60,16 @@ class EmployeeApiManager
      */
     public function registerEmployee(WP_REST_Request $request): WP_REST_Response
     {
-        $request_decoded_token = $request->get_param('decoded_token');
-        $decode_token_params = [
+        $request_params = [
+            'email',
             'first_name',
             'surname',
             'national_identity_number',
-        ];
-        $request_params = [
-            'email',
+            'phone_number',
+            'source'
         ];
 
         $params = [];
-        foreach ($decode_token_params as $param) {
-            $params[$param] = $request_decoded_token[$param];
-        }
         foreach ($request_params as $param) {
             $params[$param] = $request->get_param($param);
         }

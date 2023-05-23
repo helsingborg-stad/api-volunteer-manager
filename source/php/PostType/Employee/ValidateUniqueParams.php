@@ -25,8 +25,8 @@ class ValidateUniqueParams extends ValidateRestRequest
             return $this->generateErrorResponse('Email already exists', 'email');
         }
 
-        $decoded_token = $request->get_param('decoded_token');
-        if (!$validator->is_national_identity_unique($decoded_token['national_identity_number'])) {
+        $national_identity_number = $request->get_param('national_identity_number');
+        if (!$validator->is_national_identity_unique($national_identity_number)) {
             return $this->generateErrorResponse('National identity number already exists', 'national_identity_number');
         }
 
