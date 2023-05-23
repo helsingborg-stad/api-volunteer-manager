@@ -19,7 +19,7 @@ class JWTAuthentication implements AuthenticationInterface
     /**
      * Validate rest request with JWT
      * @param WP_REST_Request $request
-     * @return \WP_Error|\WP_REST_Request
+     * @return \WP_Error|array
      */
     public function validateRequest(WP_REST_Request $request)
     {
@@ -59,8 +59,7 @@ class JWTAuthentication implements AuthenticationInterface
 
         try {
             $decodedToken = JWT::decode($token, new Key($this->secretKey, 'HS256'));
-            $request->decoded_token = (array)$decodedToken;
-            return $request;
+            return (array)$decodedToken;
         } catch (\Exception $e) {
             return new WP_Error(
                 'jwt_auth_invalid_token',
