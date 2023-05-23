@@ -8,8 +8,8 @@ class Api
 {
     private $postTypes = [
         'assignment',
-        'employer',
-        'employee'
+        'employee',
+        'application'
     ];
 
     private $removableResponseKeys = [
