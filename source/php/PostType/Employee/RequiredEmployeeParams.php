@@ -11,21 +11,12 @@ class RequiredEmployeeParams extends ValidateRestRequest
 {
     protected function validator(WP_REST_Request $request)
     {
-        $request_decoded_token = $request->get_param('decoded_token');
-
-        $required_token_keys = [
+        $required_request_keys = [
+            'email',
             'first_name',
             'surname',
             'national_identity_number',
         ];
-
-        foreach ($required_token_keys as $key) {
-            if (empty($request_decoded_token[$key])) {
-                return $this->generateErrorResponse($key);
-            }
-        }
-
-        $required_request_keys = ['email'];
 
         foreach ($required_request_keys as $key) {
             if (empty($request[$key])) {

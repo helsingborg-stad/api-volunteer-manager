@@ -3,6 +3,7 @@
 namespace VolunteerManager;
 
 use VolunteerManager\API\Api;
+use VolunteerManager\API\Auth\JWTAuthentication;
 use VolunteerManager\Notification\EmailNotificationSender;
 use VolunteerManager\Notification\LoggingNotificationSender;
 use VolunteerManager\Notification\NotificationHandler;
@@ -15,7 +16,6 @@ use VolunteerManager\PostType\Assignment\AssignmentConfiguration;
 use VolunteerManager\PostType\Assignment\AssignmentNotificationFilters;
 use VolunteerManager\PostType\Employee\Employee;
 use VolunteerManager\PostType\Employee\EmployeeApiManager;
-use VolunteerManager\PostType\Employee\EmployeeApiValidator;
 use VolunteerManager\PostType\Employee\EmployeeConfiguration;
 use VolunteerManager\PostType\Employee\EmployeeNotificationFilters;
 
@@ -38,6 +38,8 @@ class App
         $admin = new Admin();
         $admin->addHooks();
 
+        $JWTAuthentication = new JWTAuthentication(defined('JWT_SECRET_KEY') ? JWT_SECRET_KEY : '');
+
         //Post types
         $assignment = new Assignment(...array_values(AssignmentConfiguration::getPostTypeArgs()));
         $assignment->addHooks();
@@ -49,7 +51,7 @@ class App
         $employeeNotifications = new EmployeeNotificationFilters();
         $employeeNotifications->addHooks();
 
-        (new EmployeeApiManager())->addHooks();
+        (new EmployeeApiManager($JWTAuthentication))->addHooks();
 
         $application = new Application(...array_values(ApplicationConfiguration::getPostTypeArgs()));
         $application->addHooks();
