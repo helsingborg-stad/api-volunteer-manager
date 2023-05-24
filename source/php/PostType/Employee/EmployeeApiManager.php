@@ -6,6 +6,7 @@ use VolunteerManager\API\Auth\AuthenticationInterface;
 use VolunteerManager\API\Auth\AuthenticationDecorator;
 use VolunteerManager\API\FormatRequest;
 use VolunteerManager\API\WPResponseFactory;
+use WP_Error;
 use WP_REST_Request;
 use WP_REST_Response;
 
@@ -31,9 +32,17 @@ class EmployeeApiManager
             array(
                 'methods' => 'POST',
                 'callback' => new AuthenticationDecorator([$this, 'handlePostRequest'], $this->authentication),
-                'permission_callback' => function () {
-                    return true;
-                },
+                'permission_callback' => '__return_true'
+            )
+        );
+
+        register_rest_route(
+            'wp/v2',
+            'employee',
+            array(
+                'methods' => 'GET',
+                'callback' => new AuthenticationDecorator([$this, 'handleGetRequest'], $this->authentication),
+                'permission_callback' => '__return_true',
             )
         );
     }
@@ -101,5 +110,62 @@ class EmployeeApiManager
             __('Employee created', AVM_TEXT_DOMAIN),
             $employeePostId
         );
+    }
+
+    public function handleGetRequest(WP_REST_Request $request)
+    {
+        $format_request = new FormatRequest();
+        $required_params = new RequiredEmployeeParams(
+            $format_request,
+            ['national_identity_number']
+        );
+        $validated_params = $required_params->formatRestRequest($request);
+        if (is_wp_error($validated_params)) {
+            return $validated_params;
+        }
+
+        $nationalIdentityNumber = $request->get_param('national_identity_number');
+        $employee = $this->getEmployeeByIdentityNumber($nationalIdentityNumber);
+
+        if (empty($employee[0])) {
+            return new WP_Error(
+                'rest_post_invalid_id',
+                'Invalid post ID.',
+                array(
+                    'status' => 404,
+                )
+            );
+        }
+
+        $fields = get_fields($employee[0]->ID);
+        $restResponse = [
+            'id' => $employee[0]->ID,
+            'national_identity_number' => $fields['national_identity_number'] ?? null,
+            'first_name' => $fields['first_name'] ?? null,
+            'surname' => $fields['surname'] ?? null,
+            'email' => $fields['email'] ?? null,
+            'phone_number' => $fields['phone_number'] ?? null,
+            'newsletter' => $fields['newsletter'] ?? null,
+        ];
+
+        return new WP_REST_Response(
+            $restResponse,
+            200
+        );
+    }
+
+    public function getEmployeeByIdentityNumber(string $nationalIdentityNumber): array
+    {
+        return get_posts(array(
+            'post_type' => 'employee',
+            'post_status' => 'any',
+            'meta_query' => array(
+                array(
+                    'key' => 'national_identity_number',
+                    'value' => $nationalIdentityNumber,
+                    'compare' => '=',
+                )
+            )
+        ));
     }
 }
