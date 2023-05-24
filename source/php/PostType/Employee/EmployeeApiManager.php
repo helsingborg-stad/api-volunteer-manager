@@ -127,7 +127,7 @@ class EmployeeApiManager
         $nationalIdentityNumber = $request->get_param('national_identity_number');
         $employee = $this->getEmployeeByIdentityNumber($nationalIdentityNumber);
 
-        if (empty($employee[0])) {
+        if (!$employee) {
             return new WP_Error(
                 'rest_post_invalid_id',
                 'Invalid post ID.',
@@ -137,26 +137,41 @@ class EmployeeApiManager
             );
         }
 
-        $fields = get_fields($employee[0]->ID);
-        $restResponse = [
-            'id' => $employee[0]->ID,
-            'national_identity_number' => $fields['national_identity_number'] ?? null,
-            'first_name' => $fields['first_name'] ?? null,
-            'surname' => $fields['surname'] ?? null,
-            'email' => $fields['email'] ?? null,
-            'phone_number' => $fields['phone_number'] ?? null,
-            'newsletter' => $fields['newsletter'] ?? null,
-        ];
-
         return new WP_REST_Response(
-            $restResponse,
+            $this->getEmployeeDetails($employee->ID),
             200
         );
     }
 
-    public function getEmployeeByIdentityNumber(string $nationalIdentityNumber): array
+    /**
+     * Retrieve employee data and format it into an array
+     *
+     * @param int $employeeId The ID of the employee
+     * @return array The formatted employee data
+     */
+    public function getEmployeeDetails(int $employeeId): array
     {
-        return get_posts(array(
+        $employeeFields = get_fields($employeeId);
+        return [
+            'id' => $employeeId,
+            'national_identity_number' => $employeeFields['national_identity_number'] ?? null,
+            'first_name' => $employeeFields['first_name'] ?? null,
+            'surname' => $employeeFields['surname'] ?? null,
+            'email' => $employeeFields['email'] ?? null,
+            'phone_number' => $employeeFields['phone_number'] ?? null,
+            'newsletter' => $employeeFields['newsletter'] ?? null,
+        ];
+    }
+
+    /**
+     * Retrieve employee by national identity number
+     *
+     * @param string $nationalIdentityNumber The national identity number of the employee
+     * @return null|\WP_Post The employee data matching the national identity number
+     */
+    public function getEmployeeByIdentityNumber(string $nationalIdentityNumber): ?\WP_Post
+    {
+        $employee = get_posts(array(
             'post_type' => 'employee',
             'post_status' => 'any',
             'meta_query' => array(
@@ -167,5 +182,6 @@ class EmployeeApiManager
                 )
             )
         ));
+        return !empty($employee[0]) ? $employee[0] : null;
     }
 }
