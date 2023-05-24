@@ -42,7 +42,10 @@ class EmployeeApiManager
     {
         $format_request = new FormatRequest();
         $unique_params = new ValidateUniqueParams($format_request);
-        $required_params = new RequiredEmployeeParams($unique_params);
+        $required_params = new RequiredEmployeeParams(
+            $unique_params,
+            ['email', 'first_name', 'surname', 'national_identity_number']
+        );
 
         $validated_params = $required_params->formatRestRequest($request);
         if (is_wp_error($validated_params)) {
