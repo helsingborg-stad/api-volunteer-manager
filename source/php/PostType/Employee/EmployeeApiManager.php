@@ -152,6 +152,13 @@ class EmployeeApiManager
     public function getEmployeeDetails(int $employeeId): array
     {
         $employeeFields = get_fields($employeeId);
+        $status = get_the_terms($employeeId, 'employee-registration-status');
+        $status = !empty($status[0]) ? [
+            'term_id' => $status[0]->term_id,
+            'name' => $status[0]->name,
+            'slug' => $status[0]->slug,
+        ] : null;
+
         return [
             'id' => $employeeId,
             'national_identity_number' => $employeeFields['national_identity_number'] ?? null,
@@ -160,6 +167,7 @@ class EmployeeApiManager
             'email' => $employeeFields['email'] ?? null,
             'phone_number' => $employeeFields['phone_number'] ?? null,
             'newsletter' => $employeeFields['newsletter'] ?? null,
+            'status' => $status,
         ];
     }
 
