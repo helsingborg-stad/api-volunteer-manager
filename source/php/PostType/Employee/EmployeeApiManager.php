@@ -86,7 +86,7 @@ class EmployeeApiManager
         );
 
         foreach ($params as $key => $value) {
-            update_post_meta($employeePostId, $key, $value);
+            update_field($key, $value, $employeePostId);
         }
 
         $new_status_term = get_term_by('slug', 'new', 'employee-registration-status');
