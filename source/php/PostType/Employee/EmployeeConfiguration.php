@@ -23,7 +23,8 @@ class EmployeeConfiguration
                 'exclude_from_search' => true,
                 'taxonomies' => array(),
                 'supports' => false,
-                'show_in_rest' => true]
+                'show_in_rest' => false
+            ]
         ];
     }
 
