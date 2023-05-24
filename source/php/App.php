@@ -46,12 +46,9 @@ class App
         $assignmentNotifications = new AssignmentNotificationFilters();
         $assignmentNotifications->addHooks();
 
-        $employee = new Employee(...array_values(EmployeeConfiguration::getPostTypeArgs()));
-        $employee->addHooks();
-        $employeeNotifications = new EmployeeNotificationFilters();
-        $employeeNotifications->addHooks();
-
+        (new Employee(...array_values(EmployeeConfiguration::getPostTypeArgs())))->addHooks();
         (new EmployeeApiManager($JWTAuthentication))->addHooks();
+        (new EmployeeNotificationFilters())->addHooks();
 
         $application = new Application(...array_values(ApplicationConfiguration::getPostTypeArgs()));
         $application->addHooks();
