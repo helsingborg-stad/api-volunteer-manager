@@ -34,7 +34,7 @@ class EmployeeNotificationFilters extends NotificationFilters
      */
     public function populateNotificationWithContent(array $args, int $postId): array
     {
-        $firstName = get_field($postId, 'first_name') ?? '';
+        $firstName = get_field('first_name', $postId) ?? '';
         $args['content'] = sprintf(
             $args['content'], $firstName,
         );
