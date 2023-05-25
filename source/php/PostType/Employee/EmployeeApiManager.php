@@ -78,7 +78,8 @@ class EmployeeApiManager
             'surname',
             'national_identity_number',
             'phone_number',
-            'source'
+            'source',
+            'newsletter'
         ];
 
         $params = [];
@@ -100,6 +101,8 @@ class EmployeeApiManager
         foreach ($params as $key => $value) {
             update_field($key, $value, $employeePostId);
         }
+
+        update_field('registration_date', date('Y-m-d'), $employeePostId);
 
         $new_status_term = get_term_by('slug', 'new', 'employee-registration-status');
         if ($new_status_term) {
@@ -167,6 +170,7 @@ class EmployeeApiManager
             'email' => $employeeFields['email'] ?? null,
             'phone_number' => $employeeFields['phone_number'] ?? null,
             'newsletter' => $employeeFields['newsletter'] ?? null,
+            'registration_date' => $employeeFields['registration_date'] ?? null,
             'status' => $status,
         ];
     }
