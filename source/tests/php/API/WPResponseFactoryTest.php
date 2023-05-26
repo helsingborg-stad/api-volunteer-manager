@@ -55,7 +55,7 @@ class WPResponseFactoryTest extends PluginTestCase
             ->once()
             ->andReturn($status);
 
-        $wp_rest_response = WPResponseFactory::wp_rest_response($message, $employee_id, $status);
+        $wp_rest_response = WPResponseFactory::wp_rest_response($message, ['employee_id' => $employee_id]);
         $this->assertEquals($status, $wp_rest_response->get_status());
     }
 }

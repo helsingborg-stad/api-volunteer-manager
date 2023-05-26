@@ -112,7 +112,9 @@ class EmployeeApiManager
 
         return WPResponseFactory::wp_rest_response(
             __('Employee created', AVM_TEXT_DOMAIN),
-            $employeePostId
+            array(
+                'employee_id' => $employeePostId
+            )
         );
     }
 
