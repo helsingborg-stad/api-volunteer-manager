@@ -50,14 +50,35 @@ class AssignmentApiManager
             return $validated_params;
         }
 
-        return $this->registerAssignment();
+        return $this->registerAssignment($request);
     }
 
-    public function registerAssignment(): WP_REST_Response
+    public function registerAssignment(WP_REST_Request $request): WP_REST_Response
     {
+        $request_params = [
+            'title',
+            'assignment_eligibility'
+        ];
+
+        $params = [];
+        foreach ($request_params as $param) {
+            $params[$param] = $request->get_param($param);
+        }
+        
+        $assignment_id = wp_insert_post(
+            [
+                'post_title' => $params['title'],
+                'post_type' => 'assignment',
+                'post_status' => 'pending',
+                'post_date_gmt' => current_time('mysql', true),
+                'post_modified_gmt' => current_time('mysql', true),
+            ]
+        );
+
+        $optional_response_params = ['assignment_id' => $assignment_id];
         return WPResponseFactory::wp_rest_response(
             'Assignment created',
-            200
+            $optional_response_params
         );
     }
 }
