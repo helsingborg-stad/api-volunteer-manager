@@ -18,6 +18,7 @@ class Employee extends PostType
         add_action('init', array($this, 'addPostTypeTableColumn'));
         add_action('acf/save_post', array($this, 'setPostTitle'));
         add_action('add_meta_boxes', array($this, 'registerApplicationsMetaBox'), 10, 2);
+        add_action('before_delete_post', array($this, 'deleteRelatedApplications'));
 
         add_filter('acf/load_field/name=notes_date_updated', array($this, 'acfSetNotesDefaultDate'));
     }
@@ -134,5 +135,30 @@ class Employee extends PostType
             'application_employee'
         );
         $applicationMetaBox->register();
+    }
+
+    /**
+     * Permanently deletes applications related to the employee
+     * @param $postId
+     * @return void
+     */
+    public function deleteRelatedApplications($postId)
+    {
+        $postType = get_post_type($postId);
+        if (!wp_is_post_revision($postId) && !wp_is_post_autosave($postId) && $postType === 'employee') {
+            $args = array(
+                'post_status' => 'any',
+                'meta_key' => 'application_employee',
+                'meta_value' => $postId,
+                'post_type' => 'application',
+                'posts_per_page' => -1,
+                'fields' => 'ids',
+            );
+
+            $relatedApplications = get_posts($args);
+            foreach ($relatedApplications as $application) {
+                wp_delete_post($application, true);
+            }
+        }
     }
 }
