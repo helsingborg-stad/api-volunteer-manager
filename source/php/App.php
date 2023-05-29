@@ -12,7 +12,7 @@ use VolunteerManager\PostType\Application\Application;
 use VolunteerManager\PostType\Application\ApplicationConfiguration;
 use VolunteerManager\PostType\Application\ApplicationNotificationFilters;
 use VolunteerManager\PostType\Assignment\Assignment;
-use VolunteerManager\PostType\Assignment\AssignmentApiManager;
+use VolunteerManager\API\Assignment\AssignmentApiManager;
 use VolunteerManager\PostType\Assignment\AssignmentConfiguration;
 use VolunteerManager\PostType\Assignment\AssignmentNotificationFilters;
 use VolunteerManager\PostType\Employee\Employee;
