@@ -57,7 +57,12 @@ class AssignmentApiManager
     {
         $request_params = [
             'title',
-            'assignment_eligibility'
+            'assignment_eligibility',
+            'description',
+            'qualifications',
+            'schedule',
+            'benefits',
+            'number_of_available_spots'
         ];
 
         $params = [];
