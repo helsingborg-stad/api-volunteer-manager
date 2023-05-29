@@ -13,6 +13,23 @@ class Helper
         $this->request = $request;
     }
 
+    public function setStatus(int $assignment_id)
+    {
+        $assignment_status_term = get_term_by('slug', 'pending', 'assignment-status');
+        if ($assignment_status_term) {
+            wp_set_post_terms($assignment_id, [$assignment_status_term->term_id], 'assignment-status');
+        }
+    }
+
+    public function setEligibility(int $assignment_id)
+    {
+        $assignment_eligibility_param = $this->request->get_param('assignment_eligibility');
+        $assignment_eligibility_term = get_term_by('slug', $assignment_eligibility_param, 'assignment-eligibility');
+        if ($assignment_eligibility_term) {
+            wp_set_post_terms($assignment_id, [$assignment_eligibility_term->term_id], 'assignment-eligibility');
+        }
+    }
+
     public function setSource(int $assignment_id)
     {
         // TODO: Remove static request source check.

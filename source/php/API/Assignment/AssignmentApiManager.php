@@ -83,19 +83,10 @@ class AssignmentApiManager
             update_field($key, $value, $assignment_id);
         }
 
-        $assignment_status_term = get_term_by('slug', 'pending', 'assignment-status');
-        if ($assignment_status_term) {
-            wp_set_post_terms($assignment_id, [$assignment_status_term->term_id], 'assignment-status');
-        }
-
-        $assignment_eligibility_param = $request->get_param('assignment_eligibility');
-        $assignment_eligibility_term = get_term_by('slug', $assignment_eligibility_param, 'assignment-eligibility');
-        if ($assignment_eligibility_term) {
-            wp_set_post_terms($assignment_id, [$assignment_eligibility_term->term_id], 'assignment-eligibility');
-        }
-
         $helper = new Helper($request);
 
+        $helper->setStatus($assignment_id);
+        $helper->setEligibility($assignment_id);
         $helper->setSource($assignment_id);
         $helper->setSignupValues($assignment_id);
 
