@@ -94,6 +94,45 @@ class AssignmentApiManager
             wp_set_post_terms($assignment_id, [$assignment_eligibility_term->term_id], 'assignment-eligibility');
         }
 
+        // TODO: Remove static request source check.
+        $request_source = $request->get_param('source');
+        error_log('request source' . print_r($request_source, true));
+        if ($request_source === 'https://www.helsingborg.se') {
+            update_field('internal_assignment', false, $assignment_id);
+        }
+
+
+        $signup_methods = get_field('signup_methods', $assignment_id);
+        if (!is_array($signup_methods)) {
+            $signup_methods = [];
+        }
+
+        // Update signup link.
+        $signup_link = $request->get_param('signup_link');
+        if (!empty($signup_link)) {
+            update_field('signup_link', $signup_link, $assignment_id);
+
+            $signup_methods[] = 'link';
+        }
+
+        // Update signup email.
+        $signup_email = $request->get_param('signup_email');
+        if (!empty($signup_email)) {
+            update_field('signup_email', $signup_email, $assignment_id);
+
+            $signup_methods[] = 'email';
+        }
+
+        // Update signup phone.
+        $signup_phone = $request->get_param('signup_phone');
+        if (!empty($signup_phone)) {
+            update_field('signup_phone', $signup_phone, $assignment_id);
+
+            $signup_methods[] = 'phone';
+        }
+
+        update_field('signup_methods', $signup_methods, $assignment_id);
+
         $optional_response_params = ['assignment_id' => $assignment_id];
         return WPResponseFactory::wp_rest_response(
             'Assignment created',
