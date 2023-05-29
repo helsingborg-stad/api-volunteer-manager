@@ -64,7 +64,7 @@ class AssignmentApiManager
         foreach ($request_params as $param) {
             $params[$param] = $request->get_param($param);
         }
-        
+
         $assignment_id = wp_insert_post(
             [
                 'post_title' => $params['title'],
@@ -74,6 +74,11 @@ class AssignmentApiManager
                 'post_modified_gmt' => current_time('mysql', true),
             ]
         );
+
+        $assignment_status_term = get_term_by('slug', 'pending', 'assignment-status');
+        if ($assignment_status_term) {
+            wp_set_post_terms($assignment_id, [$assignment_status_term->term_id], 'assignment-status');
+        }
 
         $optional_response_params = ['assignment_id' => $assignment_id];
         return WPResponseFactory::wp_rest_response(
