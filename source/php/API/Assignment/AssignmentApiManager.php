@@ -57,7 +57,6 @@ class AssignmentApiManager
     {
         $request_params = [
             'title',
-            'assignment_eligibility',
             'description',
             'qualifications',
             'schedule',
@@ -80,9 +79,19 @@ class AssignmentApiManager
             ]
         );
 
+        foreach ($params as $key => $value) {
+            update_field($key, $value, $assignment_id);
+        }
+
         $assignment_status_term = get_term_by('slug', 'pending', 'assignment-status');
         if ($assignment_status_term) {
             wp_set_post_terms($assignment_id, [$assignment_status_term->term_id], 'assignment-status');
+        }
+
+        $assignment_eligibility_param = $request->get_param('assignment_eligibility');
+        $assignment_eligibility_term = get_term_by('slug', $assignment_eligibility_param, 'assignment-eligibility');
+        if ($assignment_eligibility_term) {
+            wp_set_post_terms($assignment_id, [$assignment_eligibility_term->term_id], 'assignment-eligibility');
         }
 
         $optional_response_params = ['assignment_id' => $assignment_id];
