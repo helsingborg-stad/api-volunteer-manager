@@ -1,6 +1,6 @@
 <?php
 
-namespace VolunteerManager\PostType\Assignment;
+namespace VolunteerManager\API\Assignment;
 
 use VolunteerManager\API\Auth\AuthenticationDecorator;
 use VolunteerManager\API\Auth\AuthenticationInterface;
