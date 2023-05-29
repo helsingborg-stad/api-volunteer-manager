@@ -2,9 +2,10 @@
 
 namespace VolunteerManager\PostType\Employee;
 
-use VolunteerManager\API\Auth\AuthenticationInterface;
 use VolunteerManager\API\Auth\AuthenticationDecorator;
+use VolunteerManager\API\Auth\AuthenticationInterface;
 use VolunteerManager\API\FormatRequest;
+use VolunteerManager\API\ValidateRequiredRestParams;
 use VolunteerManager\API\WPResponseFactory;
 use WP_Error;
 use WP_REST_Request;
@@ -51,7 +52,7 @@ class EmployeeApiManager
     {
         $format_request = new FormatRequest();
         $unique_params = new ValidateUniqueParams($format_request);
-        $required_params = new RequiredEmployeeParams(
+        $required_params = new ValidateRequiredRestParams(
             $unique_params,
             ['email', 'first_name', 'surname', 'national_identity_number']
         );
@@ -111,14 +112,16 @@ class EmployeeApiManager
 
         return WPResponseFactory::wp_rest_response(
             __('Employee created', AVM_TEXT_DOMAIN),
-            $employeePostId
+            array(
+                'employee_id' => $employeePostId
+            )
         );
     }
 
     public function handleGetRequest(WP_REST_Request $request)
     {
         $format_request = new FormatRequest();
-        $required_params = new RequiredEmployeeParams(
+        $required_params = new ValidateRequiredRestParams(
             $format_request,
             ['national_identity_number']
         );

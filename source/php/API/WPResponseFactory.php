@@ -33,23 +33,22 @@ class WPResponseFactory
      * Create a WP_REST_Response
      *
      * @param string $message Success message.
-     * @param int $employee_id Employee ID.
-     * @param int $status Status code.
+     * @param array $optional_data
      * @return WP_REST_Response
      */
     public static function wp_rest_response(
         string $message,
-        int    $employee_id,
-        int    $status = 200
+        array $optional_data = []
     ): WP_REST_Response
     {
         return new WP_REST_Response(
-            array(
-                'status' => $status,
-                'message' => $message,
-                'employee_id' => $employee_id
-            ),
-            $status
+            array_merge(
+                array(
+                    'status' => 200,
+                    'message' => $message,
+                ),
+                $optional_data
+            )
         );
     }
 }

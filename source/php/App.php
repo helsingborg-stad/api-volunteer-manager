@@ -12,6 +12,7 @@ use VolunteerManager\PostType\Application\Application;
 use VolunteerManager\PostType\Application\ApplicationConfiguration;
 use VolunteerManager\PostType\Application\ApplicationNotificationFilters;
 use VolunteerManager\PostType\Assignment\Assignment;
+use VolunteerManager\PostType\Assignment\AssignmentApiManager;
 use VolunteerManager\PostType\Assignment\AssignmentConfiguration;
 use VolunteerManager\PostType\Assignment\AssignmentNotificationFilters;
 use VolunteerManager\PostType\Employee\Employee;
@@ -45,6 +46,8 @@ class App
         $assignment->addHooks();
         $assignmentNotifications = new AssignmentNotificationFilters();
         $assignmentNotifications->addHooks();
+
+        (new AssignmentApiManager($JWTAuthentication))->addHooks();
 
         (new Employee(...array_values(EmployeeConfiguration::getPostTypeArgs())))->addHooks();
         (new EmployeeApiManager($JWTAuthentication))->addHooks();

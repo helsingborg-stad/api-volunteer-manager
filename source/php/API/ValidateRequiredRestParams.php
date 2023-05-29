@@ -1,14 +1,11 @@
 <?php
 
-namespace VolunteerManager\PostType\Employee;
+namespace VolunteerManager\API;
 
-use VolunteerManager\API\RestFormatInterface;
-use VolunteerManager\API\ValidateRestRequest;
-use VolunteerManager\API\WPResponseFactory;
 use WP_Error;
 use WP_REST_Request;
 
-class RequiredEmployeeParams extends ValidateRestRequest
+class ValidateRequiredRestParams extends ValidateRestRequest
 {
     private array $required_request_keys;
 
