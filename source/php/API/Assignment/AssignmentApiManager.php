@@ -79,12 +79,9 @@ class AssignmentApiManager
             ]
         );
 
-        foreach ($params as $key => $value) {
-            update_field($key, $value, $assignment_id);
-        }
-
         $helper = new Helper($request);
 
+        $helper->updateFields($assignment_id, $params);
         $helper->setStatus($assignment_id);
         $helper->setEligibility($assignment_id);
         $helper->setSource($assignment_id);

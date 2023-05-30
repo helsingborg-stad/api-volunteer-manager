@@ -13,6 +13,13 @@ class Helper
         $this->request = $request;
     }
 
+    public function updateFields(int $assignment_id, array $params)
+    {
+        foreach ($params as $key => $value) {
+            update_field($key, $value, $assignment_id);
+        }
+    }
+
     public function setStatus(int $assignment_id)
     {
         $assignment_status_term = get_term_by('slug', 'pending', 'assignment-status');
