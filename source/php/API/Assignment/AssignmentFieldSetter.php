@@ -32,8 +32,8 @@ class AssignmentFieldSetter
 
     public function setAssignmentSource(WP_REST_Request $request, int $assignment_id): void
     {
-        $external_assignment = $request->get_param('internal_assignment') === 'true';
-        update_field('internal_assignment', $external_assignment, $assignment_id);
+        $internal_assignment = $request->get_param('internal_assignment') === 'true';
+        update_field('internal_assignment', $internal_assignment, $assignment_id);
     }
 
     public function setAssignmentSignupValues(WP_REST_Request $request, int $assignment_id): void
