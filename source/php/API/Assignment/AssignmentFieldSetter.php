@@ -6,6 +6,12 @@ use WP_REST_Request;
 
 class AssignmentFieldSetter
 {
+    /**
+     * Updates the assignment fields with given parameters
+     *
+     * @param int $assignment_id The ID of the assignment to update.
+     * @param array $params The parameters to update the assignment with.
+     */
     public function updateAssignmentFields(int $assignment_id, array $params): void
     {
         foreach ($params as $key => $value) {
@@ -13,6 +19,11 @@ class AssignmentFieldSetter
         }
     }
 
+    /**
+     * Sets the status of an assignment
+     *
+     * @param int $assignment_id The ID of the assignment to update.
+     */
     public function setAssignmentStatus(int $assignment_id): void
     {
         $assignment_status_term = get_term_by('slug', 'pending', 'assignment-status');
@@ -21,6 +32,12 @@ class AssignmentFieldSetter
         }
     }
 
+    /**
+     * Sets the eligibility of an assignment from request parameters
+     *
+     * @param WP_REST_Request $request The request containing the eligibility parameter.
+     * @param int $assignment_id The ID of the assignment to update.
+     */
     public function setAssignmentEligibility(WP_REST_Request $request, int $assignment_id): void
     {
         $assignment_eligibility_param = $request->get_param('assignment_eligibility');
@@ -30,12 +47,24 @@ class AssignmentFieldSetter
         }
     }
 
+    /**
+     * Sets the eligibility of an assignment from request parameters
+     *
+     * @param WP_REST_Request $request The request containing the eligibility parameter.
+     * @param int $assignment_id The ID of the assignment to update.
+     */
     public function setAssignmentSource(WP_REST_Request $request, int $assignment_id): void
     {
         $internal_assignment = $request->get_param('internal_assignment') === 'true';
         update_field('internal_assignment', $internal_assignment, $assignment_id);
     }
 
+    /**
+     * Sets the signup values of an assignment from request parameters
+     *
+     * @param WP_REST_Request $request The request containing the signup values.
+     * @param int $assignment_id The ID of the assignment to update.
+     */
     public function setAssignmentSignupValues(WP_REST_Request $request, int $assignment_id): void
     {
         $signup_methods = get_fields('signup_methods', $assignment_id);
