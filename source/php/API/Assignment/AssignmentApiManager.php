@@ -37,7 +37,7 @@ class AssignmentApiManager
             'assignment',
             array(
                 'methods' => 'POST',
-                'callback' => new AuthenticationDecorator([$this, 'handleAssignmentCreationRequest'], $this->authentication),
+                'callback' => [$this, 'handleAssignmentCreationRequest'],
                 'permission_callback' => '__return_true'
             )
         );
