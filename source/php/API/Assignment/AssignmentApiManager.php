@@ -6,17 +6,23 @@ use VolunteerManager\API\Auth\AuthenticationDecorator;
 use VolunteerManager\API\Auth\AuthenticationInterface;
 use VolunteerManager\API\FormatRequest;
 use VolunteerManager\API\ValidateRequiredRestParams;
-use VolunteerManager\API\WPResponseFactory;
 use WP_REST_Request;
-use WP_REST_Response;
 
 class AssignmentApiManager
 {
     private AuthenticationInterface $authentication;
+    private AssignmentCreator $assignmentCreator;
+    private AssignmentFieldSetter $assignmentFieldSetter;
 
-    public function __construct(AuthenticationInterface $authentication)
+    public function __construct(
+        AuthenticationInterface $authentication,
+        AssignmentCreator       $assignmentCreator,
+        AssignmentFieldSetter   $assignmentFieldSetter
+    )
     {
         $this->authentication = $authentication;
+        $this->assignmentCreator = $assignmentCreator;
+        $this->assignmentFieldSetter = $assignmentFieldSetter;
     }
 
     public function addHooks()
@@ -31,59 +37,25 @@ class AssignmentApiManager
             'assignment',
             array(
                 'methods' => 'POST',
-                'callback' => new AuthenticationDecorator([$this, 'handlePostRequest'], $this->authentication),
+                'callback' => new AuthenticationDecorator([$this, 'handleAssignmentCreationRequest'], $this->authentication),
                 'permission_callback' => '__return_true'
             )
         );
     }
 
-    public function handlePostRequest(WP_REST_Request $request)
+    public function handleAssignmentCreationRequest(WP_REST_Request $request)
     {
-        $format_request = new FormatRequest();
-        $required_params = new ValidateRequiredRestParams(
-            $format_request,
+        $formatRequest = new FormatRequest();
+        $requiredParamsValidator = new ValidateRequiredRestParams(
+            $formatRequest,
             ['assignment_eligibility']
         );
 
-        $validated_params = $required_params->formatRestRequest($request);
-        if (is_wp_error($validated_params)) {
-            return $validated_params;
+        $validatedParams = $requiredParamsValidator->formatRestRequest($request);
+        if (is_wp_error($validatedParams)) {
+            return $validatedParams;
         }
 
-        return $this->registerAssignment($request);
-    }
-
-    public function registerAssignment(WP_REST_Request $request): WP_REST_Response
-    {
-        $request_params = [
-            'title',
-            'assignment_eligibility'
-        ];
-
-        $params = [];
-        foreach ($request_params as $param) {
-            $params[$param] = $request->get_param($param);
-        }
-
-        $assignment_id = wp_insert_post(
-            [
-                'post_title' => $params['title'],
-                'post_type' => 'assignment',
-                'post_status' => 'pending',
-                'post_date_gmt' => current_time('mysql', true),
-                'post_modified_gmt' => current_time('mysql', true),
-            ]
-        );
-
-        $assignment_status_term = get_term_by('slug', 'pending', 'assignment-status');
-        if ($assignment_status_term) {
-            wp_set_post_terms($assignment_id, [$assignment_status_term->term_id], 'assignment-status');
-        }
-
-        $optional_response_params = ['assignment_id' => $assignment_id];
-        return WPResponseFactory::wp_rest_response(
-            'Assignment created',
-            $optional_response_params
-        );
+        return $this->assignmentCreator->create($request, $this->assignmentFieldSetter);
     }
 }
