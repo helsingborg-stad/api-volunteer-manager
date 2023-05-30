@@ -4,7 +4,7 @@ namespace VolunteerManager\API\Assignment;
 
 use WP_REST_Request;
 
-class Helper
+class AssignmentFieldSetter
 {
     private WP_REST_Request $request;
 

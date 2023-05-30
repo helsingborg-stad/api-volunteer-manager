@@ -79,7 +79,7 @@ class AssignmentApiManager
             ]
         );
 
-        $helper = new Helper($request);
+        $helper = new AssignmentFieldSetter($request);
 
         $helper->updateFields($assignment_id, $params);
         $helper->setStatus($assignment_id);
