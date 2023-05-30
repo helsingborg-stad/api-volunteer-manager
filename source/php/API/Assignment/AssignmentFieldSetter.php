@@ -6,14 +6,14 @@ use WP_REST_Request;
 
 class AssignmentFieldSetter
 {
-    public function updateFields(int $assignment_id, array $params)
+    public function updateAssignmentFields(int $assignment_id, array $params): void
     {
         foreach ($params as $key => $value) {
             update_field($key, $value, $assignment_id);
         }
     }
 
-    public function setStatus(int $assignment_id)
+    public function setAssignmentStatus(int $assignment_id): void
     {
         $assignment_status_term = get_term_by('slug', 'pending', 'assignment-status');
         if ($assignment_status_term) {
@@ -21,7 +21,7 @@ class AssignmentFieldSetter
         }
     }
 
-    public function setEligibility(WP_REST_Request $request, int $assignment_id)
+    public function setAssignmentEligibility(WP_REST_Request $request, int $assignment_id): void
     {
         $assignment_eligibility_param = $request->get_param('assignment_eligibility');
         $assignment_eligibility_term = get_term_by('slug', $assignment_eligibility_param, 'assignment-eligibility');
@@ -30,7 +30,7 @@ class AssignmentFieldSetter
         }
     }
 
-    public function setSource(WP_REST_Request $request, int $assignment_id)
+    public function setAssignmentSource(WP_REST_Request $request, int $assignment_id): void
     {
         // TODO: Remove static request source check.
         $request_source = $request->get_param('source');
@@ -39,7 +39,7 @@ class AssignmentFieldSetter
         }
     }
 
-    public function setSignupValues(WP_REST_Request $request, int $assignment_id)
+    public function setAssignmentSignupValues(WP_REST_Request $request, int $assignment_id): void
     {
         $signup_methods = get_fields('signup_methods', $assignment_id);
         if (!is_array($signup_methods)) {

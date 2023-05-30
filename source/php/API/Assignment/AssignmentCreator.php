@@ -13,11 +13,11 @@ class AssignmentCreator
         $assignmentDetails = $this->extractAssignmentDetailsFromRequest($request);
         $assignmentId = $this->createAssignmentPost($assignmentDetails['title']);
 
-        $fieldSetter->updateFields($assignmentId, $assignmentDetails);
-        $fieldSetter->setStatus($assignmentId);
-        $fieldSetter->setEligibility($request, $assignmentId);
-        $fieldSetter->setSource($request, $assignmentId);
-        $fieldSetter->setSignupValues($request, $assignmentId);
+        $fieldSetter->updateAssignmentFields($assignmentId, $assignmentDetails);
+        $fieldSetter->setAssignmentStatus($assignmentId);
+        $fieldSetter->setAssignmentEligibility($request, $assignmentId);
+        $fieldSetter->setAssignmentSource($request, $assignmentId);
+        $fieldSetter->setAssignmentSignupValues($request, $assignmentId);
 
         return WPResponseFactory::wp_rest_response(
             'Assignment created',
