@@ -32,11 +32,8 @@ class AssignmentFieldSetter
 
     public function setAssignmentSource(WP_REST_Request $request, int $assignment_id): void
     {
-        // TODO: Remove static request source check.
-        $request_source = $request->get_param('source');
-        if ($request_source === 'https://www.helsingborg.se') {
-            update_field('internal_assignment', false, $assignment_id);
-        }
+        $external_assignment = $request->get_param('internal_assignment') === 'true';
+        update_field('internal_assignment', $external_assignment, $assignment_id);
     }
 
     public function setAssignmentSignupValues(WP_REST_Request $request, int $assignment_id): void
