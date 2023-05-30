@@ -22,7 +22,7 @@ class AssignmentCreator
         $assignmentId = $this->createAssignmentPost($assignmentDetails['title']);
 
         $fieldSetter->updateAssignmentFields($assignmentId, $assignmentDetails);
-        $fieldSetter->setAssignmentStatus($assignmentId);
+        $fieldSetter->setAssignmentStatus($assignmentId, 'pending');
         $fieldSetter->setAssignmentEligibility($request, $assignmentId);
         $fieldSetter->setAssignmentSource($request, $assignmentId);
         $fieldSetter->setAssignmentSignupValues($request, $assignmentId);

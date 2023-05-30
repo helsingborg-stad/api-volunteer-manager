@@ -24,9 +24,9 @@ class AssignmentFieldSetter
      *
      * @param int $assignment_id The ID of the assignment to update.
      */
-    public function setAssignmentStatus(int $assignment_id): void
+    public function setAssignmentStatus(int $assignment_id, string $status_slug): void
     {
-        $assignment_status_term = get_term_by('slug', 'pending', 'assignment-status');
+        $assignment_status_term = get_term_by('slug', $status_slug, 'assignment-status');
         if ($assignment_status_term) {
             wp_set_post_terms($assignment_id, [$assignment_status_term->term_id], 'assignment-status');
         }
