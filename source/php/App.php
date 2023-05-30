@@ -3,6 +3,8 @@
 namespace VolunteerManager;
 
 use VolunteerManager\API\Api;
+use VolunteerManager\API\Assignment\AssignmentCreator;
+use VolunteerManager\API\Assignment\AssignmentFieldSetter;
 use VolunteerManager\API\Auth\JWTAuthentication;
 use VolunteerManager\Notification\EmailNotificationSender;
 use VolunteerManager\Notification\LoggingNotificationSender;
@@ -47,7 +49,11 @@ class App
         $assignmentNotifications = new AssignmentNotificationFilters();
         $assignmentNotifications->addHooks();
 
-        (new AssignmentApiManager($JWTAuthentication))->addHooks();
+        (new AssignmentApiManager(
+            $JWTAuthentication,
+            new AssignmentCreator(),
+            new AssignmentFieldSetter()
+        ))->addHooks();
 
         (new Employee(...array_values(EmployeeConfiguration::getPostTypeArgs())))->addHooks();
         (new EmployeeApiManager($JWTAuthentication))->addHooks();
