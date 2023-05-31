@@ -50,7 +50,6 @@ class App
         $assignmentNotifications->addHooks();
 
         (new AssignmentApiManager(
-            $JWTAuthentication,
             new AssignmentCreator(),
             new AssignmentFieldSetter()
         ))->addHooks();

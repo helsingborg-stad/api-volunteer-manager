@@ -2,6 +2,7 @@
 
 namespace VolunteerManager\API\Assignment;
 
+use VolunteerManager\API\Assignment\RequestFormatDecorators\SanitizeAssignmentParams;
 use VolunteerManager\API\Auth\AuthenticationDecorator;
 use VolunteerManager\API\Auth\AuthenticationInterface;
 use VolunteerManager\API\FormatRequest;
@@ -10,17 +11,14 @@ use WP_REST_Request;
 
 class AssignmentApiManager
 {
-    private AuthenticationInterface $authentication;
     private AssignmentCreator $assignmentCreator;
     private AssignmentFieldSetter $assignmentFieldSetter;
 
     public function __construct(
-        AuthenticationInterface $authentication,
-        AssignmentCreator       $assignmentCreator,
-        AssignmentFieldSetter   $assignmentFieldSetter
+        AssignmentCreator     $assignmentCreator,
+        AssignmentFieldSetter $assignmentFieldSetter
     )
     {
-        $this->authentication = $authentication;
         $this->assignmentCreator = $assignmentCreator;
         $this->assignmentFieldSetter = $assignmentFieldSetter;
     }
@@ -46,8 +44,9 @@ class AssignmentApiManager
     public function handleAssignmentCreationRequest(WP_REST_Request $request)
     {
         $formatRequest = new FormatRequest();
+        $sanitizeParams = new SanitizeAssignmentParams($formatRequest);
         $requiredParamsValidator = new ValidateRequiredRestParams(
-            $formatRequest,
+            $sanitizeParams,
             ['assignment_eligibility']
         );
 

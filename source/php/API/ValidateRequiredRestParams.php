@@ -29,7 +29,7 @@ class ValidateRequiredRestParams extends ValidateRestRequest
     private function generateErrorResponse(string $param): WP_Error
     {
         return WPResponseFactory::wp_error_response(
-            'avm_employee_param_error',
+            'avm_param_error',
             __('Missing required parameter', AVM_TEXT_DOMAIN),
             $param
         );
