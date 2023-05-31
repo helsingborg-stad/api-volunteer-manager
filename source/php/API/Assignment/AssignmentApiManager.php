@@ -10,17 +10,14 @@ use WP_REST_Request;
 
 class AssignmentApiManager
 {
-    private AuthenticationInterface $authentication;
     private AssignmentCreator $assignmentCreator;
     private AssignmentFieldSetter $assignmentFieldSetter;
 
     public function __construct(
-        AuthenticationInterface $authentication,
         AssignmentCreator       $assignmentCreator,
         AssignmentFieldSetter   $assignmentFieldSetter
     )
     {
-        $this->authentication = $authentication;
         $this->assignmentCreator = $assignmentCreator;
         $this->assignmentFieldSetter = $assignmentFieldSetter;
     }
