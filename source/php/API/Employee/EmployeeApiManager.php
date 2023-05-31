@@ -1,9 +1,10 @@
 <?php
 
-namespace VolunteerManager\PostType\Employee;
+namespace VolunteerManager\API\Employee;
 
 use VolunteerManager\API\Auth\AuthenticationDecorator;
 use VolunteerManager\API\Auth\AuthenticationInterface;
+use VolunteerManager\API\Employee\RequestFormatDecorators\ValidateUniqueParams;
 use VolunteerManager\API\FormatRequest;
 use VolunteerManager\API\ValidateRequiredRestParams;
 use VolunteerManager\API\WPResponseFactory;

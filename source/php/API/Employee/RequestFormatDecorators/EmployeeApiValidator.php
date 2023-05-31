@@ -1,8 +1,6 @@
 <?php
 
-namespace VolunteerManager\PostType\Employee;
-
-use WP_Error;
+namespace VolunteerManager\API\Employee\RequestFormatDecorators;
 
 class EmployeeApiValidator
 {
