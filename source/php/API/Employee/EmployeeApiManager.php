@@ -15,10 +15,12 @@ use WP_REST_Response;
 class EmployeeApiManager
 {
     private AuthenticationInterface $authentication;
+    private EmployeeFieldSetter $employeeFieldSetter;
 
     public function __construct(AuthenticationInterface $authentication)
     {
         $this->authentication = $authentication;
+        $this->employeeFieldSetter = new EmployeeFieldSetter();
     }
 
     public function addHooks()
@@ -33,7 +35,10 @@ class EmployeeApiManager
             'employee',
             array(
                 'methods' => 'POST',
-                'callback' => new AuthenticationDecorator([$this, 'handlePostRequest'], $this->authentication),
+                'callback' => new AuthenticationDecorator(
+                    [$this, 'handleEmployeeCreationRequest'],
+                    $this->authentication
+                ),
                 'permission_callback' => '__return_true'
             )
         );
@@ -49,7 +54,7 @@ class EmployeeApiManager
         );
     }
 
-    public function handlePostRequest(WP_REST_Request $request)
+    public function handleEmployeeCreationRequest(WP_REST_Request $request)
     {
         $format_request = new FormatRequest();
         $unique_params = new ValidateUniqueParams($format_request);
