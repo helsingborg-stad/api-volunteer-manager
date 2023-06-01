@@ -81,7 +81,7 @@ class AssignmentCreator extends ApiHandler
             'post_modified_gmt' => current_time('mysql', true),
         ];
 
-        return insertPost($post);
+        return wp_insert_post($post);
     }
 
     /**
