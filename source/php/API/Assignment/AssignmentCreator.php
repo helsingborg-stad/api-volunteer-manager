@@ -2,12 +2,13 @@
 
 namespace VolunteerManager\API\Assignment;
 
+use VolunteerManager\API\ApiHandler;
 use VolunteerManager\API\WPResponseFactory;
 use VolunteerManager\Entity\FieldSetter;
 use WP_REST_Request;
 use WP_REST_Response;
 
-class AssignmentCreator
+class AssignmentCreator extends ApiHandler
 {
     /**
      * Creates a new assignment from a given request
@@ -17,18 +18,17 @@ class AssignmentCreator
      *
      * @return WP_REST_Response The response of the assignment creation operation.
      */
-    public function create(WP_REST_Request $request, FieldSetter $fieldSetter): WP_REST_Response
+    public function create(WP_REST_Request $request, FieldSetter $fieldSetter, string $postSlug): WP_REST_Response
     {
         $assignmentDetails = $this->extractAssignmentDetailsFromRequest($request);
-        $assignmentId = $this->createAssignmentPost($assignmentDetails['title']);
+        $assignmentId = $this->createAssignmentPost(
+            $assignmentDetails['title'],
+            $postSlug
+        );
 
         $fieldSetter->updateFields($assignmentId, $assignmentDetails);
         $fieldSetter->setPostStatus($assignmentId, 'pending', 'assignment-status');
-        $fieldSetter->setPostByParam(
-            $request,
-            $assignmentId,
-            'assignment_eligibility'
-        );
+        $fieldSetter->setPostByParam($request, $assignmentId, 'assignment_eligibility');
 
         $internal_assignment = $request->get_param('internal_assignment') === 'true';
         $fieldSetter->updateField('internal_assignment', $internal_assignment, $assignmentId);
@@ -61,12 +61,7 @@ class AssignmentCreator
             'number_of_available_spots'
         ];
 
-        $params = [];
-        foreach ($requestParams as $param) {
-            $params[$param] = $request->get_param($param);
-        }
-
-        return $params;
+        return $this->extractParamsFromRequest($request, $requestParams);
     }
 
     /**
@@ -76,17 +71,17 @@ class AssignmentCreator
      *
      * @return int The ID of the newly created assignment.
      */
-    private function createAssignmentPost(string $title): int
+    private function createAssignmentPost(string $title, string $postType): int
     {
-        return wp_insert_post(
-            [
-                'post_title' => $title,
-                'post_type' => 'assignment',
-                'post_status' => 'pending',
-                'post_date_gmt' => current_time('mysql', true),
-                'post_modified_gmt' => current_time('mysql', true),
-            ]
-        );
+        $post = [
+            'post_title' => $title,
+            'post_type' => $postType,
+            'post_status' => 'pending',
+            'post_date_gmt' => current_time('mysql', true),
+            'post_modified_gmt' => current_time('mysql', true),
+        ];
+
+        return insertPost($post);
     }
 
     /**

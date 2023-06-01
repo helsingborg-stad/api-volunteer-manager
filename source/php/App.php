@@ -52,7 +52,8 @@ class App
 
         (new AssignmentApiManager(
             new AssignmentCreator(),
-            new FieldSetter()
+            new FieldSetter(),
+            $assignment->slug
         ))->addHooks();
 
         (new Employee(...array_values(EmployeeConfiguration::getPostTypeArgs())))->addHooks();

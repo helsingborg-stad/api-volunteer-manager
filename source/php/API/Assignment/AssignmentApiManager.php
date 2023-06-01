@@ -10,16 +10,20 @@ use WP_REST_Request;
 
 class AssignmentApiManager
 {
+    private string $assignmentPostSlug;
     private AssignmentCreator $assignmentCreator;
     private FieldSetter $assignmentFieldSetter;
 
     public function __construct(
         AssignmentCreator $assignmentCreator,
-        FieldSetter       $assignmentFieldSetter
+        FieldSetter       $assignmentFieldSetter,
+        string            $assignmentPostSlug
     )
     {
         $this->assignmentCreator = $assignmentCreator;
         $this->assignmentFieldSetter = $assignmentFieldSetter;
+
+        $this->assignmentPostSlug = $assignmentPostSlug;
     }
 
     public function addHooks()
@@ -54,6 +58,6 @@ class AssignmentApiManager
             return $validatedParams;
         }
 
-        return $this->assignmentCreator->create($request, $this->assignmentFieldSetter);
+        return $this->assignmentCreator->create($request, $this->assignmentFieldSetter, $this->assignmentPostSlug);
     }
 }

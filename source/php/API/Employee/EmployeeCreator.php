@@ -2,12 +2,13 @@
 
 namespace VolunteerManager\API\Employee;
 
+use VolunteerManager\API\ApiHandler;
 use VolunteerManager\API\WPResponseFactory;
 use VolunteerManager\Entity\FieldSetter;
 use WP_REST_Request;
 use WP_REST_Response;
 
-class EmployeeCreator
+class EmployeeCreator extends ApiHandler
 {
     public function create(WP_REST_Request $request, FieldSetter $fieldSetter): WP_REST_Response
     {
@@ -36,12 +37,7 @@ class EmployeeCreator
             'newsletter'
         ];
 
-        $params = [];
-        foreach ($requestParams as $param) {
-            $params[$param] = $request->get_param($param);
-        }
-
-        return $params;
+        return $this->extractParamsFromRequest($request, $requestParams);
     }
 
     private function createEmployeePost(string $title): int
