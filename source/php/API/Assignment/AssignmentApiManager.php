@@ -3,20 +3,19 @@
 namespace VolunteerManager\API\Assignment;
 
 use VolunteerManager\API\Assignment\RequestFormatDecorators\SanitizeAssignmentParams;
-use VolunteerManager\API\Auth\AuthenticationDecorator;
-use VolunteerManager\API\Auth\AuthenticationInterface;
 use VolunteerManager\API\FormatRequest;
 use VolunteerManager\API\ValidateRequiredRestParams;
+use VolunteerManager\Entity\FieldSetter;
 use WP_REST_Request;
 
 class AssignmentApiManager
 {
     private AssignmentCreator $assignmentCreator;
-    private AssignmentFieldSetter $assignmentFieldSetter;
+    private FieldSetter $assignmentFieldSetter;
 
     public function __construct(
-        AssignmentCreator     $assignmentCreator,
-        AssignmentFieldSetter $assignmentFieldSetter
+        AssignmentCreator $assignmentCreator,
+        FieldSetter       $assignmentFieldSetter
     )
     {
         $this->assignmentCreator = $assignmentCreator;

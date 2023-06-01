@@ -7,7 +7,7 @@ use VolunteerManager\API\Auth\AuthenticationInterface;
 use VolunteerManager\API\Employee\RequestFormatDecorators\ValidateUniqueParams;
 use VolunteerManager\API\FormatRequest;
 use VolunteerManager\API\ValidateRequiredRestParams;
-use VolunteerManager\API\WPResponseFactory;
+use VolunteerManager\Entity\FieldSetter;
 use WP_Error;
 use WP_REST_Request;
 use WP_REST_Response;
@@ -16,14 +16,18 @@ class EmployeeApiManager
 {
     private AuthenticationInterface $authentication;
     private EmployeeCreator $employeeCreator;
-    private EmployeeFieldSetter $employeeFieldSetter;
+    private FieldSetter $employeeFieldSetter;
 
-    public function __construct(AuthenticationInterface $authentication)
+    public function __construct(
+        AuthenticationInterface $authentication,
+        EmployeeCreator         $employeeCreator,
+        FieldSetter             $employeeFieldSetter
+    )
     {
         $this->authentication = $authentication;
 
-        $this->employeeCreator = new EmployeeCreator();
-        $this->employeeFieldSetter = new EmployeeFieldSetter();
+        $this->employeeCreator = $employeeCreator;
+        $this->employeeFieldSetter = $employeeFieldSetter;
     }
 
     public function addHooks()

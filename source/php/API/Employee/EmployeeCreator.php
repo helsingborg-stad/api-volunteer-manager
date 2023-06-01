@@ -3,17 +3,20 @@
 namespace VolunteerManager\API\Employee;
 
 use VolunteerManager\API\WPResponseFactory;
+use VolunteerManager\Entity\FieldSetter;
 use WP_REST_Request;
+use WP_REST_Response;
 
 class EmployeeCreator
 {
-    public function create(WP_REST_Request $request, EmployeeFieldSetter $fieldSetter): \WP_REST_Response
+    public function create(WP_REST_Request $request, FieldSetter $fieldSetter): WP_REST_Response
     {
         $employeeDetails = $this->extractEmployeeDetailsFromRequest($request);
         $employeeId = $this->createEmployeePost($employeeDetails['email']);
 
-        $fieldSetter->updateEmployeeFields($employeeId, $employeeDetails);
-        $fieldSetter->setEmployeeDate($employeeId);
+        $fieldSetter->updateFields($employeeId, $employeeDetails);
+        $fieldSetter->updateField('registration_date', date('Y-m-d'), $employeeId);
+        $fieldSetter->setPostStatus($employeeId, 'new', 'employee-registration-status');
 
         return WPResponseFactory::wp_rest_response(
             'Employee created',
