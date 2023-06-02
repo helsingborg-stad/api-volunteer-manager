@@ -9,6 +9,7 @@ use VolunteerManager\API\FormatRequest;
 use VolunteerManager\API\ValidateRequiredRestParams;
 use VolunteerManager\Entity\FieldSetter;
 use WP_Error;
+use WP_Post;
 use WP_REST_Request;
 use WP_REST_Response;
 
@@ -98,6 +99,7 @@ class EmployeeApiManager
 
         $nationalIdentityNumber = $request->get_param('national_identity_number');
         $employee = $this->getEmployeeByIdentityNumber($nationalIdentityNumber);
+//        error_log('employee: ' . print_r($employee, true) . ' nationalIdentityNumber: ' . $nationalIdentityNumber);
 
         if (!$employee) {
             return new WP_Error(
@@ -124,12 +126,31 @@ class EmployeeApiManager
     public function getEmployeeDetails(int $employeeId): array
     {
         $employeeFields = get_fields($employeeId);
+
         $status = get_the_terms($employeeId, 'employee-registration-status');
         $status = !empty($status[0]) ? [
             'term_id' => $status[0]->term_id,
             'name' => $status[0]->name,
             'slug' => $status[0]->slug,
         ] : null;
+
+        $employeeApplications = get_posts(
+            [
+                'post_type' => 'application',
+                'post_status' => 'any',
+                'orderby' => 'post_date',
+                'order' => 'ASC',
+                'posts_per_page' => -1,
+                'suppress_filters' => true,
+                'meta_query' => [
+                    [
+                        'key' => 'application_employee',
+                        'value' => $employeeId,
+                        'compare' => '='
+                    ]
+                ],
+            ]
+        );
 
         return [
             'id' => $employeeId,
@@ -141,6 +162,14 @@ class EmployeeApiManager
             'newsletter' => $employeeFields['newsletter'] ?? null,
             'registration_date' => $employeeFields['registration_date'] ?? null,
             'status' => $status,
+            'assignments' => array_map(function ($assignment) {
+                return [
+                    'id' => $assignment->ID,
+                    'title' => $assignment->post_title,
+                    'status' => get_the_terms($assignment->ID, 'application-status'),
+                    'date' => $assignment->post_date,
+                ];
+            }, $employeeApplications),
         ];
     }
 
@@ -148,9 +177,9 @@ class EmployeeApiManager
      * Retrieve employee by national identity number
      *
      * @param string $nationalIdentityNumber The national identity number of the employee
-     * @return null|\WP_Post The employee data matching the national identity number
+     * @return null|WP_Post The employee data matching the national identity number
      */
-    public function getEmployeeByIdentityNumber(string $nationalIdentityNumber): ?\WP_Post
+    public function getEmployeeByIdentityNumber(string $nationalIdentityNumber): ?WP_Post
     {
         $employee = get_posts(array(
             'post_type' => 'employee',
