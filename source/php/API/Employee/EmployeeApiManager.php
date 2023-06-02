@@ -17,17 +17,19 @@ class EmployeeApiManager
     private AuthenticationInterface $authentication;
     private EmployeeCreator $employeeCreator;
     private FieldSetter $employeeFieldSetter;
-
+    private string $employeePostSlug;
     public function __construct(
         AuthenticationInterface $authentication,
         EmployeeCreator         $employeeCreator,
-        FieldSetter             $employeeFieldSetter
+        FieldSetter             $employeeFieldSetter,
+        string                  $employeePostSlug
     )
     {
         $this->authentication = $authentication;
 
         $this->employeeCreator = $employeeCreator;
         $this->employeeFieldSetter = $employeeFieldSetter;
+        $this->employeePostSlug = $employeePostSlug;
     }
 
     public function addHooks()
@@ -75,7 +77,11 @@ class EmployeeApiManager
             return $validated_params;
         }
 
-        return $this->employeeCreator->create($request, $this->employeeFieldSetter);
+        return $this->employeeCreator->create(
+            $request,
+            $this->employeeFieldSetter,
+            $this->employeePostSlug
+        );
     }
 
     public function handleGetRequest(WP_REST_Request $request)

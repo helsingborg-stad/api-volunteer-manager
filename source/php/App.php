@@ -56,11 +56,13 @@ class App
             $assignment->slug
         ))->addHooks();
 
-        (new Employee(...array_values(EmployeeConfiguration::getPostTypeArgs())))->addHooks();
+        $employee = new Employee(...array_values(EmployeeConfiguration::getPostTypeArgs()));
+        $employee->addHooks();
         (new EmployeeApiManager(
             $JWTAuthentication,
             new EmployeeCreator(),
-            new FieldSetter()
+            new FieldSetter(),
+            $employee->slug
         ))->addHooks();
         (new EmployeeNotificationFilters())->addHooks();
 

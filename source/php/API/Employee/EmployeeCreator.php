@@ -10,10 +10,13 @@ use WP_REST_Response;
 
 class EmployeeCreator extends ApiHandler
 {
-    public function create(WP_REST_Request $request, FieldSetter $fieldSetter): WP_REST_Response
+    public function create(WP_REST_Request $request, FieldSetter $fieldSetter, string $postSlug): WP_REST_Response
     {
         $employeeDetails = $this->extractEmployeeDetailsFromRequest($request);
-        $employeeId = $this->createEmployeePost($employeeDetails['email']);
+        $employeeId = $this->createEmployeePost(
+            $employeeDetails['email'],
+            $postSlug
+        );
 
         $fieldSetter->updateFields($employeeId, $employeeDetails);
         $fieldSetter->updateField('registration_date', date('Y-m-d'), $employeeId);
@@ -40,11 +43,11 @@ class EmployeeCreator extends ApiHandler
         return $this->extractParamsFromRequest($request, $requestParams);
     }
 
-    private function createEmployeePost(string $title): int
+    private function createEmployeePost(string $title, string $postType): int
     {
         $post = [
             'post_title' => $title,
-            'post_type' => 'employee',
+            'post_type' => $postType,
             'post_status' => 'pending',
             'post_date_gmt' => current_time('mysql', true),
             'post_modified_gmt' => current_time('mysql', true)
