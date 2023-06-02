@@ -58,6 +58,10 @@ class AssignmentApiManager
             return $validatedParams;
         }
 
-        return $this->assignmentCreator->create($request, $this->assignmentFieldSetter, $this->assignmentPostSlug);
+        return $this->assignmentCreator->create(
+            $request,
+            $this->assignmentFieldSetter,
+            $this->assignmentPostSlug
+        );
     }
 }
