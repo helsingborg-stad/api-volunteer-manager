@@ -3,24 +3,27 @@
 namespace VolunteerManager\API\Assignment;
 
 use VolunteerManager\API\Assignment\RequestFormatDecorators\SanitizeAssignmentParams;
-use VolunteerManager\API\Auth\AuthenticationDecorator;
-use VolunteerManager\API\Auth\AuthenticationInterface;
 use VolunteerManager\API\FormatRequest;
 use VolunteerManager\API\ValidateRequiredRestParams;
+use VolunteerManager\Entity\FieldSetter;
 use WP_REST_Request;
 
 class AssignmentApiManager
 {
+    private string $assignmentPostSlug;
     private AssignmentCreator $assignmentCreator;
-    private AssignmentFieldSetter $assignmentFieldSetter;
+    private FieldSetter $assignmentFieldSetter;
 
     public function __construct(
-        AssignmentCreator     $assignmentCreator,
-        AssignmentFieldSetter $assignmentFieldSetter
+        AssignmentCreator $assignmentCreator,
+        FieldSetter       $assignmentFieldSetter,
+        string            $assignmentPostSlug
     )
     {
         $this->assignmentCreator = $assignmentCreator;
         $this->assignmentFieldSetter = $assignmentFieldSetter;
+
+        $this->assignmentPostSlug = $assignmentPostSlug;
     }
 
     public function addHooks()
@@ -55,6 +58,10 @@ class AssignmentApiManager
             return $validatedParams;
         }
 
-        return $this->assignmentCreator->create($request, $this->assignmentFieldSetter);
+        return $this->assignmentCreator->create(
+            $request,
+            $this->assignmentFieldSetter,
+            $this->assignmentPostSlug
+        );
     }
 }

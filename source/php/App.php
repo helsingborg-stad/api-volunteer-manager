@@ -3,9 +3,11 @@
 namespace VolunteerManager;
 
 use VolunteerManager\API\Api;
+use VolunteerManager\API\Assignment\AssignmentApiManager;
 use VolunteerManager\API\Assignment\AssignmentCreator;
-use VolunteerManager\API\Assignment\AssignmentFieldSetter;
 use VolunteerManager\API\Auth\JWTAuthentication;
+use VolunteerManager\API\Employee\EmployeeApiManager;
+use VolunteerManager\API\Employee\EmployeeCreator;
 use VolunteerManager\Notification\EmailNotificationSender;
 use VolunteerManager\Notification\LoggingNotificationSender;
 use VolunteerManager\Notification\NotificationHandler;
@@ -14,11 +16,10 @@ use VolunteerManager\PostType\Application\Application;
 use VolunteerManager\PostType\Application\ApplicationConfiguration;
 use VolunteerManager\PostType\Application\ApplicationNotificationFilters;
 use VolunteerManager\PostType\Assignment\Assignment;
-use VolunteerManager\API\Assignment\AssignmentApiManager;
 use VolunteerManager\PostType\Assignment\AssignmentConfiguration;
+use VolunteerManager\Entity\FieldSetter;
 use VolunteerManager\PostType\Assignment\AssignmentNotificationFilters;
 use VolunteerManager\PostType\Employee\Employee;
-use VolunteerManager\PostType\Employee\EmployeeApiManager;
 use VolunteerManager\PostType\Employee\EmployeeConfiguration;
 use VolunteerManager\PostType\Employee\EmployeeNotificationFilters;
 
@@ -51,11 +52,18 @@ class App
 
         (new AssignmentApiManager(
             new AssignmentCreator(),
-            new AssignmentFieldSetter()
+            new FieldSetter(),
+            $assignment->slug
         ))->addHooks();
 
-        (new Employee(...array_values(EmployeeConfiguration::getPostTypeArgs())))->addHooks();
-        (new EmployeeApiManager($JWTAuthentication))->addHooks();
+        $employee = new Employee(...array_values(EmployeeConfiguration::getPostTypeArgs()));
+        $employee->addHooks();
+        (new EmployeeApiManager(
+            $JWTAuthentication,
+            new EmployeeCreator(),
+            new FieldSetter(),
+            $employee->slug
+        ))->addHooks();
         (new EmployeeNotificationFilters())->addHooks();
 
         $application = new Application(...array_values(ApplicationConfiguration::getPostTypeArgs()));

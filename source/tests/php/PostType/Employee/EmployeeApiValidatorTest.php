@@ -4,8 +4,7 @@ namespace php\PostType\Employee;
 
 use Brain\Monkey\Functions;
 use PluginTestCase\PluginTestCase;
-use VolunteerManager\PostType\Employee\EmployeeApiValidator;
-use WP_Error;
+use VolunteerManager\API\Employee\RequestFormatDecorators\EmployeeApiValidator;
 
 /**
  * Run tests in separate processes and disable global state preservation

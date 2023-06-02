@@ -2,6 +2,8 @@
 
 namespace VolunteerManager\Entity;
 
+use Exception;
+
 class PostType implements PostTypeInterface
 {
     public string $slug;

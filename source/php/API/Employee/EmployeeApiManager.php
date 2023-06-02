@@ -1,12 +1,13 @@
 <?php
 
-namespace VolunteerManager\PostType\Employee;
+namespace VolunteerManager\API\Employee;
 
 use VolunteerManager\API\Auth\AuthenticationDecorator;
 use VolunteerManager\API\Auth\AuthenticationInterface;
+use VolunteerManager\API\Employee\RequestFormatDecorators\ValidateUniqueParams;
 use VolunteerManager\API\FormatRequest;
 use VolunteerManager\API\ValidateRequiredRestParams;
-use VolunteerManager\API\WPResponseFactory;
+use VolunteerManager\Entity\FieldSetter;
 use WP_Error;
 use WP_REST_Request;
 use WP_REST_Response;
@@ -14,10 +15,21 @@ use WP_REST_Response;
 class EmployeeApiManager
 {
     private AuthenticationInterface $authentication;
-
-    public function __construct(AuthenticationInterface $authentication)
+    private EmployeeCreator $employeeCreator;
+    private FieldSetter $employeeFieldSetter;
+    private string $employeePostSlug;
+    public function __construct(
+        AuthenticationInterface $authentication,
+        EmployeeCreator         $employeeCreator,
+        FieldSetter             $employeeFieldSetter,
+        string                  $employeePostSlug
+    )
     {
         $this->authentication = $authentication;
+
+        $this->employeeCreator = $employeeCreator;
+        $this->employeeFieldSetter = $employeeFieldSetter;
+        $this->employeePostSlug = $employeePostSlug;
     }
 
     public function addHooks()
@@ -32,7 +44,10 @@ class EmployeeApiManager
             'employee',
             array(
                 'methods' => 'POST',
-                'callback' => new AuthenticationDecorator([$this, 'handlePostRequest'], $this->authentication),
+                'callback' => new AuthenticationDecorator(
+                    [$this, 'handleEmployeeCreationRequest'],
+                    $this->authentication
+                ),
                 'permission_callback' => '__return_true'
             )
         );
@@ -48,7 +63,7 @@ class EmployeeApiManager
         );
     }
 
-    public function handlePostRequest(WP_REST_Request $request)
+    public function handleEmployeeCreationRequest(WP_REST_Request $request)
     {
         $format_request = new FormatRequest();
         $unique_params = new ValidateUniqueParams($format_request);
@@ -62,59 +77,10 @@ class EmployeeApiManager
             return $validated_params;
         }
 
-        return $this->registerEmployee($request);
-    }
-
-    /**
-     * Callback function to handle the employee registration POST request
-     *
-     * @param WP_REST_Request $request
-     * @return WP_REST_Response
-     */
-    public function registerEmployee(WP_REST_Request $request): WP_REST_Response
-    {
-        $request_params = [
-            'email',
-            'first_name',
-            'surname',
-            'national_identity_number',
-            'phone_number',
-            'source',
-            'newsletter'
-        ];
-
-        $params = [];
-        foreach ($request_params as $param) {
-            $params[$param] = $request->get_param($param);
-        }
-
-        // Create the employee post
-        $employeePostId = wp_insert_post(
-            array(
-                'post_title' => $params['first_name'] . ' ' . $params['surname'],
-                'post_type' => 'employee',
-                'post_status' => 'pending',
-                'post_date_gmt' => current_time('mysql', true),
-                'post_modified_gmt' => current_time('mysql', true)
-            )
-        );
-
-        foreach ($params as $key => $value) {
-            update_field($key, $value, $employeePostId);
-        }
-
-        update_field('registration_date', date('Y-m-d'), $employeePostId);
-
-        $new_status_term = get_term_by('slug', 'new', 'employee-registration-status');
-        if ($new_status_term) {
-            wp_set_post_terms($employeePostId, array($new_status_term->term_id), 'employee-registration-status');
-        }
-
-        return WPResponseFactory::wp_rest_response(
-            __('Employee created', AVM_TEXT_DOMAIN),
-            array(
-                'employee_id' => $employeePostId
-            )
+        return $this->employeeCreator->create(
+            $request,
+            $this->employeeFieldSetter,
+            $this->employeePostSlug
         );
     }
 

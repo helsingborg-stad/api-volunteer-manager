@@ -1,6 +1,6 @@
 <?php
 
-namespace VolunteerManager\PostType\Employee;
+namespace VolunteerManager\API\Employee\RequestFormatDecorators;
 
 use VolunteerManager\API\ValidateRestRequest;
 use VolunteerManager\API\WPResponseFactory;
