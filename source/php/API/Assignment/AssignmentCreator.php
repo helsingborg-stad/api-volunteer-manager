@@ -96,24 +96,16 @@ class AssignmentCreator extends ApiHandler
     private function getAssignmentSignupValues(WP_REST_Request $request, int $assignment_id): array
     {
         $signup_methods = get_fields('signup_methods', $assignment_id);
-        if (!is_array($signup_methods)) {
-            $signup_methods = [];
-        }
+        $signup_methods = is_array($signup_methods) ? $signup_methods : [];
 
-        $signup_params = [
-            'signup_link',
-            'signup_email',
-            'signup_phone'
-        ];
+        $methods = ['link', 'email', 'phone'];
 
-        foreach ($signup_params as $param) {
-            $signup_param = $request->get_param($param);
-            if (!empty($signup_param)) {
-                // remove prefix 'signup_' from param name
-                $param = substr($param, 7);
+        foreach ($methods as $method) {
+            $param_value = $request->get_param('signup_' . $method);
+            if (empty($param_value)) continue;
 
-                $signup_methods[] = $param;
-            }
+            update_field('signup_' . $method, $param_value, $assignment_id);
+            $signup_methods[] = $method;
         }
 
         return $signup_methods;
