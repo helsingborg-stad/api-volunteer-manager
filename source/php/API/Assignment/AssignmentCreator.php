@@ -13,8 +13,8 @@ class AssignmentCreator extends ApiHandler
     /**
      * Creates a new assignment from a given request
      *
-     * @param WP_REST_Request $request The request containing the assignment details.
-     * @param FieldSetter $fieldSetter The field setter used to set assignment fields.
+     * @param WP_REST_Request $request     The request containing the assignment details.
+     * @param FieldSetter     $fieldSetter The field setter used to set assignment fields.
      *
      * @return WP_REST_Response The response of the assignment creation operation.
      */
@@ -32,6 +32,7 @@ class AssignmentCreator extends ApiHandler
 
         $internal_assignment = $request->get_param('internal_assignment') === 'true';
         $fieldSetter->updateField('internal_assignment', $internal_assignment, $assignmentId);
+        $fieldSetter->updateField('source', $request->get_header('host'), $assignmentId);
 
         $signup_methods = $this->getAssignmentSignupValues($request, $assignmentId);
         $fieldSetter->updateField('signup_methods', $signup_methods, $assignmentId);
@@ -93,7 +94,7 @@ class AssignmentCreator extends ApiHandler
      * Prefix 'signup_' will be removed from the param name.
      *
      * @param WP_REST_Request $request
-     * @param int $assignment_id
+     * @param int             $assignment_id
      * @return array
      */
     private function getAssignmentSignupValues(WP_REST_Request $request, int $assignment_id): array

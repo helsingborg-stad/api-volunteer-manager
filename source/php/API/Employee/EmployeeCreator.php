@@ -21,6 +21,7 @@ class EmployeeCreator extends ApiHandler
         $fieldSetter->updateFields($employeeId, $employeeDetails);
         $fieldSetter->updateField('registration_date', date('Y-m-d'), $employeeId);
         $fieldSetter->setPostStatus($employeeId, 'new', 'employee-registration-status');
+        $fieldSetter->updateField('source', $request->get_header('host'), $employeeId);
 
         return WPResponseFactory::wp_rest_response(
             'Employee created',
@@ -36,7 +37,6 @@ class EmployeeCreator extends ApiHandler
             'surname',
             'national_identity_number',
             'phone_number',
-            'source',
             'newsletter'
         ];
 
