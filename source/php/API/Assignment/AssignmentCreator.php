@@ -63,6 +63,9 @@ class AssignmentCreator extends ApiHandler
             'submitted_by_email',
             'submitted_by_first_name',
             'submitted_by_phone',
+            'employer_name',
+            'employer_contacts',
+            'employer_website'
         ];
 
         return $this->extractParamsFromRequest($request, $requestParams);
