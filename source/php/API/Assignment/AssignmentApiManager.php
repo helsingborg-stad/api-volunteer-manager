@@ -50,7 +50,7 @@ class AssignmentApiManager
         $sanitizeParams = new SanitizeAssignmentParams($formatRequest);
         $requiredParamsValidator = new ValidateRequiredRestParams(
             $sanitizeParams,
-            ['assignment_eligibility']
+            ['title']
         );
 
         $validatedParams = $requiredParamsValidator->formatRestRequest($request);
