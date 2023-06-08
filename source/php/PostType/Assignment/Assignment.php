@@ -84,7 +84,7 @@ class Assignment extends PostType
         $postStatus = filter_input(INPUT_GET, 'post_status');
 
         $queryString = http_build_query(array(
-            'post_type' => $this->postType->slug,
+            'post_type' => $this->slug,
             'paged' => $paged,
         ));
 
