@@ -39,4 +39,30 @@ class FieldSetter
             'assignment-eligibility'
         );
     }
+
+    /**
+     * Saves a media file for a post
+     *
+     * @param string $key          The key of the file in the $_FILES array.
+     * @param int    $postId       The ID of the post to attach the media file to.
+     * @param array  $allowedTypes An array of allowed file types.
+     *
+     * @return int|\WP_Error The attachment ID on success, or a \WP_Error object on failure.
+     */
+    public function savePostMedia(string $key, int $postId, array $allowedTypes = [])
+    {
+        if (!in_array($_FILES[$key]['type'], $allowedTypes)) {
+            $errorMessage = 'Invalid file type. Allowed types: ' . implode(', ', $allowedTypes);
+            return new \WP_Error('invalid_file_type', $errorMessage, ['status' => 400]);
+        }
+
+        require_once(ABSPATH . 'wp-admin/includes/image.php');
+        require_once(ABSPATH . 'wp-admin/includes/file.php');
+        require_once(ABSPATH . 'wp-admin/includes/media.php');
+
+        $attachment_id = media_handle_upload($key, $postId);
+        set_post_thumbnail($postId, $attachment_id);
+
+        return $attachment_id;
+    }
 }

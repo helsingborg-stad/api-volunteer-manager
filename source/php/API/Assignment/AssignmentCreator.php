@@ -7,6 +7,7 @@ use VolunteerManager\API\WPResponseFactory;
 use VolunteerManager\Entity\FieldSetter;
 use WP_REST_Request;
 use WP_REST_Response;
+use WP_Error;
 
 class AssignmentCreator extends ApiHandler
 {
@@ -16,9 +17,9 @@ class AssignmentCreator extends ApiHandler
      * @param WP_REST_Request $request     The request containing the assignment details.
      * @param FieldSetter     $fieldSetter The field setter used to set assignment fields.
      *
-     * @return WP_REST_Response The response of the assignment creation operation.
+     * @return WP_REST_Response|WP_Error The response of the assignment creation operation.
      */
-    public function create(WP_REST_Request $request, FieldSetter $fieldSetter, string $postSlug): WP_REST_Response
+    public function create(WP_REST_Request $request, FieldSetter $fieldSetter, string $postSlug)
     {
         $assignmentDetails = $this->extractAssignmentDetailsFromRequest($request);
         $assignmentId = $this->createAssignmentPost(
@@ -37,6 +38,12 @@ class AssignmentCreator extends ApiHandler
         $signup_methods = $this->getAssignmentSignupValues($request, $assignmentId);
         $fieldSetter->updateField('signup_methods', $signup_methods, $assignmentId);
 
+        if (!empty($_FILES['featured_media'])) {
+            $postMedia = $fieldSetter->savePostMedia('featured_media', $assignmentId, array('image/jpeg', 'image/png'));
+            if (is_wp_error($postMedia)) {
+                return $postMedia;
+            }
+        }
 
         return WPResponseFactory::wp_rest_response(
             'Assignment created',
