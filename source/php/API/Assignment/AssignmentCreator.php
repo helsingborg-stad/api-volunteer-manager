@@ -58,7 +58,10 @@ class AssignmentCreator extends ApiHandler
             'qualifications',
             'schedule',
             'benefits',
-            'number_of_available_spots'
+            'number_of_available_spots',
+            'submitted_by_email',
+            'submitted_by_first_name',
+            'submitted_by_phone',
         ];
 
         return $this->extractParamsFromRequest($request, $requestParams);
