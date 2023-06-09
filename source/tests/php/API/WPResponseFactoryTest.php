@@ -23,7 +23,7 @@ class WPResponseFactoryTest extends PluginTestCase
     {
         $error_code = 'error_code';
         $message = 'Error message';
-        $param = 'param';
+        $param = ['param'];
 
         $wp_error_mock = \Mockery::mock('overload:WP_Error');
         $wp_error_mock->shouldReceive('get_error_code')

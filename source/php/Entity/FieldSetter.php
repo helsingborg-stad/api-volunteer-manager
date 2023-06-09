@@ -2,6 +2,7 @@
 
 namespace VolunteerManager\Entity;
 
+use VolunteerManager\API\WPResponseFactory;
 use WP_REST_Request;
 
 class FieldSetter
@@ -38,5 +39,35 @@ class FieldSetter
             $assignmentEligibilityParam,
             'assignment-eligibility'
         );
+    }
+
+    /**
+     * Saves a media file for a post
+     *
+     * @param string $key          The key of the file in the $_FILES array.
+     * @param int    $postId       The ID of the post to attach the media file to.
+     * @param array  $allowedTypes An array of allowed file types.
+     *
+     * @return int|\WP_Error The attachment ID on success, or a \WP_Error object on failure.
+     */
+    public function savePostMedia(string $key, int $postId, array $allowedTypes = [])
+    {
+        $fileType = wp_check_filetype(basename($_FILES[$key]['name']));
+        if (!in_array($fileType['type'], $allowedTypes)) {
+            $errorMessage = 'Invalid file type. Allowed types: ' . implode(', ', $allowedTypes);
+            return WPResponseFactory::wp_error_response('invalid_file_type', $errorMessage,);
+        }
+
+        require_once(ABSPATH . 'wp-admin/includes/image.php');
+        require_once(ABSPATH . 'wp-admin/includes/file.php');
+        require_once(ABSPATH . 'wp-admin/includes/media.php');
+
+        $attachment_id = media_handle_upload($key, $postId);
+        if (is_wp_error($attachment_id)) {
+            return $attachment_id;
+        }
+        set_post_thumbnail($postId, $attachment_id);
+
+        return $attachment_id;
     }
 }
