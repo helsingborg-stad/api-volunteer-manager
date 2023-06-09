@@ -2,6 +2,7 @@
 
 namespace VolunteerManager\Entity;
 
+use VolunteerManager\API\WPResponseFactory;
 use WP_REST_Request;
 
 class FieldSetter
@@ -51,9 +52,10 @@ class FieldSetter
      */
     public function savePostMedia(string $key, int $postId, array $allowedTypes = [])
     {
-        if (!in_array($_FILES[$key]['type'], $allowedTypes)) {
+        $fileType = wp_check_filetype(basename($_FILES[$key]['name']));
+        if (!in_array($fileType['type'], $allowedTypes)) {
             $errorMessage = 'Invalid file type. Allowed types: ' . implode(', ', $allowedTypes);
-            return new \WP_Error('invalid_file_type', $errorMessage, ['status' => 400]);
+            return WPResponseFactory::wp_error_response('invalid_file_type', $errorMessage,);
         }
 
         require_once(ABSPATH . 'wp-admin/includes/image.php');
@@ -61,6 +63,9 @@ class FieldSetter
         require_once(ABSPATH . 'wp-admin/includes/media.php');
 
         $attachment_id = media_handle_upload($key, $postId);
+        if (is_wp_error($attachment_id)) {
+            return $attachment_id;
+        }
         set_post_thumbnail($postId, $attachment_id);
 
         return $attachment_id;
