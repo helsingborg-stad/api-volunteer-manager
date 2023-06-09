@@ -42,7 +42,7 @@ class App
         $admin = new Admin();
         $admin->addHooks();
 
-        $JWTAuthentication = new JWTAuthentication(defined('JWT_SECRET_KEY') ? JWT_SECRET_KEY : '');
+        $JWTAuthentication = new JWTAuthentication(defined('VOLUNTEER_MANAGER_JWT_SECRET_KEY') ? VOLUNTEER_MANAGER_JWT_SECRET_KEY : '');
 
         //Post types
         $assignment = new Assignment(...array_values(AssignmentConfiguration::getPostTypeArgs()));
