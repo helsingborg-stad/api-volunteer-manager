@@ -13,19 +13,18 @@ class WPResponseFactory
      * Create a WP_Error response
      *
      * @param string|int $error_code Error code.
-     * @param string $message Error message.
-     * @param string $param
+     * @param string     $message    Error message.
+     * @param array      $data
      * @return WP_Error
      */
-    public static function wp_error_response($error_code, string $message, string $param): WP_Error
+    public static function wp_error_response($error_code, string $message, array $data = []): WP_Error
     {
         return new WP_Error(
             $error_code,
             $message,
-            array(
+            array_merge(array(
                 'status' => 400,
-                'param' => $param
-            )
+            ), $data)
         );
     }
 
@@ -33,12 +32,12 @@ class WPResponseFactory
      * Create a WP_REST_Response
      *
      * @param string $message Success message.
-     * @param array $optional_data
+     * @param array  $optional_data
      * @return WP_REST_Response
      */
     public static function wp_rest_response(
         string $message,
-        array $optional_data = []
+        array  $optional_data = []
     ): WP_REST_Response
     {
         return new WP_REST_Response(
