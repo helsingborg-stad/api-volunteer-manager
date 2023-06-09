@@ -67,6 +67,21 @@ class NotificationsConfig
                     'operator' => 'NOT_EQUAL'
                 ]
             ],
+            "Message to the volunteer when a new volunteer is approved" => [
+                'key' => 'external_volunteer_approved',
+                'taxonomy' => 'employee-registration-status',
+                'oldValue' => 'new',
+                'newValue' => 'approved',
+                'message' => [
+                    'subject' => 'Din ansökan har godkänts',
+                    'content' => 'Hej %s,<br><br>Så kul att du vill vara volontär! Din ansökan som volontär i Helsingborg har blivit godkänd. Välkommen till vårt team av engagerade människor som vill göra skillnad i samhället.<br><br>Att vara volontär ger dig möjlighet att berika ditt eget liv samtidigt som du hjälper och påverkar andra positivt. Genom ditt engagemang blir du en viktig förebild och en viktigt tillgång för dem vi stöder.<br><br>Tillsammans kan vi skapa verklig förändring och göra skillnad i människors liv.<br><br>Med vänliga hälsningar,<br>Engagemang Helsingborg',
+                ],
+                'rule' => [
+                    'key' => 'source',
+                    'value' => '',
+                    'operator' => 'NOT_EQUAL'
+                ]
+            ],
             "Message to admin when a new volunteer is created" => [
                 'key' => 'admin_external_volunteer_new',
                 'taxonomy' => 'employee-registration-status',
