@@ -14,7 +14,7 @@ class EmployeeCreator extends ApiHandler
     {
         $employeeDetails = $this->extractEmployeeDetailsFromRequest($request);
         $employeeId = $this->createEmployeePost(
-            $employeeDetails['email'],
+            $employeeDetails['first_name'] . ' ' . $employeeDetails['surname'],
             $postSlug
         );
 
