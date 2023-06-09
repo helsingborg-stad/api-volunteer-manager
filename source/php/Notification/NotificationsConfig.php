@@ -82,6 +82,21 @@ class NotificationsConfig
                     'operator' => 'NOT_EQUAL'
                 ]
             ],
+            "Message to the volunteer when a new volunteer is denied" => [
+                'key' => 'external_volunteer_denied',
+                'taxonomy' => 'employee-registration-status',
+                'oldValue' => 'new',
+                'newValue' => 'denied',
+                'message' => [
+                    'subject' => 'Din ansökan har inte blivit godkänd',
+                    'content' => 'Hej %s,<br><brTack så mycket för ditt intresse att bli volontär i Helsingborg.<br><br>Tyvärr måste vi meddela att din ansökan som volontär inte har blivit godkänd.<br><br>Kontakta oss gärna för att vet mer om din ansökan genom att mejla engagemang@helsingborg.se<br><br>Med vänliga hälsningar,<br>Engagemang Helsingborg',
+                ],
+                'rule' => [
+                    'key' => 'source',
+                    'value' => '',
+                    'operator' => 'NOT_EQUAL'
+                ]
+            ],
             "Message to admin when a new volunteer is created" => [
                 'key' => 'admin_external_volunteer_new',
                 'taxonomy' => 'employee-registration-status',
