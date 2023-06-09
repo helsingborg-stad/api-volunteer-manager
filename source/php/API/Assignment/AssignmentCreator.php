@@ -41,6 +41,7 @@ class AssignmentCreator extends ApiHandler
         if (!empty($_FILES['featured_media'])) {
             $postMedia = $fieldSetter->savePostMedia('featured_media', $assignmentId, array('image/jpeg', 'image/png'));
             if (is_wp_error($postMedia)) {
+                wp_delete_post($assignmentId, true);
                 return $postMedia;
             }
         }
