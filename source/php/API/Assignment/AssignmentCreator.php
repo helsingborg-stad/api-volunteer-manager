@@ -28,13 +28,10 @@ class AssignmentCreator extends ApiHandler
         );
 
         $fieldSetter->updateFields($assignmentId, $assignmentDetails);
-        $fieldSetter->setPostStatus($assignmentId, 'pending', 'assignment-status');
         $fieldSetter->setPostByParam($request, $assignmentId, 'assignment_eligibility');
-
         $internal_assignment = $request->get_param('internal_assignment') === 'true';
         $fieldSetter->updateField('internal_assignment', $internal_assignment, $assignmentId);
         $fieldSetter->updateField('source', $request->get_header('host'), $assignmentId);
-
         $signup_methods = $this->getAssignmentSignupValues($request, $assignmentId);
         $fieldSetter->updateField('signup_methods', $signup_methods, $assignmentId);
 
@@ -45,6 +42,8 @@ class AssignmentCreator extends ApiHandler
                 return $postMedia;
             }
         }
+
+        $fieldSetter->setPostStatus($assignmentId, 'pending', 'assignment-status');
 
         return WPResponseFactory::wp_rest_response(
             'Assignment created',
