@@ -13,8 +13,8 @@ class NotificationsConfig
                 'oldValue' => 'pending',
                 'newValue' => 'approved',
                 'message' => [
-                    'subject' => __('Your assignment "%s" is approved', AVM_TEXT_DOMAIN),
-                    'content' => __('Hello %s,<br><br>It\'s great that you want to involve more people from Helsingborg! Your assignment "%s" has now been approved for publication on <a href="https://helsingborg.se">helsingborg.se</a> and will be visible to many engaged Helsingborg residents. If you would like to make changes, update something, or remove the assignment, please send an email to engagemang@helsingborg.se.<br><br>Good luck!<br><br>Best regards,<br>Engagemang Helsingborg', AVM_TEXT_DOMAIN),
+                    'subject' => 'Ditt uppdrag "%s" har godkänts',
+                    'content' => 'Hej %s,<br><br>Så kul att du vill engagera fler helsingborgare! Ditt uppdrag “%s” är nu godkänt för publicering på <a href="https://helsingborg.se">helsingborg.se</a> och kommer bli synligt för många engagerade helsingborgare. Skulle du vilja ändra, uppdatera något eller avpublicera uppdraget så skicka ett mejl till engagemang@helsingborg.se.<br><br>Lycka till!<br><br>Med vänliga hälsningar,<br>Engagemang Helsingborg',
                 ],
                 'rule' => [
                     'key' => 'source',
@@ -28,8 +28,8 @@ class NotificationsConfig
                 'oldValue' => 'pending',
                 'newValue' => 'denied',
                 'message' => [
-                    'subject' => __('Your assignment "%s" is denied', AVM_TEXT_DOMAIN),
-                    'content' => __('Hello %s,<br><br>Thank you for wanting to register an assignment for engaged residents of Helsingborg. The assignment "%s" has been processed by an administrator and unfortunately it cannot be published. Please contact Engagemang Helsingborg for more information at engagemang@helsingborg.se.<br><br>Best regards,<br>Engagemang Helsingborg', AVM_TEXT_DOMAIN),
+                    'subject' => 'Ditt uppdrag "%s" har nekats',
+                    'content' => 'Hej %s,<br><br>Tack för att du vill registrera ett uppdrag för engagerade helsingborgare. Uppdraget "%s" har behandlats av handläggare och tyvärr så kan det inte publiceras. Kontakta Engagemang Helsingborg för mer information på engagemang@helsingborg.se.<br><br>Med vänliga hälsningar,<br>Engagemang Helsingborg',
                 ],
                 'rule' => [
                     'key' => 'source',
@@ -43,8 +43,8 @@ class NotificationsConfig
                 'oldValue' => '',
                 'newValue' => 'pending',
                 'message' => [
-                    'subject' => __('A new assignment is created', AVM_TEXT_DOMAIN),
-                    'content' => __('Hello,<br><br>A new volunteer assignment "%s" has been created in our system and is ready to be processed.<br>%s<br><br>Sincerely,<br><br>Engagemang Helsingborg', AVM_TEXT_DOMAIN)
+                    'subject' => 'Ett nytt uppdrag har skapats',
+                    'content' => 'Hej,<br><br>Ett nytt volontäruppdrag ”%s” har skapats i vårt system och är redo att behandlas.<br>%s<br><br>Med vänliga hälsningar,<br><br>Engagemang Helsingborg',
                 ],
                 'rule' => [
                     'key' => 'source',
@@ -58,8 +58,8 @@ class NotificationsConfig
                 'oldValue' => '',
                 'newValue' => 'new',
                 'message' => [
-                    'subject' => __('Your application is received', AVM_TEXT_DOMAIN),
-                    'content' => __('Hello %s,<br><br>We are pleased to inform you that your application to become a volunteer has been received and we are grateful for your interest in helping to make a positive difference in our city. Thank you for taking the time to get involved with others! You have taken a step towards making Helsingborg a better place and we are grateful for your willingness to help.<br><br>We also want to inform you that your application has been registered in our system and will be processed shortly. Until then, feel free to contact us if you have any questions or concerns.<br><br>Thanks again for your commitment!<br><br>Sincerely,<br>Engagemang Helsingborg', AVM_TEXT_DOMAIN),
+                    'subject' => 'Din ansökan har tagits emot',
+                    'content' => 'Hej %s,<br><br>Vi är glada att meddela dig att din ansökan om att bli volontär har mottagits och vi är tacksamma för ditt intresse i att hjälpa till att göra en positiv skillnad i vår stad. Tack för att du tar dig tid att engagera dig för andra! Du har tagit ett steg mot att göra Helsingborg till en bättre plats och vi är tacksamma för din vilja att hjälpa till.<br><br>Vi vill också informera dig om att din ansökan har registrerats i vårt system och kommer att behandlas inom kort. Tills dess, känn dig fri att kontakta oss om du har några frågor eller funderingar.<br><br>Tack igen för ditt engagemang!<br><br>Med vänliga hälsningar,<br><br>Engagemang Helsingborg',
                 ],
                 'rule' => [
                     'key' => 'source',
@@ -103,8 +103,8 @@ class NotificationsConfig
                 'oldValue' => '',
                 'newValue' => 'new',
                 'message' => [
-                    'subject' => __('A new application is created', AVM_TEXT_DOMAIN),
-                    'content' => __('Hello,<br><br>A new application has been created in our system and is ready to be processed. The application concerns a new volunteer who wants to help make a positive difference in Helsingborg.<br><br>We kindly ask you to take a look at the application and to process it as soon as possible. We want to make sure that every volunteer who is interested in helping to improve our city gets a chance to do so.<br><br>Sincerely,<br><br>Engagemang Helsingborg', AVM_TEXT_DOMAIN),
+                    'subject' => 'En ny ansökan har skapats',
+                    'content' => 'Hej,<br><br>En ny ansökan har skapats i vårt system och är redo att behandlas. Ansökan gäller en ny volontär som vill hjälpa till att göra en positiv skillnad i Helsingborg.<br><br>Vi ber dig vänligen att ta en titt på ansökan och att behandla den så snart som möjligt. Vi vill se till att varje volontär som är intresserad av att hjälpa till att förbättra vår stad får en chans att göra det.<br><br>Med vänliga hälsningar,<br><br>Engagemang Helsingborg',
                 ],
                 'rule' => [
                     'key' => 'source',
@@ -118,8 +118,8 @@ class NotificationsConfig
                 'oldValue' => '',
                 'newValue' => 'pending',
                 'message' => [
-                    'subject' => __('A new application to assignment is created', AVM_TEXT_DOMAIN),
-                    'content' => __('Hello,<br><br>A new application for the volunteer assignment "%s" has been created in our system and is ready to be processed.<br>%s<br><br>Sincerely,<br><br>Engagemang Helsingborg', AVM_TEXT_DOMAIN)
+                    'subject' => 'En ny ansökan till volontäruppdrag har skapats',
+                    'content' => 'Hej,<br><br>En ny ansökan till volontäruppdraget ”%s” har skapats i vårt system och är redo att behandlas.<br>%s<br><br>Med vänliga hälsningar,<br><br>Engagemang Helsingborg',
                 ],
                 'rule' => [
                     'key' => 'source',
@@ -133,8 +133,8 @@ class NotificationsConfig
                 'oldValue' => '',
                 'newValue' => 'pending',
                 'message' => [
-                    'subject' => __('Your application is received', AVM_TEXT_DOMAIN),
-                    'content' => __('Hello %s,<br><br>Thank you for your application to the assignment "%s". You will shortly receive notification if your application has been approved.<br><br>Sincerely,<br><br>Engagement Helsingborg', AVM_TEXT_DOMAIN),
+                    'subject' => 'Din ansökan har tagits emot',
+                    'content' => 'Hej %s,<br><br>Tack för din ansökan till uppdraget “%s”. Inom kort kommer du få besked om din ansökan blivit godkänd.<br><br>Med vänliga hälsningar,<br><br>Engagemang Helsingborg',
                 ],
                 'rule' => [
                     'key' => 'source',
@@ -148,8 +148,8 @@ class NotificationsConfig
                 'oldValue' => 'pending',
                 'newValue' => 'approved',
                 'message' => [
-                    'subject' => __('Your application is approved', AVM_TEXT_DOMAIN),
-                    'content' => __('Hi %s,<br><br>Your application for the assignment "%s" has now been approved. You will be contacted in a separate email with instructions and prerequisites for the assignment. If you have any questions, you can always contact us at engagement@helsingborg.se or on 042-105000.<br>Good luck with your mission and thank you for making a difference!<br><br>Sincerely,<br><br>Engagemang Helsingborg', AVM_TEXT_DOMAIN),
+                    'subject' => 'Din ansökan har godkänts',
+                    'content' => 'Hej %s,<br><br>Din ansökan till uppdraget "%s" är nu godkänd. Du kommer bli kontaktad i ett separat mejl med instruktioner och förutsättningar för uppdraget. Har du frågor kan du alltid kontakta oss på engagemang@helsingborg.se eller på 042-105000.<br>Lycka till med ditt uppdrag och tack för att du gör skillnad!<br><br>Med vänliga hälsningar,<br><br>Engagemang Helsingborg',
                 ],
                 'rule' => [
                     'key' => 'source',
@@ -163,8 +163,8 @@ class NotificationsConfig
                 'oldValue' => 'pending',
                 'newValue' => 'approved_with_condition',
                 'message' => [
-                    'subject' => __('Your application is approved', AVM_TEXT_DOMAIN),
-                    'content' => __('Hi %s,<br><br>Your application for the assignment "%s" has now been approved, but needs to be supplemented with additional information. You will be contacted in a separate email with instructions and prerequisites for the assignment. If you have any questions, you can always contact us at engagement@helsingborg.se or on 042-105000.<br>Good luck with your mission and thank you for making a difference!<br><br>Sincerely,<br><br>Engagemang Helsingborg', AVM_TEXT_DOMAIN),
+                    'subject' => 'Din ansökan har godkänts',
+                    'content' => 'Hej %s,<br><br>Din ansökan till uppdraget "%s" är nu godkänd, men behöver kompletteras med ytterligare information. Du kommer bli kontaktad i ett separat mejl gällande kompletteringen samt instruktioner och förutsättningar för uppdraget. Har du frågor kan du alltid kontakta oss på engagemang@helsingborg.se eller på 042-105000.<br>Lycka till med ditt uppdrag och tack för att du gör skillnad!<br><br>Med vänliga hälsningar,<br><br>Engagemang Helsingborg',
                 ],
                 'rule' => [
                     'key' => 'source',
@@ -178,8 +178,8 @@ class NotificationsConfig
                 'oldValue' => 'pending',
                 'newValue' => 'denied',
                 'message' => [
-                    'subject' => __('Your application is denied', AVM_TEXT_DOMAIN),
-                    'content' => __('Hi %s,<br><br>Your application to "%s" has not been approved. Engagement Helsingborg will contact you and tell you why. If you have other questions, please contact kontaktcenter@helsingborg.se or 042-105000.<br>Thanks!<br><br>Sincerely,<br><br>Engagemang Helsingborg', AVM_TEXT_DOMAIN),
+                    'subject' => 'Din ansökan har nekats',
+                    'content' => 'Hej %s,<br><br>Din ansökan till ”%s” har inte godkänts. Engagemang Helsingborg kommer att kontakta dig och berätta varför. Har du övriga frågor är du välkommen att höra av dig till kontaktcenter@helsingborg.se eller på 042-105000.<br>Tack!<br><br>Med vänliga hälsningar,<br><br>Engagemang Helsingborg',
                 ],
                 'rule' => [
                     'key' => 'source',
