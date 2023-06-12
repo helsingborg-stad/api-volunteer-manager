@@ -11,6 +11,11 @@ class EmployeeNotificationFilters extends NotificationFilters
         add_filter('avm_external_volunteer_new_notification', array($this, 'populateNotificationReceiverWithSubmitter'), 10, 2);
         add_filter('avm_external_volunteer_new_notification', array($this, 'populateNotificationWithContent'), 10, 2);
         add_filter('avm_admin_external_volunteer_new_notification', array($this, 'populateNotificationReceiverWithAdmin'), 10, 2);
+
+        add_filter('avm_external_volunteer_approved_notification', array($this, 'populateNotificationReceiverWithSubmitter'), 10, 2);
+        add_filter('avm_external_volunteer_approved_notification', array($this, 'populateNotificationWithContent'), 10, 2);
+        add_filter('avm_external_volunteer_denied_notification', array($this, 'populateNotificationReceiverWithSubmitter'), 10, 2);
+        add_filter('avm_external_volunteer_denied_notification', array($this, 'populateNotificationWithContent'), 10, 2);
     }
 
     /**
