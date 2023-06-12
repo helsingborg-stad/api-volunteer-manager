@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Volunteer Manager\n"
-"POT-Creation-Date: 2023-05-08 09:10+0200\n"
-"PO-Revision-Date: 2023-05-16 10:38+0200\n"
+"POT-Creation-Date: 2023-06-12 11:34+0200\n"
+"PO-Revision-Date: 2023-06-12 11:34+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: sv_SE\n"
@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.8.12\n"
+"X-Generator: Poedit 3.2.2\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-WPHeader: api-volunteer-manager.php\n"
 "X-Poedit-SourceCharset: UTF-8\n"
@@ -19,6 +19,10 @@ msgstr ""
 "_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.js\n"
+
+#: source/php/API/ValidateRequiredRestParams.php:33
+msgid "Missing required parameter"
+msgstr ""
 
 #: source/php/AcfFields/php/application.php:6
 msgid "Application"
@@ -327,7 +331,7 @@ msgstr "Inga ansökningar hittades."
 msgid "Date"
 msgstr "Datum"
 
-#: source/php/Components/ApplicationMetaBox/ApplicationMetaBox.php:116
+#: source/php/Components/ApplicationMetaBox/ApplicationMetaBox.php:117
 msgid "Level"
 msgstr "Nivå"
 
@@ -359,42 +363,42 @@ msgstr "Avpublicera"
 msgid "Show All"
 msgstr "Visa alla"
 
-#: source/php/Entity/PostType.php:47 source/php/Entity/PostType.php:48
+#: source/php/Entity/PostType.php:49 source/php/Entity/PostType.php:50
 #, php-format
 msgid "Add new %s"
 msgstr "Lägg till ny %s"
 
-#: source/php/Entity/PostType.php:49 source/php/Entity/Taxonomy.php:41
+#: source/php/Entity/PostType.php:51 source/php/Entity/Taxonomy.php:41
 #, php-format
 msgid "Edit %s"
 msgstr "Editera %s"
 
-#: source/php/Entity/PostType.php:50
+#: source/php/Entity/PostType.php:52
 #, php-format
 msgid "New %s"
 msgstr "Ny %s"
 
-#: source/php/Entity/PostType.php:51
+#: source/php/Entity/PostType.php:53
 #, php-format
 msgid "View %s"
 msgstr "Visa %s"
 
-#: source/php/Entity/PostType.php:52 source/php/Entity/Taxonomy.php:37
+#: source/php/Entity/PostType.php:54 source/php/Entity/Taxonomy.php:37
 #, php-format
 msgid "Search %s"
 msgstr "Sök %s"
 
-#: source/php/Entity/PostType.php:53
+#: source/php/Entity/PostType.php:55
 #, php-format
 msgid "No %s found"
 msgstr "Inga %s hittades"
 
-#: source/php/Entity/PostType.php:54
+#: source/php/Entity/PostType.php:56
 #, php-format
 msgid "No %s found in trash"
 msgstr "Inga %s hittades i skräpkorgen"
 
-#: source/php/Entity/PostType.php:55 source/php/Entity/Taxonomy.php:39
+#: source/php/Entity/PostType.php:57 source/php/Entity/Taxonomy.php:39
 #: source/php/Entity/Taxonomy.php:40
 #, php-format
 msgid "Parent %s:"
@@ -420,202 +424,9 @@ msgstr "Lägg till ny %s"
 msgid "New %s Name"
 msgstr "Nytt %s namn"
 
-#: source/php/Notification/NotificationsConfig.php:16
-#, php-format
-msgid "Your assignment \"%s\" is approved"
-msgstr "Ditt uppdrag \"%s\" har godkänts"
-
-#: source/php/Notification/NotificationsConfig.php:17
-#, php-format
-msgid ""
-"Hello %s,<br><br>It's great that you want to involve more people from "
-"Helsingborg! Your assignment \"%s\" has now been approved for publication on "
-"<a href=\"https://helsingborg.se\">helsingborg.se</a> and will be visible to "
-"many engaged Helsingborg residents. If you would like to make changes, "
-"update something, or remove the assignment, please send an email to "
-"engagemang@helsingborg.se.<br><br>Good luck!<br><br>Best regards,"
-"<br>Engagemang Helsingborg"
-msgstr ""
-"Hej %s,<br><br>Så kul att du vill engagera fler helsingborgare! Ditt uppdrag "
-"“%s” är nu godkänt för publicering på <a href=\"https://helsingborg.se"
-"\">helsingborg.se</a> och kommer bli synligt för många engagerade "
-"helsingborgare. Skulle du vilja ändra, uppdatera något eller avpublicera "
-"uppdraget så skicka ett mejl till engagemang@helsingborg.se.<br><br>Lycka "
-"till!<br><br>Med vänliga hälsningar,<br>Engagemang Helsingborg"
-
-#: source/php/Notification/NotificationsConfig.php:31
-#, php-format
-msgid "Your assignment \"%s\" is denied"
-msgstr "Ditt uppdrag \"%s\" har nekats"
-
-#: source/php/Notification/NotificationsConfig.php:32
-#, php-format
-msgid ""
-"Hello %s,<br><br>Thank you for wanting to register an assignment for engaged "
-"residents of Helsingborg. The assignment \"%s\" has been processed by an "
-"administrator and unfortunately it cannot be published. Please contact "
-"Engagemang Helsingborg for more information at engagemang@helsingborg.se."
-"<br><br>Best regards,<br>Engagemang Helsingborg"
-msgstr ""
-"Hej %s,<br><br>Tack för att du vill registrera ett uppdrag för engagerade "
-"helsingborgare. Uppdraget \"%s\" har behandlats av handläggare och tyvärr så "
-"kan det inte publiceras. Kontakta Engagemang Helsingborg för mer information "
-"på engagemang@helsingborg.se.<br><br>Med vänliga hälsningar,<br>Engagemang "
-"Helsingborg"
-
-#: source/php/Notification/NotificationsConfig.php:46
-msgid "A new assignment is created"
-msgstr "Ett nytt uppdrag har skapats"
-
-#: source/php/Notification/NotificationsConfig.php:47
-#, php-format
-msgid ""
-"Hello,<br><br>A new volunteer assignment \"%s\" has been created in our "
-"system and is ready to be processed.<br>%s<br><br>Sincerely,"
-"<br><br>Engagemang Helsingborg"
-msgstr ""
-"Hej,<br><br>Ett nytt volontäruppdrag ”%s” har skapats i vårt system och är "
-"redo att behandlas.<br>%s<br><br>Med vänliga hälsningar,<br><br>Engagemang "
-"Helsingborg"
-
-#: source/php/Notification/NotificationsConfig.php:61
-#: source/php/Notification/NotificationsConfig.php:106
-msgid "Your application is received"
-msgstr "Din ansökan har tagits emot"
-
-#: source/php/Notification/NotificationsConfig.php:62
-#, php-format
-msgid ""
-"Hello %s,<br><br>We are pleased to inform you that your application to "
-"become a volunteer has been received and we are grateful for your interest "
-"in helping to make a positive difference in our city. Thank you for taking "
-"the time to get involved with others! You have taken a step towards making "
-"Helsingborg a better place and we are grateful for your willingness to help."
-"<br><br>We also want to inform you that your application has been registered "
-"in our system and will be processed shortly. Until then, feel free to "
-"contact us if you have any questions or concerns.<br><br>Thanks again for "
-"your commitment!<br><br>Sincerely,<br>Engagemang Helsingborg"
-msgstr ""
-"Hej %s,<br><br>Vi är glada att meddela dig att din ansökan om att bli "
-"volontär har mottagits och vi är tacksamma för ditt intresse i att hjälpa "
-"till att göra en positiv skillnad i vår stad. Tack för att du tar dig tid "
-"att engagera dig för andra! Du har tagit ett steg mot att göra Helsingborg "
-"till en bättre plats och vi är tacksamma för din vilja att hjälpa till."
-"<br><br>\n"
-"Vi vill också informera dig om att din ansökan har registrerats i vårt "
-"system och kommer att behandlas inom kort. Tills dess, känn dig fri att "
-"kontakta oss om du har några frågor eller funderingar.<br><br>Tack igen för "
-"ditt engagemang!<br><br>Med vänliga hälsningar,<br><br>Engagemang Helsingborg"
-
-#: source/php/Notification/NotificationsConfig.php:76
-msgid "A new application is created"
-msgstr "En ny ansökan har skapats"
-
-#: source/php/Notification/NotificationsConfig.php:77
-msgid ""
-"Hello,<br><br>A new application has been created in our system and is ready "
-"to be processed. The application concerns a new volunteer who wants to help "
-"make a positive difference in Helsingborg.<br><br>We kindly ask you to take "
-"a look at the application and to process it as soon as possible. We want to "
-"make sure that every volunteer who is interested in helping to improve our "
-"city gets a chance to do so.<br><br>Sincerely,<br><br>Engagemang Helsingborg"
-msgstr ""
-"Hej,<br><br>En ny ansökan har skapats i vårt system och är redo att "
-"behandlas. Ansökan gäller en ny volontär som vill hjälpa till att göra en "
-"positiv skillnad i Helsingborg.<br><br>Vi ber dig vänligen att ta en titt på "
-"ansökan och att behandla den så snart som möjligt. Vi vill se till att varje "
-"volontär som är intresserad av att hjälpa till att förbättra vår stad får en "
-"chans att göra det.<br><br>Med vänliga hälsningar,<br><br>Engagemang "
-"Helsingborg"
-
-#: source/php/Notification/NotificationsConfig.php:91
-msgid "A new application to assignment is created"
-msgstr "En ny ansökan till volontäruppdrag har skapats"
-
-#: source/php/Notification/NotificationsConfig.php:92
-#, php-format
-msgid ""
-"Hello,<br><br>A new application for the volunteer assignment \"%s\" has been "
-"created in our system and is ready to be processed.<br>%s<br><br>Sincerely,"
-"<br><br>Engagemang Helsingborg"
-msgstr ""
-"Hej,<br><br>En ny ansökan till volontäruppdraget ”%s” har skapats i vårt "
-"system och är redo att behandlas.<br>%s<br><br>Med vänliga hälsningar,"
-"<br><br>Engagemang Helsingborg"
-
-#: source/php/Notification/NotificationsConfig.php:107
-#, php-format
-msgid ""
-"Hello %s,<br><br>Thank you for your application to the assignment \"%s\". "
-"You will shortly receive notification if your application has been approved."
-"<br><br>Sincerely,<br><br>Engagement Helsingborg"
-msgstr ""
-"Hej %s,<br><br>Tack för din ansökan till uppdraget “%s”. Inom kort kommer du "
-"få besked om din ansökan blivit godkänd.<br><br>Med vänliga hälsningar,"
-"<br><br>Engagemang Helsingborg"
-
-#: source/php/Notification/NotificationsConfig.php:121
-#: source/php/Notification/NotificationsConfig.php:136
-msgid "Your application is approved"
-msgstr "Din ansökan har godkänts"
-
-#: source/php/Notification/NotificationsConfig.php:122
-#, php-format
-msgid ""
-"Hi %s,<br><br>Your application for the assignment \"%s\" has now been "
-"approved. You will be contacted in a separate email with instructions and "
-"prerequisites for the assignment. If you have any questions, you can always "
-"contact us at engagement@helsingborg.se or on 042-105000.<br>Good luck with "
-"your mission and thank you for making a difference!<br><br>Sincerely,"
-"<br><br>Engagemang Helsingborg"
-msgstr ""
-"Hej %s,<br><br>Din ansökan till uppdraget \"%s\" är nu godkänd. Du kommer "
-"bli kontaktad i ett separat mejl med instruktioner och förutsättningar för "
-"uppdraget. Har du frågor kan du alltid kontakta oss på "
-"engagemang@helsingborg.se eller på 042-105000.<br>Lycka till med ditt "
-"uppdrag och tack för att du gör skillnad!<br><br>Med vänliga hälsningar,"
-"<br><br>Engagemang Helsingborg"
-
-#: source/php/Notification/NotificationsConfig.php:137
-#, php-format
-msgid ""
-"Hi %s,<br><br>Your application for the assignment \"%s\" has now been "
-"approved, but needs to be supplemented with additional information. You will "
-"be contacted in a separate email with instructions and prerequisites for the "
-"assignment. If you have any questions, you can always contact us at "
-"engagement@helsingborg.se or on 042-105000.<br>Good luck with your mission "
-"and thank you for making a difference!<br><br>Sincerely,<br><br>Engagemang "
-"Helsingborg"
-msgstr ""
-"Hej %s,<br><br>Din ansökan till uppdraget \"%s\" är nu godkänd, men behöver "
-"kompletteras med ytterligare information. Du kommer bli kontaktad i ett "
-"separat mejl gällande kompletteringen samt instruktioner och förutsättningar "
-"för uppdraget. Har du frågor kan du alltid kontakta oss på "
-"engagemang@helsingborg.se eller på 042-105000.<br>Lycka till med ditt "
-"uppdrag och tack för att du gör skillnad!<br><br>Med vänliga hälsningar,"
-"<br><br>Engagemang Helsingborg"
-
-#: source/php/Notification/NotificationsConfig.php:151
-msgid "Your application is denied"
-msgstr "Din ansökan har nekats"
-
-#: source/php/Notification/NotificationsConfig.php:152
-#, php-format
-msgid ""
-"Hi %s,<br><br>Your application to \"%s\" has not been approved. Engagement "
-"Helsingborg will contact you and tell you why. If you have other questions, "
-"please contact kontaktcenter@helsingborg.se or 042-105000.<br>Thanks!"
-"<br><br>Sincerely,<br><br>Engagemang Helsingborg"
-msgstr ""
-"Hej %s,<br><br>Din ansökan till ”%s” har inte godkänts. Engagemang "
-"Helsingborg kommer att kontakta dig och berätta varför. Har du övriga frågor "
-"är du välkommen att höra av dig till kontaktcenter@helsingborg.se eller på "
-"042-105000.<br>Tack!<br><br>Med vänliga hälsningar,<br><br>Engagemang "
-"Helsingborg"
-
 #: source/php/PostType/Application/Application.php:84
 #: source/php/PostType/Assignment/Assignment.php:67
-#: source/php/PostType/Employee/Employee.php:52
+#: source/php/PostType/Employee/Employee.php:53
 msgid "Submitted from"
 msgstr "Inskickat från"
 
@@ -651,7 +462,7 @@ msgstr "Väntande"
 
 #: source/php/PostType/Application/ApplicationConfiguration.php:37
 #: source/php/PostType/Assignment/AssignmentConfiguration.php:36
-#: source/php/PostType/Employee/EmployeeConfiguration.php:46
+#: source/php/PostType/Employee/EmployeeConfiguration.php:47
 msgid "Approved"
 msgstr "Godkänd"
 
@@ -665,7 +476,7 @@ msgstr "Stängd"
 
 #: source/php/PostType/Application/ApplicationConfiguration.php:55
 #: source/php/PostType/Assignment/AssignmentConfiguration.php:54
-#: source/php/PostType/Employee/EmployeeConfiguration.php:52
+#: source/php/PostType/Employee/EmployeeConfiguration.php:53
 msgid "Denied"
 msgstr "Nekad"
 
@@ -703,7 +514,7 @@ msgid "assignment"
 msgstr "uppdrag"
 
 #: source/php/PostType/Assignment/AssignmentConfiguration.php:16
-#: source/php/PostType/Employee/Employee.php:133
+#: source/php/PostType/Employee/Employee.php:134
 msgid "Assignments"
 msgstr "Uppdrag"
 
@@ -712,7 +523,7 @@ msgid "Approved assignment"
 msgstr "Godkänt uppdrag"
 
 #: source/php/PostType/Assignment/AssignmentConfiguration.php:42
-#: source/php/PostType/Employee/EmployeeConfiguration.php:40
+#: source/php/PostType/Employee/EmployeeConfiguration.php:41
 msgid "Ongoing"
 msgstr "Pågående"
 
@@ -744,17 +555,9 @@ msgstr "Nivå 2"
 msgid "Criminal record is required."
 msgstr "Belastningsregister krävs."
 
-#: source/php/PostType/Employee/Employee.php:38
+#: source/php/PostType/Employee/Employee.php:39
 msgid "Registration status"
 msgstr "Status för registrering"
-
-#: source/php/PostType/Employee/EmployeeApiManager.php:83
-msgid "Employee created"
-msgstr ""
-
-#: source/php/PostType/Employee/EmployeeApiValidator.php:20
-msgid "Missing required parameter"
-msgstr ""
 
 #: source/php/PostType/Employee/EmployeeConfiguration.php:13
 msgid "employees"
@@ -764,7 +567,7 @@ msgstr "medarbetare"
 msgid "employee"
 msgstr "medarbetare"
 
-#: source/php/PostType/Employee/EmployeeConfiguration.php:34
+#: source/php/PostType/Employee/EmployeeConfiguration.php:35
 msgid "New"
 msgstr "Ny"
 
@@ -796,6 +599,183 @@ msgstr ""
 #. Author URI of the plugin/theme
 msgid "https://github.com/helsingborg-stad"
 msgstr ""
+
+#, php-format
+#~ msgid "Your assignment \"%s\" is approved"
+#~ msgstr "Ditt uppdrag \"%s\" har godkänts"
+
+#, php-format
+#~ msgid ""
+#~ "Hello %s,<br><br>It's great that you want to involve more people from "
+#~ "Helsingborg! Your assignment \"%s\" has now been approved for publication "
+#~ "on <a href=\"https://helsingborg.se\">helsingborg.se</a> and will be "
+#~ "visible to many engaged Helsingborg residents. If you would like to make "
+#~ "changes, update something, or remove the assignment, please send an email "
+#~ "to engagemang@helsingborg.se.<br><br>Good luck!<br><br>Best regards,"
+#~ "<br>Engagemang Helsingborg"
+#~ msgstr ""
+#~ "Hej %s,<br><br>Så kul att du vill engagera fler helsingborgare! Ditt "
+#~ "uppdrag “%s” är nu godkänt för publicering på <a href=\"https://"
+#~ "helsingborg.se\">helsingborg.se</a> och kommer bli synligt för många "
+#~ "engagerade helsingborgare. Skulle du vilja ändra, uppdatera något eller "
+#~ "avpublicera uppdraget så skicka ett mejl till engagemang@helsingborg.se."
+#~ "<br><br>Lycka till!<br><br>Med vänliga hälsningar,<br>Engagemang "
+#~ "Helsingborg"
+
+#, php-format
+#~ msgid "Your assignment \"%s\" is denied"
+#~ msgstr "Ditt uppdrag \"%s\" har nekats"
+
+#, php-format
+#~ msgid ""
+#~ "Hello %s,<br><br>Thank you for wanting to register an assignment for "
+#~ "engaged residents of Helsingborg. The assignment \"%s\" has been "
+#~ "processed by an administrator and unfortunately it cannot be published. "
+#~ "Please contact Engagemang Helsingborg for more information at "
+#~ "engagemang@helsingborg.se.<br><br>Best regards,<br>Engagemang Helsingborg"
+#~ msgstr ""
+#~ "Hej %s,<br><br>Tack för att du vill registrera ett uppdrag för engagerade "
+#~ "helsingborgare. Uppdraget \"%s\" har behandlats av handläggare och tyvärr "
+#~ "så kan det inte publiceras. Kontakta Engagemang Helsingborg för mer "
+#~ "information på engagemang@helsingborg.se.<br><br>Med vänliga hälsningar,"
+#~ "<br>Engagemang Helsingborg"
+
+#~ msgid "A new assignment is created"
+#~ msgstr "Ett nytt uppdrag har skapats"
+
+#, php-format
+#~ msgid ""
+#~ "Hello,<br><br>A new volunteer assignment \"%s\" has been created in our "
+#~ "system and is ready to be processed.<br>%s<br><br>Sincerely,"
+#~ "<br><br>Engagemang Helsingborg"
+#~ msgstr ""
+#~ "Hej,<br><br>Ett nytt volontäruppdrag ”%s” har skapats i vårt system och "
+#~ "är redo att behandlas.<br>%s<br><br>Med vänliga hälsningar,"
+#~ "<br><br>Engagemang Helsingborg"
+
+#~ msgid "Your application is received"
+#~ msgstr "Din ansökan har tagits emot"
+
+#, php-format
+#~ msgid ""
+#~ "Hello %s,<br><br>We are pleased to inform you that your application to "
+#~ "become a volunteer has been received and we are grateful for your "
+#~ "interest in helping to make a positive difference in our city. Thank you "
+#~ "for taking the time to get involved with others! You have taken a step "
+#~ "towards making Helsingborg a better place and we are grateful for your "
+#~ "willingness to help.<br><br>We also want to inform you that your "
+#~ "application has been registered in our system and will be processed "
+#~ "shortly. Until then, feel free to contact us if you have any questions or "
+#~ "concerns.<br><br>Thanks again for your commitment!<br><br>Sincerely,"
+#~ "<br>Engagemang Helsingborg"
+#~ msgstr ""
+#~ "Hej %s,<br><br>Vi är glada att meddela dig att din ansökan om att bli "
+#~ "volontär har mottagits och vi är tacksamma för ditt intresse i att hjälpa "
+#~ "till att göra en positiv skillnad i vår stad. Tack för att du tar dig tid "
+#~ "att engagera dig för andra! Du har tagit ett steg mot att göra "
+#~ "Helsingborg till en bättre plats och vi är tacksamma för din vilja att "
+#~ "hjälpa till.<br><br>\n"
+#~ "Vi vill också informera dig om att din ansökan har registrerats i vårt "
+#~ "system och kommer att behandlas inom kort. Tills dess, känn dig fri att "
+#~ "kontakta oss om du har några frågor eller funderingar.<br><br>Tack igen "
+#~ "för ditt engagemang!<br><br>Med vänliga hälsningar,<br><br>Engagemang "
+#~ "Helsingborg"
+
+#~ msgid "A new application is created"
+#~ msgstr "En ny ansökan har skapats"
+
+#~ msgid ""
+#~ "Hello,<br><br>A new application has been created in our system and is "
+#~ "ready to be processed. The application concerns a new volunteer who wants "
+#~ "to help make a positive difference in Helsingborg.<br><br>We kindly ask "
+#~ "you to take a look at the application and to process it as soon as "
+#~ "possible. We want to make sure that every volunteer who is interested in "
+#~ "helping to improve our city gets a chance to do so.<br><br>Sincerely,"
+#~ "<br><br>Engagemang Helsingborg"
+#~ msgstr ""
+#~ "Hej,<br><br>En ny ansökan har skapats i vårt system och är redo att "
+#~ "behandlas. Ansökan gäller en ny volontär som vill hjälpa till att göra en "
+#~ "positiv skillnad i Helsingborg.<br><br>Vi ber dig vänligen att ta en titt "
+#~ "på ansökan och att behandla den så snart som möjligt. Vi vill se till att "
+#~ "varje volontär som är intresserad av att hjälpa till att förbättra vår "
+#~ "stad får en chans att göra det.<br><br>Med vänliga hälsningar,"
+#~ "<br><br>Engagemang Helsingborg"
+
+#~ msgid "A new application to assignment is created"
+#~ msgstr "En ny ansökan till volontäruppdrag har skapats"
+
+#, php-format
+#~ msgid ""
+#~ "Hello,<br><br>A new application for the volunteer assignment \"%s\" has "
+#~ "been created in our system and is ready to be processed."
+#~ "<br>%s<br><br>Sincerely,<br><br>Engagemang Helsingborg"
+#~ msgstr ""
+#~ "Hej,<br><br>En ny ansökan till volontäruppdraget ”%s” har skapats i vårt "
+#~ "system och är redo att behandlas.<br>%s<br><br>Med vänliga hälsningar,"
+#~ "<br><br>Engagemang Helsingborg"
+
+#, php-format
+#~ msgid ""
+#~ "Hello %s,<br><br>Thank you for your application to the assignment \"%s\". "
+#~ "You will shortly receive notification if your application has been "
+#~ "approved.<br><br>Sincerely,<br><br>Engagement Helsingborg"
+#~ msgstr ""
+#~ "Hej %s,<br><br>Tack för din ansökan till uppdraget “%s”. Inom kort kommer "
+#~ "du få besked om din ansökan blivit godkänd.<br><br>Med vänliga hälsningar,"
+#~ "<br><br>Engagemang Helsingborg"
+
+#~ msgid "Your application is approved"
+#~ msgstr "Din ansökan har godkänts"
+
+#, php-format
+#~ msgid ""
+#~ "Hi %s,<br><br>Your application for the assignment \"%s\" has now been "
+#~ "approved. You will be contacted in a separate email with instructions and "
+#~ "prerequisites for the assignment. If you have any questions, you can "
+#~ "always contact us at engagement@helsingborg.se or on 042-105000.<br>Good "
+#~ "luck with your mission and thank you for making a difference!"
+#~ "<br><br>Sincerely,<br><br>Engagemang Helsingborg"
+#~ msgstr ""
+#~ "Hej %s,<br><br>Din ansökan till uppdraget \"%s\" är nu godkänd. Du kommer "
+#~ "bli kontaktad i ett separat mejl med instruktioner och förutsättningar "
+#~ "för uppdraget. Har du frågor kan du alltid kontakta oss på "
+#~ "engagemang@helsingborg.se eller på 042-105000.<br>Lycka till med ditt "
+#~ "uppdrag och tack för att du gör skillnad!<br><br>Med vänliga hälsningar,"
+#~ "<br><br>Engagemang Helsingborg"
+
+#, php-format
+#~ msgid ""
+#~ "Hi %s,<br><br>Your application for the assignment \"%s\" has now been "
+#~ "approved, but needs to be supplemented with additional information. You "
+#~ "will be contacted in a separate email with instructions and prerequisites "
+#~ "for the assignment. If you have any questions, you can always contact us "
+#~ "at engagement@helsingborg.se or on 042-105000.<br>Good luck with your "
+#~ "mission and thank you for making a difference!<br><br>Sincerely,"
+#~ "<br><br>Engagemang Helsingborg"
+#~ msgstr ""
+#~ "Hej %s,<br><br>Din ansökan till uppdraget \"%s\" är nu godkänd, men "
+#~ "behöver kompletteras med ytterligare information. Du kommer bli kontaktad "
+#~ "i ett separat mejl gällande kompletteringen samt instruktioner och "
+#~ "förutsättningar för uppdraget. Har du frågor kan du alltid kontakta oss "
+#~ "på engagemang@helsingborg.se eller på 042-105000.<br>Lycka till med ditt "
+#~ "uppdrag och tack för att du gör skillnad!<br><br>Med vänliga hälsningar,"
+#~ "<br><br>Engagemang Helsingborg"
+
+#~ msgid "Your application is denied"
+#~ msgstr "Din ansökan har nekats"
+
+#, php-format
+#~ msgid ""
+#~ "Hi %s,<br><br>Your application to \"%s\" has not been approved. "
+#~ "Engagement Helsingborg will contact you and tell you why. If you have "
+#~ "other questions, please contact kontaktcenter@helsingborg.se or "
+#~ "042-105000.<br>Thanks!<br><br>Sincerely,<br><br>Engagemang Helsingborg"
+#~ msgstr ""
+#~ "Hej %s,<br><br>Din ansökan till ”%s” har inte godkänts. Engagemang "
+#~ "Helsingborg kommer att kontakta dig och berätta varför. Har du övriga "
+#~ "frågor är du välkommen att höra av dig till kontaktcenter@helsingborg.se "
+#~ "eller på 042-105000.<br>Tack!<br><br>Med vänliga hälsningar,"
+#~ "<br><br>Engagemang Helsingborg"
 
 #~ msgid ""
 #~ "The employees eligibility level does not match the assignment.</i></p>"
