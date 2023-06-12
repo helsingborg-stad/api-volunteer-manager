@@ -2,6 +2,12 @@
 
 namespace VolunteerManager\Notification;
 
+/**
+ * Notification subject, content and rules
+ *
+ * No logic should be added here, only configuration.
+ * Subject and content only supported in Swedish language. Not required to be translated.
+ */
 class NotificationsConfig
 {
     public static function getNotifications()
