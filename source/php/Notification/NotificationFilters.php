@@ -28,7 +28,7 @@ class NotificationFilters
     {
         $senderOption = get_field('notification_sender', 'option');
         $senderEmail = $senderOption['email'] ?? '';
-        $sender = $senderOption['name'] ? "{$senderOption['name']} <{$senderEmail}>" : $senderEmail;
+        $sender = !empty($senderOption['name']) ? "{$senderOption['name']} <{$senderEmail}>" : $senderEmail;
         $args['from'] = $sender;
         return $args;
     }
