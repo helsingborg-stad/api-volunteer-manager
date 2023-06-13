@@ -46,6 +46,8 @@ class ValidateParams extends ValidateRestRequest
             );
         }
 
+        // TODO: Validate if user is approved volunteer
+
         if (!$validator->is_application_unique($employee->ID, (int)$assignment)) {
             return WPResponseFactory::wp_error_response(
                 'avm_application_validation_error',
