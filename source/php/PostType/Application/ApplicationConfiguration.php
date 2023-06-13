@@ -20,6 +20,7 @@ class ApplicationConfiguration
                 'show_in_nav_menus' => true,
                 'exclude_from_search' => true,
                 'supports' => false,
+                'show_in_rest' => false,
             ]
         ];
     }
