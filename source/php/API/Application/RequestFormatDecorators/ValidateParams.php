@@ -35,7 +35,16 @@ class ValidateParams extends ValidateRestRequest
             );
         }
 
-        // TODO: Validate if user exists and is approved volunteer
+        if (!isset($employee->ID) || !$validator->post_exist($employee->ID)) {
+            return WPResponseFactory::wp_error_response(
+                'avm_application_validation_error',
+                __('User with the given ID does not exist in the database.', AVM_TEXT_DOMAIN),
+                [
+                    'param' => 'national_identity_number',
+                    'status' => 404
+                ]
+            );
+        }
 
         if (!$validator->is_application_unique($employee->ID, (int)$assignment)) {
             return WPResponseFactory::wp_error_response(
