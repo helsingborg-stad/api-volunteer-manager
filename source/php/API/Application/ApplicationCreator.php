@@ -20,7 +20,7 @@ class ApplicationCreator extends ApiHandler
 
         $employee = $this->getEmployeeByIdentityNumber($applicationDetails['national_identity_number']);
         $fieldSetter->updateField('application_employee', $employee->ID ?? null, $applicationId);
-        $fieldSetter->updateField('application_assignment', (int)$applicationDetails['assignment'], $applicationId);
+        $fieldSetter->updateField('application_assignment', (int)$applicationDetails['assignment_id'], $applicationId);
         $fieldSetter->updateField('source', $request->get_header('host'), $applicationId);
         $fieldSetter->setPostStatus($applicationId, 'pending', 'application-status');
 
@@ -34,7 +34,7 @@ class ApplicationCreator extends ApiHandler
     {
         $requestParams = [
             'national_identity_number',
-            'assignment',
+            'assignment_id',
         ];
 
         return $this->extractParamsFromRequest($request, $requestParams);

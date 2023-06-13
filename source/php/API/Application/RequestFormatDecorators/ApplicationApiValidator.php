@@ -34,4 +34,13 @@ class ApplicationApiValidator
 
         return empty($applications);
     }
+
+    /**
+     * @param int $postId
+     * @return bool
+     */
+    public function post_exist(int $postId): bool
+    {
+        return (bool)get_post($postId);
+    }
 }

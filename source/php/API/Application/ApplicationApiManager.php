@@ -57,7 +57,7 @@ class ApplicationApiManager
         $unique_params = new ValidateParams($format_request);
         $required_params = new ValidateRequiredRestParams(
             $unique_params,
-            ['national_identity_number', 'assignment']
+            ['national_identity_number', 'assignment_id']
         );
 
         $validated_params = $required_params->formatRestRequest($request);

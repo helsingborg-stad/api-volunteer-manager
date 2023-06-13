@@ -22,26 +22,30 @@ class ValidateParams extends ValidateRestRequest
 
         $national_identity_number = $request->get_param('national_identity_number');
         $employee = $this->getEmployeeByIdentityNumber($national_identity_number);
+        $assignment = $request->get_param('assignment_id');
 
-        // TODO: Validate if user is approved
+        if (!$validator->post_exist((int)$assignment)) {
+            return WPResponseFactory::wp_error_response(
+                'avm_application_validation_error',
+                __('Assignment with the given ID does not exist in the database.', AVM_TEXT_DOMAIN),
+                [
+                    'param' => 'assignment_id',
+                    'status' => 404
+                ]
+            );
+        }
 
-        // TODO: Validate if assignment exists
+        // TODO: Validate if user exists and is approved volunteer
 
-        $assignment = $request->get_param('assignment');
         if (!$validator->is_application_unique($employee->ID, (int)$assignment)) {
-            return $this->generateErrorResponse("Application already exists for this user.", 'national_identity_number');
+            return WPResponseFactory::wp_error_response(
+                'avm_application_validation_error',
+                __('An application already exists for this user.', AVM_TEXT_DOMAIN),
+                ['param' => 'national_identity_number']
+            );
         }
 
         return $request;
-    }
-
-    private function generateErrorResponse(string $message, string $param): WP_Error
-    {
-        return WPResponseFactory::wp_error_response(
-            'avm_application_creation_error',
-            __($message, AVM_TEXT_DOMAIN),
-            ['param' => $param]
-        );
     }
 
     /**
