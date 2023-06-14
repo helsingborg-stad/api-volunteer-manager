@@ -25,7 +25,7 @@ class ValidateParams extends ValidateRestRequest
         $employee = EmployeeHelper::getEmployeeByIdentityNumber($national_identity_number);
         $assignment = $request->get_param('assignment_id');
 
-        if (!$validator->post_exist((int)$assignment)) {
+        if (!$validator->is_post_published((int)$assignment)) {
             return WPResponseFactory::wp_error_response(
                 'avm_application_validation_error',
                 __('Assignment with the given ID does not exist in the database.', AVM_TEXT_DOMAIN),

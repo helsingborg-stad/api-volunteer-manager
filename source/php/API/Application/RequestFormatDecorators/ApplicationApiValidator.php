@@ -45,6 +45,16 @@ class ApplicationApiValidator
     }
 
     /**
+     * @param int $postId
+     * @return bool
+     */
+    public function is_post_published(int $postId): bool
+    {
+        $status = get_post_status($postId);
+        return $status === 'publish';
+    }
+
+    /**
      * @param int $employeeId
      * @return bool
      */
