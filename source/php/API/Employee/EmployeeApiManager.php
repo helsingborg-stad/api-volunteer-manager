@@ -8,6 +8,7 @@ use VolunteerManager\API\Employee\RequestFormatDecorators\ValidateUniqueParams;
 use VolunteerManager\API\FormatRequest;
 use VolunteerManager\API\ValidateRequiredRestParams;
 use VolunteerManager\Entity\FieldSetter;
+use VolunteerManager\Helper\Admin\EmployeeHelper;
 use WP_Error;
 use WP_Post;
 use WP_REST_Request;
@@ -19,6 +20,7 @@ class EmployeeApiManager
     private EmployeeCreator $employeeCreator;
     private FieldSetter $employeeFieldSetter;
     private string $employeePostSlug;
+
     public function __construct(
         AuthenticationInterface $authentication,
         EmployeeCreator         $employeeCreator,
@@ -98,8 +100,7 @@ class EmployeeApiManager
         }
 
         $nationalIdentityNumber = $request->get_param('national_identity_number');
-        $employee = $this->getEmployeeByIdentityNumber($nationalIdentityNumber);
-//        error_log('employee: ' . print_r($employee, true) . ' nationalIdentityNumber: ' . $nationalIdentityNumber);
+        $employee = EmployeeHelper::getEmployeeByIdentityNumber($nationalIdentityNumber);
 
         if (!$employee) {
             return new WP_Error(
@@ -171,27 +172,5 @@ class EmployeeApiManager
                 ];
             }, $employeeApplications),
         ];
-    }
-
-    /**
-     * Retrieve employee by national identity number
-     *
-     * @param string $nationalIdentityNumber The national identity number of the employee
-     * @return null|WP_Post The employee data matching the national identity number
-     */
-    public function getEmployeeByIdentityNumber(string $nationalIdentityNumber): ?WP_Post
-    {
-        $employee = get_posts(array(
-            'post_type' => 'employee',
-            'post_status' => 'any',
-            'meta_query' => array(
-                array(
-                    'key' => 'national_identity_number',
-                    'value' => $nationalIdentityNumber,
-                    'compare' => '=',
-                )
-            )
-        ));
-        return !empty($employee[0]) ? $employee[0] : null;
     }
 }

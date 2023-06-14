@@ -5,6 +5,7 @@ namespace VolunteerManager\API\Application;
 use VolunteerManager\API\ApiHandler;
 use VolunteerManager\API\WPResponseFactory;
 use VolunteerManager\Entity\FieldSetter;
+use VolunteerManager\Helper\Admin\EmployeeHelper;
 use WP_REST_Request;
 use WP_REST_Response;
 use WP_Post;
@@ -18,7 +19,7 @@ class ApplicationCreator extends ApiHandler
             $postSlug,
         );
 
-        $employee = $this->getEmployeeByIdentityNumber($applicationDetails['national_identity_number']);
+        $employee = EmployeeHelper::getEmployeeByIdentityNumber($applicationDetails['national_identity_number']);
         $fieldSetter->updateField('application_employee', $employee->ID ?? null, $applicationId);
         $fieldSetter->updateField('application_assignment', (int)$applicationDetails['assignment_id'], $applicationId);
         $fieldSetter->updateField('source', $request->get_header('host'), $applicationId);
@@ -51,27 +52,5 @@ class ApplicationCreator extends ApiHandler
         ];
 
         return wp_insert_post($post);
-    }
-
-    /**
-     * Retrieve employee by national identity number
-     *
-     * @param string $nationalIdentityNumber The national identity number of the employee
-     * @return null|WP_Post The employee data matching the national identity number
-     */
-    public function getEmployeeByIdentityNumber(string $nationalIdentityNumber): ?WP_Post
-    {
-        $employee = get_posts(array(
-            'post_type' => 'employee',
-            'post_status' => 'any',
-            'meta_query' => array(
-                array(
-                    'key' => 'national_identity_number',
-                    'value' => $nationalIdentityNumber,
-                    'compare' => '=',
-                )
-            )
-        ));
-        return !empty($employee[0]) ? $employee[0] : null;
     }
 }

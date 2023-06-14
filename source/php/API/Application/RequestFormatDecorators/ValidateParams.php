@@ -4,6 +4,7 @@ namespace VolunteerManager\API\Application\RequestFormatDecorators;
 
 use VolunteerManager\API\ValidateRestRequest;
 use VolunteerManager\API\WPResponseFactory;
+use VolunteerManager\Helper\Admin\EmployeeHelper;
 use WP_Error;
 use WP_REST_Request;
 use WP_Post;
@@ -21,7 +22,7 @@ class ValidateParams extends ValidateRestRequest
         $validator = new ApplicationApiValidator();
 
         $national_identity_number = $request->get_param('national_identity_number');
-        $employee = $this->getEmployeeByIdentityNumber($national_identity_number);
+        $employee = EmployeeHelper::getEmployeeByIdentityNumber($national_identity_number);
         $assignment = $request->get_param('assignment_id');
 
         if (!$validator->post_exist((int)$assignment)) {
@@ -60,27 +61,5 @@ class ValidateParams extends ValidateRestRequest
         }
 
         return $request;
-    }
-
-    /**
-     * Retrieve employee by national identity number
-     *
-     * @param string $nationalIdentityNumber The national identity number of the employee
-     * @return null|WP_Post The employee data matching the national identity number
-     */
-    public function getEmployeeByIdentityNumber(string $nationalIdentityNumber): ?WP_Post
-    {
-        $employee = get_posts(array(
-            'post_type' => 'employee',
-            'post_status' => 'any',
-            'meta_query' => array(
-                array(
-                    'key' => 'national_identity_number',
-                    'value' => $nationalIdentityNumber,
-                    'compare' => '=',
-                )
-            )
-        ));
-        return !empty($employee[0]) ? $employee[0] : null;
     }
 }
