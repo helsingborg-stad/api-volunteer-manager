@@ -43,4 +43,15 @@ class ApplicationApiValidator
     {
         return (bool)get_post($postId);
     }
+
+    /**
+     * @param int $employeeId
+     * @return bool
+     */
+    public function is_employee_approved(int $employeeId): bool
+    {
+        $statuses = get_the_terms($employeeId, 'employee-registration-status');
+        $status = $statuses[0]->slug ?? null;
+        return $status === 'approved';
+    }
 }

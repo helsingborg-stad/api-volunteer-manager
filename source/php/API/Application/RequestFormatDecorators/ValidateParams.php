@@ -39,20 +39,23 @@ class ValidateParams extends ValidateRestRequest
             return WPResponseFactory::wp_error_response(
                 'avm_application_validation_error',
                 __('User with the given ID does not exist in the database.', AVM_TEXT_DOMAIN),
-                [
-                    'param' => 'national_identity_number',
-                    'status' => 404
-                ]
+                ['status' => 404]
             );
         }
 
-        // TODO: Validate if user is approved volunteer
+        if (!$validator->is_employee_approved($employee->ID)) {
+            return WPResponseFactory::wp_error_response(
+                'avm_application_validation_error',
+                __('User has no permissions to create applications.', AVM_TEXT_DOMAIN),
+                ['status' => 403]
+            );
+        }
 
         if (!$validator->is_application_unique($employee->ID, (int)$assignment)) {
             return WPResponseFactory::wp_error_response(
                 'avm_application_validation_error',
                 __('An application already exists for this user.', AVM_TEXT_DOMAIN),
-                ['param' => 'national_identity_number']
+                ['status' => 400]
             );
         }
 
