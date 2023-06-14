@@ -8,7 +8,6 @@ use VolunteerManager\Entity\FieldSetter;
 use VolunteerManager\Helper\Admin\EmployeeHelper;
 use WP_REST_Request;
 use WP_REST_Response;
-use WP_Post;
 
 class ApplicationCreator extends ApiHandler
 {
@@ -24,6 +23,8 @@ class ApplicationCreator extends ApiHandler
         $fieldSetter->updateField('application_assignment', (int)$applicationDetails['assignment_id'], $applicationId);
         $fieldSetter->updateField('source', $request->get_header('host'), $applicationId);
         $fieldSetter->setPostStatus($applicationId, 'pending', 'application-status');
+
+        do_action('acf/save_post', $applicationId);
 
         return WPResponseFactory::wp_rest_response(
             'Application created',
@@ -44,7 +45,6 @@ class ApplicationCreator extends ApiHandler
     private function createApplicationPost(string $postType): int
     {
         $post = [
-            //'post_title' => $title, TODO: add post title or trigger acd/save_posts
             'post_type' => $postType,
             'post_status' => 'pending',
             'post_date_gmt' => current_time('mysql', true),
