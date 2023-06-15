@@ -38,12 +38,6 @@ class EmployeeConfiguration
                 'color' => '#eeee22'
             ],
             [
-                'name' => __('Ongoing', 'api-volunteer-manager'),
-                'slug' => 'ongoing',
-                'description' => 'Employee under investigation.',
-                'color' => '#81d742'
-            ],
-            [
                 'name' => __('Approved', 'api-volunteer-manager'),
                 'slug' => 'approved',
                 'description' => 'Employee approved for assignments.',

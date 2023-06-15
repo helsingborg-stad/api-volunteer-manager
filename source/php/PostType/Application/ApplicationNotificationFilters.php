@@ -28,13 +28,14 @@ class ApplicationNotificationFilters extends NotificationFilters
      */
     public function populateAdminNotificationWithContent(array $args, int $postId): array
     {
-        $assignment = get_field('application_assignment', $postId);
-        $adminUrl = get_edit_post_link($assignment->ID);
-        $args['content'] = sprintf(
-            $args['content'],
-            $assignment->post_title,
-            $adminUrl
-        );
+        if ($assignment = get_field('application_assignment', $postId)) {
+            $adminUrl = get_edit_post_link($assignment->ID);
+            $args['content'] = sprintf(
+                $args['content'],
+                $assignment->post_title,
+                $adminUrl
+            );
+        }
         return $args;
     }
 
@@ -46,9 +47,10 @@ class ApplicationNotificationFilters extends NotificationFilters
      */
     public function populateReceiverWithEmployee(array $args, int $postId): array
     {
-        $employee = get_field('application_employee', $postId);
-        $receiver = get_field('email', $employee->ID);
-        $args['to'] = $receiver ?? '';
+        if ($employee = get_field('application_employee', $postId)) {
+            $receiver = get_field('email', $employee->ID);
+            $args['to'] = $receiver ?? '';
+        }
         return $args;
     }
 
@@ -61,13 +63,15 @@ class ApplicationNotificationFilters extends NotificationFilters
     public function populateApplicationWithContent(array $args, int $postId): array
     {
         $employee = get_field('application_employee', $postId);
-        $name = get_field('first_name', $employee->ID);
         $assignment = get_field('application_assignment', $postId);
-        $args['content'] = sprintf(
-            $args['content'],
-            $name,
-            $assignment->post_title
-        );
+        if ($employee && $assignment) {
+            $name = get_field('first_name', $employee->ID);
+            $args['content'] = sprintf(
+                $args['content'],
+                $name,
+                $assignment->post_title
+            );
+        }
         return $args;
     }
 }

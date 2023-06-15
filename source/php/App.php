@@ -3,6 +3,8 @@
 namespace VolunteerManager;
 
 use VolunteerManager\API\Api;
+use VolunteerManager\API\Application\ApplicationApiManager;
+use VolunteerManager\API\Application\ApplicationCreator;
 use VolunteerManager\API\Assignment\AssignmentApiManager;
 use VolunteerManager\API\Assignment\AssignmentCreator;
 use VolunteerManager\API\Auth\JWTAuthentication;
@@ -68,6 +70,12 @@ class App
 
         $application = new Application(...array_values(ApplicationConfiguration::getPostTypeArgs()));
         $application->addHooks();
+        (new ApplicationApiManager(
+            $JWTAuthentication,
+            new ApplicationCreator(),
+            new FieldSetter(),
+            $application->slug
+        ))->addHooks();
         $applicationNotifications = new ApplicationNotificationFilters();
         $applicationNotifications->addHooks();
     }

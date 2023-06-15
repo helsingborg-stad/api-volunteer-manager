@@ -59,7 +59,7 @@ class ApplicationNotificationFiltersTest extends PluginTestCase
     {
         $args = ['to' => '', 'from' => '', 'subject' => 'Subject example', 'content' => 'Lorem ipsum %s sit amet %s'];
         $expectedResult = ['to' => '', 'from' => '', 'subject' => 'Subject example', 'content' => 'Lorem ipsum Foo sit amet Bar'];
-        Functions\expect('get_field')->times(3)->andReturn((object)['ID' => 1], 'Foo', (object)['post_title' => 'Bar']);
+        Functions\expect('get_field')->times(3)->andReturn((object)['ID' => 1], (object)['post_title' => 'Bar'], 'Foo');
         $this->assertEquals(
             $expectedResult,
             $this->applicationNotificationFilters->populateApplicationWithContent($args, $this->post->ID)
