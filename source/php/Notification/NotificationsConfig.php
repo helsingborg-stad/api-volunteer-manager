@@ -65,7 +65,7 @@ class NotificationsConfig
                 'newValue' => 'new',
                 'message' => [
                     'subject' => 'Din ansökan har tagits emot',
-                    'content' => 'Hej %s,<br><br>Vi är glada att meddela dig att din ansökan om att bli volontär har mottagits och vi är tacksamma för ditt intresse i att hjälpa till att göra en positiv skillnad i vår stad. Tack för att du tar dig tid att engagera dig för andra! Du har tagit ett steg mot att göra Helsingborg till en bättre plats och vi är tacksamma för din vilja att hjälpa till.<br><br>Vi vill också informera dig om att din ansökan har registrerats i vårt system och kommer att behandlas inom kort. Tills dess, känn dig fri att kontakta oss om du har några frågor eller funderingar.<br><br>Tack igen för ditt engagemang!<br><br>Med vänliga hälsningar,<br><br>Engagemang Helsingborg',
+                    'content' => 'Hej %s,<br><br>Vi är glada att meddela dig att din ansökan om att bli volontär har mottagits och vi är tacksamma för ditt intresse i att hjälpa till att göra en positiv skillnad i vår stad. Tack för att du tar dig tid att engagera dig för andra! Du har tagit ett steg mot att göra Helsingborg till en bättre plats och vi är tacksamma för din vilja att hjälpa till.<br><br><b>Boka tid för ett volontärsamtal</b><br>Då du inte har varit volontär genom Helsingborgs stad innan så vill vi gärna träffa dig för att prata om dina önskemål och förväntningar om att vara volontär samt kunna berätta mer vad det innebär att vara volontär genom Helsingborg stad.<br><br>Du bokar en tid för ett samtal genom e-tjänsten på länken nedan.<br>Boka volontärsamtal här: <a href="https://eservice.helsingborg.se/H379">https://eservice.helsingborg.se/H379</a>.<br><br>Vi vill också informera dig om att din ansökan har registreinsats i vårt system och kommer att behandlas inom kort. Tills dess, känn dig fri att kontakta oss om du har några frågor eller funderingar.<br><br>Tack igen för ditt engagemang!<br><br>Med vänliga hälsningar,<br><br>Engagemang Helsingborg',
                 ],
                 'rule' => [
                     'key' => 'source',
@@ -95,7 +95,7 @@ class NotificationsConfig
                 'newValue' => 'denied',
                 'message' => [
                     'subject' => 'Din ansökan har inte blivit godkänd',
-                    'content' => 'Hej %s,<br><brTack så mycket för ditt intresse att bli volontär i Helsingborg.<br><br>Tyvärr måste vi meddela att din ansökan som volontär inte har blivit godkänd.<br><br>Kontakta oss gärna för att vet mer om din ansökan genom att mejla engagemang@helsingborg.se<br><br>Med vänliga hälsningar,<br>Engagemang Helsingborg',
+                    'content' => 'Hej %s,<br><br>Tack så mycket för ditt intresse att bli volontär i Helsingborg.<br><br>Tyvärr måste vi meddela att din ansökan som volontär inte har blivit godkänd.<br><br>Kontakta oss gärna för att vet mer om din ansökan genom att mejla engagemang@helsingborg.se<br><br>Med vänliga hälsningar,<br>Engagemang Helsingborg',
                 ],
                 'rule' => [
                     'key' => 'source',

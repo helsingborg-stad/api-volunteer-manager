@@ -61,7 +61,8 @@ class AssignmentNotificationFilters extends NotificationFilters
     public function populateAdminNotificationWithContent(array $args, int $postId): array
     {
         $post = get_post($postId);
-        $adminUrl = get_edit_post_link($postId);
+        $adminUrl = get_admin_url(null, 'post.php?action=edit&post=' . $postId);
+
         $args['content'] = sprintf(
             $args['content'],
             $post->post_title,
