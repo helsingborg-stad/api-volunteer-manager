@@ -10,7 +10,6 @@ use VolunteerManager\API\ValidateRequiredRestParams;
 use VolunteerManager\Entity\FieldSetter;
 use VolunteerManager\Helper\Admin\EmployeeHelper;
 use WP_Error;
-use WP_Post;
 use WP_REST_Request;
 use WP_REST_Response;
 
@@ -127,15 +126,72 @@ class EmployeeApiManager
     public function getEmployeeDetails(int $employeeId): array
     {
         $employeeFields = get_fields($employeeId);
+        $statuses = get_the_terms($employeeId, 'employee-registration-status');
+        $status = $statuses ? $this->formatStatus($statuses) : null;
+        $employeeApplications = $this->getEmployeeApplications($employeeId);
 
-        $status = get_the_terms($employeeId, 'employee-registration-status');
-        $status = !empty($status[0]) ? [
-            'term_id' => $status[0]->term_id,
-            'name' => $status[0]->name,
-            'slug' => $status[0]->slug,
-        ] : null;
+        return [
+            'id' => $employeeId,
+            'national_identity_number' => $employeeFields['national_identity_number'] ?? null,
+            'first_name' => $employeeFields['first_name'] ?? null,
+            'surname' => $employeeFields['surname'] ?? null,
+            'email' => $employeeFields['email'] ?? null,
+            'phone_number' => $employeeFields['phone_number'] ?? null,
+            'newsletter' => $employeeFields['newsletter'] ?? null,
+            'registration_date' => $employeeFields['registration_date'] ?? null,
+            'status' => $status,
+            'assignments' => $this->formatApplications($employeeApplications),
+        ];
+    }
 
-        $employeeApplications = get_posts(
+    /**
+     * Format status
+     * @param $statuses
+     * @return array
+     */
+    public function formatStatus($statuses): array
+    {
+        $status = array_pop($statuses);
+        return [
+            'term_id' => $status->term_id,
+            'name' => $status->name,
+            'slug' => $status->slug,
+        ];
+    }
+
+    /**
+     * Format applications list
+     * @param $applications
+     * @return array
+     */
+    public function formatApplications($applications): array
+    {
+        $formattedApplications = [];
+        foreach ($applications as $application) {
+            $status = get_the_terms($application->ID, 'application-status');
+            $assignmentId = get_field('application_assignment', $application->ID);
+            $assignmentObject = get_post($assignmentId);
+            if ($assignmentObject) {
+                $formattedApplications[] = [
+                    'id' => $assignmentObject->ID,
+                    'title' => $assignmentObject->post_title,
+                    'status' => $status ? $this->formatStatus($status) : null,
+                    'date' => $application->post_date,
+                ];
+            }
+        }
+
+        return $formattedApplications;
+    }
+
+    /**
+     * Get employee applications
+     * @param $employeeId
+     * @return array
+     */
+    public function getEmployeeApplications($employeeId): array
+    {
+        return get_posts(
             [
                 'post_type' => 'application',
                 'post_status' => 'any',
@@ -152,25 +208,5 @@ class EmployeeApiManager
                 ],
             ]
         );
-
-        return [
-            'id' => $employeeId,
-            'national_identity_number' => $employeeFields['national_identity_number'] ?? null,
-            'first_name' => $employeeFields['first_name'] ?? null,
-            'surname' => $employeeFields['surname'] ?? null,
-            'email' => $employeeFields['email'] ?? null,
-            'phone_number' => $employeeFields['phone_number'] ?? null,
-            'newsletter' => $employeeFields['newsletter'] ?? null,
-            'registration_date' => $employeeFields['registration_date'] ?? null,
-            'status' => $status,
-            'assignments' => array_map(function ($assignment) {
-                return [
-                    'id' => $assignment->ID,
-                    'title' => $assignment->post_title,
-                    'status' => get_the_terms($assignment->ID, 'application-status'),
-                    'date' => $assignment->post_date,
-                ];
-            }, $employeeApplications),
-        ];
     }
 }
