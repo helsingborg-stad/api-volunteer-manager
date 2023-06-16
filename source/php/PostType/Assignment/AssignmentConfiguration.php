@@ -55,6 +55,12 @@ class AssignmentConfiguration
                 'slug' => 'denied',
                 'description' => __('Denied assignment', 'api-volunteer-manager'),
                 'color' => '#dd3333'
+            ],
+            [
+                'name' => __('Completed', 'api-volunteer-manager'),
+                'slug' => 'completed',
+                'description' => __('Completed assignment', 'api-volunteer-manager'),
+                'color' => '#dd3333'
             ]
         ];
     }
