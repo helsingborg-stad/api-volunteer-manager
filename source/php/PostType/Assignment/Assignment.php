@@ -267,7 +267,8 @@ class Assignment extends PostType
 
     /**
      * Handles the transition of an assignment post to a 'draft' status when the status changes to 'completed'.
-     * If the new term of the post is 'completed' and the old term is not 'completed', the post status is changed to 'draft'.
+     * If the new term of the post is 'completed' and the old term is not 'completed', the post status is changed to
+     * 'draft'.
      *
      */
     function draftOnStatusCompleted($object_id, $terms, $tt_ids, $taxonomy, $append, $old_tt_ids)
@@ -303,13 +304,13 @@ class Assignment extends PostType
         ) {
             $args = array(
                 'post_type' => 'application',
+                'post_per_page' => '-1',
+                'post_status' => 'any',
                 'meta_query' => array(
                     array(
                         'key' => 'application_assignment',
                         'value' => $postId,
-                        'compare' => '=',
-                        'post_per_page' => '-1',
-                        'post_status' => 'any'
+                        'compare' => '='
                     )
                 )
             );
