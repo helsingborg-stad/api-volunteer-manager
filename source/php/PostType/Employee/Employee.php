@@ -3,6 +3,7 @@
 namespace VolunteerManager\PostType\Employee;
 
 use VolunteerManager\Components\ApplicationMetaBox\ApplicationMetaBox;
+use VolunteerManager\Entity\Filter as Filter;
 use VolunteerManager\Entity\PostType as PostType;
 use VolunteerManager\Entity\Taxonomy as Taxonomy;
 use VolunteerManager\Helper\Admin\UI as AdminUI;
@@ -66,8 +67,8 @@ class Employee extends PostType
     public function registerStatusTaxonomy()
     {
         $this->employeeTaxonomy = new Taxonomy(
-            'Registration statuses',
-            'Registration status',
+            __('Statuses', AVM_TEXT_DOMAIN),
+            __('Status', AVM_TEXT_DOMAIN),
             'employee-registration-status',
             array($this->slug),
             array(
@@ -77,6 +78,11 @@ class Employee extends PostType
         );
 
         $this->employeeTaxonomy->registerTaxonomy();
+
+        new Filter(
+            'employee-registration-status',
+            'employee'
+        );
     }
 
     /**
