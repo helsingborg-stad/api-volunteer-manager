@@ -23,40 +23,6 @@
             "ui": 1
         },
         {
-            "key": "field_639b06c1a6e7a",
-            "label": "Signup methods",
-            "name": "signup_methods",
-            "aria-label": "",
-            "type": "checkbox",
-            "instructions": "",
-            "required": 1,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_639af11ba5ae7",
-                        "operator": "!=",
-                        "value": "1"
-                    }
-                ]
-            ],
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "choices": {
-                "link": "Link",
-                "email": "Email",
-                "phone": "Phone"
-            },
-            "default_value": [],
-            "return_format": "value",
-            "allow_custom": 0,
-            "layout": "horizontal",
-            "toggle": 1,
-            "save_custom": 0
-        },
-        {
             "key": "field_639b0713a6e7b",
             "label": "Email",
             "name": "signup_email",
@@ -64,15 +30,7 @@
             "type": "email",
             "instructions": "",
             "required": 0,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_639b06c1a6e7a",
-                        "operator": "==",
-                        "value": "email"
-                    }
-                ]
-            ],
+            "conditional_logic": 0,
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -91,15 +49,7 @@
             "type": "text",
             "instructions": "",
             "required": 0,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_639b06c1a6e7a",
-                        "operator": "==",
-                        "value": "phone"
-                    }
-                ]
-            ],
+            "conditional_logic": 0,
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -119,15 +69,7 @@
             "type": "text",
             "instructions": "",
             "required": 0,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_639b06c1a6e7a",
-                        "operator": "==",
-                        "value": "link"
-                    }
-                ]
-            ],
+            "conditional_logic": 0,
             "wrapper": {
                 "width": "",
                 "class": "",
