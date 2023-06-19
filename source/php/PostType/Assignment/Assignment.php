@@ -28,6 +28,7 @@ class Assignment extends PostType
         add_action('init', array($this, 'registerEligibilityTaxonomy'));
         add_action('init', array($this, 'insertAssignmentEligibilityTerms'));
         add_action('init', array($this, 'addPostTypeTableColumn'));
+        add_action('before_delete_post', array($this, 'deleteRelatedApplications'));
     }
 
     /**
@@ -261,5 +262,39 @@ class Assignment extends PostType
     public function insertAssignmentEligibilityTerms()
     {
         return $this->eligibilityTaxonomy->insertTerms(AssignmentConfiguration::getEligibilityTerms());
+    }
+
+    /**
+     * Permanently delete applications related to the assignment
+     *
+     * @param int $postId
+     * @return void
+     */
+    public function deleteRelatedApplications(int $postId)
+    {
+        $postType = get_post_type($postId);
+        if (
+            !wp_is_post_revision($postId) &&
+            !wp_is_post_autosave($postId) &&
+            $postType === 'assignment'
+        ) {
+            $args = array(
+                'post_type' => 'application',
+                'meta_query' => array(
+                    array(
+                        'key' => 'application_assignment',
+                        'value' => $postId,
+                        'compare' => '=',
+                        'post_per_page' => '-1',
+                        'post_status' => 'any'
+                    )
+                )
+            );
+
+            $relatedApplications = get_posts($args);
+            foreach ($relatedApplications as $application) {
+                wp_delete_post($application->ID, true);
+            }
+        }
     }
 }
