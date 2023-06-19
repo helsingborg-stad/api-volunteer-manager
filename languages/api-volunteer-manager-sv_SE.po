@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Volunteer Manager\n"
-"POT-Creation-Date: 2023-06-12 11:34+0200\n"
-"PO-Revision-Date: 2023-06-12 11:34+0200\n"
+"POT-Creation-Date: 2023-06-16 13:08+0200\n"
+"PO-Revision-Date: 2023-06-16 13:08+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: sv_SE\n"
@@ -19,6 +19,22 @@ msgstr ""
 "_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.js\n"
+
+#: source/php/API/Application/RequestFormatDecorators/ValidateParams.php:31
+msgid "Assignment with the given ID does not exist in the database."
+msgstr ""
+
+#: source/php/API/Application/RequestFormatDecorators/ValidateParams.php:42
+msgid "User with the given ID does not exist in the database."
+msgstr ""
+
+#: source/php/API/Application/RequestFormatDecorators/ValidateParams.php:50
+msgid "User has no permissions to create applications."
+msgstr ""
+
+#: source/php/API/Application/RequestFormatDecorators/ValidateParams.php:58
+msgid "An application already exists for this user."
+msgstr ""
 
 #: source/php/API/ValidateRequiredRestParams.php:33
 msgid "Missing required parameter"
@@ -150,7 +166,7 @@ msgstr "Brottsregister hämtats vid datum"
 
 #: source/php/AcfFields/php/employee.php:188
 msgid "Registration date"
-msgstr "Registreringsdatum "
+msgstr "Registreringsdatum"
 
 #: source/php/AcfFields/php/employee.php:206
 msgid "Swedish Language Proficiency"
@@ -455,28 +471,28 @@ msgstr "ansökan"
 msgid "Applications"
 msgstr "Ansökningar"
 
-#: source/php/PostType/Application/ApplicationConfiguration.php:31
+#: source/php/PostType/Application/ApplicationConfiguration.php:32
 #: source/php/PostType/Assignment/AssignmentConfiguration.php:48
 msgid "Pending"
 msgstr "Väntande"
 
-#: source/php/PostType/Application/ApplicationConfiguration.php:37
+#: source/php/PostType/Application/ApplicationConfiguration.php:38
 #: source/php/PostType/Assignment/AssignmentConfiguration.php:36
-#: source/php/PostType/Employee/EmployeeConfiguration.php:47
+#: source/php/PostType/Employee/EmployeeConfiguration.php:41
 msgid "Approved"
 msgstr "Godkänd"
 
-#: source/php/PostType/Application/ApplicationConfiguration.php:43
+#: source/php/PostType/Application/ApplicationConfiguration.php:44
 msgid "Approved with condition"
 msgstr "Godkänd med villkor"
 
-#: source/php/PostType/Application/ApplicationConfiguration.php:49
+#: source/php/PostType/Application/ApplicationConfiguration.php:50
 msgid "Closed"
 msgstr "Stängd"
 
-#: source/php/PostType/Application/ApplicationConfiguration.php:55
+#: source/php/PostType/Application/ApplicationConfiguration.php:56
 #: source/php/PostType/Assignment/AssignmentConfiguration.php:54
-#: source/php/PostType/Employee/EmployeeConfiguration.php:53
+#: source/php/PostType/Employee/EmployeeConfiguration.php:47
 msgid "Denied"
 msgstr "Nekad"
 
@@ -523,7 +539,6 @@ msgid "Approved assignment"
 msgstr "Godkänt uppdrag"
 
 #: source/php/PostType/Assignment/AssignmentConfiguration.php:42
-#: source/php/PostType/Employee/EmployeeConfiguration.php:41
 msgid "Ongoing"
 msgstr "Pågående"
 
@@ -539,19 +554,27 @@ msgstr ""
 msgid "Denied assignment"
 msgstr ""
 
-#: source/php/PostType/Assignment/AssignmentConfiguration.php:66
+#: source/php/PostType/Assignment/AssignmentConfiguration.php:60
+msgid "Completed"
+msgstr "Avslutad"
+
+#: source/php/PostType/Assignment/AssignmentConfiguration.php:62
+msgid "Completed assignment"
+msgstr "Uppdrag avslutad"
+
+#: source/php/PostType/Assignment/AssignmentConfiguration.php:72
 msgid "Level 1"
 msgstr "Nivå 1"
 
-#: source/php/PostType/Assignment/AssignmentConfiguration.php:68
+#: source/php/PostType/Assignment/AssignmentConfiguration.php:74
 msgid "No criminal record required."
 msgstr "Inget belastningsregister krävs."
 
-#: source/php/PostType/Assignment/AssignmentConfiguration.php:72
+#: source/php/PostType/Assignment/AssignmentConfiguration.php:78
 msgid "Level 2"
 msgstr "Nivå 2"
 
-#: source/php/PostType/Assignment/AssignmentConfiguration.php:74
+#: source/php/PostType/Assignment/AssignmentConfiguration.php:80
 msgid "Criminal record is required."
 msgstr "Belastningsregister krävs."
 

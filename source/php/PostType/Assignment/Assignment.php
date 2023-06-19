@@ -29,6 +29,7 @@ class Assignment extends PostType
         add_action('init', array($this, 'insertAssignmentEligibilityTerms'));
         add_action('init', array($this, 'addPostTypeTableColumn'));
         add_action('before_delete_post', array($this, 'deleteRelatedApplications'));
+        add_action('set_object_terms', array($this, 'draftOnStatusCompleted'), 10, 6);
     }
 
     /**
@@ -262,6 +263,28 @@ class Assignment extends PostType
     public function insertAssignmentEligibilityTerms()
     {
         return $this->eligibilityTaxonomy->insertTerms(AssignmentConfiguration::getEligibilityTerms());
+    }
+
+    /**
+     * Handles the transition of an assignment post to a 'draft' status when the status changes to 'completed'.
+     * If the new term of the post is 'completed' and the old term is not 'completed', the post status is changed to 'draft'.
+     *
+     */
+    function draftOnStatusCompleted($object_id, $terms, $tt_ids, $taxonomy, $append, $old_tt_ids)
+    {
+        if ('assignment-status' !== $taxonomy) {
+            return;
+        }
+
+        $completedTerm = get_term_by('slug', 'completed', 'assignment-status');
+
+        // If the new term is 'completed' and the old term is not 'completed', draft the post.
+        if (in_array($completedTerm->term_id, $tt_ids) && !in_array($completedTerm->term_id, $old_tt_ids)) {
+            wp_update_post(array(
+                'ID' => $object_id,
+                'post_status' => 'draft'
+            ));
+        }
     }
 
     /**
