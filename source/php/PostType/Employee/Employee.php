@@ -22,6 +22,59 @@ class Employee extends PostType
         add_action('before_delete_post', array($this, 'deleteRelatedApplications'));
 
         add_filter('acf/load_field/name=notes_date_updated', array($this, 'acfSetNotesDefaultDate'));
+
+        add_action('restrict_manage_posts', [$this, 'addMetaFilterDropdown']);
+        add_filter('pre_get_posts', [$this, 'applyMetaFilters']);
+    }
+
+    public function addMetaFilterDropdown()
+    {
+        global $typenow;
+
+        if ('employee' === $typenow) {
+            $this->addCustomMetaFilterDropdown('swedish_language_proficiency', __('Language proficiency', AVM_TEXT_DOMAIN));
+        }
+    }
+
+    public function addCustomMetaFilterDropdown($fieldKey, $dropdownTitle)
+    {
+        $field = acf_get_field($fieldKey);
+
+        if ($field) {
+            $selected_value = $_GET[$fieldKey] ?? '';
+
+            echo '<select name="' . $fieldKey . '">';
+            echo '<option value="">' . $dropdownTitle . '</option>';
+
+            foreach ($field['choices'] as $value => $label) {
+                echo '<option value="' . $value . '" ' . selected($selected_value, $value, false) . '>' . $label . '</option>';
+            }
+
+            echo '</select>';
+        }
+    }
+
+    public function applyMetaFilters($query)
+    {
+        global $typenow;
+
+        if ('employee' === $typenow) {
+            $this->applyCustomMetaFilter($query, 'swedish_language_proficiency');
+        }
+    }
+
+    public function applyCustomMetaFilter($query, $fieldKey)
+    {
+        global $pagenow;
+
+        if ('edit.php' === $pagenow && isset($_GET[$fieldKey])) {
+            $meta_value = sanitize_text_field($_GET[$fieldKey]);
+
+            if (!empty($meta_value)) {
+                $query->query_vars['meta_key'] = $fieldKey;
+                $query->query_vars['meta_value'] = $meta_value;
+            }
+        }
     }
 
     public function initTaxonomiesAndTerms()
