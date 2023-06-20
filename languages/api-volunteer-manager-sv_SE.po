@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Volunteer Manager\n"
-"POT-Creation-Date: 2023-06-16 13:08+0200\n"
-"PO-Revision-Date: 2023-06-16 13:08+0200\n"
+"POT-Creation-Date: 2023-06-20 09:03+0200\n"
+"PO-Revision-Date: 2023-06-20 09:03+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: sv_SE\n"
@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.2.2\n"
+"X-Generator: Poedit 1.8.12\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-WPHeader: api-volunteer-manager.php\n"
 "X-Poedit-SourceCharset: UTF-8\n"
@@ -58,8 +58,9 @@ msgstr "Uppdrag"
 #: source/php/AcfFields/php/assignment-status.php:10
 #: source/php/Components/ApplicationMetaBox/ApplicationMetaBox.php:81
 #: source/php/PostType/Application/Application.php:70
-#: source/php/PostType/Assignment/Assignment.php:42
-#: source/php/PostType/Assignment/Assignment.php:113
+#: source/php/PostType/Assignment/Assignment.php:44
+#: source/php/PostType/Assignment/Assignment.php:115
+#: source/php/PostType/Employee/Employee.php:124
 msgid "Status"
 msgstr "Status"
 
@@ -70,13 +71,13 @@ msgstr "Taxonomier"
 #: source/php/AcfFields/php/assignment-status.php:36
 #: source/php/Components/ApplicationMetaBox/ApplicationMetaBox.php:80
 #: source/php/PostType/Application/Application.php:128
-#: source/php/PostType/Assignment/Assignment.php:174
-#: source/php/PostType/Assignment/Assignment.php:175
+#: source/php/PostType/Assignment/Assignment.php:176
+#: source/php/PostType/Assignment/Assignment.php:177
 msgid "Eligibility"
 msgstr "Behörighet"
 
 #: source/php/AcfFields/php/assignment-status.php:62
-#: source/php/PostType/Assignment/Assignment.php:144
+#: source/php/PostType/Assignment/Assignment.php:146
 msgid "Category"
 msgstr "Kategori"
 
@@ -134,9 +135,8 @@ msgstr "Svenskt personnummer"
 #: source/php/AcfFields/php/employer.php:74
 #: source/php/AcfFields/php/options.php:48
 #: source/php/AcfFields/php/options.php:95
-#: source/php/AcfFields/php/signup.php:52
-#: source/php/AcfFields/php/signup.php:65
-#: source/php/PostType/Assignment/Assignment.php:234
+#: source/php/AcfFields/php/signup.php:30
+#: source/php/PostType/Assignment/Assignment.php:236
 msgid "Email"
 msgstr "E-postadress"
 
@@ -229,7 +229,7 @@ msgstr "Arbetsgivare"
 #: source/php/AcfFields/php/employer.php:53
 #: source/php/AcfFields/php/options.php:28
 #: source/php/Components/ApplicationMetaBox/ApplicationMetaBox.php:78
-#: source/php/PostType/Assignment/Assignment.php:233
+#: source/php/PostType/Assignment/Assignment.php:235
 msgid "Name"
 msgstr "Namn"
 
@@ -246,9 +246,8 @@ msgid "Add Contact"
 msgstr "Lägg till kontakt"
 
 #: source/php/AcfFields/php/employer.php:94
-#: source/php/AcfFields/php/signup.php:53
-#: source/php/AcfFields/php/signup.php:92
-#: source/php/PostType/Assignment/Assignment.php:235
+#: source/php/AcfFields/php/signup.php:49
+#: source/php/PostType/Assignment/Assignment.php:237
 msgid "Phone"
 msgstr "Telefonnummer"
 
@@ -317,12 +316,7 @@ msgstr "Intern"
 msgid "External"
 msgstr "Extern"
 
-#: source/php/AcfFields/php/signup.php:30
-msgid "Signup methods"
-msgstr "Registreringsmetoder"
-
-#: source/php/AcfFields/php/signup.php:51
-#: source/php/AcfFields/php/signup.php:120
+#: source/php/AcfFields/php/signup.php:69
 msgid "Link"
 msgstr "Länk"
 
@@ -441,8 +435,8 @@ msgid "New %s Name"
 msgstr "Nytt %s namn"
 
 #: source/php/PostType/Application/Application.php:84
-#: source/php/PostType/Assignment/Assignment.php:67
-#: source/php/PostType/Employee/Employee.php:53
+#: source/php/PostType/Assignment/Assignment.php:69
+#: source/php/PostType/Employee/Employee.php:107
 msgid "Submitted from"
 msgstr "Inskickat från"
 
@@ -472,7 +466,7 @@ msgid "Applications"
 msgstr "Ansökningar"
 
 #: source/php/PostType/Application/ApplicationConfiguration.php:32
-#: source/php/PostType/Assignment/AssignmentConfiguration.php:48
+#: source/php/PostType/Assignment/AssignmentConfiguration.php:42
 msgid "Pending"
 msgstr "Väntande"
 
@@ -491,32 +485,33 @@ msgid "Closed"
 msgstr "Stängd"
 
 #: source/php/PostType/Application/ApplicationConfiguration.php:56
-#: source/php/PostType/Assignment/AssignmentConfiguration.php:54
+#: source/php/PostType/Assignment/AssignmentConfiguration.php:48
 #: source/php/PostType/Employee/EmployeeConfiguration.php:47
 msgid "Denied"
 msgstr "Nekad"
 
-#: source/php/PostType/Assignment/Assignment.php:56
+#: source/php/PostType/Assignment/Assignment.php:58
 msgid "Visibility"
 msgstr "Synlighet"
 
-#: source/php/PostType/Assignment/Assignment.php:112
+#: source/php/PostType/Assignment/Assignment.php:114
+#: source/php/PostType/Employee/Employee.php:123
 msgid "Statuses"
 msgstr "Statusar"
 
-#: source/php/PostType/Assignment/Assignment.php:143
+#: source/php/PostType/Assignment/Assignment.php:145
 msgid "Categories"
 msgstr "Kategorier"
 
-#: source/php/PostType/Assignment/Assignment.php:210
+#: source/php/PostType/Assignment/Assignment.php:212
 msgid "Submitted by"
 msgstr "Inskickat av"
 
-#: source/php/PostType/Assignment/Assignment.php:232
+#: source/php/PostType/Assignment/Assignment.php:234
 msgid "Contact details of the person who submitted the assignment."
 msgstr "Kontaktuppgifter till personen som skickat in uppdraget."
 
-#: source/php/PostType/Assignment/Assignment.php:250
+#: source/php/PostType/Assignment/Assignment.php:252
 #: source/php/PostType/Employee/EmployeeConfiguration.php:16
 msgid "Employees"
 msgstr "Medarbetare"
@@ -530,7 +525,7 @@ msgid "assignment"
 msgstr "uppdrag"
 
 #: source/php/PostType/Assignment/AssignmentConfiguration.php:16
-#: source/php/PostType/Employee/Employee.php:134
+#: source/php/PostType/Employee/Employee.php:193
 msgid "Assignments"
 msgstr "Uppdrag"
 
@@ -538,47 +533,43 @@ msgstr "Uppdrag"
 msgid "Approved assignment"
 msgstr "Godkänt uppdrag"
 
-#: source/php/PostType/Assignment/AssignmentConfiguration.php:42
-msgid "Ongoing"
-msgstr "Pågående"
-
 #: source/php/PostType/Assignment/AssignmentConfiguration.php:44
-msgid "Ongoing assignment"
-msgstr ""
-
-#: source/php/PostType/Assignment/AssignmentConfiguration.php:50
 msgid "Pending assignment"
 msgstr ""
 
-#: source/php/PostType/Assignment/AssignmentConfiguration.php:56
+#: source/php/PostType/Assignment/AssignmentConfiguration.php:50
 msgid "Denied assignment"
 msgstr ""
 
-#: source/php/PostType/Assignment/AssignmentConfiguration.php:60
+#: source/php/PostType/Assignment/AssignmentConfiguration.php:54
 msgid "Completed"
 msgstr "Avslutad"
 
-#: source/php/PostType/Assignment/AssignmentConfiguration.php:62
+#: source/php/PostType/Assignment/AssignmentConfiguration.php:56
 msgid "Completed assignment"
 msgstr "Uppdrag avslutad"
 
-#: source/php/PostType/Assignment/AssignmentConfiguration.php:72
+#: source/php/PostType/Assignment/AssignmentConfiguration.php:66
 msgid "Level 1"
 msgstr "Nivå 1"
 
-#: source/php/PostType/Assignment/AssignmentConfiguration.php:74
+#: source/php/PostType/Assignment/AssignmentConfiguration.php:68
 msgid "No criminal record required."
 msgstr "Inget belastningsregister krävs."
 
-#: source/php/PostType/Assignment/AssignmentConfiguration.php:78
+#: source/php/PostType/Assignment/AssignmentConfiguration.php:72
 msgid "Level 2"
 msgstr "Nivå 2"
 
-#: source/php/PostType/Assignment/AssignmentConfiguration.php:80
+#: source/php/PostType/Assignment/AssignmentConfiguration.php:74
 msgid "Criminal record is required."
 msgstr "Belastningsregister krävs."
 
-#: source/php/PostType/Employee/Employee.php:39
+#: source/php/PostType/Employee/Employee.php:35
+msgid "Language proficiency"
+msgstr "Språkkunskaper"
+
+#: source/php/PostType/Employee/Employee.php:93
 msgid "Registration status"
 msgstr "Status för registrering"
 
@@ -623,11 +614,15 @@ msgstr ""
 msgid "https://github.com/helsingborg-stad"
 msgstr ""
 
-#, php-format
+#~ msgid "Signup methods"
+#~ msgstr "Registreringsmetoder"
+
+#~ msgid "Ongoing"
+#~ msgstr "Pågående"
+
 #~ msgid "Your assignment \"%s\" is approved"
 #~ msgstr "Ditt uppdrag \"%s\" har godkänts"
 
-#, php-format
 #~ msgid ""
 #~ "Hello %s,<br><br>It's great that you want to involve more people from "
 #~ "Helsingborg! Your assignment \"%s\" has now been approved for publication "
@@ -645,11 +640,9 @@ msgstr ""
 #~ "<br><br>Lycka till!<br><br>Med vänliga hälsningar,<br>Engagemang "
 #~ "Helsingborg"
 
-#, php-format
 #~ msgid "Your assignment \"%s\" is denied"
 #~ msgstr "Ditt uppdrag \"%s\" har nekats"
 
-#, php-format
 #~ msgid ""
 #~ "Hello %s,<br><br>Thank you for wanting to register an assignment for "
 #~ "engaged residents of Helsingborg. The assignment \"%s\" has been "
@@ -666,7 +659,6 @@ msgstr ""
 #~ msgid "A new assignment is created"
 #~ msgstr "Ett nytt uppdrag har skapats"
 
-#, php-format
 #~ msgid ""
 #~ "Hello,<br><br>A new volunteer assignment \"%s\" has been created in our "
 #~ "system and is ready to be processed.<br>%s<br><br>Sincerely,"
@@ -679,7 +671,6 @@ msgstr ""
 #~ msgid "Your application is received"
 #~ msgstr "Din ansökan har tagits emot"
 
-#, php-format
 #~ msgid ""
 #~ "Hello %s,<br><br>We are pleased to inform you that your application to "
 #~ "become a volunteer has been received and we are grateful for your "
@@ -727,17 +718,15 @@ msgstr ""
 #~ msgid "A new application to assignment is created"
 #~ msgstr "En ny ansökan till volontäruppdrag har skapats"
 
-#, php-format
 #~ msgid ""
 #~ "Hello,<br><br>A new application for the volunteer assignment \"%s\" has "
-#~ "been created in our system and is ready to be processed."
-#~ "<br>%s<br><br>Sincerely,<br><br>Engagemang Helsingborg"
+#~ "been created in our system and is ready to be processed.<br>"
+#~ "%s<br><br>Sincerely,<br><br>Engagemang Helsingborg"
 #~ msgstr ""
 #~ "Hej,<br><br>En ny ansökan till volontäruppdraget ”%s” har skapats i vårt "
 #~ "system och är redo att behandlas.<br>%s<br><br>Med vänliga hälsningar,"
 #~ "<br><br>Engagemang Helsingborg"
 
-#, php-format
 #~ msgid ""
 #~ "Hello %s,<br><br>Thank you for your application to the assignment \"%s\". "
 #~ "You will shortly receive notification if your application has been "
@@ -750,7 +739,6 @@ msgstr ""
 #~ msgid "Your application is approved"
 #~ msgstr "Din ansökan har godkänts"
 
-#, php-format
 #~ msgid ""
 #~ "Hi %s,<br><br>Your application for the assignment \"%s\" has now been "
 #~ "approved. You will be contacted in a separate email with instructions and "
@@ -766,7 +754,6 @@ msgstr ""
 #~ "uppdrag och tack för att du gör skillnad!<br><br>Med vänliga hälsningar,"
 #~ "<br><br>Engagemang Helsingborg"
 
-#, php-format
 #~ msgid ""
 #~ "Hi %s,<br><br>Your application for the assignment \"%s\" has now been "
 #~ "approved, but needs to be supplemented with additional information. You "
@@ -787,7 +774,6 @@ msgstr ""
 #~ msgid "Your application is denied"
 #~ msgstr "Din ansökan har nekats"
 
-#, php-format
 #~ msgid ""
 #~ "Hi %s,<br><br>Your application to \"%s\" has not been approved. "
 #~ "Engagement Helsingborg will contact you and tell you why. If you have "
