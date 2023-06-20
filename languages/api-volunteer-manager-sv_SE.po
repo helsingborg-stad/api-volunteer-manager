@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Volunteer Manager\n"
-"POT-Creation-Date: 2023-06-20 09:03+0200\n"
-"PO-Revision-Date: 2023-06-20 09:03+0200\n"
+"POT-Creation-Date: 2023-06-20 11:37+0200\n"
+"PO-Revision-Date: 2023-06-20 11:37+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: sv_SE\n"
@@ -60,7 +60,7 @@ msgstr "Uppdrag"
 #: source/php/PostType/Application/Application.php:70
 #: source/php/PostType/Assignment/Assignment.php:44
 #: source/php/PostType/Assignment/Assignment.php:115
-#: source/php/PostType/Employee/Employee.php:124
+#: source/php/PostType/Employee/Employee.php:109
 msgid "Status"
 msgstr "Status"
 
@@ -153,6 +153,7 @@ msgid "new"
 msgstr "ny"
 
 #: source/php/AcfFields/php/employee.php:150
+#: source/php/PostType/Employee/Employee.php:40
 msgid "Crime record extracts"
 msgstr "Utdrag ur brottsregistret"
 
@@ -373,6 +374,14 @@ msgstr "Avpublicera"
 msgid "Show All"
 msgstr "Visa alla"
 
+#: source/php/Entity/MetaFilter.php:40
+msgid "Yes"
+msgstr "Ja"
+
+#: source/php/Entity/MetaFilter.php:41
+msgid "No"
+msgstr "Nej"
+
 #: source/php/Entity/PostType.php:49 source/php/Entity/PostType.php:50
 #, php-format
 msgid "Add new %s"
@@ -436,7 +445,7 @@ msgstr "Nytt %s namn"
 
 #: source/php/PostType/Application/Application.php:84
 #: source/php/PostType/Assignment/Assignment.php:69
-#: source/php/PostType/Employee/Employee.php:107
+#: source/php/PostType/Employee/Employee.php:92
 msgid "Submitted from"
 msgstr "Inskickat från"
 
@@ -495,7 +504,7 @@ msgid "Visibility"
 msgstr "Synlighet"
 
 #: source/php/PostType/Assignment/Assignment.php:114
-#: source/php/PostType/Employee/Employee.php:123
+#: source/php/PostType/Employee/Employee.php:108
 msgid "Statuses"
 msgstr "Statusar"
 
@@ -525,7 +534,7 @@ msgid "assignment"
 msgstr "uppdrag"
 
 #: source/php/PostType/Assignment/AssignmentConfiguration.php:16
-#: source/php/PostType/Employee/Employee.php:193
+#: source/php/PostType/Employee/Employee.php:178
 msgid "Assignments"
 msgstr "Uppdrag"
 
@@ -565,11 +574,15 @@ msgstr "Nivå 2"
 msgid "Criminal record is required."
 msgstr "Belastningsregister krävs."
 
-#: source/php/PostType/Employee/Employee.php:35
+#: source/php/PostType/Employee/Employee.php:39
 msgid "Language proficiency"
 msgstr "Språkkunskaper"
 
-#: source/php/PostType/Employee/Employee.php:93
+#: source/php/PostType/Employee/Employee.php:61
+msgid "Clear filters"
+msgstr "Återställ filter"
+
+#: source/php/PostType/Employee/Employee.php:78
 msgid "Registration status"
 msgstr "Status för registrering"
 
