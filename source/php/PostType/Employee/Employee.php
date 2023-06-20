@@ -4,6 +4,7 @@ namespace VolunteerManager\PostType\Employee;
 
 use VolunteerManager\Components\ApplicationMetaBox\ApplicationMetaBox;
 use VolunteerManager\Entity\Filter as Filter;
+use VolunteerManager\Entity\MetaFilter;
 use VolunteerManager\Entity\PostType as PostType;
 use VolunteerManager\Entity\Taxonomy as Taxonomy;
 use VolunteerManager\Helper\Admin\UI as AdminUI;
@@ -20,9 +21,46 @@ class Employee extends PostType
         add_action('acf/save_post', array($this, 'setPostTitle'));
         add_action('add_meta_boxes', array($this, 'registerApplicationsMetaBox'), 10, 2);
         add_action('before_delete_post', array($this, 'deleteRelatedApplications'));
+        add_action('restrict_manage_posts', [$this, 'addMetaFilterDropdown']);
 
         add_filter('acf/load_field/name=notes_date_updated', array($this, 'acfSetNotesDefaultDate'));
+        add_filter('pre_get_posts', [$this, 'applyMetaFilters']);
     }
+
+    /**
+     * Adds a meta filter dropdown for the employee post type.
+     */
+    public function addMetaFilterDropdown()
+    {
+        global $typenow;
+
+        if ('employee' === $typenow) {
+            $metaFilter = new MetaFilter();
+            $metaFilter->addCustomMetaFilterDropdown('swedish_language_proficiency', __('Language proficiency', AVM_TEXT_DOMAIN));
+            $metaFilter->addCustomMetaFilterDropdown('crime_record_extracted', __('Crime record extracts', AVM_TEXT_DOMAIN));
+            $this->renderClearFiltersButton();
+        }
+    }
+
+
+    public function applyMetaFilters($query)
+    {
+        global $typenow;
+
+        if ('employee' === $typenow) {
+            $metaFilter = new MetaFilter();
+            $metaFilter->applyCustomMetaFilter($query, 'swedish_language_proficiency');
+            $metaFilter->applyCustomMetaFilter($query, 'crime_record_extracted');
+        }
+    }
+
+
+    public function renderClearFiltersButton()
+    {
+        $clear_filters_url = remove_query_arg(array('swedish_language_proficiency', 'crime_record_extracted', 'employee-registration-status', 'm'));
+        echo '<a href="' . esc_url($clear_filters_url) . '" class="button">' . __('Clear filters', AVM_TEXT_DOMAIN) . '</a>';
+    }
+
 
     public function initTaxonomiesAndTerms()
     {
