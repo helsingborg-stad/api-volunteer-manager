@@ -26,10 +26,75 @@ class MetaFilter
         }
     }
 
+    public function addCustomAssignmentFilterDropdown(string $dropdownTitle)
+    {
+        $assignments = get_posts([
+            'post_type' => 'assignment',
+            'posts_per_page' => -1,
+            'post_status' => 'any',
+            'suppress_filters' => true,
+        ]);
+
+        if ($assignments) {
+            $selectedAssignment = $_GET['assignment_id'] ?? '';
+
+            $this->renderPostDropdown('assignment_id', $dropdownTitle, $assignments, $selectedAssignment);
+        }
+    }
+
+    /**
+     * Renders the dropdown.
+     *
+     * @param string $name The name of the select element.
+     * @param array $options The options for the dropdown.
+     * @param string $selectedValue The currently selected value.
+     * @param string $dropdownTitle The title of the dropdown.
+     */
+    private function renderDropdown(string $name, array $options, string $selectedValue, string $dropdownTitle)
+    {
+        echo '<select name="' . $name . '">';
+        echo '<option value="">' . $dropdownTitle . '</option>';
+        foreach ($options as $value => $label) {
+            echo '<option value="' . $value . '" ' . selected($selectedValue, (string)$value, false) . '>' . $label . '</option>';
+        }
+        echo '</select>';
+    }
+
+    /**
+     * Renders the dropdown for the posts.
+     *
+     * @param string $postType The post type.
+     * @param string $dropdownTitle The title of the dropdown.
+     * @param array $posts The posts to be listed in the dropdown.
+     * @param string $selectedValue The currently selected value.
+     */
+    private function renderPostDropdown(string $postType, string $dropdownTitle, array $posts, string $selectedValue)
+    {
+        $options = [];
+        foreach ($posts as $post) {
+            $options[$post->ID] = $post->post_title;
+        }
+
+        $this->renderDropdown($postType, $options, $selectedValue, $dropdownTitle);
+    }
+
+    /**
+     * Renders the dropdown for the select field type.
+     *
+     * @param string $fieldKey The key of the custom field.
+     * @param string $dropdownTitle The title of the dropdown.
+     * @param array $choices The choices for the dropdown.
+     * @param string $selectedValue The currently selected value.
+     */
+    private function renderSelectDropdown(string $fieldKey, string $dropdownTitle, array $choices, string $selectedValue)
+    {
+        $this->renderDropdown($fieldKey, $choices, $selectedValue, $dropdownTitle);
+    }
+
     /**
      * Renders the dropdown for the true/false field type.
      *
-     * @param string $fieldKey      The key of the custom field.
+     * @param string $fieldKey The key of the custom field.
      * @param string $dropdownTitle The title of the dropdown.
      * @param string $selectedValue The currently selected value.
      */
@@ -39,24 +104,6 @@ class MetaFilter
         echo '<option value="">' . $dropdownTitle . '</option>';
         echo '<option value="1" ' . selected($selectedValue, '1', false) . '>' . __('Yes', AVM_TEXT_DOMAIN) . '</option>';
         echo '<option value="0" ' . selected($selectedValue, '0', false) . '>' . __('No', AVM_TEXT_DOMAIN) . '</option>';
-        echo '</select>';
-    }
-
-    /**
-     * Renders the dropdown for the select field type.
-     *
-     * @param string $fieldKey      The key of the custom field.
-     * @param string $dropdownTitle The title of the dropdown.
-     * @param array  $choices       The choices for the dropdown.
-     * @param string $selectedValue The currently selected value.
-     */
-    private function renderSelectDropdown(string $fieldKey, string $dropdownTitle, array $choices, string $selectedValue)
-    {
-        echo '<select name="' . $fieldKey . '">';
-        echo '<option value="">' . $dropdownTitle . '</option>';
-        foreach ($choices as $value => $label) {
-            echo '<option value="' . $value . '" ' . selected($selectedValue, $value, false) . '>' . $label . '</option>';
-        }
         echo '</select>';
     }
 
@@ -80,5 +127,49 @@ class MetaFilter
                 $query->query_vars['meta_query'][] = $meta_query;
             }
         }
+    }
+
+    public function applyCustomAssignmentFilter($query, $fieldKey)
+    {
+        global $pagenow;
+
+        if (!is_admin() || !$query->is_main_query()) {
+            return;
+        }
+
+        if ('edit.php' === $pagenow && isset($_GET[$fieldKey])) {
+            $meta_value = sanitize_text_field($_GET[$fieldKey]);
+            if ($meta_value !== '') {
+                $employees = $this->getApplicationEmployees($meta_value);
+                $query->query_vars['post__in'] = $employees;
+            }
+        }
+    }
+
+    private function getApplicationEmployees(int $assignmentId): array
+    {
+        $applicationPosts = get_posts([
+            'post_type' => 'application',
+            'posts_per_page' => -1,
+            'post_status' => 'any',
+            'suppress_filters' => false,
+            'meta_query' => [
+                [
+                    'key' => 'application_assignment',
+                    'value' => $assignmentId,
+                    'compare' => '=',
+                ]
+            ]
+        ]);
+
+        $employees = [];
+        foreach ($applicationPosts as $applicationPost) {
+            $employee = get_post_meta($applicationPost->ID, 'application_employee', true);
+            if ($employee) {
+                $employees[] = $employee;
+            }
+        }
+
+        return $employees;
     }
 }

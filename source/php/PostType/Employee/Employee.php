@@ -38,6 +38,9 @@ class Employee extends PostType
             $metaFilter = new MetaFilter();
             $metaFilter->addCustomMetaFilterDropdown('swedish_language_proficiency', __('Language proficiency', AVM_TEXT_DOMAIN));
             $metaFilter->addCustomMetaFilterDropdown('crime_record_extracted', __('Crime record extracts', AVM_TEXT_DOMAIN));
+
+            $metaFilter->addCustomAssignmentFilterDropdown(__('Assignment', AVM_TEXT_DOMAIN));
+
             $this->renderClearFiltersButton();
         }
     }
@@ -51,13 +54,14 @@ class Employee extends PostType
             $metaFilter = new MetaFilter();
             $metaFilter->applyCustomMetaFilter($query, 'swedish_language_proficiency');
             $metaFilter->applyCustomMetaFilter($query, 'crime_record_extracted');
+            $metaFilter->applyCustomAssignmentFilter($query, 'assignment_id');
         }
     }
 
 
     public function renderClearFiltersButton()
     {
-        $clear_filters_url = remove_query_arg(array('swedish_language_proficiency', 'crime_record_extracted', 'employee-registration-status', 'm'));
+        $clear_filters_url = remove_query_arg(array('swedish_language_proficiency', 'crime_record_extracted', 'employee-registration-status', 'm', 'assignment_id'));
         echo '<a href="' . esc_url($clear_filters_url) . '" class="button">' . __('Clear filters', AVM_TEXT_DOMAIN) . '</a>';
     }
 
