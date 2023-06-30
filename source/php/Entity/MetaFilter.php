@@ -107,29 +107,7 @@ class MetaFilter
         echo '</select>';
     }
 
-    /**
-     * Apply custom meta filters
-     * @param $query
-     * @param $fieldKey
-     * @return void
-     */
-    public function applyCustomMetaFilter($query, $fieldKey)
-    {
-        global $pagenow;
-
-        if ('edit.php' === $pagenow && isset($_GET[$fieldKey])) {
-            $meta_value = sanitize_text_field($_GET[$fieldKey]);
-            if ($meta_value !== '') {
-                $meta_query = array(
-                    'key' => $fieldKey,
-                    'value' => $meta_value,
-                );
-                $query->query_vars['meta_query'][] = $meta_query;
-            }
-        }
-    }
-
-    public function applyCustomAssignmentFilter($query, $fieldKey)
+    public function applyCustomFilter($query, $fieldKey, $callback = null)
     {
         global $pagenow;
 
@@ -140,10 +118,33 @@ class MetaFilter
         if ('edit.php' === $pagenow && isset($_GET[$fieldKey])) {
             $meta_value = sanitize_text_field($_GET[$fieldKey]);
             if ($meta_value !== '') {
-                $employees = $this->getApplicationEmployees($meta_value);
-                $query->query_vars['post__in'] = $employees;
+                $meta_query = array(
+                    'key' => $fieldKey,
+                    'value' => $meta_value,
+                );
+
+                if (is_callable($callback)) {
+                    call_user_func($callback, $meta_query, $query);
+                } else {
+                    $query->query_vars['meta_query'][] = $meta_query;
+                }
             }
         }
+    }
+
+    public function applyCustomMetaFilter($query, $fieldKey)
+    {
+        $this->applyCustomFilter($query, $fieldKey, function ($meta_query, $query) {
+            $query->query_vars['meta_query'][] = $meta_query;
+        });
+    }
+
+    public function applyCustomAssignmentFilter($query, $fieldKey)
+    {
+        $this->applyCustomFilter($query, $fieldKey, function ($meta_value, $query) {
+            $employees = $this->getApplicationEmployees($meta_value['value']);
+            $query->query_vars['post__in'] = $employees;
+        });
     }
 
     private function getApplicationEmployees(int $assignmentId): array
