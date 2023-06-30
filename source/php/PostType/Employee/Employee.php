@@ -4,7 +4,7 @@ namespace VolunteerManager\PostType\Employee;
 
 use VolunteerManager\Components\ApplicationMetaBox\ApplicationMetaBox;
 use VolunteerManager\Entity\Filter as Filter;
-use VolunteerManager\Entity\MetaFilter;
+use VolunteerManager\Entity\CustomFieldFilter;
 use VolunteerManager\Entity\PostType as PostType;
 use VolunteerManager\Entity\Taxonomy as Taxonomy;
 use VolunteerManager\Helper\Admin\UI as AdminUI;
@@ -35,7 +35,7 @@ class Employee extends PostType
         global $typenow;
 
         if ('employee' === $typenow) {
-            $metaFilter = new MetaFilter();
+            $metaFilter = new CustomFieldFilter();
             $metaFilter->addCustomMetaFilterDropdown('swedish_language_proficiency', __('Language proficiency', AVM_TEXT_DOMAIN));
             $metaFilter->addCustomMetaFilterDropdown('crime_record_extracted', __('Crime record extracts', AVM_TEXT_DOMAIN));
 
@@ -51,7 +51,7 @@ class Employee extends PostType
         global $typenow;
 
         if ('employee' === $typenow) {
-            $metaFilter = new MetaFilter();
+            $metaFilter = new CustomFieldFilter();
             $metaFilter->applyCustomMetaFilter($query, 'swedish_language_proficiency');
             $metaFilter->applyCustomMetaFilter($query, 'crime_record_extracted');
             $metaFilter->applyCustomAssignmentFilter($query, 'assignment_id');

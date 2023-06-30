@@ -2,12 +2,12 @@
 
 namespace VolunteerManager\Entity;
 
-class MetaFilter
+class CustomFieldFilter
 {
     /**
      * Adds a custom meta filter dropdown based on the field type.
      *
-     * @param string $fieldKey      The key of the custom field.
+     * @param string $fieldKey The key of the custom field.
      * @param string $dropdownTitle The title of the dropdown.
      */
     public function addCustomMetaFilterDropdown(string $fieldKey, string $dropdownTitle)
