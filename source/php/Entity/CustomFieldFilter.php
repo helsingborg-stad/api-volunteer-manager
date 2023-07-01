@@ -123,11 +123,7 @@ class CustomFieldFilter
                     'value' => $meta_value,
                 );
 
-                if (is_callable($callback)) {
-                    call_user_func($callback, $meta_query, $query);
-                } else {
-                    $query->query_vars['meta_query'][] = $meta_query;
-                }
+                call_user_func($callback, $meta_query, $query);
             }
         }
     }
