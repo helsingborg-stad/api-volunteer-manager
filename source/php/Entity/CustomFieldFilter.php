@@ -2,6 +2,8 @@
 
 namespace VolunteerManager\Entity;
 
+use WP_Query;
+
 class CustomFieldFilter
 {
     /**
@@ -26,6 +28,15 @@ class CustomFieldFilter
         }
     }
 
+    /**
+     * Adds a custom filter dropdown for assignments
+     *
+     * This method retrieves all assignments and creates a dropdown to filter them.
+     * It renders a dropdown with the assignment titles and applies the selected
+     * filter when an assignment is chosen.
+     *
+     * @param string $dropdownTitle The title of the dropdown.
+     */
     public function addCustomAssignmentFilterDropdown(string $dropdownTitle)
     {
         $assignments = get_posts([
@@ -107,7 +118,19 @@ class CustomFieldFilter
         echo '</select>';
     }
 
-    public function applyCustomFilter($query, $fieldKey, $callback = null)
+    /**
+     * Applies a custom filter to a query based on the provided parameters
+     *
+     * This method applies a custom filter to the provided query, by appending
+     * the filter parameters to the query. If a callback function is provided, it
+     * calls the callback function with the meta query and the original query as
+     * parameters.
+     *
+     * @param WP_Query $query The query to which the custom filter should be applied.
+     * @param string $fieldKey The key of the custom field.
+     * @param callable|null $callback (Optional) A callback function to process the meta query.
+     */
+    public function applyCustomFilter(WP_Query $query, string $fieldKey, callable $callback = null)
     {
         global $pagenow;
 
@@ -128,14 +151,32 @@ class CustomFieldFilter
         }
     }
 
-    public function applyCustomMetaFilter($query, $fieldKey)
+    /**
+     * Applies a custom meta filter to the provided query
+     *
+     * This method specializes in applying a filter specifically based on
+     * meta fields by using the applyCustomFilter method.
+     *
+     * @param WP_Query $query The query to which the custom meta filter should be applied.
+     * @param string $fieldKey The key of the custom meta field.
+     */
+    public function applyCustomMetaFilter(WP_Query $query, string $fieldKey)
     {
         $this->applyCustomFilter($query, $fieldKey, function ($meta_query, $query) {
             $query->query_vars['meta_query'][] = $meta_query;
         });
     }
 
-    public function applyCustomAssignmentFilter($query, $fieldKey)
+    /**
+     * Applies a custom assignment filter to the provided query
+     *
+     * This method specializes in applying a filter specifically for assignments
+     * by utilizing the applyCustomFilter method.
+     *
+     * @param WP_Query $query The query to which the custom assignment filter should be applied.
+     * @param string $fieldKey The key of the custom field related to the assignment.
+     */
+    public function applyCustomAssignmentFilter(WP_Query $query, string $fieldKey)
     {
         $this->applyCustomFilter($query, $fieldKey, function ($meta_value, $query) {
             $employees = $this->getApplicationEmployees($meta_value['value']);
@@ -143,6 +184,15 @@ class CustomFieldFilter
         });
     }
 
+    /**
+     * Retrieves the employee ids related to a given assignment id
+     *
+     * This method queries for all the application posts related to a given assignment
+     * and extracts the ids of the employees associated with each application post.
+     *
+     * @param int $assignmentId The id of the assignment.
+     * @return int[] An array of employee ids related to the assignment.
+     */
     private function getApplicationEmployees(int $assignmentId): array
     {
         $applicationPosts = get_posts([
