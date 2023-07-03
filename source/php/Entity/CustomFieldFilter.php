@@ -54,7 +54,7 @@ class CustomFieldFilter
     }
 
     /**
-     * Renders the dropdown.
+     * Renders the dropdown
      *
      * @param string $name The name of the select element.
      * @param array $options The options for the dropdown.
@@ -72,7 +72,7 @@ class CustomFieldFilter
     }
 
     /**
-     * Renders the dropdown for the posts.
+     * Renders the dropdown for the posts
      *
      * @param string $postType The post type.
      * @param string $dropdownTitle The title of the dropdown.
