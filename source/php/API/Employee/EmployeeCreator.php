@@ -21,32 +21,12 @@ class EmployeeCreator extends ApiHandler
         $fieldSetter->updateFields($employeeId, $employeeDetails);
         $fieldSetter->updateField('registration_date', date('Y-m-d'), $employeeId);
         $fieldSetter->setPostStatus($employeeId, 'new', 'employee-registration-status');
-
-        $source = $this->getSourceFromRequest($request);
-        $fieldSetter->updateField('source', $source, $employeeId);
+        $fieldSetter->updateField('source', (new ApiHandler())->extractSourceFromRequest($request), $employeeId);
 
         return WPResponseFactory::wp_rest_response(
             'Employee created',
             ['employee_id' => $employeeId]
         );
-    }
-
-    private function getSourceFromRequest(WP_REST_Request $request): string
-    {
-        $referer = $_SERVER['HTTP_REFERER'] ?? '';
-        $source = __('Web form submission', AVM_TEXT_DOMAIN);
-
-        if ($referer) {
-            // Check if the referer matches the WordPress site URL
-            if (strpos($referer, get_site_url()) === 0) {
-                $source = __('WP admin submission', AVM_TEXT_DOMAIN);
-            } else {
-                $parsedSource = parse_url($referer, PHP_URL_HOST);
-                $source = $parsedSource ? $parsedSource : $referer;
-            }
-        }
-
-        return $source;
     }
 
     private function extractEmployeeDetailsFromRequest(WP_REST_Request $request): array

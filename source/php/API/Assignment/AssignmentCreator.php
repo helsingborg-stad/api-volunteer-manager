@@ -31,7 +31,7 @@ class AssignmentCreator extends ApiHandler
         $fieldSetter->setPostByParam($request, $assignmentId, 'assignment_eligibility');
         $internal_assignment = $request->get_param('internal_assignment') === 'true';
         $fieldSetter->updateField('internal_assignment', $internal_assignment, $assignmentId);
-        $fieldSetter->updateField('source', $request->get_header('host'), $assignmentId);
+        $fieldSetter->updateField('source', (new ApiHandler())->extractSourceFromRequest($request), $assignmentId);
         $signup_methods = $this->getAssignmentSignupValues($request, $assignmentId);
         $fieldSetter->updateField('signup_methods', $signup_methods, $assignmentId);
 

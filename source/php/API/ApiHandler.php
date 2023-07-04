@@ -2,9 +2,11 @@
 
 namespace VolunteerManager\API;
 
+use WP_REST_Request;
+
 class ApiHandler
 {
-    public function extractParamsFromRequest(\WP_REST_Request $request, array $requestParams): array
+    public function extractParamsFromRequest(WP_REST_Request $request, array $requestParams): array
     {
         $params = [];
         foreach ($requestParams as $param) {
@@ -12,5 +14,23 @@ class ApiHandler
         }
 
         return $params;
+    }
+
+    public function extractSourceFromRequest(WP_REST_Request $request): string
+    {
+        $referer = $_SERVER['HTTP_REFERER'] ?? '';
+        $source = __('External form submission', AVM_TEXT_DOMAIN);
+
+        if ($referer) {
+            // Check if the referer matches the WordPress site URL
+            if (strpos($referer, get_site_url()) === 0) {
+                $source = __('Internally created user', AVM_TEXT_DOMAIN);
+            } else {
+                $parsedSource = parse_url($referer, PHP_URL_HOST);
+                $source = $parsedSource ? $parsedSource : $referer;
+            }
+        }
+
+        return $source;
     }
 }
