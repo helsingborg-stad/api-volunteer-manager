@@ -54,7 +54,9 @@ class Employee extends PostType
 
     public function addExportUsersButton($which)
     {
-        if ($which === 'top') {
+        global $typenow;
+
+        if ($typenow === 'employee' && $which === 'top') {
             (new EmployeeExport())->createExportButton(EmployeeExportFormat::CSV);
         }
     }
