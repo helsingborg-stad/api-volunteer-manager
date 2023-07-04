@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Volunteer Manager\n"
-"POT-Creation-Date: 2023-06-20 11:37+0200\n"
-"PO-Revision-Date: 2023-06-20 11:37+0200\n"
+"POT-Creation-Date: 2023-06-27 16:40+0200\n"
+"PO-Revision-Date: 2023-06-27 16:40+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: sv_SE\n"
@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.8.12\n"
+"X-Generator: Poedit 3.2.2\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-WPHeader: api-volunteer-manager.php\n"
 "X-Poedit-SourceCharset: UTF-8\n"
@@ -60,7 +60,7 @@ msgstr "Uppdrag"
 #: source/php/PostType/Application/Application.php:70
 #: source/php/PostType/Assignment/Assignment.php:44
 #: source/php/PostType/Assignment/Assignment.php:115
-#: source/php/PostType/Employee/Employee.php:109
+#: source/php/PostType/Employee/Employee.php:122
 msgid "Status"
 msgstr "Status"
 
@@ -153,7 +153,7 @@ msgid "new"
 msgstr "ny"
 
 #: source/php/AcfFields/php/employee.php:150
-#: source/php/PostType/Employee/Employee.php:40
+#: source/php/PostType/Employee/Employee.php:47
 msgid "Crime record extracts"
 msgstr "Utdrag ur brottsregistret"
 
@@ -445,7 +445,7 @@ msgstr "Nytt %s namn"
 
 #: source/php/PostType/Application/Application.php:84
 #: source/php/PostType/Assignment/Assignment.php:69
-#: source/php/PostType/Employee/Employee.php:92
+#: source/php/PostType/Employee/Employee.php:105
 msgid "Submitted from"
 msgstr "Inskickat från"
 
@@ -504,7 +504,7 @@ msgid "Visibility"
 msgstr "Synlighet"
 
 #: source/php/PostType/Assignment/Assignment.php:114
-#: source/php/PostType/Employee/Employee.php:108
+#: source/php/PostType/Employee/Employee.php:121
 msgid "Statuses"
 msgstr "Statusar"
 
@@ -534,7 +534,7 @@ msgid "assignment"
 msgstr "uppdrag"
 
 #: source/php/PostType/Assignment/AssignmentConfiguration.php:16
-#: source/php/PostType/Employee/Employee.php:178
+#: source/php/PostType/Employee/Employee.php:191
 msgid "Assignments"
 msgstr "Uppdrag"
 
@@ -574,15 +574,15 @@ msgstr "Nivå 2"
 msgid "Criminal record is required."
 msgstr "Belastningsregister krävs."
 
-#: source/php/PostType/Employee/Employee.php:39
+#: source/php/PostType/Employee/Employee.php:46
 msgid "Language proficiency"
 msgstr "Språkkunskaper"
 
-#: source/php/PostType/Employee/Employee.php:61
+#: source/php/PostType/Employee/Employee.php:75
 msgid "Clear filters"
 msgstr "Återställ filter"
 
-#: source/php/PostType/Employee/Employee.php:78
+#: source/php/PostType/Employee/Employee.php:91
 msgid "Registration status"
 msgstr "Status för registrering"
 
@@ -597,6 +597,10 @@ msgstr "medarbetare"
 #: source/php/PostType/Employee/EmployeeConfiguration.php:35
 msgid "New"
 msgstr "Ny"
+
+#: source/php/PostType/Employee/EmployeeExport.php:44
+msgid "Export as CSV"
+msgstr "Exportera som CSV"
 
 #: vendor/helsingborg-stad/acf-export-manager/src/AcfExportManager.php:364
 msgid "Export with AcfExportManager"
@@ -626,6 +630,12 @@ msgstr ""
 #. Author URI of the plugin/theme
 msgid "https://github.com/helsingborg-stad"
 msgstr ""
+
+#~ msgid "National identity number"
+#~ msgstr "Personnummer"
+
+#~ msgid "Source"
+#~ msgstr "Källa"
 
 #~ msgid "Signup methods"
 #~ msgstr "Registreringsmetoder"
@@ -733,8 +743,8 @@ msgstr ""
 
 #~ msgid ""
 #~ "Hello,<br><br>A new application for the volunteer assignment \"%s\" has "
-#~ "been created in our system and is ready to be processed.<br>"
-#~ "%s<br><br>Sincerely,<br><br>Engagemang Helsingborg"
+#~ "been created in our system and is ready to be processed."
+#~ "<br>%s<br><br>Sincerely,<br><br>Engagemang Helsingborg"
 #~ msgstr ""
 #~ "Hej,<br><br>En ny ansökan till volontäruppdraget ”%s” har skapats i vårt "
 #~ "system och är redo att behandlas.<br>%s<br><br>Med vänliga hälsningar,"

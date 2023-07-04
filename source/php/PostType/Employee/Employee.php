@@ -22,9 +22,16 @@ class Employee extends PostType
         add_action('add_meta_boxes', array($this, 'registerApplicationsMetaBox'), 10, 2);
         add_action('before_delete_post', array($this, 'deleteRelatedApplications'));
         add_action('restrict_manage_posts', [$this, 'addMetaFilterDropdown']);
+        add_action('manage_posts_extra_tablenav', [$this, 'addExportUsersButton'], 10, 1);
+        add_action('admin_init', [$this, 'triggerCSVDownload']);
 
         add_filter('acf/load_field/name=notes_date_updated', array($this, 'acfSetNotesDefaultDate'));
         add_filter('pre_get_posts', [$this, 'applyMetaFilters']);
+    }
+
+    public function triggerCSVDownload()
+    {
+        (new EmployeeExport())->handleEmployeeExport();
     }
 
     /**
@@ -39,6 +46,13 @@ class Employee extends PostType
             $metaFilter->addCustomMetaFilterDropdown('swedish_language_proficiency', __('Language proficiency', AVM_TEXT_DOMAIN));
             $metaFilter->addCustomMetaFilterDropdown('crime_record_extracted', __('Crime record extracts', AVM_TEXT_DOMAIN));
             $this->renderClearFiltersButton();
+        }
+    }
+
+    public function addExportUsersButton($which)
+    {
+        if ($which === 'top') {
+            (new EmployeeExport())->createExportButton(EmployeeExportFormat::CSV);
         }
     }
 
@@ -60,7 +74,6 @@ class Employee extends PostType
         $clear_filters_url = remove_query_arg(array('swedish_language_proficiency', 'crime_record_extracted', 'employee-registration-status', 'm'));
         echo '<a href="' . esc_url($clear_filters_url) . '" class="button">' . __('Clear filters', AVM_TEXT_DOMAIN) . '</a>';
     }
-
 
     public function initTaxonomiesAndTerms()
     {
