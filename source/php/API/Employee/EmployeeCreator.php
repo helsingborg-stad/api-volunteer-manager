@@ -34,12 +34,12 @@ class EmployeeCreator extends ApiHandler
     private function getSourceFromRequest(WP_REST_Request $request): string
     {
         $referer = $_SERVER['HTTP_REFERER'] ?? '';
-        $source = 'external'; // default to external
+        $source = __('Web form submission', AVM_TEXT_DOMAIN);
 
         if ($referer) {
             // Check if the referer matches the WordPress site URL
             if (strpos($referer, get_site_url()) === 0) {
-                $source = 'internal';
+                $source = __('WP admin submission', AVM_TEXT_DOMAIN);
             } else {
                 $parsedSource = parse_url($referer, PHP_URL_HOST);
                 $source = $parsedSource ? $parsedSource : $referer;
