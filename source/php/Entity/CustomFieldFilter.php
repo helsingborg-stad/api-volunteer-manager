@@ -180,6 +180,7 @@ class CustomFieldFilter
     {
         $this->applyCustomFilter($query, $fieldKey, function ($meta_value, $query) {
             $employees = $this->getApplicationEmployees($meta_value['value']);
+            $employees = !empty($employees) ? $employees : [-1];
             $query->query_vars['post__in'] = $employees;
         });
     }
