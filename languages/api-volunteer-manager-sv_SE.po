@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Volunteer Manager\n"
-"POT-Creation-Date: 2023-06-27 16:40+0200\n"
-"PO-Revision-Date: 2023-06-27 16:40+0200\n"
+"POT-Creation-Date: 2023-07-04 16:01+0200\n"
+"PO-Revision-Date: 2023-07-04 16:01+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: sv_SE\n"
@@ -19,6 +19,14 @@ msgstr ""
 "_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.js\n"
+
+#: source/php/API/ApiHandler.php:22
+msgid "External form submission"
+msgstr "Externt formulär"
+
+#: source/php/API/ApiHandler.php:27
+msgid "Internally created user"
+msgstr "Internt skapad användare"
 
 #: source/php/API/Application/RequestFormatDecorators/ValidateParams.php:31
 msgid "Assignment with the given ID does not exist in the database."
@@ -51,6 +59,7 @@ msgstr "Medarbetare"
 
 #: source/php/AcfFields/php/application.php:39
 #: source/php/AcfFields/php/assignment.php:6
+#: source/php/PostType/Employee/Employee.php:49
 msgid "Assignment"
 msgstr "Uppdrag"
 
@@ -60,7 +69,7 @@ msgstr "Uppdrag"
 #: source/php/PostType/Application/Application.php:70
 #: source/php/PostType/Assignment/Assignment.php:44
 #: source/php/PostType/Assignment/Assignment.php:115
-#: source/php/PostType/Employee/Employee.php:122
+#: source/php/PostType/Employee/Employee.php:128
 msgid "Status"
 msgstr "Status"
 
@@ -370,17 +379,17 @@ msgstr "Avpublicera det här inlägget"
 msgid "Unpublish"
 msgstr "Avpublicera"
 
-#: source/php/Entity/Filter.php:26
-msgid "Show All"
-msgstr "Visa alla"
-
-#: source/php/Entity/MetaFilter.php:40
+#: source/php/Entity/CustomFieldFilter.php:116
 msgid "Yes"
 msgstr "Ja"
 
-#: source/php/Entity/MetaFilter.php:41
+#: source/php/Entity/CustomFieldFilter.php:117
 msgid "No"
 msgstr "Nej"
+
+#: source/php/Entity/Filter.php:26
+msgid "Show All"
+msgstr "Visa alla"
 
 #: source/php/Entity/PostType.php:49 source/php/Entity/PostType.php:50
 #, php-format
@@ -445,7 +454,7 @@ msgstr "Nytt %s namn"
 
 #: source/php/PostType/Application/Application.php:84
 #: source/php/PostType/Assignment/Assignment.php:69
-#: source/php/PostType/Employee/Employee.php:105
+#: source/php/PostType/Employee/Employee.php:111
 msgid "Submitted from"
 msgstr "Inskickat från"
 
@@ -504,7 +513,7 @@ msgid "Visibility"
 msgstr "Synlighet"
 
 #: source/php/PostType/Assignment/Assignment.php:114
-#: source/php/PostType/Employee/Employee.php:121
+#: source/php/PostType/Employee/Employee.php:127
 msgid "Statuses"
 msgstr "Statusar"
 
@@ -534,7 +543,7 @@ msgid "assignment"
 msgstr "uppdrag"
 
 #: source/php/PostType/Assignment/AssignmentConfiguration.php:16
-#: source/php/PostType/Employee/Employee.php:191
+#: source/php/PostType/Employee/Employee.php:197
 msgid "Assignments"
 msgstr "Uppdrag"
 
@@ -578,11 +587,11 @@ msgstr "Belastningsregister krävs."
 msgid "Language proficiency"
 msgstr "Språkkunskaper"
 
-#: source/php/PostType/Employee/Employee.php:75
+#: source/php/PostType/Employee/Employee.php:81
 msgid "Clear filters"
 msgstr "Återställ filter"
 
-#: source/php/PostType/Employee/Employee.php:91
+#: source/php/PostType/Employee/Employee.php:97
 msgid "Registration status"
 msgstr "Status för registrering"
 
@@ -630,6 +639,9 @@ msgstr ""
 #. Author URI of the plugin/theme
 msgid "https://github.com/helsingborg-stad"
 msgstr ""
+
+#~ msgid "Internal submission"
+#~ msgstr "Internt skapad användare"
 
 #~ msgid "National identity number"
 #~ msgstr "Personnummer"

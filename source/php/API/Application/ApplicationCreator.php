@@ -21,7 +21,7 @@ class ApplicationCreator extends ApiHandler
         $employee = EmployeeHelper::getEmployeeByIdentityNumber($applicationDetails['national_identity_number']);
         $fieldSetter->updateField('application_employee', $employee->ID ?? null, $applicationId);
         $fieldSetter->updateField('application_assignment', (int)$applicationDetails['assignment_id'], $applicationId);
-        $fieldSetter->updateField('source', $request->get_header('host'), $applicationId);
+        $fieldSetter->updateField('source', (new ApiHandler())->extractSourceFromRequest($request), $applicationId);
         $fieldSetter->setPostStatus($applicationId, 'pending', 'application-status');
 
         do_action('acf/save_post', $applicationId);
