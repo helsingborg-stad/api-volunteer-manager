@@ -112,6 +112,27 @@
             ]
         },
         {
+            "key": "field_64a2749201991",
+            "label": "About",
+            "name": "employer_about",
+            "aria-label": "",
+            "type": "textarea",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "acfe_textarea_code": 0,
+            "maxlength": "",
+            "rows": 4,
+            "placeholder": "",
+            "new_lines": ""
+        },
+        {
             "key": "field_639af303f57b8",
             "label": "Website",
             "name": "employer_website",
@@ -153,4 +174,4 @@
     "acfe_meta": "",
     "acfe_note": ""
 }]
-
+
