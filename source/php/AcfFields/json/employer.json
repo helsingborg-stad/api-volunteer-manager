@@ -113,7 +113,7 @@
         },
         {
             "key": "field_64a2749201991",
-            "label": "About",
+            "label": "Description",
             "name": "employer_about",
             "aria-label": "",
             "type": "textarea",

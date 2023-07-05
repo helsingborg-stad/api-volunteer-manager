@@ -116,7 +116,7 @@
         ),
         2 => array(
             'key' => 'field_64a2749201991',
-            'label' => __('About', 'api-volunteer-manager'),
+            'label' => __('Description', 'api-volunteer-manager'),
             'name' => 'employer_about',
             'aria-label' => '',
             'type' => 'textarea',
