@@ -1,7 +1,9 @@
 <?php 
 
-if (function_exists('acf_add_local_field_group')) {
-    acf_add_local_field_group(array(
+
+if (function_exists('acf_add_local_field_group')) {
+
+    acf_add_local_field_group(array(
     'key' => 'group_639308fb101ce',
     'title' => __('Employer', 'api-volunteer-manager'),
     'fields' => array(
@@ -55,7 +57,7 @@
                     'aria-label' => '',
                     'type' => 'text',
                     'instructions' => '',
-                    'required' => 1,
+                    'required' => 0,
                     'conditional_logic' => 0,
                     'wrapper' => array(
                         'width' => '',
@@ -156,4 +158,5 @@
     'acfe_meta' => '',
     'acfe_note' => '',
 ));
-}
+
+}
