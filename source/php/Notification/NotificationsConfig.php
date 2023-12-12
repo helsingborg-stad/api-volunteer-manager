@@ -80,7 +80,7 @@ class NotificationsConfig
                 'newValue' => 'approved',
                 'message' => [
                     'subject' => 'Din ansökan har godkänts',
-                    'content' => 'Hej %s,<br><br>Så kul att du vill vara volontär! Din ansökan som volontär i Helsingborg har blivit godkänd. Välkommen till vårt team av engagerade människor som vill göra skillnad i samhället.<br><br>Att vara volontär ger dig möjlighet att berika ditt eget liv samtidigt som du hjälper och påverkar andra positivt. Genom ditt engagemang blir du en viktig förebild och en viktigt tillgång för dem vi stöder.<br><br>Tillsammans kan vi skapa verklig förändring och göra skillnad i människors liv.<br><br>Med vänliga hälsningar,<br>Engagemang Helsingborg',
+                    'content' => 'Hej %s,<br><br>Så kul att du vill vara volontär! Din ansökan som volontär i Helsingborg har blivit godkänd. Välkommen till vårt team av engagerade människor som vill göra skillnad i samhället.<br><br>Att vara volontär ger dig möjlighet att berika ditt liv samtidigt som du hjälper och påverkar andra positivt. Genom ditt engagemang blir du en viktig förebild och en viktig tillgång för dem vi stödjer.<br><br>Tillsammans kan vi skapa verklig förändring och göra skillnad i människors liv.<br>Nu kan du gå in och anmäla dig till ett uppdrag som passar dig.<br>Du hittar alla uppdrag på denna sida: <a href="https://helsingborg.se/volontaruppdrag">Volontäruppdrag | Helsingborg.se</a><br><br>Med vänliga hälsningar,<br>Engagemang Helsingborg',
                 ],
                 'rule' => [
                     'key' => 'source',
@@ -140,7 +140,7 @@ class NotificationsConfig
                 'newValue' => 'pending',
                 'message' => [
                     'subject' => 'Din ansökan har tagits emot',
-                    'content' => 'Hej %s,<br><br>Tack för din ansökan till uppdraget “%s”. Inom kort kommer du få besked om din ansökan blivit godkänd.<br><br>Med vänliga hälsningar,<br><br>Engagemang Helsingborg',
+                    'content' => 'Hej %s,<br><br>Tack för din anmälan till uppdraget “%s”. Inom kort kommer du få besked om din anmälan blivit godkänd.<br><br>Med vänliga hälsningar,<br><br>Engagemang Helsingborg',
                 ],
                 'rule' => [
                     'key' => 'source',
