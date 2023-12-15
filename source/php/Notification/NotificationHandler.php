@@ -113,7 +113,7 @@ class NotificationHandler implements NotificationHandlerInterface
             case 'EQUAL':
                 return $metaValue == $rule['value'];
             case 'NOT_EQUAL':
-                return $metaValue != $rule['value'];
+                return $metaValue !== $rule['value'];
             default:
                 return false;
         }
