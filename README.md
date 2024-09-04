@@ -81,6 +81,18 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 
 Instructions for deploys.
 
+## Development environment
+Devcontainer can be used for development.
+
+1. To start the development environment, open the project in Visual Studio Code and then select "Reopen in Container" from the quick actions menu.
+
+1. When the container is started, run the following commands to install the necessary dependencies: `php build.php`.
+
+1. Then run `composer install`.
+
+1. You should then be able to access the project in your browser. You will find the exposed port in the ports section Visual Studio Code.
+
+1. When accessing the project in the browser, you will need to go through the WordPress installation process. When that is done you should activate the plugin from the WordPress admin panel.
 
 ## Constants
 
