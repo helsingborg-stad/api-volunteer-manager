@@ -2,6 +2,7 @@
 
 namespace VolunteerManager\PostType\Application;
 
+use VolunteerManager\Entity\Filter;
 use VolunteerManager\Entity\TermInterface;
 use VolunteerManager\Entity\PostType;
 use VolunteerManager\Entity\Taxonomy as Taxonomy;
@@ -47,7 +48,15 @@ class Application extends PostType
         );
 
         $this->applicationTaxonomy->registerTaxonomy();
+
+        //Add filter
+        new Filter(
+            'application-status',
+            'application'
+        );
     }
+
+    
 
     /**
      * Insert status terms
