@@ -72,6 +72,15 @@ class Assignment extends PostType
                 echo get_post_meta($postId, 'source', true);
             }
         );
+
+        $this->addTableColumn(
+            'eligibility',
+            __('Eligibility', AVM_TEXT_DOMAIN),
+            false,
+            function ($column, $postId) {
+                echo (get_the_terms($postId, 'assignment-eligibility'))[0]->name ?? '';
+            }
+        );
     }
 
     /**
