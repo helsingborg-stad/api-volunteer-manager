@@ -74,7 +74,7 @@ class Assignment extends PostType
         );
 
         $this->addTableColumn(
-            'Eligibility',
+            'eligibility',
             __('Eligibility', AVM_TEXT_DOMAIN),
             false,
             function ($column, $postId) {

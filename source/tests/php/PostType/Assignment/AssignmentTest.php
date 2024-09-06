@@ -73,4 +73,9 @@ class AssignmentTest extends PluginTestCase
         Functions\expect('add_meta_box')->never()->withAnyArgs();
         $this->assignment->registerSubmitterMetaBox('assignment', $this->post);
     }
+
+    public function testColumnForEligibilityIsAdded() {
+        $this->assignment->addPostTypeTableColumn();
+        $this->assertArrayHasKey('eligibility', $this->assignment->tableColumns);
+    }
 }
