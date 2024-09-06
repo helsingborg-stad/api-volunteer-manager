@@ -1,107 +1,100 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: Volunteer Manager\n"
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: \n"
-"Language-Team: \n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2023-07-04 16:01+0200\n"
-"PO-Revision-Date: 2023-07-04 16:01+0200\n"
-"Language: sv_SE\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.2.2\n"
-"X-Poedit-Basepath: ..\n"
-"X-Poedit-WPHeader: api-volunteer-manager.php\n"
-"X-Poedit-SourceCharset: UTF-8\n"
-"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
-"X-Poedit-SearchPath-0: .\n"
-"X-Poedit-SearchPathExcluded-0: *.js\n"
+"POT-Creation-Date: 2024-09-06T09:18:02+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.11.0\n"
+"X-Domain: api-volunteer-manager\n"
 
 #: php/AcfFields/php/application.php:8
 msgid "Application"
-msgstr "Ansökan"
+msgstr ""
 
 #: php/AcfFields/php/application.php:12
 #: php/AcfFields/php/employee.php:8
 msgid "Employee"
-msgstr "Medarbetare"
+msgstr ""
 
 #: php/AcfFields/php/application.php:41
 #: php/AcfFields/php/assignment.php:8
 msgid "Assignment"
-msgstr "Uppdrag"
+msgstr ""
 
 #: php/AcfFields/php/application.php:70
 #: php/AcfFields/php/assignment-status.php:12
 #: php/PostType/Assignment/Assignment.php:124
 msgid "Status"
-msgstr "Status"
+msgstr ""
 
 #: php/AcfFields/php/assignment-status.php:8
 msgid "Taxonomies"
-msgstr "Taxonomier"
+msgstr ""
 
 #: php/AcfFields/php/assignment-status.php:38
 #: php/PostType/Assignment/Assignment.php:185
 #: php/PostType/Assignment/Assignment.php:186
 msgid "Eligibility"
-msgstr "Behörighet"
+msgstr ""
 
 #: php/AcfFields/php/assignment-status.php:64
 #: php/PostType/Assignment/Assignment.php:155
 msgid "Category"
-msgstr "Kategori"
+msgstr ""
 
 #: php/AcfFields/php/assignment.php:12
 #: php/AcfFields/php/employer.php:121
 msgid "Description"
-msgstr "Beskrivning"
+msgstr ""
 
 #: php/AcfFields/php/assignment.php:16
 msgid "Describe the assignment."
-msgstr "Beskriv uppdraget."
+msgstr ""
 
 #: php/AcfFields/php/assignment.php:32
 msgid "Qualification"
-msgstr "Kvalifikation"
+msgstr ""
 
 #: php/AcfFields/php/assignment.php:36
 msgid "What is required of the volunteer (e.g., education, access to a car, language)."
-msgstr "Vad krävs av volontären (t.ex. utbildning, tillgång till bil, språk)."
+msgstr ""
 
 #: php/AcfFields/php/assignment.php:52
 msgid "Schedule"
-msgstr "Schema"
+msgstr ""
 
 #: php/AcfFields/php/assignment.php:56
 msgid "Schedule for when and how often the assignment occurs."
-msgstr "Schemalägg när och hur ofta uppdraget inträffar."
+msgstr ""
 
 #: php/AcfFields/php/assignment.php:72
 msgid "Benefits"
-msgstr "Förmåner"
+msgstr ""
 
 #: php/AcfFields/php/assignment.php:76
 msgid "E.g., bus card, lunch."
-msgstr "T.ex. busskort, lunch."
+msgstr ""
 
 #: php/AcfFields/php/assignment.php:92
 msgid "Number of spots"
-msgstr "Antal platser"
+msgstr ""
 
 #: php/AcfFields/php/employee.php:12
 msgid "First name"
-msgstr "Förnamn"
+msgstr ""
 
 #: php/AcfFields/php/employee.php:32
 msgid "Surname"
-msgstr "Efternamn"
+msgstr ""
 
 #: php/AcfFields/php/employee.php:52
 msgid "Swedish national identity number"
-msgstr "Svenskt personnummer"
+msgstr ""
 
 #: php/AcfFields/php/employee.php:72
 #: php/AcfFields/php/employer.php:76
@@ -109,76 +102,76 @@ msgstr "Svenskt personnummer"
 #: php/AcfFields/php/options.php:97
 #: php/AcfFields/php/signup.php:32
 msgid "Email"
-msgstr "E-postadress"
+msgstr ""
 
 #: php/AcfFields/php/employee.php:91
 msgid "Phone number"
-msgstr "Telefonnummer"
+msgstr ""
 
 #: php/AcfFields/php/employee.php:111
 msgid "Employment status"
-msgstr "Anställningsstatus"
+msgstr ""
 
 #: php/AcfFields/php/employee.php:132
 msgid "new"
-msgstr "ny"
+msgstr ""
 
 #: php/AcfFields/php/employee.php:152
 msgid "Crime record extracts"
-msgstr "Utdrag ur brottsregistret"
+msgstr ""
 
 #: php/AcfFields/php/employee.php:164
 msgid "Indicates wheter requests for criminal record extracts have been made."
-msgstr "Indikerar att begäran om utdrag ur belastningsregistret gjorts."
+msgstr ""
 
 #: php/AcfFields/php/employee.php:172
 msgid "Crime record extracted at date"
-msgstr "Brottsregister hämtats vid datum"
+msgstr ""
 
 #: php/AcfFields/php/employee.php:190
 msgid "Registration date"
-msgstr "Registreringsdatum"
+msgstr ""
 
 #: php/AcfFields/php/employee.php:208
 msgid "Swedish Language Proficiency"
-msgstr "Språkkunskaper i svenska"
+msgstr ""
 
 #: php/AcfFields/php/employee.php:221
 msgid "Fluent"
-msgstr "Flytande"
+msgstr ""
 
 #: php/AcfFields/php/employee.php:222
 msgid "Basic"
-msgstr "Grundläggande"
+msgstr ""
 
 #: php/AcfFields/php/employee.php:223
 msgid "Lacks language proficiency"
-msgstr "Saknas"
+msgstr ""
 
 #: php/AcfFields/php/employee.php:235
 msgid "Newsletter"
-msgstr "Nyhetsbrev"
+msgstr ""
 
 #: php/AcfFields/php/employee.php:239
 msgid "Indicates if employee subscribes to newsletter."
-msgstr "Anger om medarbetaren prenumererar på nyhetsbrev."
+msgstr ""
 
 #: php/AcfFields/php/employee.php:255
 msgid "Notes about employee"
-msgstr "Anteckningar om anställd"
+msgstr ""
 
 #: php/AcfFields/php/employee.php:259
 msgid "This field can be used for taking notes about the employee."
-msgstr "Detta fält kan användas för att skriva anteckningar om den anställde."
+msgstr ""
 
 #: php/AcfFields/php/employee.php:273
 #: php/AcfFields/php/options.php:92
 msgid "Add Row"
-msgstr "Lägg till rad"
+msgstr ""
 
 #: php/AcfFields/php/employee.php:278
 msgid "Notes"
-msgstr "Anteckningar"
+msgstr ""
 
 #: php/AcfFields/php/employee.php:300
 msgid "Date updated"
@@ -194,101 +187,101 @@ msgstr ""
 
 #: php/AcfFields/php/employer.php:8
 msgid "Employer"
-msgstr "Arbetsgivare"
+msgstr ""
 
 #: php/AcfFields/php/employer.php:12
 #: php/AcfFields/php/employer.php:55
 #: php/AcfFields/php/options.php:30
 msgid "Name"
-msgstr "Namn"
+msgstr ""
 
 #: php/AcfFields/php/employer.php:16
 msgid "Company/organisation."
-msgstr "Företag/organisation."
+msgstr ""
 
 #: php/AcfFields/php/employer.php:32
 msgid "Contacts"
-msgstr "Kontaktpersoner"
+msgstr ""
 
 #: php/AcfFields/php/employer.php:50
 msgid "Add Contact"
-msgstr "Lägg till kontakt"
+msgstr ""
 
 #: php/AcfFields/php/employer.php:96
 #: php/AcfFields/php/signup.php:51
 msgid "Phone"
-msgstr "Telefonnummer"
+msgstr ""
 
 #: php/AcfFields/php/employer.php:142
 msgid "Website"
-msgstr "Webbplats"
+msgstr ""
 
 #: php/AcfFields/php/location.php:8
 msgid "Location"
-msgstr "Plats"
+msgstr ""
 
 #: php/AcfFields/php/location.php:12
 msgid "Street address"
-msgstr "Gatuadress"
+msgstr ""
 
 #: php/AcfFields/php/location.php:32
 msgid "Postal code"
-msgstr "Postnummer"
+msgstr ""
 
 #: php/AcfFields/php/location.php:54
 msgid "City"
-msgstr "Stad"
+msgstr ""
 
 #: php/AcfFields/php/options.php:8
 #: php/Admin.php:43
 #: php/Admin.php:44
 msgid "Options"
-msgstr "Inställningar"
+msgstr ""
 
 #: php/AcfFields/php/options.php:12
 msgid "Sender"
-msgstr "Avsändare"
+msgstr ""
 
 #: php/AcfFields/php/options.php:16
 msgid "Shown as sender on outgoing email."
-msgstr "Visas som avsändare för utgående e-post."
+msgstr ""
 
 #: php/AcfFields/php/options.php:74
 msgid "Receivers"
-msgstr "Mottagare"
+msgstr ""
 
 #: php/AcfFields/php/options.php:78
 msgid "List of notification receivers."
-msgstr "Lista med mottagare för notiser."
+msgstr ""
 
 #: php/AcfFields/php/signup.php:8
 msgid "Signup"
-msgstr "Registrering"
+msgstr ""
 
 #: php/AcfFields/php/signup.php:12
 msgid "Internal assignment"
-msgstr "Internt uppdrag"
+msgstr ""
 
 #: php/AcfFields/php/signup.php:16
 msgid "Toggle to indicate whether the assignment is managed internally by the city or externally by a third party."
-msgstr "Växla för att ange om uppdraget hanteras internt av staden eller externt av en tredje part."
+msgstr ""
 
 #: php/AcfFields/php/signup.php:26
 msgid "Internal"
-msgstr "Intern"
+msgstr ""
 
 #: php/AcfFields/php/signup.php:27
 msgid "External"
-msgstr "Extern"
+msgstr ""
 
 #: php/AcfFields/php/signup.php:71
 msgid "Link"
-msgstr "Länk"
+msgstr ""
 
 #: php/AcfFields/php/taxonomy.php:8
 #: php/AcfFields/php/taxonomy.php:12
 msgid "Taxonomy Color"
-msgstr "Taxonomi-färg"
+msgstr ""
 
 #: php/AcfFields/php/taxonomy.php:24
 msgid "#eee"
@@ -296,100 +289,101 @@ msgstr ""
 
 #: php/Admin.php:33
 msgid "API-url"
-msgstr "API-url"
+msgstr ""
 
 #: php/Components/EditPostStatusButtons/DraftEditPostStatusButton.php:25
 msgid "Publish this post"
-msgstr "Publicera det här inlägget"
+msgstr ""
 
 #: php/Components/EditPostStatusButtons/DraftEditPostStatusButton.php:26
 msgid "Publish"
-msgstr "Publicera"
+msgstr ""
 
 #: php/Components/EditPostStatusButtons/PendingEditPostStatusButton.php:21
 msgid "This post must be reviewed before it can be published."
-msgstr "Det här inlägget måste granskas innan det kan publiceras."
+msgstr ""
 
 #: php/Components/EditPostStatusButtons/PendingEditPostStatusButton.php:22
 msgid "Review required"
-msgstr "Granskning krävs"
+msgstr ""
 
 #: php/Components/EditPostStatusButtons/PublishEditPostStatusButton.php:25
 msgid "Unpublish this post"
-msgstr "Avpublicera det här inlägget"
+msgstr ""
 
 #: php/Components/EditPostStatusButtons/PublishEditPostStatusButton.php:26
 msgid "Unpublish"
-msgstr "Avpublicera"
+msgstr ""
 
 #: php/Entity/Filter.php:26
 msgid "Show All"
-msgstr "Visa alla"
-
-#: php/Entity/Taxonomy.php:41
-#, php-format
-msgid "Edit %s"
-msgstr "Editera %s"
+msgstr ""
 
 #: php/Entity/Taxonomy.php:37
-#, php-format
 msgid "Search %s"
-msgstr "Sök %s"
+msgstr ""
+
+#: php/Entity/Taxonomy.php:38
+msgid "All %s"
+msgstr ""
 
 #: php/Entity/Taxonomy.php:39
 #: php/Entity/Taxonomy.php:40
-#, php-format
 msgid "Parent %s:"
-msgstr "Förälder %s:"
+msgstr ""
 
-#: php/Entity/Taxonomy.php:38
-#, php-format
-msgid "All %s"
-msgstr "Alla %s"
+#: php/Entity/Taxonomy.php:41
+msgid "Edit %s"
+msgstr ""
 
 #: php/Entity/Taxonomy.php:42
-#, php-format
 msgid "Update %s"
-msgstr "Uppdatera %s"
+msgstr ""
 
 #: php/Entity/Taxonomy.php:43
-#, php-format
 msgid "Add New %s"
-msgstr "Lägg till ny %s"
+msgstr ""
 
 #: php/Entity/Taxonomy.php:44
-#, php-format
 msgid "New %s Name"
-msgstr "Nytt %s namn"
+msgstr ""
 
-#: php/PostType/Assignment/AssignmentConfiguration.php:42
-msgid "Pending"
-msgstr "Väntande"
+#: php/PostType/Application/Application.php:40
+msgid "Application statuses"
+msgstr ""
+
+#: php/PostType/Application/Application.php:41
+msgid "Application status"
+msgstr ""
+
+#: php/PostType/Assignment/Assignment.php:123
+msgid "Statuses"
+msgstr ""
+
+#: php/PostType/Assignment/Assignment.php:154
+msgid "Categories"
+msgstr ""
 
 #: php/PostType/Assignment/AssignmentConfiguration.php:36
 #: php/PostType/Employee/EmployeeConfiguration.php:41
 msgid "Approved"
-msgstr "Godkänd"
+msgstr ""
+
+#: php/PostType/Assignment/AssignmentConfiguration.php:38
+msgid "Approved assignment"
+msgstr ""
+
+#: php/PostType/Assignment/AssignmentConfiguration.php:42
+msgid "Pending"
+msgstr ""
+
+#: php/PostType/Assignment/AssignmentConfiguration.php:44
+msgid "Pending assignment"
+msgstr ""
 
 #: php/PostType/Assignment/AssignmentConfiguration.php:48
 #: php/PostType/Employee/EmployeeConfiguration.php:47
 msgid "Denied"
-msgstr "Nekad"
-
-#: php/PostType/Assignment/Assignment.php:123
-msgid "Statuses"
-msgstr "Statusar"
-
-#: php/PostType/Assignment/Assignment.php:154
-msgid "Categories"
-msgstr "Kategorier"
-
-#: php/PostType/Assignment/AssignmentConfiguration.php:38
-msgid "Approved assignment"
-msgstr "Godkänt uppdrag"
-
-#: php/PostType/Assignment/AssignmentConfiguration.php:44
-msgid "Pending assignment"
 msgstr ""
 
 #: php/PostType/Assignment/AssignmentConfiguration.php:50
@@ -398,36 +392,28 @@ msgstr ""
 
 #: php/PostType/Assignment/AssignmentConfiguration.php:54
 msgid "Completed"
-msgstr "Avslutad"
+msgstr ""
 
 #: php/PostType/Assignment/AssignmentConfiguration.php:56
 msgid "Completed assignment"
-msgstr "Uppdrag avslutad"
+msgstr ""
 
 #: php/PostType/Assignment/AssignmentConfiguration.php:66
 msgid "Level 1"
-msgstr "Nivå 1"
+msgstr ""
 
 #: php/PostType/Assignment/AssignmentConfiguration.php:68
 msgid "No criminal record required."
-msgstr "Inget belastningsregister krävs."
+msgstr ""
 
 #: php/PostType/Assignment/AssignmentConfiguration.php:72
 msgid "Level 2"
-msgstr "Nivå 2"
+msgstr ""
 
 #: php/PostType/Assignment/AssignmentConfiguration.php:74
 msgid "Criminal record is required."
-msgstr "Belastningsregister krävs."
+msgstr ""
 
 #: php/PostType/Employee/EmployeeConfiguration.php:35
 msgid "New"
-msgstr "Ny"
-
-#: php/PostType/Application/Application.php:40
-msgid "Application statuses"
-msgstr "Ansökningsstatusar"
-
-#: php/PostType/Application/Application.php:41
-msgid "Application status"
-msgstr "Ansökningsstatus"
+msgstr ""

@@ -37,8 +37,8 @@ class Application extends PostType
     public function registerStatusTaxonomy(): void
     {
         $this->applicationTaxonomy = new Taxonomy(
-            'Application statuses',
-            'Application status',
+            __('Application statuses', 'api-volunteer-manager'),
+            __('Application status', 'api-volunteer-manager'),
             'application-status',
             array($this->slug),
             array(
