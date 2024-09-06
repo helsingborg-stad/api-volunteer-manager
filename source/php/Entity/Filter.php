@@ -29,7 +29,7 @@ class Filter
                 'orderby'         => 'name',
                 'selected'        => isset($_GET[$this->taxonomySlug]) ? $_GET[$this->taxonomySlug] : '',
                 'show_count'      => true,
-                'hide_empty'      => true,
+                'hide_empty'      => false,
             ));
         };
     }
