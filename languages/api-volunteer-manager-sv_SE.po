@@ -192,11 +192,11 @@ msgstr "Anteckningar"
 
 #: php/AcfFields/php/employee.php:300
 msgid "Date updated"
-msgstr ""
+msgstr "Datum uppdaterat"
 
 #: php/AcfFields/php/employee.php:304
 msgid "Used for taking track of when the note was taken."
-msgstr ""
+msgstr "Används för att hålla reda på när anteckningen togs."
 
 #: php/AcfFields/php/employee.php:315
 msgid "2023-03-23"
@@ -410,11 +410,11 @@ msgstr "Godkänt uppdrag"
 
 #: php/PostType/Assignment/AssignmentConfiguration.php:44
 msgid "Pending assignment"
-msgstr ""
+msgstr "Väntande uppdrag"
 
 #: php/PostType/Assignment/AssignmentConfiguration.php:50
 msgid "Denied assignment"
-msgstr ""
+msgstr "Uppdrag nekat"
 
 #: php/PostType/Assignment/AssignmentConfiguration.php:54
 msgid "Completed"
