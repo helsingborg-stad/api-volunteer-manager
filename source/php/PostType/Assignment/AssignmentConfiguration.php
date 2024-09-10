@@ -10,10 +10,10 @@ class AssignmentConfiguration
     {
         return [
             'slug' => 'assignment',
-            'namePlural' => __('assignments', AVM_TEXT_DOMAIN),
-            'nameSingular' => __('assignment', AVM_TEXT_DOMAIN),
+            'namePlural' => __('assignments', 'api-volunteer-manager'),
+            'nameSingular' => __('assignment', 'api-volunteer-manager'),
             'args' => [
-                'description' => __('Assignments', AVM_TEXT_DOMAIN),
+                'description' => __('Assignments', 'api-volunteer-manager'),
                 'menu_icon' => Icon::get('person'),
                 'publicly_queryable' => true,
                 'show_ui' => true,

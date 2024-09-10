@@ -21,9 +21,8 @@ if (!defined('WPINC')) {
 define('VOLUNTEER_MANAGER_PATH', plugin_dir_path(__FILE__));
 define('VOLUNTEER_MANAGER_URL', plugins_url('', __FILE__));
 define('VOLUNTEER_MANAGER_TEMPLATE_PATH', VOLUNTEER_MANAGER_PATH . 'templates/');
-const AVM_TEXT_DOMAIN = 'api-volunteer-manager';
 
-load_plugin_textdomain(AVM_TEXT_DOMAIN, false, dirname(plugin_basename(__FILE__)) . '/languages');
+load_plugin_textdomain('api-volunteer-manager', false, dirname(plugin_basename(__FILE__)) . '/languages');
 
 require_once VOLUNTEER_MANAGER_PATH . 'Public.php';
 

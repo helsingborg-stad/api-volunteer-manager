@@ -41,7 +41,7 @@ class Assignment extends PostType
     {
         $this->addTableColumn(
             'status',
-            __('Status', AVM_TEXT_DOMAIN),
+            __('Status', 'api-volunteer-manager'),
             true,
             function ($column, $postId) {
                 echo AdminUI::createTaxonomyPills(
@@ -55,7 +55,7 @@ class Assignment extends PostType
 
         $this->addTableColumn(
             'visibility',
-            __('Visibility', AVM_TEXT_DOMAIN),
+            __('Visibility', 'api-volunteer-manager'),
             false,
             function ($column, $postId) {
                 $postStatus = get_post_status($postId);
@@ -66,7 +66,7 @@ class Assignment extends PostType
 
         $this->addTableColumn(
             'submitted_from',
-            __('Submitted from', AVM_TEXT_DOMAIN),
+            __('Submitted from', 'api-volunteer-manager'),
             false,
             function ($column, $postId) {
                 echo get_post_meta($postId, 'source', true);
@@ -75,7 +75,7 @@ class Assignment extends PostType
 
         $this->addTableColumn(
             'eligibility',
-            __('Eligibility', AVM_TEXT_DOMAIN),
+            __('Eligibility', 'api-volunteer-manager'),
             false,
             function ($column, $postId) {
                 echo (get_the_terms($postId, 'assignment-eligibility'))[0]->name ?? '';
@@ -218,7 +218,7 @@ class Assignment extends PostType
         }
         add_meta_box(
             'submitter-info',
-            __('Submitted by', AVM_TEXT_DOMAIN),
+            __('Submitted by', 'api-volunteer-manager'),
             array($this, 'renderSubmitterData'),
             array('assignment'),
             'normal',
@@ -240,10 +240,10 @@ class Assignment extends PostType
      */
     public function renderSubmitterData(object $post, array $args): void
     {
-        $content = sprintf('<p>%s</p>', __('Contact details of the person who submitted the assignment.', AVM_TEXT_DOMAIN));
-        $content .= sprintf('<p><strong>%s:</strong> %s %s</p>', __('Name', AVM_TEXT_DOMAIN), $args['args']['submittedByFirstName'], $args['args']['submittedBySurname']);
-        $content .= sprintf('<p><strong>%1$s:</strong> <a href="mailto:%2$s">%2$s</a></p>', __('Email', AVM_TEXT_DOMAIN), $args['args']['submittedByEmail']);
-        $content .= sprintf('<p><strong>%s:</strong> %s</p>', __('Phone', AVM_TEXT_DOMAIN), $args['args']['submittedByPhone']);
+        $content = sprintf('<p>%s</p>', __('Contact details of the person who submitted the assignment.', 'api-volunteer-manager'));
+        $content .= sprintf('<p><strong>%s:</strong> %s %s</p>', __('Name', 'api-volunteer-manager'), $args['args']['submittedByFirstName'], $args['args']['submittedBySurname']);
+        $content .= sprintf('<p><strong>%1$s:</strong> <a href="mailto:%2$s">%2$s</a></p>', __('Email', 'api-volunteer-manager'), $args['args']['submittedByEmail']);
+        $content .= sprintf('<p><strong>%s:</strong> %s</p>', __('Phone', 'api-volunteer-manager'), $args['args']['submittedByPhone']);
         echo $content;
     }
 
@@ -258,7 +258,7 @@ class Assignment extends PostType
         }
         $applicationMetaBox = new ApplicationMetaBox(
             $post,
-            __('Employees', AVM_TEXT_DOMAIN),
+            __('Employees', 'api-volunteer-manager'),
             'application_assignment'
         );
         $applicationMetaBox->register();

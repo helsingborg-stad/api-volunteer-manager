@@ -22,10 +22,6 @@ class PluginTestCase extends TestCase
         Monkey\setUp();
 
         Functions\stubTranslationFunctions();
-
-        if (!defined('AVM_TEXT_DOMAIN')) {
-            define('AVM_TEXT_DOMAIN', 'avm-text-domain');
-        }
     }
 
     /**

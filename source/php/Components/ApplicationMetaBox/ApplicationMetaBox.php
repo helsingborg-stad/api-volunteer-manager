@@ -69,16 +69,16 @@ class ApplicationMetaBox
     public function render(array $posts): void
     {
         if (empty($posts)) {
-            echo '<div class="empty_result">' . __('No applications found.', AVM_TEXT_DOMAIN) . '</div>';
+            echo '<div class="empty_result">' . __('No applications found.', 'api-volunteer-manager') . '</div>';
             return;
         }
 
         $html = '<table>';
         $html .= '<tr>
-                    <th>' . __('Name', AVM_TEXT_DOMAIN) . '</th>
-                    <th>' . __('Date', AVM_TEXT_DOMAIN) . '</th>
-                    <th>' . __('Eligibility', AVM_TEXT_DOMAIN) . '</th>
-                    <th>' . __('Status', AVM_TEXT_DOMAIN) . '</th>
+                    <th>' . __('Name', 'api-volunteer-manager') . '</th>
+                    <th>' . __('Date', 'api-volunteer-manager') . '</th>
+                    <th>' . __('Eligibility', 'api-volunteer-manager') . '</th>
+                    <th>' . __('Status', 'api-volunteer-manager') . '</th>
                     <th></th>
                   </tr>';
         foreach ($posts as $post) {
@@ -114,7 +114,7 @@ class ApplicationMetaBox
             $columnHtml,
             $date,
             $eligibilityClass,
-            __('Level', AVM_TEXT_DOMAIN),
+            __('Level', 'api-volunteer-manager'),
             $employeeEligibilityLevel,
             $taxonomyPills,
             $this->createActionLink('Edit', $post->ID),
@@ -159,7 +159,7 @@ class ApplicationMetaBox
             '<a href="%s" %s>%s</a>',
             $url,
             $classAttr,
-            esc_html__($label, AVM_TEXT_DOMAIN)
+            esc_html__($label, 'api-volunteer-manager')
         );
     }
 

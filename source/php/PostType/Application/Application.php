@@ -76,7 +76,7 @@ class Application extends PostType
     {
         $this->addTableColumn(
             'status',
-            __('Status', AVM_TEXT_DOMAIN),
+            __('Status', 'api-volunteer-manager'),
             true,
             function ($column, $postId) {
                 echo AdminUI::createTaxonomyPills(
@@ -90,7 +90,7 @@ class Application extends PostType
 
         $this->addTableColumn(
             'submitted_from',
-            __('Submitted from', AVM_TEXT_DOMAIN),
+            __('Submitted from', 'api-volunteer-manager'),
             false,
             function ($column, $postId) {
                 echo get_post_meta($postId, 'source', true);
@@ -134,7 +134,7 @@ class Application extends PostType
 
         add_meta_box(
             'application-eligibility',
-            __('Eligibility', AVM_TEXT_DOMAIN),
+            __('Eligibility', 'api-volunteer-manager'),
             array($this, 'renderEligibilityMetaBox'),
             array('application'),
             'normal',
@@ -158,7 +158,7 @@ class Application extends PostType
         $eligibilityClass = $employeeEligibility < $assignmentEligibility ? 'red' : null;
         $classAttr = $eligibilityClass ? "class=\"{$eligibilityClass}\"" : '';
         $content = sprintf(
-            __('<p><a href="%s">%s</a>:<br><span>Level %s</span></p><p><a href="%s">%s</a>:<br><span %s>Level %s</span></p>', AVM_TEXT_DOMAIN),
+            __('<p><a href="%s">%s</a>:<br><span>Level %s</span></p><p><a href="%s">%s</a>:<br><span %s>Level %s</span></p>', 'api-volunteer-manager'),
             get_edit_post_link($assignment),
             $assignment->post_title,
             $assignmentEligibility,
@@ -167,7 +167,7 @@ class Application extends PostType
             $classAttr,
             $employeeEligibility
         );
-        $content .= $employeeEligibility < $assignmentEligibility ? '<p><i>' . __('The employees eligibility level does not match the assignment.', AVM_TEXT_DOMAIN) . '</i></p>' : '';
+        $content .= $employeeEligibility < $assignmentEligibility ? '<p><i>' . __('The employees eligibility level does not match the assignment.', 'api-volunteer-manager') . '</i></p>' : '';
         echo $content;
     }
 

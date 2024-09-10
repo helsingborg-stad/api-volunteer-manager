@@ -7,7 +7,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2024-09-06T09:18:02+00:00\n"
+"POT-Creation-Date: 2024-09-10T06:35:37+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: api-volunteer-manager\n"
@@ -23,12 +23,17 @@ msgstr ""
 
 #: php/AcfFields/php/application.php:41
 #: php/AcfFields/php/assignment.php:8
+#: php/PostType/Employee/Employee.php:49
 msgid "Assignment"
 msgstr ""
 
 #: php/AcfFields/php/application.php:70
 #: php/AcfFields/php/assignment-status.php:12
+#: php/Components/ApplicationMetaBox/ApplicationMetaBox.php:81
+#: php/PostType/Application/Application.php:79
+#: php/PostType/Assignment/Assignment.php:44
 #: php/PostType/Assignment/Assignment.php:124
+#: php/PostType/Employee/Employee.php:128
 msgid "Status"
 msgstr ""
 
@@ -37,6 +42,9 @@ msgid "Taxonomies"
 msgstr ""
 
 #: php/AcfFields/php/assignment-status.php:38
+#: php/Components/ApplicationMetaBox/ApplicationMetaBox.php:80
+#: php/PostType/Application/Application.php:137
+#: php/PostType/Assignment/Assignment.php:78
 #: php/PostType/Assignment/Assignment.php:185
 #: php/PostType/Assignment/Assignment.php:186
 msgid "Eligibility"
@@ -101,6 +109,7 @@ msgstr ""
 #: php/AcfFields/php/options.php:50
 #: php/AcfFields/php/options.php:97
 #: php/AcfFields/php/signup.php:32
+#: php/PostType/Assignment/Assignment.php:245
 msgid "Email"
 msgstr ""
 
@@ -117,6 +126,7 @@ msgid "new"
 msgstr ""
 
 #: php/AcfFields/php/employee.php:152
+#: php/PostType/Employee/Employee.php:47
 msgid "Crime record extracts"
 msgstr ""
 
@@ -192,6 +202,8 @@ msgstr ""
 #: php/AcfFields/php/employer.php:12
 #: php/AcfFields/php/employer.php:55
 #: php/AcfFields/php/options.php:30
+#: php/Components/ApplicationMetaBox/ApplicationMetaBox.php:78
+#: php/PostType/Assignment/Assignment.php:244
 msgid "Name"
 msgstr ""
 
@@ -209,6 +221,7 @@ msgstr ""
 
 #: php/AcfFields/php/employer.php:96
 #: php/AcfFields/php/signup.php:51
+#: php/PostType/Assignment/Assignment.php:246
 msgid "Phone"
 msgstr ""
 
@@ -291,6 +304,46 @@ msgstr ""
 msgid "API-url"
 msgstr ""
 
+#: php/API/ApiHandler.php:22
+msgid "External form submission"
+msgstr ""
+
+#: php/API/ApiHandler.php:27
+msgid "Internally created user"
+msgstr ""
+
+#: php/API/Application/RequestFormatDecorators/ValidateParams.php:31
+msgid "Assignment with the given ID does not exist in the database."
+msgstr ""
+
+#: php/API/Application/RequestFormatDecorators/ValidateParams.php:42
+msgid "User with the given ID does not exist in the database."
+msgstr ""
+
+#: php/API/Application/RequestFormatDecorators/ValidateParams.php:50
+msgid "User has no permissions to create applications."
+msgstr ""
+
+#: php/API/Application/RequestFormatDecorators/ValidateParams.php:58
+msgid "An application already exists for this user."
+msgstr ""
+
+#: php/API/ValidateRequiredRestParams.php:33
+msgid "Missing required parameter"
+msgstr ""
+
+#: php/Components/ApplicationMetaBox/ApplicationMetaBox.php:72
+msgid "No applications found."
+msgstr ""
+
+#: php/Components/ApplicationMetaBox/ApplicationMetaBox.php:79
+msgid "Date"
+msgstr ""
+
+#: php/Components/ApplicationMetaBox/ApplicationMetaBox.php:117
+msgid "Level"
+msgstr ""
+
 #: php/Components/EditPostStatusButtons/DraftEditPostStatusButton.php:25
 msgid "Publish this post"
 msgstr ""
@@ -315,25 +368,57 @@ msgstr ""
 msgid "Unpublish"
 msgstr ""
 
+#: php/Entity/CustomFieldFilter.php:116
+msgid "Yes"
+msgstr ""
+
+#: php/Entity/CustomFieldFilter.php:117
+msgid "No"
+msgstr ""
+
 #: php/Entity/Filter.php:26
 msgid "Show All"
 msgstr ""
 
+#: php/Entity/PostType.php:49
+#: php/Entity/PostType.php:50
+msgid "Add new %s"
+msgstr ""
+
+#: php/Entity/PostType.php:51
+#: php/Entity/Taxonomy.php:41
+msgid "Edit %s"
+msgstr ""
+
+#: php/Entity/PostType.php:52
+msgid "New %s"
+msgstr ""
+
+#: php/Entity/PostType.php:53
+msgid "View %s"
+msgstr ""
+
+#: php/Entity/PostType.php:54
 #: php/Entity/Taxonomy.php:37
 msgid "Search %s"
 msgstr ""
 
-#: php/Entity/Taxonomy.php:38
-msgid "All %s"
+#: php/Entity/PostType.php:55
+msgid "No %s found"
 msgstr ""
 
+#: php/Entity/PostType.php:56
+msgid "No %s found in trash"
+msgstr ""
+
+#: php/Entity/PostType.php:57
 #: php/Entity/Taxonomy.php:39
 #: php/Entity/Taxonomy.php:40
 msgid "Parent %s:"
 msgstr ""
 
-#: php/Entity/Taxonomy.php:41
-msgid "Edit %s"
+#: php/Entity/Taxonomy.php:38
+msgid "All %s"
 msgstr ""
 
 #: php/Entity/Taxonomy.php:42
@@ -356,7 +441,63 @@ msgstr ""
 msgid "Application status"
 msgstr ""
 
+#: php/PostType/Application/Application.php:93
+#: php/PostType/Assignment/Assignment.php:69
+#: php/PostType/Employee/Employee.php:111
+msgid "Submitted from"
+msgstr ""
+
+#: php/PostType/Application/Application.php:161
+msgid "<p><a href=\"%s\">%s</a>:<br><span>Level %s</span></p><p><a href=\"%s\">%s</a>:<br><span %s>Level %s</span></p>"
+msgstr ""
+
+#: php/PostType/Application/Application.php:170
+msgid "The employees eligibility level does not match the assignment."
+msgstr ""
+
+#: php/PostType/Application/ApplicationConfiguration.php:13
+msgid "applications"
+msgstr ""
+
+#: php/PostType/Application/ApplicationConfiguration.php:14
+msgid "application"
+msgstr ""
+
+#: php/PostType/Application/ApplicationConfiguration.php:16
+msgid "Applications"
+msgstr ""
+
+#: php/PostType/Application/ApplicationConfiguration.php:32
+#: php/PostType/Assignment/AssignmentConfiguration.php:42
+msgid "Pending"
+msgstr ""
+
+#: php/PostType/Application/ApplicationConfiguration.php:38
+#: php/PostType/Assignment/AssignmentConfiguration.php:36
+#: php/PostType/Employee/EmployeeConfiguration.php:41
+msgid "Approved"
+msgstr ""
+
+#: php/PostType/Application/ApplicationConfiguration.php:44
+msgid "Approved with condition"
+msgstr ""
+
+#: php/PostType/Application/ApplicationConfiguration.php:50
+msgid "Closed"
+msgstr ""
+
+#: php/PostType/Application/ApplicationConfiguration.php:56
+#: php/PostType/Assignment/AssignmentConfiguration.php:48
+#: php/PostType/Employee/EmployeeConfiguration.php:47
+msgid "Denied"
+msgstr ""
+
+#: php/PostType/Assignment/Assignment.php:58
+msgid "Visibility"
+msgstr ""
+
 #: php/PostType/Assignment/Assignment.php:123
+#: php/PostType/Employee/Employee.php:127
 msgid "Statuses"
 msgstr ""
 
@@ -364,26 +505,38 @@ msgstr ""
 msgid "Categories"
 msgstr ""
 
-#: php/PostType/Assignment/AssignmentConfiguration.php:36
-#: php/PostType/Employee/EmployeeConfiguration.php:41
-msgid "Approved"
+#: php/PostType/Assignment/Assignment.php:221
+msgid "Submitted by"
+msgstr ""
+
+#: php/PostType/Assignment/Assignment.php:243
+msgid "Contact details of the person who submitted the assignment."
+msgstr ""
+
+#: php/PostType/Assignment/Assignment.php:261
+#: php/PostType/Employee/EmployeeConfiguration.php:16
+msgid "Employees"
+msgstr ""
+
+#: php/PostType/Assignment/AssignmentConfiguration.php:13
+msgid "assignments"
+msgstr ""
+
+#: php/PostType/Assignment/AssignmentConfiguration.php:14
+msgid "assignment"
+msgstr ""
+
+#: php/PostType/Assignment/AssignmentConfiguration.php:16
+#: php/PostType/Employee/Employee.php:197
+msgid "Assignments"
 msgstr ""
 
 #: php/PostType/Assignment/AssignmentConfiguration.php:38
 msgid "Approved assignment"
 msgstr ""
 
-#: php/PostType/Assignment/AssignmentConfiguration.php:42
-msgid "Pending"
-msgstr ""
-
 #: php/PostType/Assignment/AssignmentConfiguration.php:44
 msgid "Pending assignment"
-msgstr ""
-
-#: php/PostType/Assignment/AssignmentConfiguration.php:48
-#: php/PostType/Employee/EmployeeConfiguration.php:47
-msgid "Denied"
 msgstr ""
 
 #: php/PostType/Assignment/AssignmentConfiguration.php:50
@@ -414,6 +567,30 @@ msgstr ""
 msgid "Criminal record is required."
 msgstr ""
 
+#: php/PostType/Employee/Employee.php:46
+msgid "Language proficiency"
+msgstr ""
+
+#: php/PostType/Employee/Employee.php:81
+msgid "Clear filters"
+msgstr ""
+
+#: php/PostType/Employee/Employee.php:97
+msgid "Registration status"
+msgstr ""
+
+#: php/PostType/Employee/EmployeeConfiguration.php:13
+msgid "employees"
+msgstr ""
+
+#: php/PostType/Employee/EmployeeConfiguration.php:14
+msgid "employee"
+msgstr ""
+
 #: php/PostType/Employee/EmployeeConfiguration.php:35
 msgid "New"
+msgstr ""
+
+#: php/PostType/Employee/EmployeeExport.php:44
+msgid "Export as CSV"
 msgstr ""

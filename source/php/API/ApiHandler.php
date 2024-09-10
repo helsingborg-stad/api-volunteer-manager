@@ -19,12 +19,12 @@ class ApiHandler
     public function extractSourceFromRequest(WP_REST_Request $request): string
     {
         $referer = $_SERVER['HTTP_REFERER'] ?? '';
-        $source = __('External form submission', AVM_TEXT_DOMAIN);
+        $source = __('External form submission', 'api-volunteer-manager');
 
         if ($referer) {
             // Check if the referer matches the WordPress site URL
             if (strpos($referer, get_site_url()) === 0) {
-                $source = __('Internally created user', AVM_TEXT_DOMAIN);
+                $source = __('Internally created user', 'api-volunteer-manager');
             } else {
                 $parsedSource = parse_url($referer, PHP_URL_HOST);
                 $source = $parsedSource ? $parsedSource : $referer;

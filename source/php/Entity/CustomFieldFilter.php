@@ -113,8 +113,8 @@ class CustomFieldFilter
     {
         echo '<select name="' . $fieldKey . '">';
         echo '<option value="">' . $dropdownTitle . '</option>';
-        echo '<option value="1" ' . selected($selectedValue, '1', false) . '>' . __('Yes', AVM_TEXT_DOMAIN) . '</option>';
-        echo '<option value="0" ' . selected($selectedValue, '0', false) . '>' . __('No', AVM_TEXT_DOMAIN) . '</option>';
+        echo '<option value="1" ' . selected($selectedValue, '1', false) . '>' . __('Yes', 'api-volunteer-manager') . '</option>';
+        echo '<option value="0" ' . selected($selectedValue, '0', false) . '>' . __('No', 'api-volunteer-manager') . '</option>';
         echo '</select>';
     }
 
