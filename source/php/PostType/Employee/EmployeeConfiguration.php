@@ -10,10 +10,10 @@ class EmployeeConfiguration
     {
         return [
             'slug' => 'employee',
-            'namePlural' => __('employees', AVM_TEXT_DOMAIN),
-            'nameSingular' => __('employee', AVM_TEXT_DOMAIN),
+            'namePlural' => __('employees', 'api-volunteer-manager'),
+            'nameSingular' => __('employee', 'api-volunteer-manager'),
             'args' => [
-                'description' => __('Employees', AVM_TEXT_DOMAIN),
+                'description' => __('Employees', 'api-volunteer-manager'),
                 'menu_icon' => Icon::get('person'),
                 'publicly_queryable' => true,
                 'show_ui' => true,

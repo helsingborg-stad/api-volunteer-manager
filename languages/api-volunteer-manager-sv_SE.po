@@ -30,12 +30,17 @@ msgstr "Medarbetare"
 
 #: php/AcfFields/php/application.php:41
 #: php/AcfFields/php/assignment.php:8
+#: php/PostType/Employee/Employee.php:49
 msgid "Assignment"
 msgstr "Uppdrag"
 
 #: php/AcfFields/php/application.php:70
 #: php/AcfFields/php/assignment-status.php:12
+#: php/Components/ApplicationMetaBox/ApplicationMetaBox.php:81
+#: php/PostType/Application/Application.php:79
+#: php/PostType/Assignment/Assignment.php:44
 #: php/PostType/Assignment/Assignment.php:124
+#: php/PostType/Employee/Employee.php:128
 msgid "Status"
 msgstr "Status"
 
@@ -44,6 +49,9 @@ msgid "Taxonomies"
 msgstr "Taxonomier"
 
 #: php/AcfFields/php/assignment-status.php:38
+#: php/Components/ApplicationMetaBox/ApplicationMetaBox.php:80
+#: php/PostType/Application/Application.php:137
+#: php/PostType/Assignment/Assignment.php:78
 #: php/PostType/Assignment/Assignment.php:185
 #: php/PostType/Assignment/Assignment.php:186
 msgid "Eligibility"
@@ -108,6 +116,7 @@ msgstr "Svenskt personnummer"
 #: php/AcfFields/php/options.php:50
 #: php/AcfFields/php/options.php:97
 #: php/AcfFields/php/signup.php:32
+#: php/PostType/Assignment/Assignment.php:245
 msgid "Email"
 msgstr "E-postadress"
 
@@ -124,6 +133,7 @@ msgid "new"
 msgstr "ny"
 
 #: php/AcfFields/php/employee.php:152
+#: php/PostType/Employee/Employee.php:47
 msgid "Crime record extracts"
 msgstr "Utdrag ur brottsregistret"
 
@@ -199,6 +209,8 @@ msgstr "Arbetsgivare"
 #: php/AcfFields/php/employer.php:12
 #: php/AcfFields/php/employer.php:55
 #: php/AcfFields/php/options.php:30
+#: php/Components/ApplicationMetaBox/ApplicationMetaBox.php:78
+#: php/PostType/Assignment/Assignment.php:244
 msgid "Name"
 msgstr "Namn"
 
@@ -216,6 +228,7 @@ msgstr "Lägg till kontakt"
 
 #: php/AcfFields/php/employer.php:96
 #: php/AcfFields/php/signup.php:51
+#: php/PostType/Assignment/Assignment.php:246
 msgid "Phone"
 msgstr "Telefonnummer"
 
@@ -326,16 +339,19 @@ msgstr "Avpublicera"
 msgid "Show All"
 msgstr "Visa alla"
 
+#: php/Entity/PostType.php:51
 #: php/Entity/Taxonomy.php:41
 #, php-format
 msgid "Edit %s"
 msgstr "Editera %s"
 
+#: php/Entity/PostType.php:54
 #: php/Entity/Taxonomy.php:37
 #, php-format
 msgid "Search %s"
 msgstr "Sök %s"
 
+#: php/Entity/PostType.php:57
 #: php/Entity/Taxonomy.php:39
 #: php/Entity/Taxonomy.php:40
 #, php-format
@@ -362,21 +378,25 @@ msgstr "Lägg till ny %s"
 msgid "New %s Name"
 msgstr "Nytt %s namn"
 
+#: php/PostType/Application/ApplicationConfiguration.php:32
 #: php/PostType/Assignment/AssignmentConfiguration.php:42
 msgid "Pending"
 msgstr "Väntande"
 
+#: php/PostType/Application/ApplicationConfiguration.php:38
 #: php/PostType/Assignment/AssignmentConfiguration.php:36
 #: php/PostType/Employee/EmployeeConfiguration.php:41
 msgid "Approved"
 msgstr "Godkänd"
 
+#: php/PostType/Application/ApplicationConfiguration.php:56
 #: php/PostType/Assignment/AssignmentConfiguration.php:48
 #: php/PostType/Employee/EmployeeConfiguration.php:47
 msgid "Denied"
 msgstr "Nekad"
 
 #: php/PostType/Assignment/Assignment.php:123
+#: php/PostType/Employee/Employee.php:127
 msgid "Statuses"
 msgstr "Statusar"
 
@@ -431,3 +451,160 @@ msgstr "Ansökningsstatusar"
 #: php/PostType/Application/Application.php:41
 msgid "Application status"
 msgstr "Ansökningsstatus"
+
+#: php/PostType/Employee/EmployeeConfiguration.php:13
+msgid "employees"
+msgstr "medarbetare"
+
+#: php/API/ApiHandler.php:22
+msgid "External form submission"
+msgstr "Externt formulär"
+
+#: php/API/ApiHandler.php:27
+msgid "Internally created user"
+msgstr "Internt skapad användare"
+
+#: php/API/Application/RequestFormatDecorators/ValidateParams.php:31
+msgid "Assignment with the given ID does not exist in the database."
+msgstr "Uppgiften med det angivna ID:t finns inte i databasen."
+
+#: php/API/Application/RequestFormatDecorators/ValidateParams.php:42
+msgid "User with the given ID does not exist in the database."
+msgstr "Användaren med det angivna ID:t finns inte i databasen."
+
+#: php/API/Application/RequestFormatDecorators/ValidateParams.php:50
+msgid "User has no permissions to create applications."
+msgstr "Användaren har inte behörighet att skapa ansökningar."
+
+#: php/API/Application/RequestFormatDecorators/ValidateParams.php:58
+msgid "An application already exists for this user."
+msgstr "En ansökan är redan registrerad för denna användaren."
+
+#: php/API/ValidateRequiredRestParams.php:33
+msgid "Missing required parameter"
+msgstr "Saknar obligatorisk parameter"
+
+#: php/Components/ApplicationMetaBox/ApplicationMetaBox.php:72
+msgid "No applications found."
+msgstr "Inga ansökningar hittades."
+
+#: php/Components/ApplicationMetaBox/ApplicationMetaBox.php:79
+msgid "Date"
+msgstr "Datum"
+
+#: php/Components/ApplicationMetaBox/ApplicationMetaBox.php:117
+msgid "Level"
+msgstr "Nivå"
+
+#: php/Entity/CustomFieldFilter.php:116
+msgid "Yes"
+msgstr "Ja"
+
+#: php/Entity/CustomFieldFilter.php:117
+msgid "No"
+msgstr "Nej"
+
+#: php/Entity/PostType.php:49
+#: php/Entity/PostType.php:50
+msgid "Add new %s"
+msgstr "Lägg till ny %s"
+
+#: php/Entity/PostType.php:52
+msgid "New %s"
+msgstr "Ny %s"
+
+#: php/Entity/PostType.php:53
+msgid "View %s"
+msgstr "Visa %s"
+
+#: php/Entity/PostType.php:55
+msgid "No %s found"
+msgstr "Inga %s hittades"
+
+#: php/Entity/PostType.php:56
+msgid "No %s found in trash"
+msgstr "Inga %s hittades i skräpkorgen"
+
+#: php/PostType/Application/Application.php:93
+#: php/PostType/Assignment/Assignment.php:69
+#: php/PostType/Employee/Employee.php:111
+msgid "Submitted from"
+msgstr "Inskickat från"
+
+#: php/PostType/Application/Application.php:161
+msgid "<p><a href=\"%s\">%s</a>:<br><span>Level %s</span></p><p><a href=\"%s\">%s</a>:<br><span %s>Level %s</span></p>"
+msgstr "<p><a href=\"%s\">%s</a>:<br><span>Nivå %s</span></p><p><a href=\"%s\">%s</a>:<br><span %s>Nivå %s</span></p>"
+
+#: php/PostType/Application/Application.php:170
+msgid "The employees eligibility level does not match the assignment."
+msgstr "Volontärens behörighetsnivå matchar inte uppdraget."
+
+#: php/PostType/Application/ApplicationConfiguration.php:13
+msgid "applications"
+msgstr "ansökningar"
+
+#: php/PostType/Application/ApplicationConfiguration.php:14
+msgid "application"
+msgstr "ansökan"
+
+#: php/PostType/Application/ApplicationConfiguration.php:16
+msgid "Applications"
+msgstr "Ansökningar"
+
+#: php/PostType/Application/ApplicationConfiguration.php:44
+msgid "Approved with condition"
+msgstr "Godkänd med villkor"
+
+#: php/PostType/Application/ApplicationConfiguration.php:50
+msgid "Closed"
+msgstr "Stängd"
+
+#: php/PostType/Assignment/Assignment.php:58
+msgid "Visibility"
+msgstr "Synlighet"
+
+#: php/PostType/Assignment/Assignment.php:221
+msgid "Submitted by"
+msgstr "Inskickat av"
+
+#: php/PostType/Assignment/Assignment.php:243
+msgid "Contact details of the person who submitted the assignment."
+msgstr "Kontaktuppgifter till personen som skickat in uppdraget."
+
+#: php/PostType/Assignment/Assignment.php:261
+#: php/PostType/Employee/EmployeeConfiguration.php:16
+msgid "Employees"
+msgstr "Medarbetare"
+
+#: php/PostType/Assignment/AssignmentConfiguration.php:13
+msgid "assignments"
+msgstr "uppdrag"
+
+#: php/PostType/Assignment/AssignmentConfiguration.php:14
+msgid "assignment"
+msgstr "uppdrag"
+
+#: php/PostType/Assignment/AssignmentConfiguration.php:16
+#: php/PostType/Employee/Employee.php:197
+msgid "Assignments"
+msgstr "Uppdrag"
+
+#: php/PostType/Employee/Employee.php:46
+msgid "Language proficiency"
+msgstr "Språkkunskaper"
+
+#: php/PostType/Employee/Employee.php:81
+msgid "Clear filters"
+msgstr "Återställ filter"
+
+#: php/PostType/Employee/Employee.php:97
+msgid "Registration status"
+msgstr "Status för registrering"
+
+#: php/PostType/Employee/EmployeeConfiguration.php:14
+msgid "employee"
+msgstr "medarbetare"
+
+#: php/PostType/Employee/EmployeeExport.php:44
+msgid "Export as CSV"
+msgstr "Exportera som CSV"

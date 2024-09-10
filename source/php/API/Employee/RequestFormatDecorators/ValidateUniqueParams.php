@@ -37,7 +37,7 @@ class ValidateUniqueParams extends ValidateRestRequest
     {
         return WPResponseFactory::wp_error_response(
             'avm_employee_registration_error',
-            __($message, AVM_TEXT_DOMAIN),
+            __($message, 'api-volunteer-manager'),
             ['param' => $param]
         );
     }

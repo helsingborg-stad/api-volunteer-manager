@@ -41,7 +41,7 @@ class EmployeeExport
             self::$EXPORT_QUERY_PARAM => $exportFormat
         ]);
 
-        echo '<a target="_blank" href="' . $exportCSVButtonHref . '" class="button">' . __('Export as CSV', AVM_TEXT_DOMAIN) . '</a>';
+        echo '<a target="_blank" href="' . $exportCSVButtonHref . '" class="button">' . __('Export as CSV', 'api-volunteer-manager') . '</a>';
     }
 
     private function queryEmployees(): array

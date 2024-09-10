@@ -43,10 +43,10 @@ class Employee extends PostType
 
         if ('employee' === $typenow) {
             $metaFilter = new CustomFieldFilter();
-            $metaFilter->addCustomMetaFilterDropdown('swedish_language_proficiency', __('Language proficiency', AVM_TEXT_DOMAIN));
-            $metaFilter->addCustomMetaFilterDropdown('crime_record_extracted', __('Crime record extracts', AVM_TEXT_DOMAIN));
+            $metaFilter->addCustomMetaFilterDropdown('swedish_language_proficiency', __('Language proficiency', 'api-volunteer-manager'));
+            $metaFilter->addCustomMetaFilterDropdown('crime_record_extracted', __('Crime record extracts', 'api-volunteer-manager'));
 
-            $metaFilter->addCustomAssignmentFilterDropdown(__('Assignment', AVM_TEXT_DOMAIN));
+            $metaFilter->addCustomAssignmentFilterDropdown(__('Assignment', 'api-volunteer-manager'));
 
             $this->renderClearFiltersButton();
         }
@@ -78,7 +78,7 @@ class Employee extends PostType
     public function renderClearFiltersButton()
     {
         $clear_filters_url = remove_query_arg(array('swedish_language_proficiency', 'crime_record_extracted', 'employee-registration-status', 'm', 'assignment_id'));
-        echo '<a href="' . esc_url($clear_filters_url) . '" class="button">' . __('Clear filters', AVM_TEXT_DOMAIN) . '</a>';
+        echo '<a href="' . esc_url($clear_filters_url) . '" class="button">' . __('Clear filters', 'api-volunteer-manager') . '</a>';
     }
 
     public function initTaxonomiesAndTerms()
@@ -94,7 +94,7 @@ class Employee extends PostType
     {
         $this->addTableColumn(
             'registration_status',
-            __('Registration status', AVM_TEXT_DOMAIN),
+            __('Registration status', 'api-volunteer-manager'),
             true,
             function ($column, $postId) {
                 echo AdminUI::createTaxonomyPills(
@@ -108,7 +108,7 @@ class Employee extends PostType
 
         $this->addTableColumn(
             'submitted_from',
-            __('Submitted from', AVM_TEXT_DOMAIN),
+            __('Submitted from', 'api-volunteer-manager'),
             false,
             function ($column, $postId) {
                 echo get_post_meta($postId, 'source', true);
@@ -124,8 +124,8 @@ class Employee extends PostType
     public function registerStatusTaxonomy()
     {
         $this->employeeTaxonomy = new Taxonomy(
-            __('Statuses', AVM_TEXT_DOMAIN),
-            __('Status', AVM_TEXT_DOMAIN),
+            __('Statuses', 'api-volunteer-manager'),
+            __('Status', 'api-volunteer-manager'),
             'employee-registration-status',
             array($this->slug),
             array(
@@ -194,7 +194,7 @@ class Employee extends PostType
         }
         $applicationMetaBox = new ApplicationMetaBox(
             $post,
-            __('Assignments', AVM_TEXT_DOMAIN),
+            __('Assignments', 'api-volunteer-manager'),
             'application_employee'
         );
         $applicationMetaBox->register();

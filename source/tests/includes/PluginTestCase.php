@@ -23,8 +23,8 @@ class PluginTestCase extends TestCase
 
         Functions\stubTranslationFunctions();
 
-        if (!defined('AVM_TEXT_DOMAIN')) {
-            define('AVM_TEXT_DOMAIN', 'avm-text-domain');
+        if (!defined(''api-volunteer-manager'')) {
+            define(''api-volunteer-manager'', 'avm-text-domain');
         }
     }
 

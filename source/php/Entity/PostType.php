@@ -44,18 +44,18 @@ class PostType implements PostTypeInterface
     {
         $labels = array_merge(
             array(
-                'name' => __(ucfirst($this->namePlural), AVM_TEXT_DOMAIN),
-                'singular_name' => __(ucfirst($this->nameSingular), AVM_TEXT_DOMAIN),
-                'add_new' => sprintf(__('Add new %s', AVM_TEXT_DOMAIN), __(strtolower($this->nameSingular), AVM_TEXT_DOMAIN)),
-                'add_new_item' => sprintf(__('Add new %s', AVM_TEXT_DOMAIN), __(strtolower($this->nameSingular), AVM_TEXT_DOMAIN)),
-                'edit_item' => sprintf(__('Edit %s', AVM_TEXT_DOMAIN), __(strtolower($this->nameSingular), AVM_TEXT_DOMAIN)),
-                'new_item' => sprintf(__('New %s', AVM_TEXT_DOMAIN), __(strtolower($this->nameSingular), AVM_TEXT_DOMAIN)),
-                'view_item' => sprintf(__('View %s', AVM_TEXT_DOMAIN), __(strtolower($this->nameSingular), AVM_TEXT_DOMAIN)),
-                'search_items' => sprintf(__('Search %s', AVM_TEXT_DOMAIN), __(strtolower($this->namePlural), AVM_TEXT_DOMAIN)),
-                'not_found' => sprintf(__('No %s found', AVM_TEXT_DOMAIN), __(strtolower($this->namePlural), AVM_TEXT_DOMAIN)),
-                'not_found_in_trash' => sprintf(__('No %s found in trash', AVM_TEXT_DOMAIN), __(strtolower($this->namePlural), AVM_TEXT_DOMAIN)),
-                'parent_item_colon' => sprintf(__('Parent %s:', AVM_TEXT_DOMAIN), __(strtolower($this->nameSingular), AVM_TEXT_DOMAIN)),
-                'menu_name' => __(ucfirst($this->namePlural), AVM_TEXT_DOMAIN)
+                'name' => __(ucfirst($this->namePlural), 'api-volunteer-manager'),
+                'singular_name' => __(ucfirst($this->nameSingular), 'api-volunteer-manager'),
+                'add_new' => sprintf(__('Add new %s', 'api-volunteer-manager'), __(strtolower($this->nameSingular), 'api-volunteer-manager')),
+                'add_new_item' => sprintf(__('Add new %s', 'api-volunteer-manager'), __(strtolower($this->nameSingular), 'api-volunteer-manager')),
+                'edit_item' => sprintf(__('Edit %s', 'api-volunteer-manager'), __(strtolower($this->nameSingular), 'api-volunteer-manager')),
+                'new_item' => sprintf(__('New %s', 'api-volunteer-manager'), __(strtolower($this->nameSingular), 'api-volunteer-manager')),
+                'view_item' => sprintf(__('View %s', 'api-volunteer-manager'), __(strtolower($this->nameSingular), 'api-volunteer-manager')),
+                'search_items' => sprintf(__('Search %s', 'api-volunteer-manager'), __(strtolower($this->namePlural), 'api-volunteer-manager')),
+                'not_found' => sprintf(__('No %s found', 'api-volunteer-manager'), __(strtolower($this->namePlural), 'api-volunteer-manager')),
+                'not_found_in_trash' => sprintf(__('No %s found in trash', 'api-volunteer-manager'), __(strtolower($this->namePlural), 'api-volunteer-manager')),
+                'parent_item_colon' => sprintf(__('Parent %s:', 'api-volunteer-manager'), __(strtolower($this->nameSingular), 'api-volunteer-manager')),
+                'menu_name' => __(ucfirst($this->namePlural), 'api-volunteer-manager')
             ),
             $this->labels
         );

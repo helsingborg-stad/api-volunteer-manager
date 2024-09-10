@@ -28,7 +28,7 @@ class ValidateParams extends ValidateRestRequest
         if (!$validator->is_post_published((int)$assignment)) {
             return WPResponseFactory::wp_error_response(
                 'avm_application_validation_error',
-                __('Assignment with the given ID does not exist in the database.', AVM_TEXT_DOMAIN),
+                __('Assignment with the given ID does not exist in the database.', 'api-volunteer-manager'),
                 [
                     'param' => 'assignment_id',
                     'status' => 404
@@ -39,7 +39,7 @@ class ValidateParams extends ValidateRestRequest
         if (!isset($employee->ID) || !$validator->post_exist($employee->ID)) {
             return WPResponseFactory::wp_error_response(
                 'avm_application_validation_error',
-                __('User with the given ID does not exist in the database.', AVM_TEXT_DOMAIN),
+                __('User with the given ID does not exist in the database.', 'api-volunteer-manager'),
                 ['status' => 404]
             );
         }
@@ -47,7 +47,7 @@ class ValidateParams extends ValidateRestRequest
         if (!$validator->is_employee_approved($employee->ID)) {
             return WPResponseFactory::wp_error_response(
                 'avm_application_validation_error',
-                __('User has no permissions to create applications.', AVM_TEXT_DOMAIN),
+                __('User has no permissions to create applications.', 'api-volunteer-manager'),
                 ['status' => 403]
             );
         }
@@ -55,7 +55,7 @@ class ValidateParams extends ValidateRestRequest
         if (!$validator->is_application_unique($employee->ID, (int)$assignment)) {
             return WPResponseFactory::wp_error_response(
                 'avm_application_validation_error',
-                __('An application already exists for this user.', AVM_TEXT_DOMAIN),
+                __('An application already exists for this user.', 'api-volunteer-manager'),
                 ['status' => 400]
             );
         }

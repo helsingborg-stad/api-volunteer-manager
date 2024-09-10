@@ -10,10 +10,10 @@ class ApplicationConfiguration
     {
         return [
             'slug' => 'application',
-            'namePlural' => __('applications', AVM_TEXT_DOMAIN),
-            'nameSingular' => __('application', AVM_TEXT_DOMAIN),
+            'namePlural' => __('applications', 'api-volunteer-manager'),
+            'nameSingular' => __('application', 'api-volunteer-manager'),
             'args' => [
-                'description' => __('Applications', AVM_TEXT_DOMAIN),
+                'description' => __('Applications', 'api-volunteer-manager'),
                 'menu_icon' => Icon::get('person'),
                 'public' => false,
                 'show_ui' => true,
@@ -29,31 +29,31 @@ class ApplicationConfiguration
     {
         return [
             [
-                'name' => __('Pending', AVM_TEXT_DOMAIN),
+                'name' => __('Pending', 'api-volunteer-manager'),
                 'slug' => 'pending',
                 'description' => 'Application is pending.',
                 'color' => '#dd9933'
             ],
             [
-                'name' => __('Approved', AVM_TEXT_DOMAIN),
+                'name' => __('Approved', 'api-volunteer-manager'),
                 'slug' => 'approved',
                 'description' => 'Application is approved.',
                 'color' => '#81d742'
             ],
             [
-                'name' => __('Approved with condition', AVM_TEXT_DOMAIN),
+                'name' => __('Approved with condition', 'api-volunteer-manager'),
                 'slug' => 'approved_with_condition',
                 'description' => 'Application is approved, with condition.',
                 'color' => '#1e73be'
             ],
             [
-                'name' => __('Closed', AVM_TEXT_DOMAIN),
+                'name' => __('Closed', 'api-volunteer-manager'),
                 'slug' => 'closed',
                 'description' => 'Application is closed.',
                 'color' => '#708090'
             ],
             [
-                'name' => __('Denied', AVM_TEXT_DOMAIN),
+                'name' => __('Denied', 'api-volunteer-manager'),
                 'slug' => 'denied',
                 'description' => 'Application is denied.',
                 'color' => '#dd3333'
