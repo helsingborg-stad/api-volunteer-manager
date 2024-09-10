@@ -22,10 +22,6 @@ class PluginTestCase extends TestCase
         Monkey\setUp();
 
         Functions\stubTranslationFunctions();
-
-        if (!defined(''api-volunteer-manager'')) {
-            define(''api-volunteer-manager'', 'avm-text-domain');
-        }
     }
 
     /**
