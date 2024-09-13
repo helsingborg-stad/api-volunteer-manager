@@ -114,6 +114,15 @@ class Employee extends PostType
                 echo get_post_meta($postId, 'source', true);
             }
         );
+
+        $this->addTableColumn(
+            'title',
+            __('Name', 'api-volunteer-manager'),
+            true,
+            function ($column, $postId) {
+                echo get_the_title($postId);
+            }
+        );
     }
 
     /**
