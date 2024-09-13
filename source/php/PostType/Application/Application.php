@@ -105,6 +105,15 @@ class Application extends PostType
                 echo get_the_title($postId);
             }
         );
+
+        $this->addTableColumn(
+            'date',
+            __('Date', 'api-volunteer-manager'),
+            true,
+            function ($column, $postId) {
+                echo get_the_date($postId);
+            }
+        );
     }
 
     /**
