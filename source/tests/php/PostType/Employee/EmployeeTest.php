@@ -64,6 +64,16 @@ class EmployeeTest extends PluginTestCase
 
     }
 
+    public function testAddTableColumn()
+    {
+        $this->employee->addPostTypeTableColumn();
+        $actual = $this->employee->tableColumns;
+
+        $this->assertArrayHasKey('registration_status', $actual);
+        $this->assertArrayHasKey('submitted_from', $actual);
+        $this->assertArrayHasKey('title', $actual);
+    }
+
     public function acfSetNotesDefaultDateProvider(): array
     {
         $currentDate = date('Y-m-d');

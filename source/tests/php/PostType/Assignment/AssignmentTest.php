@@ -67,6 +67,18 @@ class AssignmentTest extends PluginTestCase
         $this->assignment->registerSubmitterMetaBox('assignment', $this->post);
     }
 
+    public function testAddTableColumn()
+    {
+        $this->assignment->addPostTypeTableColumn();
+        $actual = $this->assignment->tableColumns;
+
+        $this->assertArrayHasKey('status', $actual);
+        $this->assertArrayHasKey('submitted_from', $actual);
+        $this->assertArrayHasKey('title', $actual);
+        $this->assertArrayHasKey('visibility', $actual);
+        $this->assertArrayHasKey('eligibility', $actual);
+    }
+
     public function testRegisterSubmitterMetaBoxWithMissingExistingMetaValue()
     {
         Functions\when('get_post_meta')->justReturn(null);

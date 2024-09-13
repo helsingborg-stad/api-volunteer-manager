@@ -67,7 +67,10 @@ class ApplicationTest extends PluginTestCase
     {
         $this->application->addStatusTableColumn();
         $actual = $this->application->tableColumns;
-        $this->assertEquals(['status' => 'Status', 'submitted_from' => 'Submitted from'], $actual);
+
+        $this->assertArrayHasKey('status', $actual);
+        $this->assertArrayHasKey('submitted_from', $actual);
+        $this->assertArrayHasKey('title', $actual);
     }
 
     /**
