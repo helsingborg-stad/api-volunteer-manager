@@ -81,6 +81,15 @@ class Assignment extends PostType
                 echo (get_the_terms($postId, 'assignment-eligibility'))[0]->name ?? '';
             }
         );
+
+        $this->addTableColumn(
+            'title',
+            __('Assignment', 'api-volunteer-manager'),
+            true,
+            function ($column, $postId) {
+                echo get_the_title($postId);
+            }
+        );
     }
 
     /**
