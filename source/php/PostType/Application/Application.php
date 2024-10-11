@@ -77,7 +77,7 @@ class Application extends PostType
         $this->addTableColumn(
             'status',
             __('Status', 'api-volunteer-manager'),
-            true,
+            false,
             function ($column, $postId) {
                 echo AdminUI::createTaxonomyPills(
                     get_the_terms(
