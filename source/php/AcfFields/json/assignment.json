@@ -1,14 +1,14 @@
 [{
     "key": "group_63dce32c807e2",
-    "title": "Assignment",
+    "title": "Uppdrag",
     "fields": [
         {
             "key": "field_63dcd749463a4",
-            "label": "Description",
+            "label": "Beskrivning",
             "name": "description",
             "aria-label": "",
             "type": "textarea",
-            "instructions": "Describe the assignment.",
+            "instructions": "Beskriv uppdraget.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -20,15 +20,16 @@
             "maxlength": "",
             "rows": "",
             "placeholder": "",
-            "new_lines": ""
+            "new_lines": "",
+            "acfe_textarea_code": 0
         },
         {
             "key": "field_63dcdb011a906",
-            "label": "Qualification",
+            "label": "Kvalifikation",
             "name": "qualifications",
             "aria-label": "",
             "type": "textarea",
-            "instructions": "What is required of the volunteer (e.g., education, access to a car, language).",
+            "instructions": "Vad kr\u00e4vs av volont\u00e4ren (t.ex. utbildning, tillg\u00e5ng till bil, spr\u00e5k).",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -40,15 +41,16 @@
             "maxlength": "",
             "rows": "",
             "placeholder": "",
-            "new_lines": ""
+            "new_lines": "",
+            "acfe_textarea_code": 0
         },
         {
             "key": "field_63dcdea1ab055",
-            "label": "Schedule",
+            "label": "Schema",
             "name": "schedule",
             "aria-label": "",
             "type": "textarea",
-            "instructions": "Schedule for when and how often the assignment occurs.",
+            "instructions": "Schemal\u00e4gg n\u00e4r och hur ofta uppdraget intr\u00e4ffar.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -60,15 +62,16 @@
             "maxlength": "",
             "rows": "",
             "placeholder": "",
-            "new_lines": ""
+            "new_lines": "",
+            "acfe_textarea_code": 0
         },
         {
             "key": "field_63dcfaa623558",
-            "label": "Benefits",
+            "label": "F\u00f6rm\u00e5ner",
             "name": "benefits",
             "aria-label": "",
             "type": "textarea",
-            "instructions": "E.g., bus card, lunch.",
+            "instructions": "T.ex. busskort, lunch.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -80,11 +83,12 @@
             "maxlength": "",
             "rows": "",
             "placeholder": "",
-            "new_lines": ""
+            "new_lines": "",
+            "acfe_textarea_code": 0
         },
         {
             "key": "field_63dcff972b04c",
-            "label": "Number of spots",
+            "label": "Antal platser",
             "name": "number_of_available_spots",
             "aria-label": "",
             "type": "number",
@@ -103,6 +107,25 @@
             "step": "",
             "prepend": "",
             "append": ""
+        },
+        {
+            "key": "field_67160ee8351cc",
+            "label": "Slutdatum",
+            "name": "end_date",
+            "aria-label": "",
+            "type": "date_picker",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "display_format": "Y-m-d",
+            "return_format": "Y-m-d",
+            "first_day": 1,
+            "allow_in_bindings": 0
         }
     ],
     "location": [
@@ -122,6 +145,11 @@
     "hide_on_screen": "",
     "active": true,
     "description": "",
-    "show_in_rest": 1
+    "show_in_rest": 1,
+    "acfe_display_title": "",
+    "acfe_autosync": "",
+    "acfe_form": 0,
+    "acfe_meta": "",
+    "acfe_note": ""
 }]
 
