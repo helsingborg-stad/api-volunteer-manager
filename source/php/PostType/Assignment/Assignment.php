@@ -92,6 +92,15 @@ class Assignment extends PostType
         );
 
         $this->addTableColumn(
+            'end_date',
+            __('End date', 'api-volunteer-manager'),
+            true,
+            function ($column, $postId) {
+                echo get_field('end_date',$postId);
+            }
+        );
+
+        $this->addTableColumn(
             'date',
             __('Date', 'api-volunteer-manager'),
             true,

@@ -3,6 +3,7 @@
 namespace VolunteerManager\Entity;
 
 use Exception;
+use WP_Query;
 
 class PostType implements PostTypeInterface
 {
@@ -34,6 +35,32 @@ class PostType implements PostTypeInterface
         add_action('manage_' . $this->slug . '_posts_custom_column', [$this, 'tableColumnsContent'], 10, 2);
         add_filter('manage_edit-' . $this->slug . '_columns', [$this, 'setTableColumns']);
         add_filter('manage_edit-' . $this->slug . '_sortable_columns', [$this, 'tableSortableColumns']);
+        add_action('pre_get_posts' , [$this, 'sortColumns']);
+    }
+
+    public function sortColumns(WP_Query $query): void {
+        if (!$query->is_main_query()){
+            return;
+        }
+        if ($query->query_vars['orderby']==='end_date'){
+            // $query->query_vars['orderby']='end_date_sort';
+            $query->query_vars['orderby']= [
+                'end_date_sort' => 'ASC'
+            ];
+            $query->query_vars['meta_type']='DATE';
+            $query->query_vars['meta_key']='end_date';
+            $query->query_vars['meta_query']=array(
+                'relation' => 'OR',
+                'end_date_not_exist' => array(
+                    'key' => 'end_date',
+                    'compare' => 'NOT EXISTS'
+                ),
+                'end_date_sort' => array(
+                    'key' => 'end_date',
+                    'compare' => 'EXISTS'
+                )
+            );
+        }
     }
 
     /**
