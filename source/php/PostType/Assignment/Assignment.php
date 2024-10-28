@@ -30,6 +30,7 @@ class Assignment extends PostType
         add_action('init', array($this, 'addPostTypeTableColumn'));
         add_action('before_delete_post', array($this, 'deleteRelatedApplications'));
         add_action('set_object_terms', array($this, 'draftOnStatusCompleted'), 10, 6);
+        add_action('init', array($this, 'updateStatusbyEndDate'));
     }
 
     /**
@@ -357,4 +358,28 @@ class Assignment extends PostType
             }
         }
     }
+
+    /**
+     * Updates status by end date
+     */
+    
+     public function updateStatusbyEndDate(){
+        // Hämta poster med end date
+        $posts = get_posts(array(
+            'post_type' => 'assignment',
+            'posts_per_page' => -1,
+            'meta_query' => array(
+                array(
+                    'key' => 'end_date',
+                    'type' => 'DATE',
+                    'compare' => '<',
+                    'value' => date('Y-m-d')
+                )
+            )
+        ));
+        // Uppdatera status om det nått end date
+        foreach($posts as $post){
+            wp_set_post_terms($post->ID, 'completed', 'assignment-status', false);
+        }
+     }
 }
