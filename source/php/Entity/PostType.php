@@ -39,16 +39,11 @@ class PostType implements PostTypeInterface
     }
 
     public function sortColumns(WP_Query $query): void {
-        if (!$query->is_main_query()){
+        if (!$query->is_main_query()||empty($query->query_vars['orderby'])){
             return;
         }
         if ($query->query_vars['orderby']==='end_date'){
-            // $query->query_vars['orderby']='end_date_sort';
-            $query->query_vars['orderby']= [
-                'end_date_sort' => 'ASC'
-            ];
-            $query->query_vars['meta_type']='DATE';
-            $query->query_vars['meta_key']='end_date';
+            $query->query_vars['orderby']='meta_value';
             $query->query_vars['meta_query']=array(
                 'relation' => 'OR',
                 'end_date_not_exist' => array(
