@@ -13,6 +13,7 @@ use VolunteerManager\Helper\MetaBox as MetaBox;
 
 class Assignment extends PostType
 {
+    private string $statusUpdateCronHook = 'update_assignment_status_by_end_date';
     private Taxonomy $assignmentTaxonomy;
     private Taxonomy $eligibilityTaxonomy;
 
@@ -30,7 +31,15 @@ class Assignment extends PostType
         add_action('init', array($this, 'addPostTypeTableColumn'));
         add_action('before_delete_post', array($this, 'deleteRelatedApplications'));
         add_action('set_object_terms', array($this, 'draftOnStatusCompleted'), 10, 6);
-        add_action('init', array($this, 'updateStatusbyEndDate'));
+        add_action($this->statusUpdateCronHook, array($this, 'updateStatusbyEndDate'));
+
+        $this->addCronJobForStatusUpdates();
+    }
+
+    public function addCronJobForStatusUpdates(): void {
+        if(!wp_next_scheduled($this->statusUpdateCronHook)) {
+            wp_schedule_event(time(), 'twicedaily', $this->statusUpdateCronHook);
+        }
     }
 
     /**
