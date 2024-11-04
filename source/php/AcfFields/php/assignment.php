@@ -1,7 +1,9 @@
 <?php 
 
-if (function_exists('acf_add_local_field_group')) {
-    acf_add_local_field_group(array(
+
+if (function_exists('acf_add_local_field_group')) {
+
+    acf_add_local_field_group(array(
     'key' => 'group_63dce32c807e2',
     'title' => __('Assignment', 'api-volunteer-manager'),
     'fields' => array(
@@ -24,6 +26,7 @@
             'rows' => '',
             'placeholder' => '',
             'new_lines' => '',
+            'acfe_textarea_code' => 0,
         ),
         1 => array(
             'key' => 'field_63dcdb011a906',
@@ -44,6 +47,7 @@
             'rows' => '',
             'placeholder' => '',
             'new_lines' => '',
+            'acfe_textarea_code' => 0,
         ),
         2 => array(
             'key' => 'field_63dcdea1ab055',
@@ -64,6 +68,7 @@
             'rows' => '',
             'placeholder' => '',
             'new_lines' => '',
+            'acfe_textarea_code' => 0,
         ),
         3 => array(
             'key' => 'field_63dcfaa623558',
@@ -84,6 +89,7 @@
             'rows' => '',
             'placeholder' => '',
             'new_lines' => '',
+            'acfe_textarea_code' => 0,
         ),
         4 => array(
             'key' => 'field_63dcff972b04c',
@@ -107,6 +113,25 @@
             'prepend' => '',
             'append' => '',
         ),
+        5 => array(
+            'key' => 'field_67160ee8351cc',
+            'label' => __('End date', 'api-volunteer-manager'),
+            'name' => 'end_date',
+            'aria-label' => '',
+            'type' => 'date_picker',
+            'instructions' => '',
+            'required' => 0,
+            'conditional_logic' => 0,
+            'wrapper' => array(
+                'width' => '',
+                'class' => '',
+                'id' => '',
+            ),
+            'display_format' => 'Y-m-d',
+            'return_format' => 'Y-m-d',
+            'first_day' => 1,
+            'allow_in_bindings' => 0,
+        ),
     ),
     'location' => array(
         0 => array(
@@ -126,5 +151,11 @@
     'active' => true,
     'description' => '',
     'show_in_rest' => 1,
+    'acfe_display_title' => '',
+    'acfe_autosync' => '',
+    'acfe_form' => 0,
+    'acfe_meta' => '',
+    'acfe_note' => '',
 ));
-}
+
+}

@@ -20,7 +20,8 @@
             "maxlength": "",
             "rows": "",
             "placeholder": "",
-            "new_lines": ""
+            "new_lines": "",
+            "acfe_textarea_code": 0
         },
         {
             "key": "field_63dcdb011a906",
@@ -40,7 +41,8 @@
             "maxlength": "",
             "rows": "",
             "placeholder": "",
-            "new_lines": ""
+            "new_lines": "",
+            "acfe_textarea_code": 0
         },
         {
             "key": "field_63dcdea1ab055",
@@ -60,7 +62,8 @@
             "maxlength": "",
             "rows": "",
             "placeholder": "",
-            "new_lines": ""
+            "new_lines": "",
+            "acfe_textarea_code": 0
         },
         {
             "key": "field_63dcfaa623558",
@@ -80,7 +83,8 @@
             "maxlength": "",
             "rows": "",
             "placeholder": "",
-            "new_lines": ""
+            "new_lines": "",
+            "acfe_textarea_code": 0
         },
         {
             "key": "field_63dcff972b04c",
@@ -103,6 +107,25 @@
             "step": "",
             "prepend": "",
             "append": ""
+        },
+        {
+            "key": "field_67160ee8351cc",
+            "label": "Slutdatum",
+            "name": "end_date",
+            "aria-label": "",
+            "type": "date_picker",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "display_format": "Y-m-d",
+            "return_format": "Y-m-d",
+            "first_day": 1,
+            "allow_in_bindings": 0
         }
     ],
     "location": [
@@ -122,6 +145,11 @@
     "hide_on_screen": "",
     "active": true,
     "description": "",
-    "show_in_rest": 1
+    "show_in_rest": 1,
+    "acfe_display_title": "",
+    "acfe_autosync": "",
+    "acfe_form": 0,
+    "acfe_meta": "",
+    "acfe_note": ""
 }]
-
+
