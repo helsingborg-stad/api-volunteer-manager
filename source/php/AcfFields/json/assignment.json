@@ -1,14 +1,14 @@
 [{
     "key": "group_63dce32c807e2",
-    "title": "Uppdrag",
+    "title": "Assignment",
     "fields": [
         {
             "key": "field_63dcd749463a4",
-            "label": "Beskrivning",
+            "label": "Description",
             "name": "description",
             "aria-label": "",
             "type": "textarea",
-            "instructions": "Beskriv uppdraget.",
+            "instructions": "Describe the assignment.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -25,11 +25,11 @@
         },
         {
             "key": "field_63dcdb011a906",
-            "label": "Kvalifikation",
+            "label": "Qualification",
             "name": "qualifications",
             "aria-label": "",
             "type": "textarea",
-            "instructions": "Vad kr\u00e4vs av volont\u00e4ren (t.ex. utbildning, tillg\u00e5ng till bil, spr\u00e5k).",
+            "instructions": "What is required of the volunteer (e.g., education, access to a car, language).",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -46,11 +46,11 @@
         },
         {
             "key": "field_63dcdea1ab055",
-            "label": "Schema",
+            "label": "Schedule",
             "name": "schedule",
             "aria-label": "",
             "type": "textarea",
-            "instructions": "Schemal\u00e4gg n\u00e4r och hur ofta uppdraget intr\u00e4ffar.",
+            "instructions": "Schedule for when and how often the assignment occurs.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -67,11 +67,11 @@
         },
         {
             "key": "field_63dcfaa623558",
-            "label": "F\u00f6rm\u00e5ner",
+            "label": "Benefits",
             "name": "benefits",
             "aria-label": "",
             "type": "textarea",
-            "instructions": "T.ex. busskort, lunch.",
+            "instructions": "E.g., bus card, lunch.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -88,7 +88,7 @@
         },
         {
             "key": "field_63dcff972b04c",
-            "label": "Antal platser",
+            "label": "Number of spots",
             "name": "number_of_available_spots",
             "aria-label": "",
             "type": "number",
@@ -152,4 +152,4 @@
     "acfe_meta": "",
     "acfe_note": ""
 }]
-
+
