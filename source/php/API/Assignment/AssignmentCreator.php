@@ -77,6 +77,7 @@ class AssignmentCreator extends ApiHandler
             'street_address',
             'postal_code',
             'city',
+            'end_date',
         ];
 
         return $this->extractParamsFromRequest($request, $requestParams);
