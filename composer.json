@@ -22,10 +22,10 @@
   "minimum-stability": "stable",
   "require": {
     "helsingborg-stad/acf-export-manager": ">=1.0.0",
-    "firebase/php-jwt": "^6.4"
+    "firebase/php-jwt": "^7.0"
   },
   "require-dev": {
-    "mockery/mockery": "dev-master@dev",
+    "mockery/mockery": "1.6.12",
     "brain/monkey": "^2.6",
     "codedungeon/phpunit-result-printer": "^0.32.0",
     "phpunit/phpunit": "^9.6"
