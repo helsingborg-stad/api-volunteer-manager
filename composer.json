@@ -3,6 +3,10 @@
   "description": "Creates a api that may be used to manage volunteer assignments",
   "type": "wordpress-plugin",
   "license": "MIT",
+  "dist": {
+    "type": "zip",
+    "url": "https://github.com/helsingborg-stad/api-volunteer-manager/releases/download/%prettyVersion%/api-volunteer-manager-%prettyVersion%.zip"
+  },
   "scripts": {
     "test": "./vendor/bin/phpunit --testdox",
     "coverage": "XDEBUG_MODE=coverage ./vendor/bin/phpunit --testdox",

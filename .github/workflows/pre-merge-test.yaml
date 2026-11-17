@@ -13,11 +13,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
 
-    - uses: actions/setup-node@v2
+    - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
       with:
-        node-version: '16'
+        node-version: '22'
 
     - name: Setup PHP with composer v2
       uses: shivammathur/setup-php@v2
@@ -30,3 +30,13 @@ jobs:
 
     - name: Run unit tests
       run: composer test
+
+    - name: Build and verify the Composer distribution
+      run: |
+        npm ci --no-progress --ignore-scripts
+        npm run build
+        python3 -m unittest discover -s scripts -p 'test_*.py'
+        version=$(node -p "require('./package.json').version")
+        archive="$RUNNER_TEMP/api-volunteer-manager-$version.zip"
+        python3 scripts/release_package.py create "$archive"
+        bash scripts/test_composer_dist.sh "$archive" "$version"
