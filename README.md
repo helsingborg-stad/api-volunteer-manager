@@ -79,7 +79,28 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 
 ## Deploy
 
-Instructions for deploys.
+Pushes to `master` and manual runs of the **Publish Composer release** workflow
+create versioned releases. The workflow determines a semantic version from the
+Git history, updates the package and plugin versions, builds and tests the
+plugin, and publishes `api-volunteer-manager-<version>.zip` on the corresponding
+GitHub release. Automated version commits do not trigger another release.
+Runs stop if `master` advances or an existing tag or asset conflicts; fix the
+underlying problem before retrying. Existing releases are not repackaged.
+
+The ZIP is for Composer installations, not direct WordPress uploads. It contains
+the compiled assets but no `vendor/` directory. Install with Composer 2.1 or
+newer and load the consuming project's Composer autoloader before WordPress
+loads the plugin. Composer installs its PHP dependencies separately. A local
+source checkout can instead use its own `vendor/autoload.php` after
+`composer install`. `--prefer-source` uses the Git checkout and its tracked
+assets rather than the release ZIP.
+
+Packagist may index a tag before its release asset is published. After a release,
+verify the metadata with `bash scripts/check_packagist_release.sh <version>`,
+then install that version in a clean Composer project using `--prefer-dist`
+and verify that the release ZIP was downloaded. If metadata has not propagated,
+retry the check later. The local archive smoke test alone does not verify
+Packagist.
 
 ## Development environment
 Devcontainer can be used for development.

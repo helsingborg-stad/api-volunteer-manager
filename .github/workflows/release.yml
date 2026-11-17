@@ -1,0 +1,114 @@
+name: Publish Composer release
+
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+concurrency:
+  group: api-volunteer-manager-release-master
+  cancel-in-progress: false
+
+jobs:
+  prepare:
+    if: >-
+      github.ref == 'refs/heads/master' &&
+      (github.event_name != 'push' || !startsWith(github.event.head_commit.message, 'build: update package file versions to '))
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    outputs:
+      sha: ${{ steps.source.outputs.sha }}
+      version: ${{ steps.source.outputs.version }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          fetch-depth: 0
+
+      - name: Check release trigger
+        run: |
+          test "$(git ls-remote origin refs/heads/master | cut -f1)" = "$GITHUB_SHA" || {
+            echo "::error::master advanced before this release started"
+            exit 1
+          }
+          test -z "$(git status --porcelain)"
+
+      - uses: gittools/actions/gitversion/setup@c368911c8982846e30b6855f79e579104849bfc3 # v0
+        with:
+          versionSpec: 5.12.0
+
+      - uses: gittools/actions/gitversion/execute@c368911c8982846e30b6855f79e579104849bfc3 # v0
+        id: gitversion
+        with:
+          useConfigFile: true
+
+      - name: Update version files
+        env:
+          VERSION: ${{ steps.gitversion.outputs.semVer }}
+        run: |
+          python3 scripts/set_release_version.py "$VERSION"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add package.json package-lock.json api-volunteer-manager.php
+          if ! git diff --cached --quiet; then
+            git commit -m "build: update package file versions to $VERSION"
+            git push origin HEAD:master
+          fi
+
+      - name: Capture versioned source
+        id: source
+        run: |
+          source_sha=$(git rev-parse HEAD)
+          if [ "$source_sha" != "$GITHUB_SHA" ] && [ "$(git rev-parse HEAD^)" != "$GITHUB_SHA" ]; then
+            echo "::error::Version commit does not follow the triggering commit"
+            exit 1
+          fi
+          test -z "$(git status --porcelain)"
+          test "$(git ls-remote origin refs/heads/master | cut -f1)" = "$source_sha"
+          echo "sha=$source_sha" >> "$GITHUB_OUTPUT"
+          echo "version=$(jq -r .version package.json)" >> "$GITHUB_OUTPUT"
+
+  release:
+    needs: prepare
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          ref: ${{ needs.prepare.outputs.sha }}
+          fetch-depth: 0
+
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '22'
+
+      - uses: shivammathur/setup-php@eb7c497e18156a6bbabfef1d3a82760b9eda3962
+        with:
+          php-version: '8.3'
+          tools: composer:v2
+
+      - name: Install dependencies and run tests
+        run: |
+          composer install --no-interaction --prefer-dist --no-progress
+          composer test
+          npm ci --no-progress --ignore-scripts
+          python3 -m unittest discover -s scripts -p 'test_*.py'
+
+      - name: Build and verify distribution
+        env:
+          VERSION: ${{ needs.prepare.outputs.version }}
+        run: |
+          npm run build
+          archive="$RUNNER_TEMP/api-volunteer-manager-$VERSION.zip"
+          python3 scripts/release_package.py create "$archive"
+          python3 scripts/release_package.py check "$archive"
+          bash scripts/test_composer_dist.sh "$archive" "$VERSION"
+          test "$(git rev-parse HEAD)" = "${{ needs.prepare.outputs.sha }}"
+
+      - name: Publish immutable release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VERSION: ${{ needs.prepare.outputs.version }}
+          SOURCE_SHA: ${{ needs.prepare.outputs.sha }}
+        run: bash scripts/publish_release.sh "$VERSION" "$SOURCE_SHA" "$RUNNER_TEMP/api-volunteer-manager-$VERSION.zip" "$GITHUB_REPOSITORY"
