@@ -4,7 +4,7 @@
  * Plugin Name:       Volunteer Manager
  * Plugin URI:        https://github.com/helsingborg-stad/api-volunteer-manager
  * Description:       Creates a api that may be used to manage volunteer assignments
- * Version:           0.5.1
+ * Version:           0.5.2
  * Author:            Sebastian Thulin @ Helsingborg Stad
  * Author URI:        https://github.com/helsingborg-stad
  * License:           MIT

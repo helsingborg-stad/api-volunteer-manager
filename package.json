@@ -1,6 +1,6 @@
 {
   "name": "api-volunteer-manager",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "description": "Creates a api that may be used to manage volunteer assignments",
   "main": "",
   "repository": {
